@@ -1,6 +1,6 @@
 {
     "name": "bleumi/bleumi-pay-sdk-php",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "PHP SDK for Bleumi Pay REST API",
     "keywords": [
         "swagger",

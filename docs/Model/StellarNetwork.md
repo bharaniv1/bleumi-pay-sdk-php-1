@@ -1,6 +1,6 @@
 # StellarNetwork
 
-## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
+## Enum
 
+* `TEST` (value: `"test"`)
+* `PUBLIC` (value: `"public"`)

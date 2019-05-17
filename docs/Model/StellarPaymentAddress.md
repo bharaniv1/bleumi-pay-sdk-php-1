@@ -3,5 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**memo** | **string** |  | [optional] 
-**addr** | [**\Bleumi\Pay\Model\StellarAddress**](StellarAddress.md) |  | 
+**memo** | [**StellarMemo**](StellarMemo.md) | Memo for the transfer  |  [optional]
+**addr** | **String** |Valid Stellar address  | Stellar Address should comply to pattern: <br><br><strong>'^G[A-Z2-7]{55}$'</strong><br><br>Eg. GDQZHFBNBOGABXSXSE3ZG2YDERDUOENM2IBULLYRO7FR3WTOU3QKTW33
+

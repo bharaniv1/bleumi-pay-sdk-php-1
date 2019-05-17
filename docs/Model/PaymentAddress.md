@@ -1,5 +1,7 @@
 # PaymentAddress
+This model represents the payment address. 
 
-## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
+## Types
+
+ - [ERC20PaymentAddress](ERC20PaymentAddress.md)
+ - [StellarPaymentAddress](StellarPaymentAddress.md)

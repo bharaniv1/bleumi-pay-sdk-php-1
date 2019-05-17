@@ -3,12 +3,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**payment_amount** | **string** |  | 
-**token** | [**\Bleumi\Pay\Model\Token**](Token.md) |  | 
-**from_address** | [**\Bleumi\Pay\Model\Address**](Address.md) |  | [optional] 
-**from_memo** | **string** |  | [optional] 
-**to_address** | [**\Bleumi\Pay\Model\Address**](Address.md) |  | 
-**to_memo** | **string** |  | [optional] 
-
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
+**paymentAmount** | **String** | Payment amount requested. | Minimum payment amount is 10.  Decimal places are restricted by the token being used. Please refer to the token list and ensure paymentAmount specified does not exceed the token capability. 
+**token** | [**ERC20Token**](ERC20Token.md) or [**StellarToken**](StellarToken.md) | Details of the Token  | 
+**fromAddress** | [**EthAddress**](EthAddress.md)/[**StellarAddress**](StellarAddress.md) | The source Network address from which payment is being made  |   (Optional) Refunds (for cancelled request or excess payment) will be sent to this address. Incoming payments are not processed until this field is set using the create or update endpoints.
+**fromMemo** | [**StellarMemo**](StellarMemo.md) | Memo to be used while making a transfer to fromAddress |  [optional] Applicable only for Stellar Network
+**toAddress** | [**EthAddress**](EthAddress.md)/[**StellarAddress**](StellarAddress.md) | The target Network address to which payment is being sent  | Payment amount (minus charges) will be sent to this address. 
+**toMemo** | [**StellarMemo**](StellarMemo.md) | Memo to be used while making a transfer to toAddress |  [optional] Applicable only for Stellar Network

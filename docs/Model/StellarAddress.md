@@ -3,6 +3,4 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
+**addr** | **String** |Valid Stellar address  | Stellar Address should comply to pattern: <br><br><strong>'^G[A-Z2-7]{55}$'</strong><br><br>Eg. GDQZHFBNBOGABXSXSE3ZG2YDERDUOENM2IBULLYRO7FR3WTOU3QKTW33

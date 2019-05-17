@@ -189,7 +189,15 @@ class StellarToken extends Token
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
+        if ($this->container['network'] === null) {
+            $invalidProperties[] = "Stellar Token 'network' can't be null";
+        }
+        if ($this->container['issuer'] === null) {
+            $invalidProperties[] = "Stellar Token 'issuer' can't be null";
+        }
+        if ($this->container['code'] === null) {
+            $invalidProperties[] = "Stellar Token 'code' can't be null";
+        }
         return $invalidProperties;
     }
 

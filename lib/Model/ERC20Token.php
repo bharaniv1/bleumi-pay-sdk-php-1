@@ -191,10 +191,10 @@ class ERC20Token extends Token
         $invalidProperties = [];
 
         if ($this->container['network'] === null) {
-            $invalidProperties[] = "'network' can't be null";
+            $invalidProperties[] = "ERC20 Token 'network' can't be null";
         }
         if ($this->container['addr'] === null) {
-            $invalidProperties[] = "'addr' can't be null";
+            $invalidProperties[] = "ERC20 Token 'addr' can't be null";
         }
         return $invalidProperties;
     }

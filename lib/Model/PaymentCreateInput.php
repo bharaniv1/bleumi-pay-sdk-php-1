@@ -213,6 +213,9 @@ class PaymentCreateInput implements ModelInterface, ArrayAccess
         if ($this->container['token'] === null) {
             $invalidProperties[] = "'token' can't be null";
         }
+        if ($this->container['from_address'] === null) {
+            $invalidProperties[] = "'from_address' can't be null";
+        }
         if ($this->container['to_address'] === null) {
             $invalidProperties[] = "'to_address' can't be null";
         }

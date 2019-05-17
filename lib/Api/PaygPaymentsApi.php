@@ -523,6 +523,21 @@ class PaygPaymentsApi
                 'Missing the required parameter $id when calling createPayment'
             );
         }
+        // verify the required parameters in 'body' are set
+        $validationFailures = $body->listInvalidProperties();
+        if (count($validationFailures) != 0) {
+            throw new ApiException(
+                $validationFailures[0]
+            );
+        }
+        // verify the required parameters in 'token' are set
+        $token = $body->getToken();
+        $tokenValidationFailures = $token->listInvalidProperties();
+        if (count($tokenValidationFailures) != 0) {
+            throw new ApiException(
+                $tokenValidationFailures[0]
+            );
+        }
 
         $resourcePath = '/v1/payment/payg/{id}';
         $formParams = [];
@@ -1615,6 +1630,13 @@ class PaygPaymentsApi
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $id when calling updatePayment'
+            );
+        }
+        // verify the required parameters in 'body' are set
+        $validationFailures = $body->listInvalidProperties();
+        if (count($validationFailures) != 0) {
+            throw new ApiException(
+                $validationFailures[0]
             );
         }
 

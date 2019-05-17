@@ -25,15 +25,9 @@ To install the bindings via [Composer](http://getcomposer.org/), add the followi
 
 ```
 {
-  "repositories": [
-    {
-      "type": "git",
-      "url": "https://github.com/bleumi/bleumi-pay-sdk-php.git"
+    "require": {
+        "bleumi/bleumi-pay-sdk-php":"1.0.2"
     }
-  ],
-  "require": {
-    "Bleumi/bleumi-pay-sdk-php": "*@dev"
-  }
 }
 ```
 

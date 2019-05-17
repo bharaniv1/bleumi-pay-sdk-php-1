@@ -56,10 +56,12 @@ class StellarAddress extends Address
      */
     public function __construct($addr = null)
     {
-        if (preg_match("/^G[A-Z2-7]{55}$/", $addr)) {
-            $this->container['addr'] = isset($addr) ? $addr : null;
-        } else {
-            throw new \Exception("$addr is NOT a valid Stellar address");
+        if (isset($addr)) {
+            if (preg_match("/^G[A-Z2-7]{55}$/", $addr)) {
+                $this->container['addr'] = $addr;
+            } else {
+                throw new \Exception("$addr is NOT a valid Stellar address");
+            }
         }
     }
 

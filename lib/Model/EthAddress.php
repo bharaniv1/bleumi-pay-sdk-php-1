@@ -55,10 +55,12 @@ class EthAddress extends Address
      */
     public function __construct($addr = null)
     {
-        if (preg_match("/^0x[a-fA-F0-9]{40}$/", $$addr)) {
-            $this->container['addr'] = isset($addr) ? $addr : null;
-        } else {
-            throw new \Exception("$addr NOT a valid Ethereum address");
+        if (isset($addr)) {
+            if (preg_match("/^0x[a-fA-F0-9]{40}$/", $$addr)) {
+                $this->container['addr'] = $addr ;
+            } else {
+                 throw new \Exception("$addr NOT a valid Ethereum address");
+            }
         }
     }
 

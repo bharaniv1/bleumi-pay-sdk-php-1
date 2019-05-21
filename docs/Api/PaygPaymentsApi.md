@@ -91,8 +91,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**\Bleumi\Pay\Model\PaymentCreateInput**](../Model/PaymentCreateInput.md)|  |
- **id** | **string**| Unique ID identifying this record in your system |
+ **body** | [**\Bleumi\Pay\Model\PaymentCreateInput**](../Model/PaymentCreateInput.md)| Details of the payment request |
+ **id** | **string**| The ID with which the payment request is to be created |
 
 ### Return type
 
@@ -162,8 +162,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**\Bleumi\Pay\Model\PaymentUpdateInput**](../Model/PaymentUpdateInput.md)|  |
- **id** | **string**| Unique ID identifying this record in your system |
+ **body** | [**\Bleumi\Pay\Model\PaymentUpdateInput**](../Model/PaymentUpdateInput.md)| Details of the Payment update request |
+ **id** | **string**| The ID of the payment request to be updated |
 
 ### Return type
 
@@ -203,7 +203,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **string**| Unique ID identifying this record in your system |
+ **id** | **string**| The ID of the payment request to retrieve |
 
 ### Return type
 
@@ -249,9 +249,9 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **next_token** | **string**| Cursor to start results from | [optional]
- **sort_by** | **string**| Sort payments by | [optional]
- **start_at** | **string**| Get payments from this timestamp | [optional]
- **end_at** | **string**| Get payments till this timestamp | [optional]
+ **sort_by** | **string**| Sort payments by | [optional] 'createdAt' - results will be sorted by created time in ascending order. 'updatedAt' - results will be sorted by last updated time in ascending order.
+ **start_at** | **string**| Get payments from this timestamp | [optional] Get payments from this timestamp (unix). Will be compared to created or updated time based on the value of sortBy parameter.
+ **end_at** | **string**| Get payments till this timestamp | [optional] Get payments till this timestamp (unix). Will be compared to created or updated time based on the value of sortBy parameter.
 
 ### Return type
 
@@ -292,7 +292,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **string**| Unique ID identifying this record in your system |
+ **id** | **string**| The ID of the payment request to cancel |
 
 ### Return type
 
@@ -334,7 +334,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **string**| Unique ID identifying this record in your system |
+ **id** | **string**| The ID of the payment request to settle |
 
 ### Return type
 

@@ -3,10 +3,15 @@
     "version": "1.0.3",
     "description": "PHP SDK for Bleumi Pay REST API",
     "keywords": [
-        "swagger",
+        "payment-gateway",
         "php",
         "sdk",
-        "api"
+        "api",
+        "cryptopayments",
+        "stablecoins",
+        "ethereum",
+        "stellar",
+        "Bleumi Pay API"
     ],
     "homepage": "http://pay.bleumi.com",
     "license": "MIT",

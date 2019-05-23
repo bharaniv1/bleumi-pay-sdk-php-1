@@ -91,6 +91,7 @@ PaygPaymentsApi | [**getPayment**](docs/Api/PaygPaymentsApi.md#getpayment) | **G
 PaygPaymentsApi | [**listPayments**](docs/Api/PaygPaymentsApi.md#listpayments) | **GET** /v1/payments/payg | Retrieves all PAYG payment requests.
 PaygPaymentsApi | [**cancelPayment**](docs/Api/PaygPaymentsApi.md#cancelpayment) | **POST** /v1/payment/payg/{id}/cancel | Cancels a specific payment. Any amount received will be refunded (minus charges) to the address specified in fromAddress.
 PaygPaymentsApi | [**settlePayment**](docs/Api/PaygPaymentsApi.md#settlepayment) | **POST** /v1/payment/payg/{id}/settle | Settle a specific payment which has been partially paid. Current balance (minus charges) will be sent to the address specified in toAddress.
+PaygPaymentsApi | [**extendPayment**](docs/Api/PaygPaymentsApi.md#extendpayment) | **POST** /v1/payment/payg/{id}/extend | Enable processing for a payment for 7 days from date of invocation
 GasApi | [**estimateGas**](docs/Api/GasApi.md#estimategas) | **GET** /v1/gas/estimate | Provides an estimate of the Ethereum Network Fee for an ERC20 Token.
 DevelopmentApi | [**friendbot**](docs/Api/DevelopmentApi.md#friendbot) | **POST** /v1/friendbot | Provides 10,000 tokens to any Stellar address on the test network.
 

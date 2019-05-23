@@ -9,6 +9,8 @@ Method | HTTP request | Description
 [**listPayments**](PaygPaymentsApi.md#listPayments) | **GET** /v1/payments/payg | Retrieves all PAYG payment requests.
 [**cancelPayment**](PaygPaymentsApi.md#cancelPayment) | **POST** /v1/payment/payg/{id}/cancel | Cancels a specific payment. Any amount received will be refunded (minus charges) to the address specified in fromAddress.
 [**settlePayment**](PaygPaymentsApi.md#settlePayment) | **POST** /v1/payment/payg/{id}/settle | Settle a specific payment which has been partially paid. Current balance (minus charges) will be sent to the address specified in toAddress.
+[**extendPayment**](PaygPaymentsApi.md#extendPayment) | **POST** /v1/payment/payg/{id}/extend | Enable processing for a payment for 7 days from date of invocation
+
 
 # **createPayment**
 > \Bleumi\Pay\Model\Payment createPayment($body, $id)
@@ -28,7 +30,7 @@ $apiInstance = new Bleumi\Pay\Api\PaygPaymentsApi(
     $config
 );
 $payment = new \Bleumi\Pay\Model\PaymentCreateInput(); // \Bleumi\Pay\Model\PaymentCreateInput | 
-$id = "001-ETH"; // string | Unique ID identifying this record in your system
+id = '<ID>' # str | Unique ID identifying this record in your system, Replace <ID> with any string. Eg. 001-ETH-PHP
 
 try {
     $tokenAddress = new \Bleumi\Pay\Model\EthAddress('<ERC20 Token Address>'); // Replace <ERC20 Token Address> with the Ethereum Network Smart Contract address of the Token
@@ -62,7 +64,7 @@ $apiInstance = new Bleumi\Pay\Api\PaygPaymentsApi(
     $config
 );
 $payment = new \Bleumi\Pay\Model\PaymentCreateInput(); // \Bleumi\Pay\Model\PaymentCreateInput | 
-$id = "001-STELLAR"; // string | Unique ID identifying this record in your system
+id = '<ID>' # str | Unique ID identifying this record in your system, Replace <ID> with any string. Eg. 001-XLM-PHP
 
 try {
     $issuer = new \Bleumi\Pay\Model\StellarAddress('GDWEVA6U7ZUKAWERV336BIQ7T3UNLLKSF4ENFK3GZ3Q35ZSU7SWH6AYV');
@@ -116,7 +118,7 @@ $apiInstance = new Bleumi\Pay\Api\PaygPaymentsApi(
     $config
 );
 $payment = new \Bleumi\Pay\Model\PaymentUpdateInput(); // \Bleumi\Pay\Model\PaymentUpdateInput | 
-$id = "001-ETH"; // string | Unique ID identifying this record in your system
+id = '<ID>' # str | Unique ID identifying this record in your system, Replace <ID> with any string. Eg. 001-ETH-PHP
 
 try {
     $toAddress = new \Bleumi\Pay\Model\EthAddress('<To Address>'); // Replace <To Address> with Ethereum Address of the Receiver 
@@ -143,7 +145,7 @@ $apiInstance = new Bleumi\Pay\Api\PaygPaymentsApi(
     $config
 );
 $payment = new \Bleumi\Pay\Model\PaymentUpdateInput(); // \Bleumi\Pay\Model\PaymentUpdateInput | 
-$id = "001-STELLAR"; // string | Unique ID identifying this record in your system
+id = '<ID>' # str | Unique ID identifying this record in your system, Replace <ID> with any string. Eg. 001-XLM-PHP
 
 try {
     $toAddress = new \Bleumi\Pay\Model\StellarAddress('<To Address>'); // Replace <To Address> with Stellar Address of the Receiver
@@ -188,7 +190,7 @@ $apiInstance = new Bleumi\Pay\Api\PaygPaymentsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = "001-ETH"; // string | Unique ID identifying this record in your system
+id = '<ID>' # str | Unique ID identifying this record in your system, Replace <ID> with any string . Eg. 001-ETH-PHP which is the ID of the payment request to retrieve
 
 try {
     $result = $apiInstance->getPayment($id);
@@ -278,7 +280,7 @@ $apiInstance = new Bleumi\Pay\Api\PaygPaymentsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = "001-ETH"; // string | Unique ID identifying this record in your system
+id = '<ID>' # str | Unique ID identifying this record in your system, Replace <ID> with any string . Eg. 001-ETH-PHP which is the ID of the payment request to cancel
 
 try {
     $apiInstance->cancelPayment($id);
@@ -320,7 +322,7 @@ $apiInstance = new Bleumi\Pay\Api\PaygPaymentsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = "001-ETH"; // string | Unique ID identifying this record in your system
+id = '<ID>' # str | Unique ID identifying this record in your system, Replace <ID> with any string . Eg. 001-ETH-PHP which is the ID of the payment request to settle
 
 try {
     $apiInstance->settlePayment($id);
@@ -341,3 +343,40 @@ Name | Type | Description  | Notes
 void (empty response body)
 
 
+# **extendPayment**
+> extendPayment($id)
+
+Enable processing for a payment for 7 days from date of invocation
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+// Configure API key authorization: ApiKeyAuth
+$config = Bleumi\Pay\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', '<Your API Key>'); // Replace <Your API Key> with your actual API key
+
+$apiInstance = new Bleumi\Pay\Api\PaygPaymentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+id = '<ID>' # str | Unique ID identifying this record in your system, Replace <ID> with any string . Eg. 001-ETH-PHP which is the ID of the payment request to extend the processing window
+
+try {
+    $apiInstance->extendPayment($id);
+} catch (Exception $e) {
+    echo 'Exception when calling PaygPaymentsApi->extendPayment: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **string**| The ID of the payment request to extend processing |
+
+### Return type
+
+void (empty response body)

@@ -26,6 +26,7 @@ namespace Bleumi\Pay\Model;
 
 use \ArrayAccess;
 use \Bleumi\Pay\ObjectSerializer;
+use JsonSerializable;
 
 /**
  * PaginatedPayments Class Doc Comment
@@ -35,7 +36,7 @@ use \Bleumi\Pay\ObjectSerializer;
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class PaginatedPayments implements ModelInterface, ArrayAccess
+class PaginatedPayments implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = null;
 
@@ -53,7 +54,7 @@ class PaginatedPayments implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'results' => '\Bleumi\Pay\Model\Payment[]',
-'next_token' => 'string'    ];
+        'next_token' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -62,7 +63,7 @@ class PaginatedPayments implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'results' => null,
-'next_token' => null    ];
+        'next_token' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -92,7 +93,7 @@ class PaginatedPayments implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'results' => 'results',
-'next_token' => 'nextToken'    ];
+        'next_token' => 'nextToken'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -101,7 +102,7 @@ class PaginatedPayments implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'results' => 'setResults',
-'next_token' => 'setNextToken'    ];
+        'next_token' => 'setNextToken'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -110,7 +111,7 @@ class PaginatedPayments implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'results' => 'getResults',
-'next_token' => 'getNextToken'    ];
+        'next_token' => 'getNextToken'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -316,5 +317,13 @@ class PaginatedPayments implements ModelInterface, ArrayAccess
         }
 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
+
+    /**
+     * Customize the way json_encode() renders the object.
+     */
+    public function jsonSerialize()
+    {
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 }

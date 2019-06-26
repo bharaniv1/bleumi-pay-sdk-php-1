@@ -26,6 +26,7 @@ namespace Bleumi\Pay\Model;
 
 use \ArrayAccess;
 use \Bleumi\Pay\ObjectSerializer;
+use JsonSerializable;
 
 /**
  * Token Class Doc Comment
@@ -35,7 +36,7 @@ use \Bleumi\Pay\ObjectSerializer;
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class Token implements ModelInterface, ArrayAccess
+class Token implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = 'network';
 
@@ -247,20 +248,29 @@ class Token implements ModelInterface, ArrayAccess
         unset($this->container[$offset]);
     }
 
-    // /**
-    //  * Gets the string presentation of the object
-    //  *
-    //  * @return string
-    //  */
-    // public function __toString()
-    // {
-    //     if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-    //         return json_encode(
-    //             ObjectSerializer::sanitizeForSerialization($this),
-    //             JSON_PRETTY_PRINT
-    //         );
-    //     }
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
 
-    //     return json_encode(ObjectSerializer::sanitizeForSerialization($this));
-    // }
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
+
+
+    /**
+     * Customize the way json_encode() renders the object.
+     */
+    public function jsonSerialize()
+    {
+        return ObjectSerializer::sanitizeForSerialization($this);
+    }
 }

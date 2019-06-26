@@ -28,7 +28,8 @@ try {
     $result = $apiInstance->estimateGas($network, $addr);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling GasApi->estimateGas: ', $e->getMessage(), PHP_EOL;
+    echo 'Response: ', $e->getResponseBody(), nl2br (" \n ");
+    echo 'Full Message: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```

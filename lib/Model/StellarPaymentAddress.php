@@ -53,7 +53,7 @@ class StellarPaymentAddress extends PaymentAddress
       */
     protected static $swaggerTypes = [
         'memo' => 'string',
-'addr' => '\Bleumi\Pay\Model\StellarAddress'    ];
+        'addr' => '\Bleumi\Pay\Model\StellarAddress'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -62,7 +62,7 @@ class StellarPaymentAddress extends PaymentAddress
       */
     protected static $swaggerFormats = [
         'memo' => null,
-'addr' => null    ];
+        'addr' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -92,7 +92,7 @@ class StellarPaymentAddress extends PaymentAddress
      */
     protected static $attributeMap = [
         'memo' => 'memo',
-'addr' => 'addr'    ];
+        'addr' => 'addr'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -101,7 +101,7 @@ class StellarPaymentAddress extends PaymentAddress
      */
     protected static $setters = [
         'memo' => 'setMemo',
-'addr' => 'setAddr'    ];
+        'addr' => 'setAddr'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -110,7 +110,7 @@ class StellarPaymentAddress extends PaymentAddress
      */
     protected static $getters = [
         'memo' => 'getMemo',
-'addr' => 'getAddr'    ];
+        'addr' => 'getAddr'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -316,5 +316,14 @@ class StellarPaymentAddress extends PaymentAddress
         }
 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
+
+
+    /**
+     * Customize the way json_encode() renders the object.
+     */
+    public function jsonSerialize()
+    {
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 }

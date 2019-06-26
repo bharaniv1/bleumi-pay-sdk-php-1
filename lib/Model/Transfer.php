@@ -26,6 +26,7 @@ namespace Bleumi\Pay\Model;
 
 use \ArrayAccess;
 use \Bleumi\Pay\ObjectSerializer;
+use JsonSerializable;
 
 /**
  * Transfer Class Doc Comment
@@ -35,7 +36,7 @@ use \Bleumi\Pay\ObjectSerializer;
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class Transfer implements ModelInterface, ArrayAccess
+class Transfer implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = null;
 
@@ -66,11 +67,11 @@ class Transfer implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'transfer_type' => null,
-'tx_hash' => null,
-'to_addr' => null,
-'to_memo' => null,
-'value' => null,
-'timestamp' => null    ];
+        'tx_hash' => null,
+        'to_addr' => null,
+        'to_memo' => null,
+        'value' => null,
+        'timestamp' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -100,11 +101,11 @@ class Transfer implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'transfer_type' => 'transferType',
-'tx_hash' => 'txHash',
-'to_addr' => 'toAddr',
-'to_memo' => 'toMemo',
-'value' => 'value',
-'timestamp' => 'timestamp'    ];
+        'tx_hash' => 'txHash',
+        'to_addr' => 'toAddr',
+        'to_memo' => 'toMemo',
+        'value' => 'value',
+        'timestamp' => 'timestamp'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -113,11 +114,11 @@ class Transfer implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'transfer_type' => 'setTransferType',
-'tx_hash' => 'setTxHash',
-'to_addr' => 'setToAddr',
-'to_memo' => 'setToMemo',
-'value' => 'setValue',
-'timestamp' => 'setTimestamp'    ];
+        'tx_hash' => 'setTxHash',
+        'to_addr' => 'setToAddr',
+        'to_memo' => 'setToMemo',
+        'value' => 'setValue',
+        'timestamp' => 'setTimestamp'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -126,11 +127,11 @@ class Transfer implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'transfer_type' => 'getTransferType',
-'tx_hash' => 'getTxHash',
-'to_addr' => 'getToAddr',
-'to_memo' => 'getToMemo',
-'value' => 'getValue',
-'timestamp' => 'getTimestamp'    ];
+        'tx_hash' => 'getTxHash',
+        'to_addr' => 'getToAddr',
+        'to_memo' => 'getToMemo',
+        'value' => 'getValue',
+        'timestamp' => 'getTimestamp'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -448,5 +449,14 @@ class Transfer implements ModelInterface, ArrayAccess
         }
 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
+
+
+    /**
+     * Customize the way json_encode() renders the object.
+     */
+    public function jsonSerialize()
+    {
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 }

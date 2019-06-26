@@ -353,4 +353,13 @@ class StellarToken extends Token
 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
+
+
+    /**
+     * Customize the way json_encode() renders the object.
+     */
+    public function jsonSerialize()
+    {
+        return ObjectSerializer::sanitizeForSerialization($this);
+    }
 }

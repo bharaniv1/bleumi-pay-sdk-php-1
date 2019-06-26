@@ -45,9 +45,11 @@ try {
     $payment->setToAddress($toAddress);
     $payment->setToken($token);    
     $result = $apiInstance->createPayment($payment, $id);
-    print_r($result);
+    $data = json_encode($result);
+    echo  nl2br ("$data \n ");
 } catch (Exception $e) {
-    echo 'Exception when calling PaygPaymentsApi->createPayment: ', $e->getMessage(), PHP_EOL;
+    echo 'Response: ', $e->getResponseBody(), nl2br (" \n ");
+    echo 'Full Message: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```
@@ -82,9 +84,11 @@ try {
     $payment->setToken($token);
     $payment->setToMemo(new \Bleumi\Pay\Model\StellarMemo($id));
     $result = $apiInstance->createPayment($payment, $id);
-    print_r($result);
+    $data = json_encode($result);
+    echo  nl2br ("$data \n ");
 } catch (Exception $e) {
-    echo 'Exception when calling PaygPaymentsApi->createPayment: ', $e->getMessage(), PHP_EOL;
+    echo 'Response: ', $e->getResponseBody(), nl2br (" \n ");
+    echo 'Full Message: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```
@@ -126,9 +130,11 @@ try {
     $payment->setPaymentAmount('15.0'); // Notice payment amount getting updated
     $payment->setToAddress($toAddress);
     $result = $apiInstance->updatePayment($payment, $id);
-    print_r($result);
+    $data = json_encode($result);
+    echo  nl2br ("$data \n ");
 } catch (Exception $e) {
-    echo 'Exception when calling PaygPaymentsApi->updatePayment: ', $e->getMessage(), PHP_EOL;
+    echo 'Response: ', $e->getResponseBody(), nl2br (" \n ");
+    echo 'Full Message: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```
@@ -145,7 +151,7 @@ $apiInstance = new Bleumi\Pay\Api\PaygPaymentsApi(
     $config
 );
 $payment = new \Bleumi\Pay\Model\PaymentUpdateInput(); // \Bleumi\Pay\Model\PaymentUpdateInput | 
-id = '<ID>' # str | Unique ID identifying this record in your system, Replace <ID> with any string. Eg. 001-XLM-PHP
+id = '<ID>'; # str | Unique ID identifying this record in your system, Replace <ID> with any string. Eg. 001-XLM-PHP
 
 try {
     $toAddress = new \Bleumi\Pay\Model\StellarAddress('<To Address>'); // Replace <To Address> with Stellar Address of the Receiver
@@ -153,9 +159,11 @@ try {
     $payment->setPaymentAmount('15.0');
     $payment->setToAddress($toAddress);
     $result = $apiInstance->updatePayment($payment, $id);
-    print_r($result);
+    $data = json_encode($result);
+    echo  nl2br ("$data \n ");
 } catch (Exception $e) {
-    echo 'Exception when calling PaygPaymentsApi->updatePayment: ', $e->getMessage(), PHP_EOL;
+    echo 'Response: ', $e->getResponseBody(), nl2br (" \n ");
+    echo 'Full Message: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```
@@ -190,13 +198,15 @@ $apiInstance = new Bleumi\Pay\Api\PaygPaymentsApi(
     new GuzzleHttp\Client(),
     $config
 );
-id = '<ID>' # str | Unique ID identifying this record in your system, Replace <ID> with any string . Eg. 001-ETH-PHP which is the ID of the payment request to retrieve
+id = '<ID>'; # str | Unique ID identifying this record in your system, Replace <ID> with any string . Eg. 001-ETH-PHP which is the ID of the payment request to retrieve
 
 try {
     $result = $apiInstance->getPayment($id);
-    print_r($result);
+    $data = json_encode($result);
+    echo  nl2br ("$data \n ");
 } catch (Exception $e) {
-    echo 'Exception when calling PaygPaymentsApi->getPayment: ', $e->getMessage(), PHP_EOL;
+    echo 'Response: ', $e->getResponseBody(), nl2br (" \n ");
+    echo 'Full Message: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```
@@ -239,9 +249,11 @@ $end_at = ""; // string | Get payments till this timestamp
 
 try {
     $result = $apiInstance->listPayments($next_token, $sort_by, $start_at, $end_at);
-    print_r($result);
+    $data = json_encode($result);
+    echo  nl2br ("$data \n ");
 } catch (Exception $e) {
-    echo 'Exception when calling PaygPaymentsApi->listPayments: ', $e->getMessage(), PHP_EOL;
+    echo 'Response: ', $e->getResponseBody(), nl2br (" \n ");
+    echo 'Full Message: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```
@@ -285,7 +297,8 @@ id = '<ID>' # str | Unique ID identifying this record in your system, Replace <I
 try {
     $apiInstance->cancelPayment($id);
 } catch (Exception $e) {
-    echo 'Exception when calling PaygPaymentsApi->cancelPayment: ', $e->getMessage(), PHP_EOL;
+    echo 'Response: ', $e->getResponseBody(), nl2br (" \n ");
+    echo 'Full Message: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```
@@ -327,7 +340,8 @@ id = '<ID>' # str | Unique ID identifying this record in your system, Replace <I
 try {
     $apiInstance->settlePayment($id);
 } catch (Exception $e) {
-    echo 'Exception when calling PaygPaymentsApi->settlePayment: ', $e->getMessage(), PHP_EOL;
+    echo 'Response: ', $e->getResponseBody(), nl2br (" \n ");
+    echo 'Full Message: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```
@@ -366,7 +380,8 @@ id = '<ID>' # str | Unique ID identifying this record in your system, Replace <I
 try {
     $apiInstance->extendPayment($id);
 } catch (Exception $e) {
-    echo 'Exception when calling PaygPaymentsApi->extendPayment: ', $e->getMessage(), PHP_EOL;
+    echo 'Response: ', $e->getResponseBody(), nl2br (" \n ");
+    echo 'Full Message: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```

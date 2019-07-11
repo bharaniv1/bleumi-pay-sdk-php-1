@@ -46,10 +46,10 @@ try {
     $payment->setToken($token);    
     $result = $apiInstance->createPayment($payment, $id);
     $data = json_encode($result);
-    echo  nl2br ("$data \n ");
+    echo  $data;
 } catch (Exception $e) {
-    echo 'Response: ', $e->getResponseBody(), nl2br (" \n ");
-    echo 'Full Message: ', $e->getMessage(), PHP_EOL;
+    echo 'Code: ', $e->getCode(), nl2br (" \n ");
+    echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
 }
 ?>
 ```
@@ -85,10 +85,10 @@ try {
     $payment->setToMemo(new \Bleumi\Pay\Model\StellarMemo($id));
     $result = $apiInstance->createPayment($payment, $id);
     $data = json_encode($result);
-    echo  nl2br ("$data \n ");
+    echo  $data;
 } catch (Exception $e) {
-    echo 'Response: ', $e->getResponseBody(), nl2br (" \n ");
-    echo 'Full Message: ', $e->getMessage(), PHP_EOL;
+    echo 'Code: ', $e->getCode(), nl2br (" \n ");
+    echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
 }
 ?>
 ```
@@ -131,10 +131,10 @@ try {
     $payment->setToAddress($toAddress);
     $result = $apiInstance->updatePayment($payment, $id);
     $data = json_encode($result);
-    echo  nl2br ("$data \n ");
+    echo  $data;
 } catch (Exception $e) {
-    echo 'Response: ', $e->getResponseBody(), nl2br (" \n ");
-    echo 'Full Message: ', $e->getMessage(), PHP_EOL;
+    echo 'Code: ', $e->getCode(), nl2br (" \n ");
+    echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
 }
 ?>
 ```
@@ -160,10 +160,10 @@ try {
     $payment->setToAddress($toAddress);
     $result = $apiInstance->updatePayment($payment, $id);
     $data = json_encode($result);
-    echo  nl2br ("$data \n ");
+    echo  $data;
 } catch (Exception $e) {
-    echo 'Response: ', $e->getResponseBody(), nl2br (" \n ");
-    echo 'Full Message: ', $e->getMessage(), PHP_EOL;
+    echo 'Code: ', $e->getCode(), nl2br (" \n ");
+    echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
 }
 ?>
 ```
@@ -203,10 +203,10 @@ id = '<ID>'; # str | Unique ID identifying this record in your system, Replace <
 try {
     $result = $apiInstance->getPayment($id);
     $data = json_encode($result);
-    echo  nl2br ("$data \n ");
+    echo  $data;
 } catch (Exception $e) {
-    echo 'Response: ', $e->getResponseBody(), nl2br (" \n ");
-    echo 'Full Message: ', $e->getMessage(), PHP_EOL;
+    echo 'Code: ', $e->getCode(), nl2br (" \n ");
+    echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
 }
 ?>
 ```
@@ -250,10 +250,10 @@ $end_at = ""; // string | Get payments till this timestamp
 try {
     $result = $apiInstance->listPayments($next_token, $sort_by, $start_at, $end_at);
     $data = json_encode($result);
-    echo  nl2br ("$data \n ");
+    echo  $data;
 } catch (Exception $e) {
-    echo 'Response: ', $e->getResponseBody(), nl2br (" \n ");
-    echo 'Full Message: ', $e->getMessage(), PHP_EOL;
+    echo 'Code: ', $e->getCode(), nl2br (" \n ");
+    echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
 }
 ?>
 ```
@@ -292,13 +292,13 @@ $apiInstance = new Bleumi\Pay\Api\PaygPaymentsApi(
     new GuzzleHttp\Client(),
     $config
 );
-id = '<ID>' # str | Unique ID identifying this record in your system, Replace <ID> with any string . Eg. 001-ETH-PHP which is the ID of the payment request to cancel
+id = '<ID>'; # str | Unique ID identifying this record in your system, Replace <ID> with any string . Eg. 001-ETH-PHP which is the ID of the payment request to cancel
 
 try {
     $apiInstance->cancelPayment($id);
 } catch (Exception $e) {
-    echo 'Response: ', $e->getResponseBody(), nl2br (" \n ");
-    echo 'Full Message: ', $e->getMessage(), PHP_EOL;
+    echo 'Code: ', $e->getCode(), nl2br (" \n ");
+    echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
 }
 ?>
 ```
@@ -335,7 +335,7 @@ $apiInstance = new Bleumi\Pay\Api\PaygPaymentsApi(
     new GuzzleHttp\Client(),
     $config
 );
-id = '<ID>' # str | Unique ID identifying this record in your system, Replace <ID> with any string . Eg. 001-ETH-PHP which is the ID of the payment request to settle
+id = '<ID>'; # str | Unique ID identifying this record in your system, Replace <ID> with any string . Eg. 001-ETH-PHP which is the ID of the payment request to settle
 
 try {
     $apiInstance->settlePayment($id);
@@ -375,13 +375,13 @@ $apiInstance = new Bleumi\Pay\Api\PaygPaymentsApi(
     new GuzzleHttp\Client(),
     $config
 );
-id = '<ID>' # str | Unique ID identifying this record in your system, Replace <ID> with any string . Eg. 001-ETH-PHP which is the ID of the payment request to extend the processing window
+id = '<ID>'; # str | Unique ID identifying this record in your system, Replace <ID> with any string . Eg. 001-ETH-PHP which is the ID of the payment request to extend the processing window
 
 try {
     $apiInstance->extendPayment($id);
 } catch (Exception $e) {
-    echo 'Response: ', $e->getResponseBody(), nl2br (" \n ");
-    echo 'Full Message: ', $e->getMessage(), PHP_EOL;
+    echo 'Code: ', $e->getCode(), nl2br (" \n ");
+    echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
 }
 ?>
 ```

@@ -34,8 +34,8 @@ $issuer = 'GDWEVA6U7ZUKAWERV336BIQ7T3UNLLKSF4ENFK3GZ3Q35ZSU7SWH6AYV'; // String 
 try {
     $apiInstance->friendbot($addr, $issuer);
 } catch (Exception $e) {
-    echo 'Response: ', $e->getResponseBody(), nl2br (" \n ");
-    echo 'Full Message: ', $e->getMessage(), PHP_EOL;
+    echo 'Code: ', $e->getCode(), nl2br (" \n ");
+    echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
 }
 ?>
 ```

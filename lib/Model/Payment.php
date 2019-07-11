@@ -55,6 +55,7 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
     protected static $swaggerTypes = [
         'id' => 'string',
         'created_at' => 'int',
+        'updated_at' => 'int',
         'status' => '\Bleumi\Pay\Model\PaymentStatus',
         'amount_paid' => 'string',
         'payment_amount' => 'string',
@@ -75,6 +76,7 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
     protected static $swaggerFormats = [
         'id' => null,
         'created_at' => 'int64',
+        'updated_at' => 'int64',
         'status' => null,
         'amount_paid' => null,
         'payment_amount' => null,
@@ -116,6 +118,7 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
     protected static $attributeMap = [
         'id' => 'id',
         'created_at' => 'createdAt',
+        'updated_at' => 'updatedAt',
         'status' => 'status',
         'amount_paid' => 'amountPaid',
         'payment_amount' => 'paymentAmount',
@@ -136,6 +139,7 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
     protected static $setters = [
         'id' => 'setId',
         'created_at' => 'setCreatedAt',
+        'updated_at' => 'setUpdatedAt',
         'status' => 'setStatus',
         'amount_paid' => 'setAmountPaid',
         'payment_amount' => 'setPaymentAmount',
@@ -156,6 +160,7 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
     protected static $getters = [
         'id' => 'getId',
         'created_at' => 'getCreatedAt',
+        'updated_at' => 'getUpdatedAt',
         'status' => 'getStatus',
         'amount_paid' => 'getAmountPaid',
         'payment_amount' => 'getPaymentAmount',
@@ -228,6 +233,7 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         $this->container['created_at'] = isset($data['created_at']) ? $data['created_at'] : null;
+        $this->container['updated_at'] = isset($data['updated_at']) ? $data['updated_at'] : null;
         $this->container['status'] = isset($data['status']) ? $data['status'] : null;
         $this->container['amount_paid'] = isset($data['amount_paid']) ? $data['amount_paid'] : null;
         $this->container['payment_amount'] = isset($data['payment_amount']) ? $data['payment_amount'] : null;
@@ -255,6 +261,9 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
+        }
+        if ($this->container['updated_at'] === null) {
+            $invalidProperties[] = "'updated_at' can't be null";
         }
         if ($this->container['status'] === null) {
             $invalidProperties[] = "'status' can't be null";
@@ -336,6 +345,31 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
     public function setCreatedAt($created_at)
     {
         $this->container['created_at'] = $created_at;
+
+        return $this;
+    }
+
+
+    /**
+     * Gets updated_at
+     *
+     * @return int
+     */
+    public function getUpdatedAt()
+    {
+        return $this->container['updated_at'];
+    }
+
+    /**
+     * Sets updated_at
+     *
+     * @param int $updated_at updated_at
+     *
+     * @return $this
+     */
+    public function setUpdatedAt($updated_at)
+    {
+        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }

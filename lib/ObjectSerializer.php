@@ -347,6 +347,9 @@ class ObjectSerializer
                     //echo  nl2br ("$data \n ");
                     return $data;
                 } 
+                if ( ($class == '\Bleumi\Pay\Model\StellarMemo') ) {
+                    return $data;
+                }
 
                 $propertySetter = $instance::setters()[$property];
 

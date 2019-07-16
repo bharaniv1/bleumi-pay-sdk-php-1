@@ -55,6 +55,7 @@ class PaymentCreateInput implements ModelInterface, ArrayAccess, JsonSerializabl
     protected static $swaggerTypes = [
         'payment_amount' => 'string',
         'token' => '\Bleumi\Pay\Model\Token',
+        'currency' => 'string',
         'from_address' => '\Bleumi\Pay\Model\Address',
         'from_memo' => '\Bleumi\Pay\Model\StellarMemo',
         'to_address' => '\Bleumi\Pay\Model\Address',
@@ -68,6 +69,7 @@ class PaymentCreateInput implements ModelInterface, ArrayAccess, JsonSerializabl
     protected static $swaggerFormats = [
         'payment_amount' => null,
         'token' => null,
+        'currency' => null,
         'from_address' => null,
         'from_memo' => null,
         'to_address' => null,
@@ -102,6 +104,7 @@ class PaymentCreateInput implements ModelInterface, ArrayAccess, JsonSerializabl
     protected static $attributeMap = [
         'payment_amount' => 'paymentAmount',
         'token' => 'token',
+        'currency' => 'currency',
         'from_address' => 'fromAddress',
         'from_memo' => 'fromMemo',
         'to_address' => 'toAddress',
@@ -115,6 +118,7 @@ class PaymentCreateInput implements ModelInterface, ArrayAccess, JsonSerializabl
     protected static $setters = [
         'payment_amount' => 'setPaymentAmount',
         'token' => 'setToken',
+        'currency' => 'setCurrency',
         'from_address' => 'setFromAddress',
         'from_memo' => 'setFromMemo',
         'to_address' => 'setToAddress',
@@ -128,6 +132,7 @@ class PaymentCreateInput implements ModelInterface, ArrayAccess, JsonSerializabl
     protected static $getters = [
         'payment_amount' => 'getPaymentAmount',
         'token' => 'getToken',
+        'currency' => 'getCurrency',
         'from_address' => 'getFromAddress',
         'from_memo' => 'getFromMemo',
         'to_address' => 'getToAddress',
@@ -193,6 +198,7 @@ class PaymentCreateInput implements ModelInterface, ArrayAccess, JsonSerializabl
     {
         $this->container['payment_amount'] = isset($data['payment_amount']) ? $data['payment_amount'] : null;
         $this->container['token'] = isset($data['token']) ? $data['token'] : null;
+        $this->container['currency'] = isset($data['currency']) ? $data['currency'] : null;
         $this->container['from_address'] = isset($data['from_address']) ? $data['from_address'] : null;
         $this->container['from_memo'] = isset($data['from_memo']) ? $data['from_memo'] : null;
         $this->container['to_address'] = isset($data['to_address']) ? $data['to_address'] : null;
@@ -279,6 +285,30 @@ class PaymentCreateInput implements ModelInterface, ArrayAccess, JsonSerializabl
     public function setToken($token)
     {
         $this->container['token'] = $token;
+
+        return $this;
+    }
+
+    /**
+     * Gets currency
+     *
+     * @return string
+     */
+    public function getCurrency()
+    {
+        return $this->container['currency'];
+    }
+
+    /**
+     * Sets currency
+     *
+     * @param string $currency
+     *
+     * @return $this
+     */
+    public function setCurrency($currency)
+    {
+        $this->container['currency'] = $currency;
 
         return $this;
     }

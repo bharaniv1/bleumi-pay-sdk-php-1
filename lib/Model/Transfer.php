@@ -54,11 +54,13 @@ class Transfer implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static $swaggerTypes = [
         'transfer_type' => 'string',
-'tx_hash' => 'string',
-'to_addr' => '\Bleumi\Pay\Model\Address',
-'to_memo' => 'string',
-'value' => 'string',
-'timestamp' => 'string'    ];
+        'tx_hash' => 'string',
+        'to_addr' => '\Bleumi\Pay\Model\Address',
+        'to_memo' => '\Bleumi\Pay\Model\StellarMemo',
+        'value' => 'string',
+        'status' => 'string',
+        'transfer_dest' => 'string',
+        'timestamp' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -71,6 +73,8 @@ class Transfer implements ModelInterface, ArrayAccess, JsonSerializable
         'to_addr' => null,
         'to_memo' => null,
         'value' => null,
+        'status' => null,
+        'transfer_dest' => null,
         'timestamp' => null    ];
 
     /**
@@ -105,6 +109,8 @@ class Transfer implements ModelInterface, ArrayAccess, JsonSerializable
         'to_addr' => 'toAddr',
         'to_memo' => 'toMemo',
         'value' => 'value',
+        'status' => 'status',
+        'transfer_dest' => 'transferDest',
         'timestamp' => 'timestamp'    ];
 
     /**
@@ -118,6 +124,8 @@ class Transfer implements ModelInterface, ArrayAccess, JsonSerializable
         'to_addr' => 'setToAddr',
         'to_memo' => 'setToMemo',
         'value' => 'setValue',
+        'status' => 'setStatus',
+        'transfer_dest' => 'setTransferDest',
         'timestamp' => 'setTimestamp'    ];
 
     /**
@@ -131,6 +139,8 @@ class Transfer implements ModelInterface, ArrayAccess, JsonSerializable
         'to_addr' => 'getToAddr',
         'to_memo' => 'getToMemo',
         'value' => 'getValue',
+        'status' => 'getStatus',
+        'transfer_dest' => 'getTransferDest',
         'timestamp' => 'getTimestamp'    ];
 
     /**
@@ -196,6 +206,8 @@ class Transfer implements ModelInterface, ArrayAccess, JsonSerializable
         $this->container['to_addr'] = isset($data['to_addr']) ? $data['to_addr'] : null;
         $this->container['to_memo'] = isset($data['to_memo']) ? $data['to_memo'] : null;
         $this->container['value'] = isset($data['value']) ? $data['value'] : null;
+        $this->container['status'] = isset($data['status']) ? $data['status'] : null;
+        $this->container['transfer_dest'] = isset($data['transfer_dest']) ? $data['transfer_dest'] : null;
         $this->container['timestamp'] = isset($data['timestamp']) ? $data['timestamp'] : null;
     }
 
@@ -219,6 +231,12 @@ class Transfer implements ModelInterface, ArrayAccess, JsonSerializable
         }
         if ($this->container['value'] === null) {
             $invalidProperties[] = "'value' can't be null";
+        }
+        if ($this->container['status'] === null) {
+            $invalidProperties[] = "'status' can't be null";
+        }
+        if ($this->container['transfer_dest'] === null) {
+            $invalidProperties[] = "'transfer_dest' can't be null";
         }
         if ($this->container['timestamp'] === null) {
             $invalidProperties[] = "'timestamp' can't be null";
@@ -357,6 +375,54 @@ class Transfer implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
+    /**
+     * Gets status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->container['status'];
+    }
+
+    /**
+     * Sets status
+     *
+     * @param string $status status
+     *
+     * @return $this
+     */
+    public function setStatus($status)
+    {
+        $this->container['status'] = $status;
+
+        return $this;
+    }
+    
+    /**
+     * Gets transfer_dest
+     *
+     * @return string
+     */
+    public function getTransferDest()
+    {
+        return $this->container['transfer_dest'];
+    }
+
+    /**
+     * Sets transfer_dest
+     *
+     * @param string $transfer_dest transfer_dest
+     *
+     * @return $this
+     */
+    public function setTransferDest($transfer_dest)
+    {
+        $this->container['transfer_dest'] = $transfer_dest;
+
+        return $this;
+    }    
 
     /**
      * Gets timestamp

@@ -59,6 +59,9 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
         'status' => '\Bleumi\Pay\Model\PaymentStatus',
         'amount_paid' => 'string',
         'payment_amount' => 'string',
+        'net_fee' => 'string',
+        'tx_fee' => 'string',
+        'currency' => 'string',
         'token' => '\Bleumi\Pay\Model\Token',
         'from_address' => '\Bleumi\Pay\Model\Address',
         'from_memo' => '\Bleumi\Pay\Model\StellarMemo',
@@ -66,7 +69,9 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
         'to_memo' => '\Bleumi\Pay\Model\StellarMemo',
         'payment_address' => '\Bleumi\Pay\Model\PaymentAddress',
         'is_processing' => 'bool',
-        'transfers' => '\Bleumi\Pay\Model\Transfer[]'    ];
+        'processing_completed' => 'bool',
+        'transfers' => '\Bleumi\Pay\Model\Transfer[]'    
+    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -80,6 +85,9 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
         'status' => null,
         'amount_paid' => null,
         'payment_amount' => null,
+        'net_fee' => null,
+        'tx_fee' => null,
+        'currency' => null,
         'token' => null,
         'from_address' => null,
         'from_memo' => null,
@@ -87,6 +95,7 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
         'to_memo' => null,
         'payment_address' => null,
         'is_processing' => null,
+        'processing_completed' => null,
         'transfers' => null    ];
 
     /**
@@ -122,6 +131,9 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
         'status' => 'status',
         'amount_paid' => 'amountPaid',
         'payment_amount' => 'paymentAmount',
+        'net_fee' => 'netFee',
+        'tx_fee' => 'txFee',
+        'currency' => 'currency',        
         'token' => 'token',
         'from_address' => 'fromAddress',
         'from_memo' => 'fromMemo',
@@ -129,6 +141,7 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
         'to_memo' => 'toMemo',
         'payment_address' => 'paymentAddress',
         'is_processing' => 'isProcessing',
+        'processing_completed' => 'processingCompleted',
         'transfers' => 'transfers'    ];
 
     /**
@@ -143,6 +156,9 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
         'status' => 'setStatus',
         'amount_paid' => 'setAmountPaid',
         'payment_amount' => 'setPaymentAmount',
+        'net_fee' => 'setNetFee',
+        'tx_fee' => 'setTxFee',
+        'currency' => 'setCurrency',  
         'token' => 'setToken',
         'from_address' => 'setFromAddress',
         'from_memo' => 'setFromMemo',
@@ -150,6 +166,7 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
         'to_memo' => 'setToMemo',
         'payment_address' => 'setPaymentAddress',
         'is_processing' => 'setIsProcessing',
+        'processing_completed' => 'setProcessingCompleted',
         'transfers' => 'setTransfers'    ];
 
     /**
@@ -164,6 +181,9 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
         'status' => 'getStatus',
         'amount_paid' => 'getAmountPaid',
         'payment_amount' => 'getPaymentAmount',
+        'net_fee' => 'getNetFee',
+        'tx_fee' => 'getTxFee',
+        'currency' => 'getCurrency', 
         'token' => 'getToken',
         'from_address' => 'getFromAddress',
         'from_memo' => 'getFromMemo',
@@ -171,6 +191,7 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
         'to_memo' => 'getToMemo',
         'payment_address' => 'getPaymentAddress',
         'is_processing' => 'getIsProcessing',
+        'processing_completed' => 'getProcessingCompleted',
         'transfers' => 'getTransfers'    ];
 
     /**
@@ -237,6 +258,9 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
         $this->container['status'] = isset($data['status']) ? $data['status'] : null;
         $this->container['amount_paid'] = isset($data['amount_paid']) ? $data['amount_paid'] : null;
         $this->container['payment_amount'] = isset($data['payment_amount']) ? $data['payment_amount'] : null;
+        $this->container['net_fee'] = isset($data['net_fee']) ? $data['net_fee'] : null;
+        $this->container['tx_fee'] = isset($data['tx_fee']) ? $data['tx_fee'] : null;
+        $this->container['currency'] = isset($data['currency']) ? $data['currency'] : null;
         $this->container['token'] = isset($data['token']) ? $data['token'] : null;
         $this->container['from_address'] = isset($data['from_address']) ? $data['from_address'] : null;
         $this->container['from_memo'] = isset($data['from_memo']) ? $data['from_memo'] : null;
@@ -244,6 +268,7 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
         $this->container['to_memo'] = isset($data['to_memo']) ? $data['to_memo'] : null;
         $this->container['payment_address'] = isset($data['payment_address']) ? $data['payment_address'] : null;
         $this->container['is_processing'] = isset($data['is_processing']) ? $data['is_processing'] : null;
+        $this->container['processing_completed'] = isset($data['processing_completed']) ? $data['processing_completed'] : null;
         $this->container['transfers'] = isset($data['transfers']) ? $data['transfers'] : null;
     }
 
@@ -274,6 +299,15 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
         if ($this->container['payment_amount'] === null) {
             $invalidProperties[] = "'payment_amount' can't be null";
         }
+        if ($this->container['net_fee'] === null) {
+            $invalidProperties[] = "'net_fee' can't be null";
+        }
+        if ($this->container['tx_fee'] === null) {
+            $invalidProperties[] = "'tx_fee' can't be null";
+        }
+        if ($this->container['currency'] === null) {
+            $invalidProperties[] = "'currency' can't be null";
+        }
         if ($this->container['token'] === null) {
             $invalidProperties[] = "'token' can't be null";
         }
@@ -282,6 +316,9 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
         }
         if ($this->container['is_processing'] === null) {
             $invalidProperties[] = "'is_processing' can't be null";
+        }
+        if ($this->container['processing_completed'] === null) {
+            $invalidProperties[] = "'processing_completed' can't be null";
         }
         if ($this->container['transfers'] === null) {
             $invalidProperties[] = "'transfers' can't be null";
@@ -442,6 +479,78 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
     public function setPaymentAmount($payment_amount)
     {
         $this->container['payment_amount'] = $payment_amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets net_fee
+     *
+     * @return string
+     */
+    public function getNetFee()
+    {
+        return $this->container['net_fee'];
+    }
+
+    /**
+     * Sets net_fee
+     *
+     * @param string $net_fee net_fee
+     *
+     * @return $this
+     */
+    public function setNetFee($net_fee)
+    {
+        $this->container['net_fee'] = $net_fee;
+
+        return $this;
+    }
+
+    /**
+     * Gets tx_fee
+     *
+     * @return string
+     */
+    public function getTxFee()
+    {
+        return $this->container['tx_fee'];
+    }
+
+    /**
+     * Sets tx_fee
+     *
+     * @param string $tx_fee tx_fee
+     *
+     * @return $this
+     */
+    public function setTxFee($tx_fee)
+    {
+        $this->container['tx_fee'] = $tx_fee;
+
+        return $this;
+    }
+
+        /**
+     * Gets currency
+     *
+     * @return string
+     */
+    public function getCurrency()
+    {
+        return $this->container['currency'];
+    }
+
+    /**
+     * Sets currency
+     *
+     * @param string $currency currency
+     *
+     * @return $this
+     */
+    public function setCurrency($currency)
+    {
+        $this->container['currency'] = $currency;
 
         return $this;
     }
@@ -610,6 +719,30 @@ class Payment implements ModelInterface, ArrayAccess, JsonSerializable
     public function setIsProcessing($is_processing)
     {
         $this->container['is_processing'] = $is_processing;
+
+        return $this;
+    }
+
+    /**
+     * Gets processing_completed
+     *
+     * @return bool
+     */
+    public function getProcessingCompleted()
+    {
+        return $this->container['processing_completed'];
+    }
+
+    /**
+     * Sets processing_completed
+     *
+     * @param bool $processing_completed processing_completed
+     *
+     * @return $this
+     */
+    public function setProcessingCompleted($processing_completed)
+    {
+        $this->container['processing_completed'] = $processing_completed;
 
         return $this;
     }

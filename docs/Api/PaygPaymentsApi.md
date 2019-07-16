@@ -30,12 +30,13 @@ $apiInstance = new Bleumi\Pay\Api\PaygPaymentsApi(
     $config
 );
 $payment = new \Bleumi\Pay\Model\PaymentCreateInput(); // \Bleumi\Pay\Model\PaymentCreateInput | 
-id = '<ID>' # str | Unique ID identifying this record in your system, Replace <ID> with any string. Eg. 001-ETH-PHP
+id = '<ID>'; # str | Unique ID identifying this record in your system, Replace <ID> with any string. Eg. 001-ETH-PHP
 
 try {
     $tokenAddress = new \Bleumi\Pay\Model\EthAddress('<ERC20 Token Address>'); // Replace <ERC20 Token Address> with the Ethereum Network Smart Contract address of the Token
     $ethNetwork = \Bleumi\Pay\Model\EthNetwork::ROPSTEN;
     $token = new \Bleumi\Pay\Model\ERC20Token($ethNetwork, $tokenAddress, null);
+    $currency = '<Currency Code>'; //'USD' or 'EUR'
 
     $fromAddress = new \Bleumi\Pay\Model\EthAddress('<From Address>'); // Replace <From Address> with Ethereum Address of the Sender
     $toAddress = new \Bleumi\Pay\Model\EthAddress('<To Address>'); // Replace <To Address> with Ethereum Address of the Receiver
@@ -43,7 +44,8 @@ try {
     $payment->setPaymentAmount('10.0');
     $payment->setFromAddress($fromAddress);
     $payment->setToAddress($toAddress);
-    $payment->setToken($token);    
+    $payment->setToken($token);
+    $payment->setCurrency($currency);
     $result = $apiInstance->createPayment($payment, $id);
     $data = json_encode($result);
     echo  $data;
@@ -66,7 +68,7 @@ $apiInstance = new Bleumi\Pay\Api\PaygPaymentsApi(
     $config
 );
 $payment = new \Bleumi\Pay\Model\PaymentCreateInput(); // \Bleumi\Pay\Model\PaymentCreateInput | 
-id = '<ID>' # str | Unique ID identifying this record in your system, Replace <ID> with any string. Eg. 001-XLM-PHP
+id = '<ID>'; # str | Unique ID identifying this record in your system, Replace <ID> with any string. Eg. 001-XLM-PHP
 
 try {
     $issuer = new \Bleumi\Pay\Model\StellarAddress('GDWEVA6U7ZUKAWERV336BIQ7T3UNLLKSF4ENFK3GZ3Q35ZSU7SWH6AYV');
@@ -82,6 +84,7 @@ try {
     $payment->setFromMemo(new \Bleumi\Pay\Model\StellarMemo($id));
     $payment->setToAddress($toAddress);
     $payment->setToken($token);
+    $payment->setCurrency($code);
     $payment->setToMemo(new \Bleumi\Pay\Model\StellarMemo($id));
     $result = $apiInstance->createPayment($payment, $id);
     $data = json_encode($result);
@@ -102,7 +105,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Bleumi\Pay\Model\Payment**](../Model/Payment.md)
+[**\Bleumi\Pay\Model\PaymentResponse**](../Model/PaymentResponse.md)
 
 
 # **updatePayment**
@@ -122,7 +125,7 @@ $apiInstance = new Bleumi\Pay\Api\PaygPaymentsApi(
     $config
 );
 $payment = new \Bleumi\Pay\Model\PaymentUpdateInput(); // \Bleumi\Pay\Model\PaymentUpdateInput | 
-id = '<ID>' # str | Unique ID identifying this record in your system, Replace <ID> with any string. Eg. 001-ETH-PHP
+id = '<ID>'; # str | Unique ID identifying this record in your system, Replace <ID> with any string. Eg. 001-ETH-PHP
 
 try {
     $toAddress = new \Bleumi\Pay\Model\EthAddress('<To Address>'); // Replace <To Address> with Ethereum Address of the Receiver 
@@ -177,7 +180,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Bleumi\Pay\Model\Payment**](../Model/Payment.md)
+[**\Bleumi\Pay\Model\PaymentResponse**](../Model/PaymentResponse.md)
 
 
 

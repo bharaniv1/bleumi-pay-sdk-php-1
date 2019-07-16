@@ -356,7 +356,7 @@ class PaygPaymentsApi
      */
     public function createPaymentWithHttpInfo($body, $id)
     {
-        $returnType = '\Bleumi\Pay\Model\Payment';
+        $returnType = '\Bleumi\Pay\Model\PaymentResponse';
         $request = $this->createPaymentRequest($body, $id);
 
         try {
@@ -408,7 +408,7 @@ class PaygPaymentsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Bleumi\Pay\Model\Payment',
+                        '\Bleumi\Pay\Model\PaymentResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -460,7 +460,7 @@ class PaygPaymentsApi
      */
     public function createPaymentAsyncWithHttpInfo($body, $id)
     {
-        $returnType = '\Bleumi\Pay\Model\Payment';
+        $returnType = '\Bleumi\Pay\Model\PaymentResponse';
         $request = $this->createPaymentRequest($body, $id);
 
         return $this->client
@@ -1465,7 +1465,7 @@ class PaygPaymentsApi
      */
     public function updatePaymentWithHttpInfo($body, $id)
     {
-        $returnType = '\Bleumi\Pay\Model\Payment';
+        $returnType = '\Bleumi\Pay\Model\PaymentResponse';
         $request = $this->updatePaymentRequest($body, $id);
 
         try {
@@ -1517,7 +1517,7 @@ class PaygPaymentsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Bleumi\Pay\Model\Payment',
+                        '\Bleumi\Pay\Model\PaymentResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1569,7 +1569,7 @@ class PaygPaymentsApi
      */
     public function updatePaymentAsyncWithHttpInfo($body, $id)
     {
-        $returnType = '\Bleumi\Pay\Model\Payment';
+        $returnType = '\Bleumi\Pay\Model\PaymentResponse';
         $request = $this->updatePaymentRequest($body, $id);
 
         return $this->client

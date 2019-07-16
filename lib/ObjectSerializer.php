@@ -87,8 +87,12 @@ class ObjectSerializer
                 }
 
                 if (($data::attributeMap()[$property] == 'fromMemo')|| ($data::attributeMap()[$property] == 'toMemo')) {
-                    $json = json_decode($value, true);
-                    $values[$data::attributeMap()[$property]] = $json['memo'];
+                    if (is_object($value)) {
+                        $json = json_decode($value, true);
+                        $values[$data::attributeMap()[$property]] = $json['memo'];
+                    } else {
+                        $values[$data::attributeMap()[$property]] = $value; 
+                    }
                 }
             }
             return (object)$values;

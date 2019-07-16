@@ -26,7 +26,7 @@ To install the bindings via [Composer](http://getcomposer.org/), add the followi
 ```
 {
     "require": {
-        "bleumi/bleumi-pay-sdk-php":"1.0.6"
+        "bleumi/bleumi-pay-sdk-php":"1.0.7"
     }
 }
 ```

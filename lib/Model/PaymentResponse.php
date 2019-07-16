@@ -174,6 +174,105 @@ class PaymentResponse implements ModelInterface, ArrayAccess, JsonSerializable
     }
 
     /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
+        return $invalidProperties;
+    }
+
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
+
+    /**
+     * Gets payment_address
+     *
+     * @return \Bleumi\Pay\Model\PaymentAddress
+     */
+    public function getPaymentAddress()
+    {
+        return $this->container['payment_address'];
+    }
+
+    /**
+     * Sets payment_address
+     *
+     * @param \Bleumi\Pay\Model\PaymentAddress $payment_address payment_address
+     *
+     * @return $this
+     */
+    public function setPaymentAddress($payment_address)
+    {
+        $this->container['payment_address'] = $payment_address;
+
+        return $this;
+    }
+
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
+
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+    
+    /**
      * Gets payment_address
      *
      * @return \Bleumi\Pay\Model\PaymentAddress

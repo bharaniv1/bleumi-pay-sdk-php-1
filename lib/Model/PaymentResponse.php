@@ -196,30 +196,6 @@ class PaymentResponse implements ModelInterface, ArrayAccess, JsonSerializable
     }
 
     /**
-     * Gets payment_address
-     *
-     * @return \Bleumi\Pay\Model\PaymentAddress
-     */
-    public function getPaymentAddress()
-    {
-        return $this->container['payment_address'];
-    }
-
-    /**
-     * Sets payment_address
-     *
-     * @param \Bleumi\Pay\Model\PaymentAddress $payment_address payment_address
-     *
-     * @return $this
-     */
-    public function setPaymentAddress($payment_address)
-    {
-        $this->container['payment_address'] = $payment_address;
-
-        return $this;
-    }
-
-    /**
      * Returns true if offset exists. False otherwise.
      *
      * @param integer $offset Offset
@@ -272,29 +248,6 @@ class PaymentResponse implements ModelInterface, ArrayAccess, JsonSerializable
         unset($this->container[$offset]);
     }
     
-    /**
-     * Gets payment_address
-     *
-     * @return \Bleumi\Pay\Model\PaymentAddress
-     */
-    public function getPaymentAddress()
-    {
-        return $this->container['payment_address'];
-    }
-
-    /**
-     * Sets payment_address
-     *
-     * @param \Bleumi\Pay\Model\PaymentAddress $payment_address payment_address
-     *
-     * @return $this
-     */
-    public function setPaymentAddress($payment_address)
-    {
-        $this->container['payment_address'] = $payment_address;
-
-        return $this;
-    }
 
     /**
      * Gets the string presentation of the object

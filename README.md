@@ -1,9 +1,8 @@
 # Bleumi Pay SDK for PHP
 
-The Bleumi Pay SDK is a one-stop shop to help you integrate stablecoin payments (on Ethereum & Stellar Networks) into your business or application. The SDK bundles [Bleumi Pay API](https://pay.bleumi.com/docs/#introduction) into one SDK to ease implementation and support.
+The Bleumi Pay SDK is a one-stop shop to help you integrate ERC-20 payments into your business or application. The SDK bundles [Bleumi Pay API](https://pay.bleumi.com/docs/#introduction) into one SDK to ease implementation and support.
 
-bleumi-pay-sdk-php is a PHP library that provides an interface between your PHP application and [Bleumi Pay API](https://pay.bleumi.com/docs/#introduction). This tutorial covers the basics, including examples, needed to use the SDK. 
-
+bleumi-pay-sdk-php is a PHP library that provides an interface between your PHP application and [Bleumi Pay API](https://pay.bleumi.com/docs/#introduction). This tutorial covers the basics, including examples, needed to use the SDK.
 
 ## Getting Started
 
@@ -26,7 +25,7 @@ To install the bindings via [Composer](http://getcomposer.org/), add the followi
 ```
 {
     "require": {
-        "bleumi/bleumi-pay-sdk-php":"1.0.10"
+        "bleumi/bleumi-pay-sdk-php":"1.0.11"
     }
 }
 ```
@@ -41,43 +40,40 @@ Download the files and include `autoload.php`:
     require_once('/path/to/bleumi-pay-sdk-php/vendor/autoload.php');
 ```
 
-
 ### Run Sample Code
 
-The following code funds a Stellar Address (targetAddress) with 10,000 tokens on the test network.
-
-Note: Please ensure the targetAddress meets the Minimum Account Balance & Trustline requirements before running this sample code. For details, please visit [How to establish Stellar Trustline documentation](http://pay.bleumi.com/wp-content/uploads/2019/05/trustline_stellar.pdf).
-
+The following code creates a wallet to accept payment from the buyer specific for the ECR-20 Token.
 
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure API key authorization: ApiKeyAuth
-$config = Bleumi\Pay\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', '<Your API Key>'); // Replace <Your API Key> with your actual API key
+$config = Bleumi\Pay\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', '<Your API Key>');
 
-
-$apiInstance = new Bleumi\Pay\Api\DevelopmentApi(
+$apiInstance = new Bleumi\Pay\Api\Erc20PaymentsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$addr = '<STELLAR ADDRESS>'; // String | Replace <STELLAR ADDRESS> with an actual Stellar Network Address 
-$issuer = 'GDWEVA6U7ZUKAWERV336BIQ7T3UNLLKSF4ENFK3GZ3Q35ZSU7SWH6AYV'; // String | Asset Issuer | Address of USD Test Issuer
-
+$body = new \Bleumi\Pay\Model\WalletCreateInput(); // \Bleumi\Pay\Model\WalletCreateInput | 
+$chain = new \Bleumi\Pay\Model\EthNetwork(); // \Bleumi\Pay\Model\EthNetwork | Ethereum network in which wallet is to be created.
 
 try {
-    $apiInstance->friendbot($addr, $issuer);
+    $tokenAddress = new \Bleumi\Pay\Model\EthAddress("<TOKEN_ADDR>"); // Replace <BUYER_ADDR> with the Buyer Address
+    $buyerAddress = new \Bleumi\Pay\Model\EthAddress("<BUYER_ADDR>"); // Replace <TOKEN_ADDR> with the Token Address
+    $body->setBuyerAddress($buyerAddress);
+    $body->setToken($tokenAddress);
+    $body->setId($id);
+    $body->setTransferToPaymentProcessor(false);
+    $result = $apiInstance->createWallet($body, $chain::ROPSTEN);
+    $data = json_encode($result, JSON_PRETTY_PRINT);
+    echo  $data;
 } catch (Exception $e) {
+    echo 'Exception: ', $e->getMessage(), nl2br (" \n ");
     echo 'Code: ', $e->getCode(), nl2br (" \n ");
     echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
 }
 ?>
-```
-
-Use the Stellar Laboratory's [Endpoint Explorer](https://www.stellar.org/laboratory/#explorer?resource=accounts&endpoint=single&network=test) or the following URL to check the balance of the target address.
-
-```
-https://horizon-testnet.stellar.org/accounts/<targetAddress>
 ```
 
 More examples can be found under each method in [SDK Classes](README.md#sdk-classes) section.
@@ -86,38 +82,28 @@ More examples can be found under each method in [SDK Classes](README.md#sdk-clas
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-PaygPaymentsApi | [**createPayment**](docs/Api/PaygPaymentsApi.md#createpayment) | **POST** /v1/payment/payg/{id} | Create a payment request.
-PaygPaymentsApi | [**updatePayment**](docs/Api/PaygPaymentsApi.md#updatepayment) | **PUT** /v1/payment/payg/{id} | Update a payment request.
-PaygPaymentsApi | [**getPayment**](docs/Api/PaygPaymentsApi.md#getpayment) | **GET** /v1/payment/payg/{id} | Retrieves a specific payment request. 
-PaygPaymentsApi | [**listPayments**](docs/Api/PaygPaymentsApi.md#listpayments) | **GET** /v1/payments/payg | Retrieves all PAYG payment requests.
-PaygPaymentsApi | [**cancelPayment**](docs/Api/PaygPaymentsApi.md#cancelpayment) | **POST** /v1/payment/payg/{id}/cancel | Cancels a specific payment. Any amount received will be refunded (minus charges) to the address specified in fromAddress.
-PaygPaymentsApi | [**settlePayment**](docs/Api/PaygPaymentsApi.md#settlepayment) | **POST** /v1/payment/payg/{id}/settle | Settle a specific payment which has been partially paid. Current balance (minus charges) will be sent to the address specified in toAddress.
-PaygPaymentsApi | [**extendPayment**](docs/Api/PaygPaymentsApi.md#extendpayment) | **POST** /v1/payment/payg/{id}/extend | Enable processing for a payment for 7 days from date of invocation
-GasApi | [**estimateGas**](docs/Api/GasApi.md#estimategas) | **GET** /v1/gas/estimate | Provides an estimate of the Ethereum Network Fee for an ERC20 Token.
-DevelopmentApi | [**friendbot**](docs/Api/DevelopmentApi.md#friendbot) | **POST** /v1/friendbot | Provides 10,000 tokens to any Stellar address on the test network.
+Erc20PaymentsApi | [**createWallet**](docs/Api/Erc20PaymentsApi.md#createwallet) | **POST** /v1/payment/erc20/wallet | Create an unique wallet address to accept payments for an ERC-20 token from a buyer
+Erc20PaymentsApi | [**getWallet**](docs/Api/Erc20PaymentsApi.md#getwallet) | **GET** /v1/payment/erc20/wallet/{id} | Return a specific wallet
+Erc20PaymentsApi | [**listWallets**](docs/Api/Erc20PaymentsApi.md#listwallets) | **GET** /v1/payment/erc20/wallet | Returns a list of wallets
+Erc20PaymentsApi | [**settleWallet**](docs/Api/Erc20PaymentsApi.md#settlewallet) | **POST** /v1/payment/erc20/wallet/{id}/settle | Settle a payment, amount received will be transferred even if less than payment amount
+Erc20PaymentsApi | [**refundWallet**](docs/Api/Erc20PaymentsApi.md#refundwallet) | **POST** /v1/payment/erc20/wallet/{id}/refund | Refund wallet
+Erc20PaymentsApi | [**getWalletOperation**](docs/Api/Erc20PaymentsApi.md#getwalletoperation) | **GET** /v1/payment/erc20/wallet/{id}/operation/{txid} | Return a specific operation of the wallet
+Erc20PaymentsApi | [**getWalletOperations**](docs/Api/Erc20PaymentsApi.md#getwalletoperations) | **GET** /v1/payment/erc20/wallet/{id}/operation | Return the list of operations performed by the mechant on a specific wallet
 
 
-## SDK Data Models
+## Documentation For Models
 
- - [Address](docs/Model/Address.md)
  - [BadRequest](docs/Model/BadRequest.md)
- - [ERC20PaymentAddress](docs/Model/ERC20PaymentAddress.md)
- - [ERC20Token](docs/Model/ERC20Token.md)
- - [EstimatedGas](docs/Model/EstimatedGas.md)
  - [EthAddress](docs/Model/EthAddress.md)
  - [EthNetwork](docs/Model/EthNetwork.md)
- - [PaginatedPayments](docs/Model/PaginatedPayments.md)
- - [Payment](docs/Model/Payment.md)
- - [PaymentAddress](docs/Model/PaymentAddress.md)
- - [PaymentCreateInput](docs/Model/PaymentCreateInput.md)
- - [PaymentStatus](docs/Model/PaymentStatus.md)
- - [PaymentUpdateInput](docs/Model/PaymentUpdateInput.md)
- - [StellarAddress](docs/Model/StellarAddress.md)
- - [StellarNetwork](docs/Model/StellarNetwork.md)
- - [StellarPaymentAddress](docs/Model/StellarPaymentAddress.md)
- - [StellarToken](docs/Model/StellarToken.md)
- - [Token](docs/Model/Token.md)
- - [Transfer](docs/Model/Transfer.md)
+ - [PaginatedWalletOperations](docs/Model/PaginatedWalletOperations.md)
+ - [PaginatedWallets](docs/Model/PaginatedWallets.md)
+ - [Wallet](docs/Model/Wallet.md)
+ - [WalletCreateInput](docs/Model/WalletCreateInput.md)
+ - [WalletCreateOutput](docs/Model/WalletCreateOutput.md)
+ - [WalletOperation](docs/Model/WalletOperation.md)
+ - [WalletOperationInput](docs/Model/WalletOperationInput.md)
+ - [WalletOperationOutput](docs/Model/WalletOperationOutput.md)
 
 ## Limitations
 
@@ -128,7 +114,4 @@ DevelopmentApi | [**friendbot**](docs/Api/DevelopmentApi.md#friendbot) | **POST*
 
 Copyright 2019 Bleumi, Inc.
 
-Code licensed under the [MIT License](docs/MITLicense.md). 
-
-
-
+Code licensed under the [MIT License](docs/MITLicense.md).

@@ -1,6 +1,6 @@
 {
     "name": "bleumi/bleumi-pay-sdk-php",
-    "version": "1.0.10",
+    "version": "1.0.11",
     "description": "PHP SDK for Bleumi Pay REST API",
     "keywords": [
         "payment-gateway",
@@ -29,6 +29,9 @@
             "role": "Developer"
         }
     ],
+    "support": {
+        "email": "support@bleumi.com"
+    },
     "require": {
         "php": ">=5.5",
         "ext-curl": "*",
@@ -46,8 +49,5 @@
     },
     "autoload-dev": {
         "psr-4": { "Bleumi\\Pay\\" : "test/" }
-    },
-    "support": {
-        "email": "support@bleumi.com"
     }
 }

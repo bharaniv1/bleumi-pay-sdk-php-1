@@ -31,13 +31,13 @@ $body = new \Bleumi\Pay\Model\WalletCreateInput(); // \Bleumi\Pay\Model\WalletCr
 $chain = new \Bleumi\Pay\Model\EthNetwork(); // \Bleumi\Pay\Model\EthNetwork | Ethereum network in which wallet is to be created.
 
 try {
-    $tokenAddress = new \Bleumi\Pay\Model\EthAddress("<TOKEN_ADDR>"); // Replace <BUYER_ADDR> with the Buyer Address
-    $buyerAddress = new \Bleumi\Pay\Model\EthAddress("<BUYER_ADDR>"); // Replace <TOKEN_ADDR> with the Token Address
-
+    $tokenAddress = new \Bleumi\Pay\Model\EthAddress("<TOKEN_ADDR>"); // Replace <BUYER_ADDR> with the Buyer's Enthereum Network Address 
+    $buyerAddress = new \Bleumi\Pay\Model\EthAddress("<BUYER_ADDR>"); // Replace <TOKEN_ADDR> with the Token Contract Address
+    $merchantAddress = new \Bleumi\Pay\Model\EthAddress("<MERCHANT_ADDR>"); // Replace <MERCHANT_ADDR> with the Merchant's Enthereum Network Address
     $body->setBuyerAddress($buyerAddress);
     $body->setToken($tokenAddress);
     $body->setId($id);
-    $body->setTransferToPaymentProcessor(false);
+    $body->settransferAddress($merchantAddress);
     $result = $apiInstance->createWallet($body, $chain::ROPSTEN);
     $data = json_encode($result, JSON_PRETTY_PRINT);
     echo  $data;

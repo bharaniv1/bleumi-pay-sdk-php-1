@@ -61,7 +61,7 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
         'id' => 'string',
 'token' => '\Bleumi\Pay\Model\EthAddress',
 'buyer_address' => '\Bleumi\Pay\Model\EthAddress',
-'transfer_to_payment_processor' => 'bool'    ];
+'transfer_address' => '\Bleumi\Pay\Model\EthAddress'];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -72,7 +72,7 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
         'id' => null,
 'token' => null,
 'buyer_address' => null,
-'transfer_to_payment_processor' => null    ];
+'transfer_address' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -104,7 +104,7 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
         'id' => 'id',
 'token' => 'token',
 'buyer_address' => 'buyerAddress',
-'transfer_to_payment_processor' => 'transferToPaymentProcessor'    ];
+'transfer_address' => 'transferAddress'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -115,7 +115,7 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
         'id' => 'setId',
 'token' => 'setToken',
 'buyer_address' => 'setBuyerAddress',
-'transfer_to_payment_processor' => 'setTransferToPaymentProcessor'    ];
+'transfer_address' => 'setTransferAddress'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -126,7 +126,7 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
         'id' => 'getId',
 'token' => 'getToken',
 'buyer_address' => 'getBuyerAddress',
-'transfer_to_payment_processor' => 'getTransferToPaymentProcessor'    ];
+'transfer_address' => 'getTransferAddress'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -189,7 +189,7 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         $this->container['token'] = isset($data['token']) ? $data['token'] : null;
         $this->container['buyer_address'] = isset($data['buyer_address']) ? $data['buyer_address'] : null;
-        $this->container['transfer_to_payment_processor'] = isset($data['transfer_to_payment_processor']) ? $data['transfer_to_payment_processor'] : null;
+        $this->container['transfer_address'] = isset($data['transfer_address']) ? $data['transfer_address'] : null;
     }
 
     /**
@@ -210,8 +210,8 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
         if ($this->container['buyer_address'] === null) {
             $invalidProperties[] = "'buyer_address' can't be null";
         }
-        if ($this->container['transfer_to_payment_processor'] === null) {
-            $invalidProperties[] = "'transfer_to_payment_processor' can't be null";
+        if ($this->container['transfer_address'] === null) {
+            $invalidProperties[] = "'transfer_address' can't be null";
         }
         return $invalidProperties;
     }
@@ -301,25 +301,25 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
     }
 
     /**
-     * Gets transfer_to_payment_processor
+     * Gets transfer_address
      *
-     * @return bool
+     * @return \Bleumi\Pay\Model\EthAddress
      */
-    public function getTransferToPaymentProcessor()
+    public function getTransferAddress()
     {
-        return $this->container['transfer_to_payment_processor'];
+        return $this->container['transfer_address'];
     }
 
     /**
-     * Sets transfer_to_payment_processor
+     * Sets transfer_address
      *
-     * @param bool $transfer_to_payment_processor transfer_to_payment_processor
+     * @param \Bleumi\Pay\Model\EthAddress $transfer_address transfer_address
      *
      * @return $this
      */
-    public function setTransferToPaymentProcessor($transfer_to_payment_processor)
+    public function setTransferAddress($transfer_address)
     {
-        $this->container['transfer_to_payment_processor'] = $transfer_to_payment_processor;
+        $this->container['transfer_address'] = $transfer_address;
 
         return $this;
     }

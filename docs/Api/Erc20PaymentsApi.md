@@ -1,14 +1,5 @@
 # Bleumi\Pay\Erc20PaymentsApi
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**createWallet**](Erc20PaymentsApi.md#createWallet) | **POST** /v1/payment/erc20/wallet | Create an unique wallet address to accept payments for an ERC-20 token from a buyer
-[**getWallet**](Erc20PaymentsApi.md#getWallet) | **GET** /v1/payment/erc20/wallet/{id} | Return a specific wallet
-[**listWallets**](Erc20PaymentsApi.md#listWallets) | **GET** /v1/payment/erc20/wallet | Returns a list of wallets
-[**settleWallet**](Erc20PaymentsApi.md#settleWallet) | **POST** /v1/payment/erc20/wallet/{id}/settle | Settle a payment, amount received will be transferred even if less than payment amount
-[**refundWallet**](Erc20PaymentsApi.md#refundWallet) | **POST** /v1/payment/erc20/wallet/{id}/refund | Refund wallet
-[**getWalletOperation**](Erc20PaymentsApi.md#getWalletOperation) | **GET** /v1/payment/erc20/wallet/{id}/operation/{txid} | Return a specific operation of the wallet
-[**getWalletOperations**](Erc20PaymentsApi.md#getWalletOperations) | **GET** /v1/payment/erc20/wallet/{id}/operation | Return the list of operations performed by the mechant on a specific wallet
 
 # **createWallet**
 > \Bleumi\Pay\Model\WalletCreateOutput createWallet($body, $chain)
@@ -54,7 +45,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**\Bleumi\Pay\Model\WalletCreateInput**](../Model/WalletCreateInput.md)| Request body - used to specify the parameters for the wallet creations. |
- **chain** | [**\Bleumi\Pay\Model\EthNetwork**](../Model/.md)| Ethereum network in which wallet is to be created. | 
+ **chain** | [**\Bleumi\Pay\Model\EthNetwork**](../Model/.md)| Ethereum network in which wallet is to be created. Please refer to the [network list](https://pay.bleumi.com/docs/#supported-ethereum-networks) |
 
 ### Return type
 
@@ -95,7 +86,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **string**| Unique ID identifying the wallet in your system |
+ **id** | **string**| The ID of the wallet to get the details |
 
 ### Return type
 
@@ -191,8 +182,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **id** | **string**| The ID of the wallet to settle (withdraw) the funds from |
  **body** | [**\Bleumi\Pay\Model\WalletOperationInput**](../Model/WalletOperationInput.md)| Request body - used to specify the amount to settle. |
- **id** | **string**| Unique ID identifying this record in your system |
+
 
 ### Return type
 
@@ -234,7 +226,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **string**| Unique ID identifying this record in your system |
+ **id** | **string**| The ID of the wallet to refund the funds to the Buyer |
 
 ### Return type
 
@@ -275,8 +267,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **string**| Unique ID identifying the wallet in your system |
- **txid** | **string**| ID of a specific operation of the wallet |
+ **id** | **string**| Unique ID of the wallet for which you need the wallet operation detail |
+ **txid** | **string**| Transaction ID of a specific operation of the wallet |
 
 ### Return type
 
@@ -321,8 +313,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **string**| Unique ID identifying the wallet in your system |
- **next_token** | **string**| Cursor to start results from | [optional]
+ **id** | **string**| Unique ID of the wallet for which you need the list of operations that was performed by the merchant (or) the payment processor |
+ **next_token** | **string**| The token to fetch the next page, supply blank value to get the first page of wallet operations | [optional]
 
 ### Return type
 

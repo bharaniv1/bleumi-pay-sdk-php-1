@@ -80,9 +80,8 @@ class Configuration
      *
      * @var string
      */
-    //protected $host = 'https://api.pay.bleumi.com/';
-    protected $host = 'https://ej8fsqadb7.execute-api.us-east-1.amazonaws.com/prod';
-
+    protected $host = 'https://api.pay.bleumi.com/';
+    
     /**
      * User agent of the HTTP request, set to "PHP-Swagger" by default
      *

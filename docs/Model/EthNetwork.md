@@ -5,5 +5,5 @@
 * `MAINNET` (value: `"mainnet"`)
 * `ROPSTEN` (value: `"ropsten"`)
 * `GOERLI` (value: `"goerli"`)
-* `KOVEN` (value: `"koven"`)
+* `KOVAN` (value: `"kovan"`)
 * `RINKEBY` (value: `"rinkeby"`)

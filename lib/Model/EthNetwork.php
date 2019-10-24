@@ -45,7 +45,7 @@ class EthNetwork
     const MAINNET = 'mainnet';
 const ROPSTEN = 'ropsten';
 const GOERLI = 'goerli';
-const KOVEN = 'koven';
+const KOVAN = 'kovan';
 const RINKEBY = 'rinkeby';
     /**
      * Gets allowable values of the enum
@@ -57,7 +57,7 @@ const RINKEBY = 'rinkeby';
             self::MAINNET,
 self::ROPSTEN,
 self::GOERLI,
-self::KOVEN,
+self::KOVAN,
 self::RINKEBY,        ];
     }
 }

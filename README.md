@@ -20,6 +20,8 @@ Bleumi Pay SDK uses API keys to authenticate requests. You can obtain an API key
 ### Install Package
 ### Composer
 
+[![packagist (scoped)](https://img.shields.io/packagist/v/bleumi/bleumi-pay-sdk-php.svg)](https://packagist.org/packages/bleumi/bleumi-pay-sdk-php)
+
 To install the bindings via [Composer](http://getcomposer.org/), add the following to `composer.json`:
 
 ```

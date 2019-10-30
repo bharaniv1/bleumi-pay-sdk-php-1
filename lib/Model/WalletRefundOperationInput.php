@@ -1,6 +1,6 @@
 <?php
 /**
- * WalletCreateInput
+ * WalletRefundOperationInput
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \Bleumi\Pay\ObjectSerializer;
 use JsonSerializable;
 
 /**
- * WalletCreateInput Class Doc Comment
+ * WalletRefundOperationInput Class Doc Comment
  *
  * @category Class
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
+class WalletRefundOperationInput implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
       *
       * @var string
       */
-    protected static $swaggerModelName = 'WalletCreateInput';
+    protected static $swaggerModelName = 'WalletRefundOperationInput';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +57,7 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'id' => 'string',
-'buyer_address' => '\Bleumi\Pay\Model\EthAddress',
-'transfer_address' => '\Bleumi\Pay\Model\EthAddress'    ];
+        'token' => '\Bleumi\Pay\Model\EthAddress'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -67,9 +65,7 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'id' => null,
-'buyer_address' => null,
-'transfer_address' => null    ];
+        'token' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -98,9 +94,7 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-'buyer_address' => 'buyerAddress',
-'transfer_address' => 'transferAddress'    ];
+        'token' => 'token'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -108,9 +102,7 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-'buyer_address' => 'setBuyerAddress',
-'transfer_address' => 'setTransferAddress'    ];
+        'token' => 'setToken'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -118,9 +110,7 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-'buyer_address' => 'getBuyerAddress',
-'transfer_address' => 'getTransferAddress'    ];
+        'token' => 'getToken'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -180,9 +170,7 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['buyer_address'] = isset($data['buyer_address']) ? $data['buyer_address'] : null;
-        $this->container['transfer_address'] = isset($data['transfer_address']) ? $data['transfer_address'] : null;
+        $this->container['token'] = isset($data['token']) ? $data['token'] : null;
     }
 
     /**
@@ -194,14 +182,8 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
-        }
-        if ($this->container['buyer_address'] === null) {
-            $invalidProperties[] = "'buyer_address' can't be null";
-        }
-        if ($this->container['transfer_address'] === null) {
-            $invalidProperties[] = "'transfer_address' can't be null";
+        if ($this->container['token'] === null) {
+            $invalidProperties[] = "'token' can't be null";
         }
         return $invalidProperties;
     }
@@ -219,73 +201,25 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
 
 
     /**
-     * Gets id
-     *
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param string $id Unique ID identifying the wallet; specified here to create the wallet by your system
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets buyer_address
+     * Gets token
      *
      * @return \Bleumi\Pay\Model\EthAddress
      */
-    public function getBuyerAddress()
+    public function getToken()
     {
-        return $this->container['buyer_address'];
+        return $this->container['token'];
     }
 
     /**
-     * Sets buyer_address
+     * Sets token
      *
-     * @param \Bleumi\Pay\Model\EthAddress $buyer_address buyer_address
+     * @param \Bleumi\Pay\Model\EthAddress $token token
      *
      * @return $this
      */
-    public function setBuyerAddress($buyer_address)
+    public function setToken($token)
     {
-        $this->container['buyer_address'] = $buyer_address;
-
-        return $this;
-    }
-
-    /**
-     * Gets transfer_address
-     *
-     * @return \Bleumi\Pay\Model\EthAddress
-     */
-    public function getTransferAddress()
-    {
-        return $this->container['transfer_address'];
-    }
-
-    /**
-     * Sets transfer_address
-     *
-     * @param \Bleumi\Pay\Model\EthAddress $transfer_address transfer_address
-     *
-     * @return $this
-     */
-    public function setTransferAddress($transfer_address)
-    {
-        $this->container['transfer_address'] = $transfer_address;
+        $this->container['token'] = $token;
 
         return $this;
     }
@@ -357,13 +291,5 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
         }
 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
-    /**
-     * Customize the way json_encode() renders the object.
-     */
-    public function jsonSerialize()
-    {
-        return ObjectSerializer::sanitizeForSerialization($this);
     }
 }

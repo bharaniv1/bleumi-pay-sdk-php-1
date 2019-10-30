@@ -32,7 +32,6 @@ use \ArrayAccess;
 use \Bleumi\Pay\ObjectSerializer;
 use JsonSerializable;
 
-
 /**
  * PaginatedWallets Class Doc Comment
  *
@@ -220,7 +219,7 @@ class PaginatedWallets implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets results
      *
-     * @param \Bleumi\Pay\Model\Wallet[] $results results
+     * @param \Bleumi\Pay\Model\Wallet[] $results List of wallets in the current page
      *
      * @return $this
      */

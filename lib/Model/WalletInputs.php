@@ -1,6 +1,6 @@
 <?php
 /**
- * WalletOperationInput
+ * WalletInputs
  *
  * PHP version 5
  *
@@ -32,16 +32,15 @@ use \ArrayAccess;
 use \Bleumi\Pay\ObjectSerializer;
 use JsonSerializable;
 
-
 /**
- * WalletOperationInput Class Doc Comment
+ * WalletInputs Class Doc Comment
  *
  * @category Class
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class WalletOperationInput implements ModelInterface, ArrayAccess, JsonSerializable
+class WalletInputs implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = null;
 
@@ -50,7 +49,7 @@ class WalletOperationInput implements ModelInterface, ArrayAccess, JsonSerializa
       *
       * @var string
       */
-    protected static $swaggerModelName = 'WalletOperationInput';
+    protected static $swaggerModelName = 'WalletInputs';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,7 +57,11 @@ class WalletOperationInput implements ModelInterface, ArrayAccess, JsonSerializa
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'amount' => 'string'    ];
+        'buyer' => 'string',
+'merchant' => 'string',
+'wallet_library' => 'string',
+'wallet_proxy' => 'string',
+'salt' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -66,7 +69,11 @@ class WalletOperationInput implements ModelInterface, ArrayAccess, JsonSerializa
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'amount' => null    ];
+        'buyer' => null,
+'merchant' => null,
+'wallet_library' => null,
+'wallet_proxy' => null,
+'salt' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -95,7 +102,11 @@ class WalletOperationInput implements ModelInterface, ArrayAccess, JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'amount' => 'amount'    ];
+        'buyer' => 'buyer',
+'merchant' => 'merchant',
+'wallet_library' => 'walletLibrary',
+'wallet_proxy' => 'walletProxy',
+'salt' => 'salt'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -103,7 +114,11 @@ class WalletOperationInput implements ModelInterface, ArrayAccess, JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'amount' => 'setAmount'    ];
+        'buyer' => 'setBuyer',
+'merchant' => 'setMerchant',
+'wallet_library' => 'setWalletLibrary',
+'wallet_proxy' => 'setWalletProxy',
+'salt' => 'setSalt'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -111,7 +126,11 @@ class WalletOperationInput implements ModelInterface, ArrayAccess, JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'amount' => 'getAmount'    ];
+        'buyer' => 'getBuyer',
+'merchant' => 'getMerchant',
+'wallet_library' => 'getWalletLibrary',
+'wallet_proxy' => 'getWalletProxy',
+'salt' => 'getSalt'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -171,7 +190,11 @@ class WalletOperationInput implements ModelInterface, ArrayAccess, JsonSerializa
      */
     public function __construct(array $data = null)
     {
-        $this->container['amount'] = isset($data['amount']) ? $data['amount'] : null;
+        $this->container['buyer'] = isset($data['buyer']) ? $data['buyer'] : null;
+        $this->container['merchant'] = isset($data['merchant']) ? $data['merchant'] : null;
+        $this->container['wallet_library'] = isset($data['wallet_library']) ? $data['wallet_library'] : null;
+        $this->container['wallet_proxy'] = isset($data['wallet_proxy']) ? $data['wallet_proxy'] : null;
+        $this->container['salt'] = isset($data['salt']) ? $data['salt'] : null;
     }
 
     /**
@@ -183,8 +206,20 @@ class WalletOperationInput implements ModelInterface, ArrayAccess, JsonSerializa
     {
         $invalidProperties = [];
 
-        if ($this->container['amount'] === null) {
-            $invalidProperties[] = "'amount' can't be null";
+        if ($this->container['buyer'] === null) {
+            $invalidProperties[] = "'buyer' can't be null";
+        }
+        if ($this->container['merchant'] === null) {
+            $invalidProperties[] = "'merchant' can't be null";
+        }
+        if ($this->container['wallet_library'] === null) {
+            $invalidProperties[] = "'wallet_library' can't be null";
+        }
+        if ($this->container['wallet_proxy'] === null) {
+            $invalidProperties[] = "'wallet_proxy' can't be null";
+        }
+        if ($this->container['salt'] === null) {
+            $invalidProperties[] = "'salt' can't be null";
         }
         return $invalidProperties;
     }
@@ -202,25 +237,121 @@ class WalletOperationInput implements ModelInterface, ArrayAccess, JsonSerializa
 
 
     /**
-     * Gets amount
+     * Gets buyer
      *
      * @return string
      */
-    public function getAmount()
+    public function getBuyer()
     {
-        return $this->container['amount'];
+        return $this->container['buyer'];
     }
 
     /**
-     * Sets amount
+     * Sets buyer
      *
-     * @param string $amount amount
+     * @param string $buyer Address of the buyer
      *
      * @return $this
      */
-    public function setAmount($amount)
+    public function setBuyer($buyer)
     {
-        $this->container['amount'] = $amount;
+        $this->container['buyer'] = $buyer;
+
+        return $this;
+    }
+
+    /**
+     * Gets merchant
+     *
+     * @return string
+     */
+    public function getMerchant()
+    {
+        return $this->container['merchant'];
+    }
+
+    /**
+     * Sets merchant
+     *
+     * @param string $merchant Address of the merchant
+     *
+     * @return $this
+     */
+    public function setMerchant($merchant)
+    {
+        $this->container['merchant'] = $merchant;
+
+        return $this;
+    }
+
+    /**
+     * Gets wallet_library
+     *
+     * @return string
+     */
+    public function getWalletLibrary()
+    {
+        return $this->container['wallet_library'];
+    }
+
+    /**
+     * Sets wallet_library
+     *
+     * @param string $wallet_library Wallet Library address
+     *
+     * @return $this
+     */
+    public function setWalletLibrary($wallet_library)
+    {
+        $this->container['wallet_library'] = $wallet_library;
+
+        return $this;
+    }
+
+    /**
+     * Gets wallet_proxy
+     *
+     * @return string
+     */
+    public function getWalletProxy()
+    {
+        return $this->container['wallet_proxy'];
+    }
+
+    /**
+     * Sets wallet_proxy
+     *
+     * @param string $wallet_proxy Wallet Proxy address
+     *
+     * @return $this
+     */
+    public function setWalletProxy($wallet_proxy)
+    {
+        $this->container['wallet_proxy'] = $wallet_proxy;
+
+        return $this;
+    }
+
+    /**
+     * Gets salt
+     *
+     * @return string
+     */
+    public function getSalt()
+    {
+        return $this->container['salt'];
+    }
+
+    /**
+     * Sets salt
+     *
+     * @param string $salt Salt used to create the wallet
+     *
+     * @return $this
+     */
+    public function setSalt($salt)
+    {
+        $this->container['salt'] = $salt;
 
         return $this;
     }

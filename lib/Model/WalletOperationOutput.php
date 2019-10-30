@@ -32,7 +32,6 @@ use \ArrayAccess;
 use \Bleumi\Pay\ObjectSerializer;
 use JsonSerializable;
 
-
 /**
  * WalletOperationOutput Class Doc Comment
  *
@@ -214,7 +213,7 @@ class WalletOperationOutput implements ModelInterface, ArrayAccess, JsonSerializ
     /**
      * Sets txid
      *
-     * @param string $txid txid
+     * @param string $txid Unique identifier for the wallet operation transaction
      *
      * @return $this
      */

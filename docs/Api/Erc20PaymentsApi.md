@@ -15,6 +15,8 @@ require_once(__DIR__ . '/vendor/autoload.php');
 $config = Bleumi\Pay\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', '<Your API Key>');
 
 $apiInstance = new Bleumi\Pay\Api\Erc20PaymentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
@@ -22,11 +24,9 @@ $body = new \Bleumi\Pay\Model\WalletCreateInput(); // \Bleumi\Pay\Model\WalletCr
 $chain = new \Bleumi\Pay\Model\EthNetwork(); // \Bleumi\Pay\Model\EthNetwork | Ethereum network in which wallet is to be created.
 
 try {
-    $tokenAddress = new \Bleumi\Pay\Model\EthAddress("<TOKEN_ADDR>"); // Replace <TOKEN_ADDR> with the Buyer's Enthereum Network Address 
-    $buyerAddress = new \Bleumi\Pay\Model\EthAddress("<BUYER_ADDR>"); // Replace <BUYER_ADDR> with the Token Contract Address
+    $buyerAddress = new \Bleumi\Pay\Model\EthAddress("<BUYER_ADDR>"); // Replace <BUYER_ADDR> with the Buyer's Ethereum Network Address
     $merchantAddress = new \Bleumi\Pay\Model\EthAddress("<MERCHANT_ADDR>"); // Replace <MERCHANT_ADDR> with the Merchant's Enthereum Network Address
-    $body->setId("<ID>");
-    $body->setToken($tokenAddress);
+    $body->setId($id);
     $body->setBuyerAddress($buyerAddress);
     $body->settransferAddress($merchantAddress);
     $result = $apiInstance->createWallet($body, $chain::ROPSTEN);
@@ -44,12 +44,14 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**\Bleumi\Pay\Model\WalletCreateInput**](../Model/WalletCreateInput.md)| Request body - used to specify the parameters for the wallet creations. |
- **chain** | [**\Bleumi\Pay\Model\EthNetwork**](../Model/.md)| Ethereum network in which wallet is to be created. Please refer to the [network list](https://pay.bleumi.com/docs/#supported-ethereum-networks) |
+ **body** | [**\Bleumi\Pay\Model\WalletCreateInput**](../Model/WalletCreateInput.md)| Request body - used to specify the parameters for the wallet creations.  |
+ **chain** | [**\Bleumi\Pay\Model\EthNetwork**](../Model/EthNetwork.md)| Ethereum network in which wallet is to be created. Please refer to the [network list](https://pay.bleumi.com/docs/#supported-ethereum-networks) |
 
 ### Return type
 
 [**\Bleumi\Pay\Model\WalletCreateOutput**](../Model/WalletCreateOutput.md)
+
+
 
 # **getWallet**
 > \Bleumi\Pay\Model\Wallet getWallet($id)
@@ -59,12 +61,15 @@ Return a specific wallet
 ### Example
 ```php
 <?php
-
 require_once(__DIR__ . '/vendor/autoload.php');
+
 // Configure API key authorization: ApiKeyAuth
 $config = Bleumi\Pay\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', '<Your API Key>');
 
+
 $apiInstance = new Bleumi\Pay\Api\Erc20PaymentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
@@ -86,11 +91,14 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **string**| The ID of the wallet to get the details |
+ **id** | **string**| Unique ID identifying the wallet in your system |
 
 ### Return type
 
 [**\Bleumi\Pay\Model\Wallet**](../Model/Wallet.md)
+
+
+
 
 # **listWallets**
 > \Bleumi\Pay\Model\PaginatedWallets listWallets($next_token, $sort_by, $start_at, $end_at)
@@ -106,13 +114,15 @@ When the value of 'nextToken' field is an empty string, there are no more wallet
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure API key authorization: ApiKeyAuth
-$config = Bleumi\Pay\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', 'YOUR_API_KEY');
+$config = Bleumi\Pay\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', '<Your API Key>');
+
 
 $apiInstance = new Bleumi\Pay\Api\Erc20PaymentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-
 $next_token = ""; // string | Cursor to start results from
 $sort_by = "<SORT_BY>"; // string | Sort wallets by | Eg. "createdAt"
 $start_at = "<START_TIMESTAMP>"; // string | Get wallets from this timestamp | Eg. 1546300800 for 1-JAN-2019
@@ -120,7 +130,8 @@ $end_at = ""; // string | Get wallets till this timestamp
 
 try {
     $result = $apiInstance->listWallets($next_token, $sort_by, $start_at, $end_at);
-    print_r($result);
+    $data = json_encode($result, JSON_PRETTY_PRINT);
+    echo  $data;
 } catch (Exception $e) {
     echo 'Exception: ', $e->getMessage(), nl2br (" \n ");
     echo 'Code: ', $e->getCode(), nl2br (" \n ");
@@ -142,6 +153,11 @@ Name | Type | Description  | Notes
 
 [**\Bleumi\Pay\Model\PaginatedWallets**](../Model/PaginatedWallets.md)
 
+
+
+
+
+
 # **settleWallet**
 > \Bleumi\Pay\Model\WalletOperationOutput settleWallet($body, $id)
 
@@ -151,29 +167,33 @@ If the settle amount is less than the current wallet balance, the requested amou
 
 If the settle amount is more than the current wallet balance, no action is performed.
 
+
 ### Example
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 // Configure API key authorization: ApiKeyAuth
 $config = Bleumi\Pay\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', '<Your API Key>');
 
+
 $apiInstance = new Bleumi\Pay\Api\Erc20PaymentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$body = new \Bleumi\Pay\Model\WalletOperationInput(); // \Bleumi\Pay\Model\WalletOperationInput | 
+$body = new \Bleumi\Pay\Model\WalletSettleOperationInput(); // \Bleumi\Pay\Model\WalletSettleOperationInput | Request body - used to specify the token, amount to settle.
 $id = "<ID>"; // string | Unique ID identifying the wallet in your system
 
 try {
+    $body->setToken('<TOKEN_ADDR>'); // string | The token to settle | Replace <TOKEN_ADDR> with the ECR-20 Token Contract Address
     $body->setAmount('<AMT>'); // string | Amount to settle.
     $result = $apiInstance->settleWallet($body, $id);
     $data = json_encode($result, JSON_PRETTY_PRINT);
     echo  $data;
 } catch (Exception $e) {
-    echo 'Exception: ', $e->getMessage(), nl2br (" \n ");
-    echo 'Code: ', $e->getCode(), nl2br (" \n ");
-    echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
+    echo 'Exception when calling Erc20PaymentsApi->settleWallet: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```
@@ -183,7 +203,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| The ID of the wallet to settle (withdraw) the funds from |
- **body** | [**\Bleumi\Pay\Model\WalletOperationInput**](../Model/WalletOperationInput.md)| Request body - used to specify the amount to settle. |
+ **body** | [**\Bleumi\Pay\Model\WalletSettleOperationInput**](../Model/WalletSettleOperationInput.md)| Request body - used to specify the token and amount to settle. |
 
 
 ### Return type
@@ -191,7 +211,7 @@ Name | Type | Description  | Notes
 [**\Bleumi\Pay\Model\WalletOperationOutput**](../Model/WalletOperationOutput.md)
 
 # **refundWallet**
-> \Bleumi\Pay\Model\WalletOperationOutput refundWallet($id)
+> \Bleumi\Pay\Model\WalletOperationOutput refundWallet($body, $id)
 
 Refund wallet. The entire wallet amount will be transferred to the buyer. Supply the unique id that was used when the wallet was created.
 
@@ -201,17 +221,23 @@ At the end of refund operation, the wallet balance will be zero.
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 // Configure API key authorization: ApiKeyAuth
 $config = Bleumi\Pay\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', '<Your API Key>');
 
+
 $apiInstance = new Bleumi\Pay\Api\Erc20PaymentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
+$body = new \Bleumi\Pay\Model\WalletRefundOperationInput(); // \Bleumi\Pay\Model\WalletRefundOperationInput | Request body - used to specify the token to refund.
 $id = "<ID>"; // string | Unique ID identifying the wallet in your system
 
 try {
-    $result = $apiInstance->refundWallet($id);
+    $body->setToken('<TOKEN_ADDR>'); // string | The ECR-20 token to refund | Replace <TOKEN_ADDR> with the Token Contract Address
+    $result = $apiInstance->refundWallet($body, $id);
     $data = json_encode($result, JSON_PRETTY_PRINT);
     echo  $data;
 } catch (Exception $e) {
@@ -227,24 +253,31 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| The ID of the wallet to refund the funds to the Buyer |
+ **body** | [**\Bleumi\Pay\Model\WalletRefundOperationInput**](../Model/WalletRefundOperationInput.md)| Request body - used to specify the token to refund. |
+
 
 ### Return type
 
 [**\Bleumi\Pay\Model\WalletOperationOutput**](../Model/WalletOperationOutput.md)
 
+
 # **getWalletOperation**
 > \Bleumi\Pay\Model\WalletOperation getWalletOperation($id, $txid)
 
-Return a specific operation of the wallet.
+Return a specific operation of the wallet
 
 ### Example
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 // Configure API key authorization: ApiKeyAuth
 $config = Bleumi\Pay\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', '<Your API Key>');
 
+
 $apiInstance = new Bleumi\Pay\Api\Erc20PaymentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
@@ -274,6 +307,8 @@ Name | Type | Description  | Notes
 
 [**\Bleumi\Pay\Model\WalletOperation**](../Model/WalletOperation.md)
 
+
+
 # **getWalletOperations**
 > \Bleumi\Pay\Model\PaginatedWalletOperations getWalletOperations($id, $next_token)
 
@@ -282,15 +317,18 @@ The list of wallet operations is returned as an array in the 'results' field. Th
 If there are more wallet operations a cursor is passed in the 'nextToken' field. Passing this as the 'nextToken' query parameter will fetch the next page.
 When the value of 'nextToken' field is an empty string, there are no more wallet operations.
 
-
 ### Example
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 // Configure API key authorization: ApiKeyAuth
 $config = Bleumi\Pay\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', '<Your API Key>');
 
+
 $apiInstance = new Bleumi\Pay\Api\Erc20PaymentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );

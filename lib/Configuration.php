@@ -81,13 +81,13 @@ class Configuration
      * @var string
      */
     protected $host = 'https://api.pay.bleumi.com/';
-    
+
     /**
      * User agent of the HTTP request, set to "PHP-Swagger" by default
      *
      * @var string
      */
-    protected $userAgent = 'Swagger-Codegen/1.0.2/php';
+    protected $userAgent = 'Swagger-Codegen/1.0.12/php';
 
     /**
      * Debug switch (default set to false)
@@ -396,7 +396,7 @@ class Configuration
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . PHP_VERSION . PHP_EOL;
         $report .= '    OpenAPI Spec Version: 1.0.0' . PHP_EOL;
-        $report .= '    SDK Package Version: 1.0.2' . PHP_EOL;
+        $report .= '    SDK Package Version: 1.0.12' . PHP_EOL;
         $report .= '    Temp Folder Path: ' . self::getDefaultConfiguration()->getTempFolderPath() . PHP_EOL;
 
         return $report;

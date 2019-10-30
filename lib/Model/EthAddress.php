@@ -32,7 +32,6 @@ use \ArrayAccess;
 use \Bleumi\Pay\ObjectSerializer;
 use JsonSerializable;
 
-
 /**
  * EthAddress Class Doc Comment
  *
@@ -220,7 +219,7 @@ class EthAddress implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets addr
      *
-     * @param string $addr addr
+     * @param string $addr Valid Ethereum address string should pass validation pattern
      *
      * @return $this
      */

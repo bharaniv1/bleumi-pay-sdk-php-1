@@ -220,7 +220,7 @@ class BadRequest implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets error_code
      *
-     * @param string $error_code error_code
+     * @param string $error_code Code for error class. Complete list of error codes is available [here](https://pay.bleumi.com/docs/#errors)
      *
      * @return $this
      */
@@ -244,7 +244,7 @@ class BadRequest implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets error_message
      *
-     * @param string $error_message error_message
+     * @param string $error_message Error description
      *
      * @return $this
      */
@@ -331,4 +331,5 @@ class BadRequest implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return ObjectSerializer::sanitizeForSerialization($this);
     }
+
 }

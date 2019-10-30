@@ -32,7 +32,6 @@ use \ArrayAccess;
 use \Bleumi\Pay\ObjectSerializer;
 use JsonSerializable;
 
-
 /**
  * WalletOperation Class Doc Comment
  *
@@ -61,7 +60,7 @@ class WalletOperation implements ModelInterface, ArrayAccess, JsonSerializable
         'id' => 'string',
 'func_name' => 'string',
 'status' => 'bool',
-'inputs' => '\Bleumi\Pay\Model\WalletOperationInput',
+'inputs' => '\Bleumi\Pay\Model\WalletOperationInputs',
 'hash' => 'string'    ];
 
     /**
@@ -207,9 +206,6 @@ class WalletOperation implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
-        }
         if ($this->container['func_name'] === null) {
             $invalidProperties[] = "'func_name' can't be null";
         }
@@ -250,7 +246,7 @@ class WalletOperation implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets id
      *
-     * @param string $id id
+     * @param string $id Unique ID of the wallet; specified when it was created by your system
      *
      * @return $this
      */
@@ -274,7 +270,7 @@ class WalletOperation implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets func_name
      *
-     * @param string $func_name func_name
+     * @param string $func_name The name of the function invoked on the payment processor
      *
      * @return $this
      */
@@ -298,7 +294,7 @@ class WalletOperation implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets status
      *
-     * @param bool $status status
+     * @param bool $status <b>null</b> - operation in progress <br/> <b>true</b> - operation completed successfuly <br/> <b>false</b> - operation failed to process
      *
      * @return $this
      */
@@ -312,7 +308,7 @@ class WalletOperation implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets inputs
      *
-     * @return \Bleumi\Pay\Model\WalletOperationInput
+     * @return \Bleumi\Pay\Model\WalletOperationInputs
      */
     public function getInputs()
     {
@@ -322,7 +318,7 @@ class WalletOperation implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets inputs
      *
-     * @param \Bleumi\Pay\Model\WalletOperationInput $inputs inputs
+     * @param \Bleumi\Pay\Model\WalletOperationInputs $inputs inputs
      *
      * @return $this
      */
@@ -346,7 +342,7 @@ class WalletOperation implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets hash
      *
-     * @param string $hash hash
+     * @param string $hash Transaction hash of operation submitted to the network. This field is blank when operation is in progress.
      *
      * @return $this
      */

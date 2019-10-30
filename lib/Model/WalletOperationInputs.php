@@ -1,6 +1,6 @@
 <?php
 /**
- * WalletCreateInput
+ * WalletOperationInputs
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \Bleumi\Pay\ObjectSerializer;
 use JsonSerializable;
 
 /**
- * WalletCreateInput Class Doc Comment
+ * WalletOperationInputs Class Doc Comment
  *
  * @category Class
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
+class WalletOperationInputs implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
       *
       * @var string
       */
-    protected static $swaggerModelName = 'WalletCreateInput';
+    protected static $swaggerModelName = 'WalletOperationInputs';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +57,10 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'id' => 'string',
-'buyer_address' => '\Bleumi\Pay\Model\EthAddress',
-'transfer_address' => '\Bleumi\Pay\Model\EthAddress'    ];
+        'amount' => 'string',
+'token' => 'string',
+'token_amount' => 'string',
+'token_decimals' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -67,9 +68,10 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'id' => null,
-'buyer_address' => null,
-'transfer_address' => null    ];
+        'amount' => null,
+'token' => null,
+'token_amount' => null,
+'token_decimals' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -98,9 +100,10 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-'buyer_address' => 'buyerAddress',
-'transfer_address' => 'transferAddress'    ];
+        'amount' => 'amount',
+'token' => 'token',
+'token_amount' => 'token_amount',
+'token_decimals' => 'token_decimals'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -108,9 +111,10 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-'buyer_address' => 'setBuyerAddress',
-'transfer_address' => 'setTransferAddress'    ];
+        'amount' => 'setAmount',
+'token' => 'setToken',
+'token_amount' => 'setTokenAmount',
+'token_decimals' => 'setTokenDecimals'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -118,9 +122,10 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-'buyer_address' => 'getBuyerAddress',
-'transfer_address' => 'getTransferAddress'    ];
+        'amount' => 'getAmount',
+'token' => 'getToken',
+'token_amount' => 'getTokenAmount',
+'token_decimals' => 'getTokenDecimals'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -180,9 +185,10 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['buyer_address'] = isset($data['buyer_address']) ? $data['buyer_address'] : null;
-        $this->container['transfer_address'] = isset($data['transfer_address']) ? $data['transfer_address'] : null;
+        $this->container['amount'] = isset($data['amount']) ? $data['amount'] : null;
+        $this->container['token'] = isset($data['token']) ? $data['token'] : null;
+        $this->container['token_amount'] = isset($data['token_amount']) ? $data['token_amount'] : null;
+        $this->container['token_decimals'] = isset($data['token_decimals']) ? $data['token_decimals'] : null;
     }
 
     /**
@@ -194,14 +200,17 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
+        if ($this->container['amount'] === null) {
+            $invalidProperties[] = "'amount' can't be null";
         }
-        if ($this->container['buyer_address'] === null) {
-            $invalidProperties[] = "'buyer_address' can't be null";
+        if ($this->container['token'] === null) {
+            $invalidProperties[] = "'token' can't be null";
         }
-        if ($this->container['transfer_address'] === null) {
-            $invalidProperties[] = "'transfer_address' can't be null";
+        if ($this->container['token_amount'] === null) {
+            $invalidProperties[] = "'token_amount' can't be null";
+        }
+        if ($this->container['token_decimals'] === null) {
+            $invalidProperties[] = "'token_decimals' can't be null";
         }
         return $invalidProperties;
     }
@@ -219,73 +228,97 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
 
 
     /**
-     * Gets id
+     * Gets amount
      *
      * @return string
      */
-    public function getId()
+    public function getAmount()
     {
-        return $this->container['id'];
+        return $this->container['amount'];
     }
 
     /**
-     * Sets id
+     * Sets amount
      *
-     * @param string $id Unique ID identifying the wallet; specified here to create the wallet by your system
+     * @param string $amount Amount to be settled
      *
      * @return $this
      */
-    public function setId($id)
+    public function setAmount($amount)
     {
-        $this->container['id'] = $id;
+        $this->container['amount'] = $amount;
 
         return $this;
     }
 
     /**
-     * Gets buyer_address
+     * Gets token
      *
-     * @return \Bleumi\Pay\Model\EthAddress
+     * @return string
      */
-    public function getBuyerAddress()
+    public function getToken()
     {
-        return $this->container['buyer_address'];
+        return $this->container['token'];
     }
 
     /**
-     * Sets buyer_address
+     * Sets token
      *
-     * @param \Bleumi\Pay\Model\EthAddress $buyer_address buyer_address
+     * @param string $token Address of the ERC-20 token
      *
      * @return $this
      */
-    public function setBuyerAddress($buyer_address)
+    public function setToken($token)
     {
-        $this->container['buyer_address'] = $buyer_address;
+        $this->container['token'] = $token;
 
         return $this;
     }
 
     /**
-     * Gets transfer_address
+     * Gets token_amount
      *
-     * @return \Bleumi\Pay\Model\EthAddress
+     * @return string
      */
-    public function getTransferAddress()
+    public function getTokenAmount()
     {
-        return $this->container['transfer_address'];
+        return $this->container['token_amount'];
     }
 
     /**
-     * Sets transfer_address
+     * Sets token_amount
      *
-     * @param \Bleumi\Pay\Model\EthAddress $transfer_address transfer_address
+     * @param string $token_amount Amount in full precision
      *
      * @return $this
      */
-    public function setTransferAddress($transfer_address)
+    public function setTokenAmount($token_amount)
     {
-        $this->container['transfer_address'] = $transfer_address;
+        $this->container['token_amount'] = $token_amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets token_decimals
+     *
+     * @return string
+     */
+    public function getTokenDecimals()
+    {
+        return $this->container['token_decimals'];
+    }
+
+    /**
+     * Sets token_decimals
+     *
+     * @param string $token_decimals token_decimals
+     *
+     * @return $this
+     */
+    public function setTokenDecimals($token_decimals)
+    {
+        $this->container['token_decimals'] = $token_decimals;
 
         return $this;
     }

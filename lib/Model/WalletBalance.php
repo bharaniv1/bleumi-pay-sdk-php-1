@@ -1,6 +1,6 @@
 <?php
 /**
- * WalletCreateInput
+ * WalletBalance
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \Bleumi\Pay\ObjectSerializer;
 use JsonSerializable;
 
 /**
- * WalletCreateInput Class Doc Comment
+ * WalletBalance Class Doc Comment
  *
  * @category Class
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
+class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
       *
       * @var string
       */
-    protected static $swaggerModelName = 'WalletCreateInput';
+    protected static $swaggerModelName = 'WalletBalance';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +57,10 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'id' => 'string',
-'buyer_address' => '\Bleumi\Pay\Model\EthAddress',
-'transfer_address' => '\Bleumi\Pay\Model\EthAddress'    ];
+        'balance' => 'string',
+'token_balance' => 'string',
+'token_decimals' => 'int',
+'block_num' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -67,9 +68,10 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'id' => null,
-'buyer_address' => null,
-'transfer_address' => null    ];
+        'balance' => null,
+'token_balance' => null,
+'token_decimals' => 'int64',
+'block_num' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -98,9 +100,10 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-'buyer_address' => 'buyerAddress',
-'transfer_address' => 'transferAddress'    ];
+        'balance' => 'balance',
+'token_balance' => 'token_balance',
+'token_decimals' => 'token_decimals',
+'block_num' => 'blockNum'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -108,9 +111,10 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-'buyer_address' => 'setBuyerAddress',
-'transfer_address' => 'setTransferAddress'    ];
+        'balance' => 'setBalance',
+'token_balance' => 'setTokenBalance',
+'token_decimals' => 'setTokenDecimals',
+'block_num' => 'setBlockNum'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -118,9 +122,10 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-'buyer_address' => 'getBuyerAddress',
-'transfer_address' => 'getTransferAddress'    ];
+        'balance' => 'getBalance',
+'token_balance' => 'getTokenBalance',
+'token_decimals' => 'getTokenDecimals',
+'block_num' => 'getBlockNum'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -180,9 +185,10 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['buyer_address'] = isset($data['buyer_address']) ? $data['buyer_address'] : null;
-        $this->container['transfer_address'] = isset($data['transfer_address']) ? $data['transfer_address'] : null;
+        $this->container['balance'] = isset($data['balance']) ? $data['balance'] : null;
+        $this->container['token_balance'] = isset($data['token_balance']) ? $data['token_balance'] : null;
+        $this->container['token_decimals'] = isset($data['token_decimals']) ? $data['token_decimals'] : null;
+        $this->container['block_num'] = isset($data['block_num']) ? $data['block_num'] : null;
     }
 
     /**
@@ -194,14 +200,17 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
+        if ($this->container['balance'] === null) {
+            $invalidProperties[] = "'balance' can't be null";
         }
-        if ($this->container['buyer_address'] === null) {
-            $invalidProperties[] = "'buyer_address' can't be null";
+        if ($this->container['token_balance'] === null) {
+            $invalidProperties[] = "'token_balance' can't be null";
         }
-        if ($this->container['transfer_address'] === null) {
-            $invalidProperties[] = "'transfer_address' can't be null";
+        if ($this->container['token_decimals'] === null) {
+            $invalidProperties[] = "'token_decimals' can't be null";
+        }
+        if ($this->container['block_num'] === null) {
+            $invalidProperties[] = "'block_num' can't be null";
         }
         return $invalidProperties;
     }
@@ -219,73 +228,97 @@ class WalletCreateInput implements ModelInterface, ArrayAccess, JsonSerializable
 
 
     /**
-     * Gets id
+     * Gets balance
      *
      * @return string
      */
-    public function getId()
+    public function getBalance()
     {
-        return $this->container['id'];
+        return $this->container['balance'];
     }
 
     /**
-     * Sets id
+     * Sets balance
      *
-     * @param string $id Unique ID identifying the wallet; specified here to create the wallet by your system
+     * @param string $balance Address of the buyer
      *
      * @return $this
      */
-    public function setId($id)
+    public function setBalance($balance)
     {
-        $this->container['id'] = $id;
+        $this->container['balance'] = $balance;
 
         return $this;
     }
 
     /**
-     * Gets buyer_address
+     * Gets token_balance
      *
-     * @return \Bleumi\Pay\Model\EthAddress
+     * @return string
      */
-    public function getBuyerAddress()
+    public function getTokenBalance()
     {
-        return $this->container['buyer_address'];
+        return $this->container['token_balance'];
     }
 
     /**
-     * Sets buyer_address
+     * Sets token_balance
      *
-     * @param \Bleumi\Pay\Model\EthAddress $buyer_address buyer_address
+     * @param string $token_balance Address of the merchant
      *
      * @return $this
      */
-    public function setBuyerAddress($buyer_address)
+    public function setTokenBalance($token_balance)
     {
-        $this->container['buyer_address'] = $buyer_address;
+        $this->container['token_balance'] = $token_balance;
 
         return $this;
     }
 
     /**
-     * Gets transfer_address
+     * Gets token_decimals
      *
-     * @return \Bleumi\Pay\Model\EthAddress
+     * @return int
      */
-    public function getTransferAddress()
+    public function getTokenDecimals()
     {
-        return $this->container['transfer_address'];
+        return $this->container['token_decimals'];
     }
 
     /**
-     * Sets transfer_address
+     * Sets token_decimals
      *
-     * @param \Bleumi\Pay\Model\EthAddress $transfer_address transfer_address
+     * @param int $token_decimals Wallet Library address
      *
      * @return $this
      */
-    public function setTransferAddress($transfer_address)
+    public function setTokenDecimals($token_decimals)
     {
-        $this->container['transfer_address'] = $transfer_address;
+        $this->container['token_decimals'] = $token_decimals;
+
+        return $this;
+    }
+
+    /**
+     * Gets block_num
+     *
+     * @return string
+     */
+    public function getBlockNum()
+    {
+        return $this->container['block_num'];
+    }
+
+    /**
+     * Sets block_num
+     *
+     * @param string $block_num Wallet Proxy address
+     *
+     * @return $this
+     */
+    public function setBlockNum($block_num)
+    {
+        $this->container['block_num'] = $block_num;
 
         return $this;
     }

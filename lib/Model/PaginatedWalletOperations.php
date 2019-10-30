@@ -32,7 +32,6 @@ use \ArrayAccess;
 use \Bleumi\Pay\ObjectSerializer;
 use JsonSerializable;
 
-
 /**
  * PaginatedWalletOperations Class Doc Comment
  *
@@ -220,7 +219,7 @@ class PaginatedWalletOperations implements ModelInterface, ArrayAccess, JsonSeri
     /**
      * Sets results
      *
-     * @param \Bleumi\Pay\Model\WalletOperation[] $results results
+     * @param \Bleumi\Pay\Model\WalletOperation[] $results List of operations of the wallet in the current page
      *
      * @return $this
      */

@@ -1515,15 +1515,16 @@ class Erc20PaymentsApi
      *
      * Refund wallet
      *
+     * @param  \Bleumi\Pay\Model\WalletRefundOperationInput $body Request body - used to specify the token to refund. (required)
      * @param  string $id Unique ID identifying this record in your system (required)
      *
      * @throws \Bleumi\Pay\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Bleumi\Pay\Model\WalletOperationOutput
      */
-    public function refundWallet($id)
+    public function refundWallet($body, $id)
     {
-        list($response) = $this->refundWalletWithHttpInfo($id);
+        list($response) = $this->refundWalletWithHttpInfo($body, $id);
         return $response;
     }
 
@@ -1532,16 +1533,17 @@ class Erc20PaymentsApi
      *
      * Refund wallet
      *
+     * @param  \Bleumi\Pay\Model\WalletRefundOperationInput $body Request body - used to specify the token to refund. (required)
      * @param  string $id Unique ID identifying this record in your system (required)
      *
      * @throws \Bleumi\Pay\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Bleumi\Pay\Model\WalletOperationOutput, HTTP status code, HTTP response headers (array of strings)
      */
-    public function refundWalletWithHttpInfo($id)
+    public function refundWalletWithHttpInfo($body, $id)
     {
         $returnType = '\Bleumi\Pay\Model\WalletOperationOutput';
-        $request = $this->refundWalletRequest($id);
+        $request = $this->refundWalletRequest($body, $id);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1615,14 +1617,15 @@ class Erc20PaymentsApi
      *
      * Refund wallet
      *
+     * @param  \Bleumi\Pay\Model\WalletRefundOperationInput $body Request body - used to specify the token to refund. (required)
      * @param  string $id Unique ID identifying this record in your system (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function refundWalletAsync($id)
+    public function refundWalletAsync($body, $id)
     {
-        return $this->refundWalletAsyncWithHttpInfo($id)
+        return $this->refundWalletAsyncWithHttpInfo($body, $id)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1635,15 +1638,16 @@ class Erc20PaymentsApi
      *
      * Refund wallet
      *
+     * @param  \Bleumi\Pay\Model\WalletRefundOperationInput $body Request body - used to specify the token to refund. (required)
      * @param  string $id Unique ID identifying this record in your system (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function refundWalletAsyncWithHttpInfo($id)
+    public function refundWalletAsyncWithHttpInfo($body, $id)
     {
         $returnType = '\Bleumi\Pay\Model\WalletOperationOutput';
-        $request = $this->refundWalletRequest($id);
+        $request = $this->refundWalletRequest($body, $id);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1685,13 +1689,20 @@ class Erc20PaymentsApi
     /**
      * Create request for operation 'refundWallet'
      *
+     * @param  \Bleumi\Pay\Model\WalletRefundOperationInput $body Request body - used to specify the token to refund. (required)
      * @param  string $id Unique ID identifying this record in your system (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function refundWalletRequest($id)
+    protected function refundWalletRequest($body, $id)
     {
+        // verify the required parameter 'body' is set
+        if ($body === null || (is_array($body) && count($body) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $body when calling refundWallet'
+            );
+        }
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
@@ -1718,6 +1729,9 @@ class Erc20PaymentsApi
 
         // body params
         $_tempBody = null;
+        if (isset($body)) {
+            $_tempBody = $body;
+        }
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
@@ -1726,7 +1740,7 @@ class Erc20PaymentsApi
         } else {
             $headers = $this->headerSelector->selectHeaders(
                 ['application/json'],
-                []
+                ['application/json']
             );
         }
 
@@ -1790,7 +1804,7 @@ class Erc20PaymentsApi
      *
      * Settle a wallet, amount received will be transferred even if less than payment amount
      *
-     * @param  \Bleumi\Pay\Model\WalletOperationInput $body body (required)
+     * @param  \Bleumi\Pay\Model\WalletSettleOperationInput $body Request body - used to specify the amount to settle. (required)
      * @param  string $id Unique ID identifying this record in your system (required)
      *
      * @throws \Bleumi\Pay\ApiException on non-2xx response
@@ -1808,7 +1822,7 @@ class Erc20PaymentsApi
      *
      * Settle a wallet, amount received will be transferred even if less than payment amount
      *
-     * @param  \Bleumi\Pay\Model\WalletOperationInput $body (required)
+     * @param  \Bleumi\Pay\Model\WalletSettleOperationInput $body Request body - used to specify the amount to settle. (required)
      * @param  string $id Unique ID identifying this record in your system (required)
      *
      * @throws \Bleumi\Pay\ApiException on non-2xx response
@@ -1892,7 +1906,7 @@ class Erc20PaymentsApi
      *
      * Settle a wallet, amount received will be transferred even if less than payment amount
      *
-     * @param  \Bleumi\Pay\Model\WalletOperationInput $body (required)
+     * @param  \Bleumi\Pay\Model\WalletSettleOperationInput $body Request body - used to specify the amount to settle. (required)
      * @param  string $id Unique ID identifying this record in your system (required)
      *
      * @throws \InvalidArgumentException
@@ -1913,7 +1927,7 @@ class Erc20PaymentsApi
      *
      * Settle a wallet, amount received will be transferred even if less than payment amount
      *
-     * @param  \Bleumi\Pay\Model\WalletOperationInput $body (required)
+     * @param  \Bleumi\Pay\Model\WalletSettleOperationInput $body Request body - used to specify the amount to settle. (required)
      * @param  string $id Unique ID identifying this record in your system (required)
      *
      * @throws \InvalidArgumentException
@@ -1964,7 +1978,7 @@ class Erc20PaymentsApi
     /**
      * Create request for operation 'settleWallet'
      *
-     * @param  \Bleumi\Pay\Model\WalletOperationInput $body (required)
+     * @param  \Bleumi\Pay\Model\WalletSettleOperationInput $body Request body - used to specify the amount to settle. (required)
      * @param  string $id Unique ID identifying this record in your system (required)
      *
      * @throws \InvalidArgumentException

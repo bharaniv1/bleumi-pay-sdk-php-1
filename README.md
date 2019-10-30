@@ -28,7 +28,7 @@ To install the bindings via [Composer](http://getcomposer.org/), add the followi
 ```
 {
     "require": {
-        "bleumi/bleumi-pay-sdk-php":"1.0.11"
+        "bleumi/bleumi-pay-sdk-php":"1.0.12"
     }
 }
 ```
@@ -62,12 +62,10 @@ $body = new \Bleumi\Pay\Model\WalletCreateInput(); // \Bleumi\Pay\Model\WalletCr
 $chain = new \Bleumi\Pay\Model\EthNetwork(); // \Bleumi\Pay\Model\EthNetwork | Ethereum network in which wallet is to be created.
 
 try {
-    $tokenAddress = new \Bleumi\Pay\Model\EthAddress("<TOKEN_ADDR>"); // Replace <BUYER_ADDR> with the Buyer's Enthereum Network Address 
     $buyerAddress = new \Bleumi\Pay\Model\EthAddress("<BUYER_ADDR>"); // Replace <TOKEN_ADDR> with the Token Contract Address
     $merchantAddress = new \Bleumi\Pay\Model\EthAddress("<MERCHANT_ADDR>"); // Replace <MERCHANT_ADDR> with the Merchant's Enthereum Network Address
-    $body->setBuyerAddress($buyerAddress);
-    $body->setToken($tokenAddress);
     $body->setId($id);
+    $body->setBuyerAddress($buyerAddress);
     $body->settransferAddress($merchantAddress);
     $result = $apiInstance->createWallet($body, $chain::ROPSTEN);
     $data = json_encode($result, JSON_PRETTY_PRINT);
@@ -89,11 +87,10 @@ Class | Method | HTTP request | Description
 Erc20PaymentsApi | [**createWallet**](docs/Api/Erc20PaymentsApi.md#createwallet) | **POST** /v1/payment/erc20/wallet | Create an unique wallet address to accept payments for an ERC-20 token from a buyer
 Erc20PaymentsApi | [**getWallet**](docs/Api/Erc20PaymentsApi.md#getwallet) | **GET** /v1/payment/erc20/wallet/{id} | Return a specific wallet
 Erc20PaymentsApi | [**listWallets**](docs/Api/Erc20PaymentsApi.md#listwallets) | **GET** /v1/payment/erc20/wallet | Returns a list of wallets
-Erc20PaymentsApi | [**settleWallet**](docs/Api/Erc20PaymentsApi.md#settlewallet) | **POST** /v1/payment/erc20/wallet/{id}/settle | Settle a payment, amount received will be transferred even if less than payment amount
+Erc20PaymentsApi | [**settleWallet**](docs/Api/Erc20PaymentsApi.md#settlewallet) | **POST** /v1/payment/erc20/wallet/{id}/settle | Settle a wallet, amount received will be transferred even if less than payment amount
 Erc20PaymentsApi | [**refundWallet**](docs/Api/Erc20PaymentsApi.md#refundwallet) | **POST** /v1/payment/erc20/wallet/{id}/refund | Refund wallet
 Erc20PaymentsApi | [**getWalletOperation**](docs/Api/Erc20PaymentsApi.md#getwalletoperation) | **GET** /v1/payment/erc20/wallet/{id}/operation/{txid} | Return a specific operation of the wallet
 Erc20PaymentsApi | [**getWalletOperations**](docs/Api/Erc20PaymentsApi.md#getwalletoperations) | **GET** /v1/payment/erc20/wallet/{id}/operation | Return the list of operations performed by the mechant on a specific wallet
-
 
 ## Documentation For Models
 
@@ -103,11 +100,15 @@ Erc20PaymentsApi | [**getWalletOperations**](docs/Api/Erc20PaymentsApi.md#getwal
  - [PaginatedWalletOperations](docs/Model/PaginatedWalletOperations.md)
  - [PaginatedWallets](docs/Model/PaginatedWallets.md)
  - [Wallet](docs/Model/Wallet.md)
+ - [WalletBalance](docs/Model/WalletBalance.md)
  - [WalletCreateInput](docs/Model/WalletCreateInput.md)
  - [WalletCreateOutput](docs/Model/WalletCreateOutput.md)
+ - [WalletInputs](docs/Model/WalletInputs.md)
  - [WalletOperation](docs/Model/WalletOperation.md)
- - [WalletOperationInput](docs/Model/WalletOperationInput.md)
+ - [WalletOperationInputs](docs/Model/WalletOperationInputs.md)
  - [WalletOperationOutput](docs/Model/WalletOperationOutput.md)
+ - [WalletRefundOperationInput](docs/Model/WalletRefundOperationInput.md)
+ - [WalletSettleOperationInput](docs/Model/WalletSettleOperationInput.md)
 
 ## Limitations
 

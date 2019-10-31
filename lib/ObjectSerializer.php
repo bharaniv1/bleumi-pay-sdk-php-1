@@ -76,7 +76,7 @@ class ObjectSerializer
                 }
                 //Bleumi-custom-start
                 if ($swaggerType == '\Bleumi\Pay\Model\EthAddress') {
-                    echo  nl2br ("get - $swaggerType  -  $property - $value \n ");
+                    //echo  nl2br ("get - $swaggerType  -  $property - $value \n ");
                     if (is_object($value)) {
                         $values[$data::attributeMap()[$property]] = $value['addr'];
                     } else {

@@ -1,5 +1,7 @@
 # Bleumi Pay SDK for PHP
 
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/bleumi/bleumi-pay-sdk-php/master/LICENSE.txt)
+
 The Bleumi Pay SDK is a one-stop shop to help you integrate ERC-20 payments into your business or application. The SDK bundles [Bleumi Pay API](https://pay.bleumi.com/docs/#introduction) into one SDK to ease implementation and support.
 
 bleumi-pay-sdk-php is a PHP library that provides an interface between your PHP application and [Bleumi Pay API](https://pay.bleumi.com/docs/#introduction). This tutorial covers the basics, including examples, needed to use the SDK.
@@ -14,7 +16,7 @@ PHP 5.5 and later
 
 #### Obtain An API Key
 
-Bleumi Pay SDK uses API keys to authenticate requests. You can obtain an API key through the [Bleumi Pay developer portal](https://pay.bleumi.com/app/).
+Bleumi Pay SDK uses API keys to authenticate requests. You can obtain an API key through the [Bleumi Pay Dashboard](https://pay.bleumi.com/app/).
 
 
 ### Install Package
@@ -45,7 +47,7 @@ Download the files and include `autoload.php`:
 
 ### Run Sample Code
 
-The following code creates a wallet to accept payment from the buyer specific for the ECR-20 Token.
+The following code generates a wallet to accept payment from the buyer specific for the ECR-20 Token.
 
 ```php
 <?php
@@ -67,7 +69,7 @@ try {
     $body->setId($id);
     $body->setBuyerAddress($buyerAddress);
     $body->settransferAddress($merchantAddress);
-    $result = $apiInstance->createWallet($body, $chain::ROPSTEN);
+    $result = $apiInstance->generateWallet($body, $chain::ROPSTEN);
     $data = json_encode($result, JSON_PRETTY_PRINT);
     echo  $data;
 } catch (Exception $e) {
@@ -78,19 +80,19 @@ try {
 ?>
 ```
 
-More examples can be found under each method in [SDK Classes](README.md#sdk-classes) section.
+More examples can be found under each method in [SDK Classes](#sdk-classes) section.
 
 ## SDK Classes
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-Erc20PaymentsApi | [**createWallet**](docs/Api/Erc20PaymentsApi.md#createwallet) | **POST** /v1/payment/erc20/wallet | Create an unique wallet address to accept payments for an ERC-20 token from a buyer
-Erc20PaymentsApi | [**getWallet**](docs/Api/Erc20PaymentsApi.md#getwallet) | **GET** /v1/payment/erc20/wallet/{id} | Return a specific wallet
-Erc20PaymentsApi | [**listWallets**](docs/Api/Erc20PaymentsApi.md#listwallets) | **GET** /v1/payment/erc20/wallet | Returns a list of wallets
-Erc20PaymentsApi | [**settleWallet**](docs/Api/Erc20PaymentsApi.md#settlewallet) | **POST** /v1/payment/erc20/wallet/{id}/settle | Settle a wallet, amount received will be transferred even if less than payment amount
-Erc20PaymentsApi | [**refundWallet**](docs/Api/Erc20PaymentsApi.md#refundwallet) | **POST** /v1/payment/erc20/wallet/{id}/refund | Refund wallet
-Erc20PaymentsApi | [**getWalletOperation**](docs/Api/Erc20PaymentsApi.md#getwalletoperation) | **GET** /v1/payment/erc20/wallet/{id}/operation/{txid} | Return a specific operation of the wallet
-Erc20PaymentsApi | [**getWalletOperations**](docs/Api/Erc20PaymentsApi.md#getwalletoperations) | **GET** /v1/payment/erc20/wallet/{id}/operation | Return the list of operations performed by the mechant on a specific wallet
+Erc20PaymentsApi | [**generateWallet**](docs/Api/Erc20PaymentsApi.md#generatewallet) | **POST** /v1/payment/erc20/wallet | Generates an unique wallet address to accept payments for an ERC-20 token.
+Erc20PaymentsApi | [**getWallet**](docs/Api/Erc20PaymentsApi.md#getwallet) | **GET** /v1/payment/erc20/wallet/{id} | Retrieve a wallet.
+Erc20PaymentsApi | [**listWallets**](docs/Api/Erc20PaymentsApi.md#listwallets) | **GET** /v1/payment/erc20/wallet | Retrieve all wallets.
+Erc20PaymentsApi | [**settleWallet**](docs/Api/Erc20PaymentsApi.md#settlewallet) | **POST** /v1/payment/erc20/wallet/{id}/settle | This method settles a specific amount of an ERC-20 token of a wallet to the transferAddress specified during [Generate Wallet](/docs/Erc20PaymentsApi.md#generatewallet)
+Erc20PaymentsApi | [**refundWallet**](docs/Api/Erc20PaymentsApi.md#refundwallet) | **POST** /v1/payment/erc20/wallet/{id}/refund | This method refunds the balance of an ERC-20 token of a wallet to the buyerAddress specified during [Generate Wallet](/docs/Erc20PaymentsApi.md#generatewallet).
+Erc20PaymentsApi | [**getWalletOperation**](docs/Api/Erc20PaymentsApi.md#getwalletoperation) | **GET** /v1/payment/erc20/wallet/{id}/operation/{txid} | Retrieve an operation of a wallet
+Erc20PaymentsApi | [**getWalletOperations**](docs/Api/Erc20PaymentsApi.md#getwalletoperations) | **GET** /v1/payment/erc20/wallet/{id}/operation | Retrieve all operations of a wallet.
 
 ## Documentation For Models
 
@@ -119,4 +121,4 @@ Erc20PaymentsApi | [**getWalletOperations**](docs/Api/Erc20PaymentsApi.md#getwal
 
 Copyright 2019 Bleumi, Inc.
 
-Code licensed under the [MIT License](docs/MITLicense.md).
+Code licensed under the [MIT License](License.md).

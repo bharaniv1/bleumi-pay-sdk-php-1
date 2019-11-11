@@ -87,9 +87,9 @@ class Erc20PaymentsApi
     }
 
     /**
-     * Operation createWallet
+     * Operation generateWallet
      *
-     * Create an unique wallet address to accept payments for an ERC-20 token from a buyer
+     * Generate an unique wallet address to accept payments for an ERC-20 token from a buyer
      *
      * @param  \Bleumi\Pay\Model\WalletCreateInput $body body (required)
      * @param  \Bleumi\Pay\Model\EthNetwork $chain Ethereum network in which wallet is to be created. (optional)
@@ -98,16 +98,16 @@ class Erc20PaymentsApi
      * @throws \InvalidArgumentException
      * @return \Bleumi\Pay\Model\WalletCreateOutput
      */
-    public function createWallet($body, $chain = null)
+    public function generateWallet($body, $chain = null)
     {
-        list($response) = $this->createWalletWithHttpInfo($body, $chain);
+        list($response) = $this->generateWalletWithHttpInfo($body, $chain);
         return $response;
     }
 
     /**
-     * Operation createWalletWithHttpInfo
+     * Operation generateWalletWithHttpInfo
      *
-     * Create an unique wallet address to accept payments for an ERC-20 token from a buyer
+     * Generate an unique wallet address to accept payments for an ERC-20 token from a buyer
      *
      * @param  \Bleumi\Pay\Model\WalletCreateInput $body (required)
      * @param  \Bleumi\Pay\Model\EthNetwork $chain Ethereum network in which wallet is to be created. (optional)
@@ -116,10 +116,10 @@ class Erc20PaymentsApi
      * @throws \InvalidArgumentException
      * @return array of \Bleumi\Pay\Model\WalletCreateOutput, HTTP status code, HTTP response headers (array of strings)
      */
-    public function createWalletWithHttpInfo($body, $chain = null)
+    public function generateWalletWithHttpInfo($body, $chain = null)
     {
         $returnType = '\Bleumi\Pay\Model\WalletCreateOutput';
-        $request = $this->createWalletRequest($body, $chain);
+        $request = $this->generateWalletRequest($body, $chain);
 
         try {
             $options = $this->createHttpClientOption();
@@ -189,9 +189,9 @@ class Erc20PaymentsApi
     }
 
     /**
-     * Operation createWalletAsync
+     * Operation generateWalletAsync
      *
-     * Create an unique wallet address to accept payments for an ERC-20 token from a buyer
+     * Generate an unique wallet address to accept payments for an ERC-20 token from a buyer
      *
      * @param  \Bleumi\Pay\Model\WalletCreateInput $body (required)
      * @param  \Bleumi\Pay\Model\EthNetwork $chain Ethereum network in which wallet is to be created. (optional)
@@ -199,9 +199,9 @@ class Erc20PaymentsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createWalletAsync($body, $chain = null)
+    public function generateWalletAsync($body, $chain = null)
     {
-        return $this->createWalletAsyncWithHttpInfo($body, $chain)
+        return $this->generateWalletAsyncWithHttpInfo($body, $chain)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -210,9 +210,9 @@ class Erc20PaymentsApi
     }
 
     /**
-     * Operation createWalletAsyncWithHttpInfo
+     * Operation generateWalletAsyncWithHttpInfo
      *
-     * Create an unique wallet address to accept payments for an ERC-20 token from a buyer
+     * Generate an unique wallet address to accept payments for an ERC-20 token from a buyer
      *
      * @param  \Bleumi\Pay\Model\WalletCreateInput $body (required)
      * @param  \Bleumi\Pay\Model\EthNetwork $chain Ethereum network in which wallet is to be created. (optional)
@@ -220,10 +220,10 @@ class Erc20PaymentsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createWalletAsyncWithHttpInfo($body, $chain = null)
+    public function generateWalletAsyncWithHttpInfo($body, $chain = null)
     {
         $returnType = '\Bleumi\Pay\Model\WalletCreateOutput';
-        $request = $this->createWalletRequest($body, $chain);
+        $request = $this->generateWalletRequest($body, $chain);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -263,7 +263,7 @@ class Erc20PaymentsApi
     }
 
     /**
-     * Create request for operation 'createWallet'
+     * Generate request for operation 'generateWallet'
      *
      * @param  \Bleumi\Pay\Model\WalletCreateInput $body (required)
      * @param  \Bleumi\Pay\Model\EthNetwork $chain Ethereum network in which wallet is to be created. (optional)
@@ -271,12 +271,12 @@ class Erc20PaymentsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function createWalletRequest($body, $chain = null)
+    protected function generateWalletRequest($body, $chain = null)
     {
         // verify the required parameter 'body' is set
         if ($body === null || (is_array($body) && count($body) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $body when calling createWallet'
+                'Missing the required parameter $body when calling generateWallet'
             );
         }
 
@@ -935,7 +935,7 @@ class Erc20PaymentsApi
     }
 
     /**
-     * Operation getWalletOperations
+     * Operation listWalletOperations
      *
      * Return the list of operations performed by the mechant on a specific wallet
      *
@@ -946,14 +946,14 @@ class Erc20PaymentsApi
      * @throws \InvalidArgumentException
      * @return \Bleumi\Pay\Model\PaginatedWalletOperations
      */
-    public function getWalletOperations($id, $next_token = null)
+    public function listWalletOperations($id, $next_token = null)
     {
-        list($response) = $this->getWalletOperationsWithHttpInfo($id, $next_token);
+        list($response) = $this->listWalletOperationsWithHttpInfo($id, $next_token);
         return $response;
     }
 
     /**
-     * Operation getWalletOperationsWithHttpInfo
+     * Operation listWalletOperationsWithHttpInfo
      *
      * Return the list of operations performed by the mechant on a specific wallet
      *
@@ -964,10 +964,10 @@ class Erc20PaymentsApi
      * @throws \InvalidArgumentException
      * @return array of \Bleumi\Pay\Model\PaginatedWalletOperations, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getWalletOperationsWithHttpInfo($id, $next_token = null)
+    public function listWalletOperationsWithHttpInfo($id, $next_token = null)
     {
         $returnType = '\Bleumi\Pay\Model\PaginatedWalletOperations';
-        $request = $this->getWalletOperationsRequest($id, $next_token);
+        $request = $this->listWalletOperationsRequest($id, $next_token);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1037,7 +1037,7 @@ class Erc20PaymentsApi
     }
 
     /**
-     * Operation getWalletOperationsAsync
+     * Operation listWalletOperationsAsync
      *
      * Return the list of operations performed by the mechant on a specific wallet
      *
@@ -1047,9 +1047,9 @@ class Erc20PaymentsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getWalletOperationsAsync($id, $next_token = null)
+    public function listWalletOperationsAsync($id, $next_token = null)
     {
-        return $this->getWalletOperationsAsyncWithHttpInfo($id, $next_token)
+        return $this->listWalletOperationsAsyncWithHttpInfo($id, $next_token)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1058,7 +1058,7 @@ class Erc20PaymentsApi
     }
 
     /**
-     * Operation getWalletOperationsAsyncWithHttpInfo
+     * Operation listWalletOperationsAsyncWithHttpInfo
      *
      * Return the list of operations performed by the mechant on a specific wallet
      *
@@ -1068,10 +1068,10 @@ class Erc20PaymentsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getWalletOperationsAsyncWithHttpInfo($id, $next_token = null)
+    public function listWalletOperationsAsyncWithHttpInfo($id, $next_token = null)
     {
         $returnType = '\Bleumi\Pay\Model\PaginatedWalletOperations';
-        $request = $this->getWalletOperationsRequest($id, $next_token);
+        $request = $this->listWalletOperationsRequest($id, $next_token);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1111,7 +1111,7 @@ class Erc20PaymentsApi
     }
 
     /**
-     * Create request for operation 'getWalletOperations'
+     * Create request for operation 'listWalletOperations'
      *
      * @param  string $id Unique ID identifying the wallet in your system (required)
      * @param  string $next_token Cursor to start results from (optional)
@@ -1119,12 +1119,12 @@ class Erc20PaymentsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function getWalletOperationsRequest($id, $next_token = null)
+    protected function listWalletOperationsRequest($id, $next_token = null)
     {
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling getWalletOperations'
+                'Missing the required parameter $id when calling listWalletOperations'
             );
         }
 

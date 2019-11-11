@@ -1,6 +1,8 @@
+<img src="https://pay.bleumi.com/wp-content/uploads/2019/04/logo_dark_bleumi_invoice_6797x1122.png" height="30">
+
 # Bleumi Pay SDK for PHP
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/bleumi/bleumi-pay-sdk-php/master/LICENSE.txt)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/bleumi/bleumi-pay-sdk-php/master/LICENSE)
 
 The Bleumi Pay SDK is a one-stop shop to help you integrate ERC-20 payments into your business or application. The SDK bundles [Bleumi Pay API](https://pay.bleumi.com/docs/#introduction) into one SDK to ease implementation and support.
 
@@ -121,4 +123,4 @@ Erc20PaymentsApi | [**listWalletOperations**](docs/Api/Erc20PaymentsApi.md#listw
 
 Copyright 2019 Bleumi, Inc.
 
-Code licensed under the [MIT License](License.md).
+Code licensed under the [MIT License](LICENSE).

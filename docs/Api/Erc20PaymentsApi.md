@@ -309,8 +309,8 @@ Name | Type | Description  | Notes
 
 
 
-# **getWalletOperations**
-> \Bleumi\Pay\Model\PaginatedWalletOperations getWalletOperations($id, $next_token)
+# **listWalletOperations**
+> \Bleumi\Pay\Model\PaginatedWalletOperations listWalletOperations($id, $next_token)
 
 This method retrieves all operations of a wallet.
 
@@ -341,7 +341,7 @@ $id = "<ID>"; // string | Unique ID identifying the wallet in your system
 $next_token = ""; // string | Cursor to start results from
 
 try {
-    $result = $apiInstance->getWalletOperations($id, $next_token);
+    $result = $apiInstance->listWalletOperations($id, $next_token);
     $data = json_encode($result, JSON_PRETTY_PRINT);
     echo  $data;
 } catch (Exception $e) {

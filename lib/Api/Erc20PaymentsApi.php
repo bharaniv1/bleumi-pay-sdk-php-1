@@ -280,7 +280,7 @@ class Erc20PaymentsApi
             );
         }
 
-        $resourcePath = '/v1/payment/erc20/wallet';
+        $resourcePath = '/v1/payment/eth/wallet';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -554,7 +554,7 @@ class Erc20PaymentsApi
             );
         }
 
-        $resourcePath = '/v1/payment/erc20/wallet/{id}';
+        $resourcePath = '/v1/payment/eth/wallet/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -840,7 +840,7 @@ class Erc20PaymentsApi
             );
         }
 
-        $resourcePath = '/v1/payment/erc20/wallet/{id}/operation/{txid}';
+        $resourcePath = '/v1/payment/eth/wallet/{id}/operation/{txid}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1128,7 +1128,7 @@ class Erc20PaymentsApi
             );
         }
 
-        $resourcePath = '/v1/payment/erc20/wallet/{id}/operation';
+        $resourcePath = '/v1/payment/eth/wallet/{id}/operation';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1416,7 +1416,7 @@ class Erc20PaymentsApi
     protected function listWalletsRequest($next_token = null, $sort_by = null, $start_at = null, $end_at = null)
     {
 
-        $resourcePath = '/v1/payment/erc20/wallet';
+        $resourcePath = '/v1/payment/eth/wallet';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1710,7 +1710,7 @@ class Erc20PaymentsApi
             );
         }
 
-        $resourcePath = '/v1/payment/erc20/wallet/{id}/refund';
+        $resourcePath = '/v1/payment/eth/wallet/{id}/refund';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1999,7 +1999,7 @@ class Erc20PaymentsApi
             );
         }
 
-        $resourcePath = '/v1/payment/erc20/wallet/{id}/settle';
+        $resourcePath = '/v1/payment/eth/wallet/{id}/settle';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

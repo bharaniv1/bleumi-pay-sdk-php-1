@@ -1,6 +1,6 @@
 <?php
 /**
- * BadRequest
+ * CreatePaymentRequest
  *
  * PHP version 5
  *
@@ -30,17 +30,17 @@ namespace Bleumi\Pay\Model;
 
 use \ArrayAccess;
 use \Bleumi\Pay\ObjectSerializer;
+use JsonSerializable;
 
 /**
- * BadRequest Class Doc Comment
+ * CreatePaymentRequest Class Doc Comment
  *
  * @category Class
- * @description Request does not meet API specifications
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class BadRequest implements ModelInterface, ArrayAccess
+class CreatePaymentRequest implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class BadRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'BadRequest';
+    protected static $swaggerModelName = 'CreatePaymentRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,9 @@ class BadRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'error_code' => 'string',
-'error_message' => 'string'    ];
+        'id' => 'string',
+'buyer_address' => '\Bleumi\Pay\Model\EthAddress',
+'transfer_address' => '\Bleumi\Pay\Model\EthAddress'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -66,8 +67,9 @@ class BadRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'error_code' => null,
-'error_message' => null    ];
+        'id' => null,
+'buyer_address' => null,
+'transfer_address' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -96,8 +98,9 @@ class BadRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'error_code' => 'errorCode',
-'error_message' => 'errorMessage'    ];
+        'id' => 'id',
+'buyer_address' => 'buyerAddress',
+'transfer_address' => 'transferAddress'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -105,8 +108,9 @@ class BadRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'error_code' => 'setErrorCode',
-'error_message' => 'setErrorMessage'    ];
+        'id' => 'setId',
+'buyer_address' => 'setBuyerAddress',
+'transfer_address' => 'setTransferAddress'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -114,8 +118,9 @@ class BadRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'error_code' => 'getErrorCode',
-'error_message' => 'getErrorMessage'    ];
+        'id' => 'getId',
+'buyer_address' => 'getBuyerAddress',
+'transfer_address' => 'getTransferAddress'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -175,8 +180,9 @@ class BadRequest implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['error_code'] = isset($data['error_code']) ? $data['error_code'] : null;
-        $this->container['error_message'] = isset($data['error_message']) ? $data['error_message'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['buyer_address'] = isset($data['buyer_address']) ? $data['buyer_address'] : null;
+        $this->container['transfer_address'] = isset($data['transfer_address']) ? $data['transfer_address'] : null;
     }
 
     /**
@@ -188,8 +194,14 @@ class BadRequest implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['error_code'] === null) {
-            $invalidProperties[] = "'error_code' can't be null";
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['buyer_address'] === null) {
+            $invalidProperties[] = "'buyer_address' can't be null";
+        }
+        if ($this->container['transfer_address'] === null) {
+            $invalidProperties[] = "'transfer_address' can't be null";
         }
         return $invalidProperties;
     }
@@ -207,49 +219,73 @@ class BadRequest implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets error_code
+     * Gets id
      *
      * @return string
      */
-    public function getErrorCode()
+    public function getId()
     {
-        return $this->container['error_code'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets error_code
+     * Sets id
      *
-     * @param string $error_code Code for error class. Complete list of error codes is available [here](https://pay.bleumi.com/docs/#errors)
+     * @param string $id Unique ID identifying the payment
      *
      * @return $this
      */
-    public function setErrorCode($error_code)
+    public function setId($id)
     {
-        $this->container['error_code'] = $error_code;
+        $this->container['id'] = $id;
 
         return $this;
     }
 
     /**
-     * Gets error_message
+     * Gets buyer_address
      *
-     * @return string
+     * @return \Bleumi\Pay\Model\EthAddress
      */
-    public function getErrorMessage()
+    public function getBuyerAddress()
     {
-        return $this->container['error_message'];
+        return $this->container['buyer_address'];
     }
 
     /**
-     * Sets error_message
+     * Sets buyer_address
      *
-     * @param string $error_message Error description
+     * @param \Bleumi\Pay\Model\EthAddress $buyer_address buyer_address
      *
      * @return $this
      */
-    public function setErrorMessage($error_message)
+    public function setBuyerAddress($buyer_address)
     {
-        $this->container['error_message'] = $error_message;
+        $this->container['buyer_address'] = $buyer_address;
+
+        return $this;
+    }
+
+    /**
+     * Gets transfer_address
+     *
+     * @return \Bleumi\Pay\Model\EthAddress
+     */
+    public function getTransferAddress()
+    {
+        return $this->container['transfer_address'];
+    }
+
+    /**
+     * Sets transfer_address
+     *
+     * @param \Bleumi\Pay\Model\EthAddress $transfer_address transfer_address
+     *
+     * @return $this
+     */
+    public function setTransferAddress($transfer_address)
+    {
+        $this->container['transfer_address'] = $transfer_address;
 
         return $this;
     }
@@ -321,5 +357,13 @@ class BadRequest implements ModelInterface, ArrayAccess
         }
 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
+    
+    /**
+     * Customize the way json_encode() renders the object.
+     */
+    public function jsonSerialize()
+    {
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 }

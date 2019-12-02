@@ -1,6 +1,6 @@
 <?php
 /**
- * BadRequest
+ * PayoutItemInputs
  *
  * PHP version 5
  *
@@ -30,17 +30,17 @@ namespace Bleumi\Pay\Model;
 
 use \ArrayAccess;
 use \Bleumi\Pay\ObjectSerializer;
+use JsonSerializable;
 
 /**
- * BadRequest Class Doc Comment
+ * PayoutItemInputs Class Doc Comment
  *
  * @category Class
- * @description Request does not meet API specifications
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class BadRequest implements ModelInterface, ArrayAccess
+class PayoutItemInputs implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class BadRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'BadRequest';
+    protected static $swaggerModelName = 'PayoutItemInputs';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,9 @@ class BadRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'error_code' => 'string',
-'error_message' => 'string'    ];
+        'salt' => 'string',
+'token' => 'string',
+'payouts' => '\Bleumi\Pay\Model\Payout[]'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -66,8 +67,9 @@ class BadRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'error_code' => null,
-'error_message' => null    ];
+        'salt' => null,
+'token' => null,
+'payouts' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -96,8 +98,9 @@ class BadRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'error_code' => 'errorCode',
-'error_message' => 'errorMessage'    ];
+        'salt' => 'salt',
+'token' => 'token',
+'payouts' => 'payouts'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -105,8 +108,9 @@ class BadRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'error_code' => 'setErrorCode',
-'error_message' => 'setErrorMessage'    ];
+        'salt' => 'setSalt',
+'token' => 'setToken',
+'payouts' => 'setPayouts'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -114,8 +118,9 @@ class BadRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'error_code' => 'getErrorCode',
-'error_message' => 'getErrorMessage'    ];
+        'salt' => 'getSalt',
+'token' => 'getToken',
+'payouts' => 'getPayouts'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -175,8 +180,9 @@ class BadRequest implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['error_code'] = isset($data['error_code']) ? $data['error_code'] : null;
-        $this->container['error_message'] = isset($data['error_message']) ? $data['error_message'] : null;
+        $this->container['salt'] = isset($data['salt']) ? $data['salt'] : null;
+        $this->container['token'] = isset($data['token']) ? $data['token'] : null;
+        $this->container['payouts'] = isset($data['payouts']) ? $data['payouts'] : null;
     }
 
     /**
@@ -188,8 +194,14 @@ class BadRequest implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['error_code'] === null) {
-            $invalidProperties[] = "'error_code' can't be null";
+        if ($this->container['salt'] === null) {
+            $invalidProperties[] = "'salt' can't be null";
+        }
+        if ($this->container['token'] === null) {
+            $invalidProperties[] = "'token' can't be null";
+        }
+        if ($this->container['payouts'] === null) {
+            $invalidProperties[] = "'payouts' can't be null";
         }
         return $invalidProperties;
     }
@@ -207,49 +219,73 @@ class BadRequest implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets error_code
+     * Gets salt
      *
      * @return string
      */
-    public function getErrorCode()
+    public function getSalt()
     {
-        return $this->container['error_code'];
+        return $this->container['salt'];
     }
 
     /**
-     * Sets error_code
+     * Sets salt
      *
-     * @param string $error_code Code for error class. Complete list of error codes is available [here](https://pay.bleumi.com/docs/#errors)
+     * @param string $salt Unique identifier generated for the txid of the payout (specified during Create a Payout).
      *
      * @return $this
      */
-    public function setErrorCode($error_code)
+    public function setSalt($salt)
     {
-        $this->container['error_code'] = $error_code;
+        $this->container['salt'] = $salt;
 
         return $this;
     }
 
     /**
-     * Gets error_message
+     * Gets token
      *
      * @return string
      */
-    public function getErrorMessage()
+    public function getToken()
     {
-        return $this->container['error_message'];
+        return $this->container['token'];
     }
 
     /**
-     * Sets error_message
+     * Sets token
      *
-     * @param string $error_message Error description
+     * @param string $token Token used for the payout
      *
      * @return $this
      */
-    public function setErrorMessage($error_message)
+    public function setToken($token)
     {
-        $this->container['error_message'] = $error_message;
+        $this->container['token'] = $token;
+
+        return $this;
+    }
+
+    /**
+     * Gets payouts
+     *
+     * @return \Bleumi\Pay\Model\Payout[]
+     */
+    public function getPayouts()
+    {
+        return $this->container['payouts'];
+    }
+
+    /**
+     * Sets payouts
+     *
+     * @param \Bleumi\Pay\Model\Payout[] $payouts Array of payments to be made in this payout. This is an atomic transaction (i.e. either all payments are processed or all of them are rejected).
+     *
+     * @return $this
+     */
+    public function setPayouts($payouts)
+    {
+        $this->container['payouts'] = $payouts;
 
         return $this;
     }
@@ -321,5 +357,13 @@ class BadRequest implements ModelInterface, ArrayAccess
         }
 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
+
+    /**
+     * Customize the way json_encode() renders the object.
+     */
+    public function jsonSerialize()
+    {
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 }

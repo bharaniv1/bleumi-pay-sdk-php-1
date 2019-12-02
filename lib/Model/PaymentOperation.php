@@ -1,6 +1,6 @@
 <?php
 /**
- * BadRequest
+ * PaymentOperation
  *
  * PHP version 5
  *
@@ -30,17 +30,17 @@ namespace Bleumi\Pay\Model;
 
 use \ArrayAccess;
 use \Bleumi\Pay\ObjectSerializer;
+use JsonSerializable;
 
 /**
- * BadRequest Class Doc Comment
+ * PaymentOperation Class Doc Comment
  *
  * @category Class
- * @description Request does not meet API specifications
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class BadRequest implements ModelInterface, ArrayAccess
+class PaymentOperation implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class BadRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'BadRequest';
+    protected static $swaggerModelName = 'PaymentOperation';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,12 @@ class BadRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'error_code' => 'string',
-'error_message' => 'string'    ];
+        'txid' => 'string',
+'chain' => 'string',
+'func_name' => 'string',
+'status' => 'bool',
+'inputs' => '\Bleumi\Pay\Model\PaymentOperationInputs',
+'hash' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -66,8 +70,12 @@ class BadRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'error_code' => null,
-'error_message' => null    ];
+        'txid' => null,
+'chain' => null,
+'func_name' => null,
+'status' => null,
+'inputs' => null,
+'hash' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -96,8 +104,12 @@ class BadRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'error_code' => 'errorCode',
-'error_message' => 'errorMessage'    ];
+        'txid' => 'txid',
+'chain' => 'chain',
+'func_name' => 'funcName',
+'status' => 'status',
+'inputs' => 'inputs',
+'hash' => 'hash'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -105,8 +117,12 @@ class BadRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'error_code' => 'setErrorCode',
-'error_message' => 'setErrorMessage'    ];
+        'txid' => 'setTxid',
+'chain' => 'setChain',
+'func_name' => 'setFuncName',
+'status' => 'setStatus',
+'inputs' => 'setInputs',
+'hash' => 'setHash'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -114,8 +130,12 @@ class BadRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'error_code' => 'getErrorCode',
-'error_message' => 'getErrorMessage'    ];
+        'txid' => 'getTxid',
+'chain' => 'getChain',
+'func_name' => 'getFuncName',
+'status' => 'getStatus',
+'inputs' => 'getInputs',
+'hash' => 'getHash'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -175,8 +195,12 @@ class BadRequest implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['error_code'] = isset($data['error_code']) ? $data['error_code'] : null;
-        $this->container['error_message'] = isset($data['error_message']) ? $data['error_message'] : null;
+        $this->container['txid'] = isset($data['txid']) ? $data['txid'] : null;
+        $this->container['chain'] = isset($data['chain']) ? $data['chain'] : null;
+        $this->container['func_name'] = isset($data['func_name']) ? $data['func_name'] : null;
+        $this->container['status'] = isset($data['status']) ? $data['status'] : null;
+        $this->container['inputs'] = isset($data['inputs']) ? $data['inputs'] : null;
+        $this->container['hash'] = isset($data['hash']) ? $data['hash'] : null;
     }
 
     /**
@@ -188,8 +212,20 @@ class BadRequest implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['error_code'] === null) {
-            $invalidProperties[] = "'error_code' can't be null";
+        if ($this->container['chain'] === null) {
+            $invalidProperties[] = "'chain' can't be null";
+        }
+        if ($this->container['func_name'] === null) {
+            $invalidProperties[] = "'func_name' can't be null";
+        }
+        if ($this->container['status'] === null) {
+            $invalidProperties[] = "'status' can't be null";
+        }
+        if ($this->container['inputs'] === null) {
+            $invalidProperties[] = "'inputs' can't be null";
+        }
+        if ($this->container['hash'] === null) {
+            $invalidProperties[] = "'hash' can't be null";
         }
         return $invalidProperties;
     }
@@ -207,49 +243,145 @@ class BadRequest implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets error_code
+     * Gets txid
      *
      * @return string
      */
-    public function getErrorCode()
+    public function getTxid()
     {
-        return $this->container['error_code'];
+        return $this->container['txid'];
     }
 
     /**
-     * Sets error_code
+     * Sets txid
      *
-     * @param string $error_code Code for error class. Complete list of error codes is available [here](https://pay.bleumi.com/docs/#errors)
+     * @param string $txid Transaction ID of the operation
      *
      * @return $this
      */
-    public function setErrorCode($error_code)
+    public function setTxid($txid)
     {
-        $this->container['error_code'] = $error_code;
+        $this->container['txid'] = $txid;
 
         return $this;
     }
 
     /**
-     * Gets error_message
+     * Gets chain
      *
      * @return string
      */
-    public function getErrorMessage()
+    public function getChain()
     {
-        return $this->container['error_message'];
+        return $this->container['chain'];
     }
 
     /**
-     * Sets error_message
+     * Sets chain
      *
-     * @param string $error_message Error description
+     * @param string $chain Network in which the operation was carried out
      *
      * @return $this
      */
-    public function setErrorMessage($error_message)
+    public function setChain($chain)
     {
-        $this->container['error_message'] = $error_message;
+        $this->container['chain'] = $chain;
+
+        return $this;
+    }
+
+    /**
+     * Gets func_name
+     *
+     * @return string
+     */
+    public function getFuncName()
+    {
+        return $this->container['func_name'];
+    }
+
+    /**
+     * Sets func_name
+     *
+     * @param string $func_name The name of the function invoked on the [payment processor](https://pay.bleumi.com/docs/#payment-processor)
+     *
+     * @return $this
+     */
+    public function setFuncName($func_name)
+    {
+        $this->container['func_name'] = $func_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets status
+     *
+     * @return bool
+     */
+    public function getStatus()
+    {
+        return $this->container['status'];
+    }
+
+    /**
+     * Sets status
+     *
+     * @param bool $status null - Operation in progress ; true - Operation completed successfuly ; false - Operation failed to process
+     *
+     * @return $this
+     */
+    public function setStatus($status)
+    {
+        $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets inputs
+     *
+     * @return \Bleumi\Pay\Model\PaymentOperationInputs
+     */
+    public function getInputs()
+    {
+        return $this->container['inputs'];
+    }
+
+    /**
+     * Sets inputs
+     *
+     * @param \Bleumi\Pay\Model\PaymentOperationInputs $inputs inputs
+     *
+     * @return $this
+     */
+    public function setInputs($inputs)
+    {
+        $this->container['inputs'] = $inputs;
+
+        return $this;
+    }
+
+    /**
+     * Gets hash
+     *
+     * @return string
+     */
+    public function getHash()
+    {
+        return $this->container['hash'];
+    }
+
+    /**
+     * Sets hash
+     *
+     * @param string $hash Transaction hash of operation submitted to the network. This field is blank when operation is in progress.
+     *
+     * @return $this
+     */
+    public function setHash($hash)
+    {
+        $this->container['hash'] = $hash;
 
         return $this;
     }
@@ -321,5 +453,13 @@ class BadRequest implements ModelInterface, ArrayAccess
         }
 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
+
+    /**
+     * Customize the way json_encode() renders the object.
+     */
+    public function jsonSerialize()
+    {
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * BadRequest
+ * CreateCheckoutUrlRequest
  *
  * PHP version 5
  *
@@ -30,17 +30,17 @@ namespace Bleumi\Pay\Model;
 
 use \ArrayAccess;
 use \Bleumi\Pay\ObjectSerializer;
+use JsonSerializable;
 
 /**
- * BadRequest Class Doc Comment
+ * CreateCheckoutUrlRequest Class Doc Comment
  *
  * @category Class
- * @description Request does not meet API specifications
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class BadRequest implements ModelInterface, ArrayAccess
+class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class BadRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'BadRequest';
+    protected static $swaggerModelName = 'CreateCheckoutUrlRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,12 @@ class BadRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'error_code' => 'string',
-'error_message' => 'string'    ];
+        'id' => 'string',
+'currency' => 'string',
+'amount' => 'string',
+'cancel_url' => 'string',
+'success_url' => 'string',
+'token' => '\Bleumi\Pay\Model\Token'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -66,8 +70,12 @@ class BadRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'error_code' => null,
-'error_message' => null    ];
+        'id' => null,
+'currency' => null,
+'amount' => null,
+'cancel_url' => null,
+'success_url' => null,
+'token' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -96,8 +104,12 @@ class BadRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'error_code' => 'errorCode',
-'error_message' => 'errorMessage'    ];
+        'id' => 'id',
+'currency' => 'currency',
+'amount' => 'amount',
+'cancel_url' => 'cancelUrl',
+'success_url' => 'successUrl',
+'token' => 'token'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -105,8 +117,12 @@ class BadRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'error_code' => 'setErrorCode',
-'error_message' => 'setErrorMessage'    ];
+        'id' => 'setId',
+'currency' => 'setCurrency',
+'amount' => 'setAmount',
+'cancel_url' => 'setCancelUrl',
+'success_url' => 'setSuccessUrl',
+'token' => 'setToken'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -114,8 +130,12 @@ class BadRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'error_code' => 'getErrorCode',
-'error_message' => 'getErrorMessage'    ];
+        'id' => 'getId',
+'currency' => 'getCurrency',
+'amount' => 'getAmount',
+'cancel_url' => 'getCancelUrl',
+'success_url' => 'getSuccessUrl',
+'token' => 'getToken'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -175,8 +195,12 @@ class BadRequest implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['error_code'] = isset($data['error_code']) ? $data['error_code'] : null;
-        $this->container['error_message'] = isset($data['error_message']) ? $data['error_message'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['currency'] = isset($data['currency']) ? $data['currency'] : null;
+        $this->container['amount'] = isset($data['amount']) ? $data['amount'] : null;
+        $this->container['cancel_url'] = isset($data['cancel_url']) ? $data['cancel_url'] : null;
+        $this->container['success_url'] = isset($data['success_url']) ? $data['success_url'] : null;
+        $this->container['token'] = isset($data['token']) ? $data['token'] : null;
     }
 
     /**
@@ -188,8 +212,20 @@ class BadRequest implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['error_code'] === null) {
-            $invalidProperties[] = "'error_code' can't be null";
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['currency'] === null) {
+            $invalidProperties[] = "'currency' can't be null";
+        }
+        if ($this->container['amount'] === null) {
+            $invalidProperties[] = "'amount' can't be null";
+        }
+        if ($this->container['cancel_url'] === null) {
+            $invalidProperties[] = "'cancel_url' can't be null";
+        }
+        if ($this->container['success_url'] === null) {
+            $invalidProperties[] = "'success_url' can't be null";
         }
         return $invalidProperties;
     }
@@ -207,49 +243,145 @@ class BadRequest implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets error_code
+     * Gets id
      *
      * @return string
      */
-    public function getErrorCode()
+    public function getId()
     {
-        return $this->container['error_code'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets error_code
+     * Sets id
      *
-     * @param string $error_code Code for error class. Complete list of error codes is available [here](https://pay.bleumi.com/docs/#errors)
+     * @param string $id Unique identifier for this payment.
      *
      * @return $this
      */
-    public function setErrorCode($error_code)
+    public function setId($id)
     {
-        $this->container['error_code'] = $error_code;
+        $this->container['id'] = $id;
 
         return $this;
     }
 
     /**
-     * Gets error_message
+     * Gets currency
      *
      * @return string
      */
-    public function getErrorMessage()
+    public function getCurrency()
     {
-        return $this->container['error_message'];
+        return $this->container['currency'];
     }
 
     /**
-     * Sets error_message
+     * Sets currency
      *
-     * @param string $error_message Error description
+     * @param string $currency Currency Code
      *
      * @return $this
      */
-    public function setErrorMessage($error_message)
+    public function setCurrency($currency)
     {
-        $this->container['error_message'] = $error_message;
+        $this->container['currency'] = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Gets amount
+     *
+     * @return string
+     */
+    public function getAmount()
+    {
+        return $this->container['amount'];
+    }
+
+    /**
+     * Sets amount
+     *
+     * @param string $amount Set the token which must be used by the buyer for this payment.
+     *
+     * @return $this
+     */
+    public function setAmount($amount)
+    {
+        $this->container['amount'] = $amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets cancel_url
+     *
+     * @return string
+     */
+    public function getCancelUrl()
+    {
+        return $this->container['cancel_url'];
+    }
+
+    /**
+     * Sets cancel_url
+     *
+     * @param string $cancel_url Buyer will be redirected to this URL upon canceling the payment.
+     *
+     * @return $this
+     */
+    public function setCancelUrl($cancel_url)
+    {
+        $this->container['cancel_url'] = $cancel_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets success_url
+     *
+     * @return string
+     */
+    public function getSuccessUrl()
+    {
+        return $this->container['success_url'];
+    }
+
+    /**
+     * Sets success_url
+     *
+     * @param string $success_url Buyer will be redirected to this URL upon successfully completing the payment.
+     *
+     * @return $this
+     */
+    public function setSuccessUrl($success_url)
+    {
+        $this->container['success_url'] = $success_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets token
+     *
+     * @return \Bleumi\Pay\Model\Token
+     */
+    public function getToken()
+    {
+        return $this->container['token'];
+    }
+
+    /**
+     * Sets token
+     *
+     * @param \Bleumi\Pay\Model\Token $token token
+     *
+     * @return $this
+     */
+    public function setToken($token)
+    {
+        $this->container['token'] = $token;
 
         return $this;
     }
@@ -322,4 +454,12 @@ class BadRequest implements ModelInterface, ArrayAccess
 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
+
+    /**
+     * Customize the way json_encode() renders the object.
+     */
+    public function jsonSerialize()
+    {
+        return ObjectSerializer::sanitizeForSerialization($this);
+    }    
 }

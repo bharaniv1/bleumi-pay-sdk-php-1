@@ -13,7 +13,7 @@
 /**
  * Bleumi Pay API
  *
- * A simple and powerful REST API to integrate ERC20 payments into your business or application
+ * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai payments and/or payouts into your business or application
  *
  * OpenAPI spec version: 1.0.0
  * Contact: info@bleumi.com
@@ -240,7 +240,7 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets balance
      *
-     * @param string $balance Address of the buyer
+     * @param string $balance Token balance for the wallet
      *
      * @return $this
      */
@@ -264,7 +264,7 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets token_balance
      *
-     * @param string $token_balance Address of the merchant
+     * @param string $token_balance Token balance for the wallet in Ethereum format
      *
      * @return $this
      */
@@ -288,7 +288,7 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets token_decimals
      *
-     * @param int $token_decimals Wallet Library address
+     * @param int $token_decimals Token decimal places
      *
      * @return $this
      */
@@ -312,7 +312,7 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets block_num
      *
-     * @param string $block_num Wallet Proxy address
+     * @param string $block_num Block in which the balance was last updated
      *
      * @return $this
      */
@@ -391,7 +391,7 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
-    
+
     /**
      * Customize the way json_encode() renders the object.
      */

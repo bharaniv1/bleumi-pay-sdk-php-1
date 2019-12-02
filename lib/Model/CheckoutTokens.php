@@ -1,6 +1,6 @@
 <?php
 /**
- * BadRequest
+ * CheckoutTokens
  *
  * PHP version 5
  *
@@ -30,17 +30,17 @@ namespace Bleumi\Pay\Model;
 
 use \ArrayAccess;
 use \Bleumi\Pay\ObjectSerializer;
+use JsonSerializable;
 
 /**
- * BadRequest Class Doc Comment
+ * CheckoutTokens Class Doc Comment
  *
  * @category Class
- * @description Request does not meet API specifications
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class BadRequest implements ModelInterface, ArrayAccess
+class CheckoutTokens implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class BadRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'BadRequest';
+    protected static $swaggerModelName = 'CheckoutTokens';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,8 @@ class BadRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'error_code' => 'string',
-'error_message' => 'string'    ];
+        'usd' => 'map[string,\Bleumi\Pay\Model\CheckoutToken]',
+'eur' => 'map[string,\Bleumi\Pay\Model\CheckoutToken]'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -66,8 +66,8 @@ class BadRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'error_code' => null,
-'error_message' => null    ];
+        'usd' => null,
+'eur' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -96,8 +96,8 @@ class BadRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'error_code' => 'errorCode',
-'error_message' => 'errorMessage'    ];
+        'usd' => 'USD',
+'eur' => 'EUR'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -105,8 +105,8 @@ class BadRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'error_code' => 'setErrorCode',
-'error_message' => 'setErrorMessage'    ];
+        'usd' => 'setUsd',
+'eur' => 'setEur'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -114,8 +114,8 @@ class BadRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'error_code' => 'getErrorCode',
-'error_message' => 'getErrorMessage'    ];
+        'usd' => 'getUsd',
+'eur' => 'getEur'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -175,8 +175,8 @@ class BadRequest implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['error_code'] = isset($data['error_code']) ? $data['error_code'] : null;
-        $this->container['error_message'] = isset($data['error_message']) ? $data['error_message'] : null;
+        $this->container['usd'] = isset($data['usd']) ? $data['usd'] : null;
+        $this->container['eur'] = isset($data['eur']) ? $data['eur'] : null;
     }
 
     /**
@@ -188,9 +188,6 @@ class BadRequest implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['error_code'] === null) {
-            $invalidProperties[] = "'error_code' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -207,49 +204,49 @@ class BadRequest implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets error_code
+     * Gets usd
      *
-     * @return string
+     * @return map[string,\Bleumi\Pay\Model\CheckoutToken]
      */
-    public function getErrorCode()
+    public function getUsd()
     {
-        return $this->container['error_code'];
+        return $this->container['usd'];
     }
 
     /**
-     * Sets error_code
+     * Sets usd
      *
-     * @param string $error_code Code for error class. Complete list of error codes is available [here](https://pay.bleumi.com/docs/#errors)
+     * @param map[string,\Bleumi\Pay\Model\CheckoutToken] $usd Provides the details of the tokens configured for USD
      *
      * @return $this
      */
-    public function setErrorCode($error_code)
+    public function setUsd($usd)
     {
-        $this->container['error_code'] = $error_code;
+        $this->container['usd'] = $usd;
 
         return $this;
     }
 
     /**
-     * Gets error_message
+     * Gets eur
      *
-     * @return string
+     * @return map[string,\Bleumi\Pay\Model\CheckoutToken]
      */
-    public function getErrorMessage()
+    public function getEur()
     {
-        return $this->container['error_message'];
+        return $this->container['eur'];
     }
 
     /**
-     * Sets error_message
+     * Sets eur
      *
-     * @param string $error_message Error description
+     * @param map[string,\Bleumi\Pay\Model\CheckoutToken] $eur Provides the details of the tokens configured for EUR
      *
      * @return $this
      */
-    public function setErrorMessage($error_message)
+    public function setEur($eur)
     {
-        $this->container['error_message'] = $error_message;
+        $this->container['eur'] = $eur;
 
         return $this;
     }
@@ -322,4 +319,12 @@ class BadRequest implements ModelInterface, ArrayAccess
 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
+
+    /**
+     * Customize the way json_encode() renders the object.
+     */
+    public function jsonSerialize()
+    {
+        return ObjectSerializer::sanitizeForSerialization($this);
+    }    
 }

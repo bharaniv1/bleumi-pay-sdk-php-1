@@ -1,6 +1,6 @@
 <?php
 /**
- * BadRequest
+ * CheckoutToken
  *
  * PHP version 5
  *
@@ -30,17 +30,16 @@ namespace Bleumi\Pay\Model;
 
 use \ArrayAccess;
 use \Bleumi\Pay\ObjectSerializer;
-
+use JsonSerializable;
 /**
- * BadRequest Class Doc Comment
+ * CheckoutToken Class Doc Comment
  *
  * @category Class
- * @description Request does not meet API specifications
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class BadRequest implements ModelInterface, ArrayAccess
+class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +48,7 @@ class BadRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'BadRequest';
+    protected static $swaggerModelName = 'CheckoutToken';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +56,11 @@ class BadRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'error_code' => 'string',
-'error_message' => 'string'    ];
+        'chain' => 'string',
+'transfer_address' => 'string',
+'name' => 'string',
+'symbol' => 'string',
+'decimals' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -66,8 +68,11 @@ class BadRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'error_code' => null,
-'error_message' => null    ];
+        'chain' => null,
+'transfer_address' => null,
+'name' => null,
+'symbol' => null,
+'decimals' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -96,8 +101,11 @@ class BadRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'error_code' => 'errorCode',
-'error_message' => 'errorMessage'    ];
+        'chain' => 'chain',
+'transfer_address' => 'transferAddress',
+'name' => 'name',
+'symbol' => 'symbol',
+'decimals' => 'decimals'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -105,8 +113,11 @@ class BadRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'error_code' => 'setErrorCode',
-'error_message' => 'setErrorMessage'    ];
+        'chain' => 'setChain',
+'transfer_address' => 'setTransferAddress',
+'name' => 'setName',
+'symbol' => 'setSymbol',
+'decimals' => 'setDecimals'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -114,8 +125,11 @@ class BadRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'error_code' => 'getErrorCode',
-'error_message' => 'getErrorMessage'    ];
+        'chain' => 'getChain',
+'transfer_address' => 'getTransferAddress',
+'name' => 'getName',
+'symbol' => 'getSymbol',
+'decimals' => 'getDecimals'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -175,8 +189,11 @@ class BadRequest implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['error_code'] = isset($data['error_code']) ? $data['error_code'] : null;
-        $this->container['error_message'] = isset($data['error_message']) ? $data['error_message'] : null;
+        $this->container['chain'] = isset($data['chain']) ? $data['chain'] : null;
+        $this->container['transfer_address'] = isset($data['transfer_address']) ? $data['transfer_address'] : null;
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['symbol'] = isset($data['symbol']) ? $data['symbol'] : null;
+        $this->container['decimals'] = isset($data['decimals']) ? $data['decimals'] : null;
     }
 
     /**
@@ -188,8 +205,20 @@ class BadRequest implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['error_code'] === null) {
-            $invalidProperties[] = "'error_code' can't be null";
+        if ($this->container['chain'] === null) {
+            $invalidProperties[] = "'chain' can't be null";
+        }
+        if ($this->container['transfer_address'] === null) {
+            $invalidProperties[] = "'transfer_address' can't be null";
+        }
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
+        }
+        if ($this->container['symbol'] === null) {
+            $invalidProperties[] = "'symbol' can't be null";
+        }
+        if ($this->container['decimals'] === null) {
+            $invalidProperties[] = "'decimals' can't be null";
         }
         return $invalidProperties;
     }
@@ -207,49 +236,121 @@ class BadRequest implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets error_code
+     * Gets chain
      *
      * @return string
      */
-    public function getErrorCode()
+    public function getChain()
     {
-        return $this->container['error_code'];
+        return $this->container['chain'];
     }
 
     /**
-     * Sets error_code
+     * Sets chain
      *
-     * @param string $error_code Code for error class. Complete list of error codes is available [here](https://pay.bleumi.com/docs/#errors)
+     * @param string $chain The chain in which the token is defined
      *
      * @return $this
      */
-    public function setErrorCode($error_code)
+    public function setChain($chain)
     {
-        $this->container['error_code'] = $error_code;
+        $this->container['chain'] = $chain;
 
         return $this;
     }
 
     /**
-     * Gets error_message
+     * Gets transfer_address
      *
      * @return string
      */
-    public function getErrorMessage()
+    public function getTransferAddress()
     {
-        return $this->container['error_message'];
+        return $this->container['transfer_address'];
     }
 
     /**
-     * Sets error_message
+     * Sets transfer_address
      *
-     * @param string $error_message Error description
+     * @param string $transfer_address The destination address when payments are received in this token
      *
      * @return $this
      */
-    public function setErrorMessage($error_message)
+    public function setTransferAddress($transfer_address)
     {
-        $this->container['error_message'] = $error_message;
+        $this->container['transfer_address'] = $transfer_address;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string $name Name of the token
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets symbol
+     *
+     * @return string
+     */
+    public function getSymbol()
+    {
+        return $this->container['symbol'];
+    }
+
+    /**
+     * Sets symbol
+     *
+     * @param string $symbol Symbol of the token
+     *
+     * @return $this
+     */
+    public function setSymbol($symbol)
+    {
+        $this->container['symbol'] = $symbol;
+
+        return $this;
+    }
+
+    /**
+     * Gets decimals
+     *
+     * @return string
+     */
+    public function getDecimals()
+    {
+        return $this->container['decimals'];
+    }
+
+    /**
+     * Sets decimals
+     *
+     * @param string $decimals The decimal places supported
+     *
+     * @return $this
+     */
+    public function setDecimals($decimals)
+    {
+        $this->container['decimals'] = $decimals;
 
         return $this;
     }
@@ -321,5 +422,13 @@ class BadRequest implements ModelInterface, ArrayAccess
         }
 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
+
+    /**
+     * Customize the way json_encode() renders the object.
+     */
+    public function jsonSerialize()
+    {
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 }

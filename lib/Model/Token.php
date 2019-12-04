@@ -171,10 +171,10 @@ class Token implements ModelInterface, ArrayAccess, JsonSerializable
     public function __construct($addr = null)
     {
         if (isset($addr)) {
-            if (preg_match("/^0x[a-fA-F0-9]{40}$/", $addr)||(addr==='ETH')||(addr==='XDAI')||(addr==='XDAIT')) {
+            if (preg_match("/^0x[a-fA-F0-9]{40}$/", $addr)||($addr==='ETH')||($addr==='XDAI')||($addr==='XDAIT')) {
                 $this->container['addr'] = $addr ;
             } else {
-                 throw new \Exception("$addr not a valid Token");
+                 throw new \Exception("$addr not a valid Token. Expected any one of 'ETH' or 'XDAI' or 'XDAIT' or ECR-20 Contract Address.");
             }
         }
     }

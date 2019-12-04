@@ -120,6 +120,7 @@ PayoutsApi | [**listPayouts**](docs/Api/PayoutsApi.md#listpayouts) | **GET** /v1
  - [CreatePayoutRequest](docs/Model/CreatePayoutRequest.md)
  - [CreatePayoutResponse](docs/Model/CreatePayoutResponse.md)
  - [EthAddress](docs/Model/EthAddress.md)
+ - [NetworkBalance](docs/Model/NetworkBalance.md)
  - [PaginatedPaymentOperations](docs/Model/PaginatedPaymentOperations.md)
  - [PaginatedPayments](docs/Model/PaginatedPayments.md)
  - [PaginatedPayoutItems](docs/Model/PaginatedPayoutItems.md)

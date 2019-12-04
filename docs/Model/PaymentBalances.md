@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ethereum** | [**map[string,\Bleumi\Pay\Model\WalletBalance]**](WalletBalance.md) | A dictionary which gives the token balances in each network |  
+**ethereum** | [**\Bleumi\Pay\Model\NetworkBalance**](NetworkBalance.md) | A dictionary which gives the token balances in each network |  
 
 
 ## Example

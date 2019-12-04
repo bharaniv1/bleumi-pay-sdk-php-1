@@ -61,7 +61,7 @@ class PaymentOperationInputs implements ModelInterface, ArrayAccess, JsonSeriali
 'amount' => 'string',
 'token' => 'string',
 'token_amount' => 'string',
-'token_decimals' => 'string'    ];
+'token_decimals' => 'int'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -73,7 +73,7 @@ class PaymentOperationInputs implements ModelInterface, ArrayAccess, JsonSeriali
 'amount' => null,
 'token' => null,
 'token_amount' => null,
-'token_decimals' => null    ];
+'token_decimals' => 'int64'    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -335,7 +335,7 @@ class PaymentOperationInputs implements ModelInterface, ArrayAccess, JsonSeriali
     /**
      * Gets token_decimals
      *
-     * @return string
+     * @return int
      */
     public function getTokenDecimals()
     {
@@ -345,7 +345,7 @@ class PaymentOperationInputs implements ModelInterface, ArrayAccess, JsonSeriali
     /**
      * Sets token_decimals
      *
-     * @param string $token_decimals Token decimal places (Only for settle operation)
+     * @param int $token_decimals Token decimal places (Only for settle operation)
      *
      * @return $this
      */

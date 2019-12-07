@@ -20,21 +20,18 @@ $apiInstance = new Bleumi\Pay\Api\HostedCheckoutsApi(
 );
 
 try {
-    $id = "<ID>"; 
-    $currency = "<CURRENCY>"; //Eg. 'USD'
-    $amountValue = "<AMOUNT>";  // Eg. '10'
-    $successUrl = "<SUCCESS_URL>"; //Eg. https://demo.store/api/completeOrder
-    $cancelUrl = "<CANCEL_ORDER_URL>"; //Eg. https://demo.store/api/cancelOrder
-    $tokenAddress = "<TOKEN>"; // string |  Replace <TOKEN>  by anyone of the following values: 'ETH'/'XDAI'/'XDAIT'/ECR-20 Contract Address. Eg.
-    $token = new \Bleumi\Pay\Model\Token($tokenAddress);
+    $token = new \Bleumi\Pay\Model\Token("<TOKEN>");  // string |  Replace <TOKEN>  by anyone of the following values: 'ETH' or 'XDAI' or ECR-20 Contract Address or 'XDAIT'.
+    $buyerAddress = new \Bleumi\Pay\Model\EthAddress("<BUYER_ADDR>");  // string |  Replace <BUYER_ADDR>  by Ethereum Address of the Buyer.
 
-    $createReq = new \Bleumi\Pay\Model\CreateCheckoutUrlRequest();  // \Bleumi\Pay\Model\CreateCheckoutUrlRequest | Specify checkout URL creation parameters. 
-    $createReq->setId($id);
-    $createReq->setCurrency($currency);
-    $createReq->setAmount($amountValue);
-    $createReq->setSuccessUrl($successUrl);
-    $createReq->setCancelUrl($cancelUrl);
+    $createReq = new \Bleumi\Pay\Model\CreateCheckoutUrlRequest();  // Specify checkout URL creation parameters. 
+    $createReq->setId("<ID>"); // string |  Eg. '1'
+    $createReq->setCurrency("<CURRENCY>"); // string |  Eg. 'USD'
+    $createReq->setAmount("<AMOUNT>"); // string | Eg. '10'
+    $createReq->setSuccessUrl("<SUCCESS_URL>"); // string | Eg. https://demo.store/api/completeOrder
+    $createReq->setCancelUrl("<CANCEL_ORDER_URL>"); // string | Eg. https://demo.store/api/cancelOrder
     $createReq->setToken($token); //Optional
+    $createReq->setChain($chain::ROPSTEN); //Optional; Replace ROPSTEN with the Chain as required
+    $createReq->setBuyerAddress($buyerAddress); //Optional
     $result = $apiInstance->createCheckoutUrl($createReq);
     $reponse = json_encode($result, JSON_PRETTY_PRINT);
     echo  $reponse;

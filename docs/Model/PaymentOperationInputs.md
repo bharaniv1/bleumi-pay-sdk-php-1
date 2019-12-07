@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **amount** | **string** | Amount (Only for settle operation) | 
 **token** | **string** | <b>ETH</b> - for Ethereum  <br/> <b>XDAI</b> - for xDai <br/> <b>XDAIT</b> - for xDai Testnet <br/> <b> &lt;contract address of ERC-20 token&gt;</b> - for ERC-20 Tokens  | 
 **token_amount** | **string** | Token amount to be settled in network format (Only for settle operation) | 
-**token_decimals** | **string** | Token decimal places (Only for settle operation) | 
+**token_decimals** | **int** | Token decimal places (Only for settle operation) | 
 
 
 ## Settle Operation Example

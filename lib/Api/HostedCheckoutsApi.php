@@ -364,7 +364,7 @@ class HostedCheckoutsApi
      *
      * @throws \Bleumi\Pay\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Bleumi\Pay\Model\CheckoutTokens
+     * @return \Bleumi\Pay\Model\CheckoutToken[]
      */
     public function listTokens()
     {
@@ -380,11 +380,11 @@ class HostedCheckoutsApi
      *
      * @throws \Bleumi\Pay\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Bleumi\Pay\Model\CheckoutTokens, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Bleumi\Pay\Model\CheckoutToken[], HTTP status code, HTTP response headers (array of strings)
      */
     public function listTokensWithHttpInfo()
     {
-        $returnType = '\Bleumi\Pay\Model\CheckoutTokens';
+        $returnType = '\Bleumi\Pay\Model\CheckoutToken[]';
         $request = $this->listTokensRequest();
 
         try {
@@ -436,7 +436,7 @@ class HostedCheckoutsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Bleumi\Pay\Model\CheckoutTokens',
+                        '\Bleumi\Pay\Model\CheckoutToken[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -484,7 +484,7 @@ class HostedCheckoutsApi
      */
     public function listTokensAsyncWithHttpInfo()
     {
-        $returnType = '\Bleumi\Pay\Model\CheckoutTokens';
+        $returnType = '\Bleumi\Pay\Model\CheckoutToken[]';
         $request = $this->listTokensRequest();
 
         return $this->client

@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **txid** | **string** | Transaction ID of the operation | [optional] 
 **chain** | **string** | Network in which the operation was carried out | 
-**func_name** | **string** |  Name of the function invoked on the [Payment Processor](https://pay.bleumi.com/docs/#payment-processor).<br/><br/>Functions available:<br/> - createAndSettleWallet<br/> - createAndRefundWallet
+**func_name** | **string** |  Name of the function invoked on the Payment Processor.<br/><br/>Functions available:<br/> - createAndSettleWallet<br/> - createAndRefundWallet
 status | boolean | <b>null</b> - Operation in progress<br/><b>true</b> - Operation confirmed by network<br/><b>false</b> - Operation rejected by network
 **status** | **bool** | <b>null</b> - operation in progress <br/> <b>true</b> - operation completed successfuly <br/> <b>false</b> - operation failed to process | 
 **inputs** | [**\Bleumi\Pay\Model\PaymentOperationInputs**](PaymentOperationInputs.md) | The inputs provided during this operation creation | 

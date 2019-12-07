@@ -60,7 +60,7 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
 'transfer_address' => 'string',
 'name' => 'string',
 'symbol' => 'string',
-'decimals' => 'string'    ];
+'decimals' => 'int'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -72,7 +72,7 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
 'transfer_address' => null,
 'name' => null,
 'symbol' => null,
-'decimals' => null    ];
+'decimals' => 'int64'    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -334,7 +334,7 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets decimals
      *
-     * @return string
+     * @return int
      */
     public function getDecimals()
     {
@@ -344,7 +344,7 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets decimals
      *
-     * @param string $decimals The decimal places supported
+     * @param int $decimals Token decimal places
      *
      * @return $this
      */

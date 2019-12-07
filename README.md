@@ -31,7 +31,7 @@ To install the bindings via [Composer](http://getcomposer.org/), add the followi
 
 ```
 {
-    "require": {
+  "require": {
         "bleumi/bleumi-pay-sdk-php":"1.0.15"
     }
 }
@@ -112,7 +112,6 @@ PayoutsApi | [**listPayouts**](docs/Api/PayoutsApi.md#listpayouts) | **GET** /v1
  - [BadRequest](docs/Model/BadRequest.md)
  - [Chain](docs/Model/Chain.md)
  - [CheckoutToken](docs/Model/CheckoutToken.md)
- - [CheckoutTokens](docs/Model/CheckoutTokens.md)
  - [CreateCheckoutUrlRequest](docs/Model/CreateCheckoutUrlRequest.md)
  - [CreateCheckoutUrlResponse](docs/Model/CreateCheckoutUrlResponse.md)
  - [CreatePaymentRequest](docs/Model/CreatePaymentRequest.md)

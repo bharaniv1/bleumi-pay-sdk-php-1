@@ -62,6 +62,8 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
 'amount' => 'string',
 'cancel_url' => 'string',
 'success_url' => 'string',
+'buyer_address' => '\Bleumi\Pay\Model\EthAddress',
+'chain' => '\Bleumi\Pay\Model\Chain',
 'token' => '\Bleumi\Pay\Model\Token'    ];
 
     /**
@@ -75,6 +77,8 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
 'amount' => null,
 'cancel_url' => null,
 'success_url' => null,
+'buyer_address' => null,
+'chain' => null,
 'token' => null    ];
 
     /**
@@ -109,6 +113,8 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
 'amount' => 'amount',
 'cancel_url' => 'cancelUrl',
 'success_url' => 'successUrl',
+'buyer_address' => 'buyerAddress',
+'chain' => 'chain',
 'token' => 'token'    ];
 
     /**
@@ -122,6 +128,8 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
 'amount' => 'setAmount',
 'cancel_url' => 'setCancelUrl',
 'success_url' => 'setSuccessUrl',
+'buyer_address' => 'setBuyerAddress',
+'chain' => 'setChain',
 'token' => 'setToken'    ];
 
     /**
@@ -135,6 +143,8 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
 'amount' => 'getAmount',
 'cancel_url' => 'getCancelUrl',
 'success_url' => 'getSuccessUrl',
+'buyer_address' => 'getBuyerAddress',
+'chain' => 'getChain',
 'token' => 'getToken'    ];
 
     /**
@@ -200,6 +210,8 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
         $this->container['amount'] = isset($data['amount']) ? $data['amount'] : null;
         $this->container['cancel_url'] = isset($data['cancel_url']) ? $data['cancel_url'] : null;
         $this->container['success_url'] = isset($data['success_url']) ? $data['success_url'] : null;
+        $this->container['buyer_address'] = isset($data['buyer_address']) ? $data['buyer_address'] : null;
+        $this->container['chain'] = isset($data['chain']) ? $data['chain'] : null;
         $this->container['token'] = isset($data['token']) ? $data['token'] : null;
     }
 
@@ -358,6 +370,54 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
     public function setSuccessUrl($success_url)
     {
         $this->container['success_url'] = $success_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets buyer_address
+     *
+     * @return \Bleumi\Pay\Model\EthAddress
+     */
+    public function getBuyerAddress()
+    {
+        return $this->container['buyer_address'];
+    }
+
+    /**
+     * Sets buyer_address
+     *
+     * @param \Bleumi\Pay\Model\EthAddress $buyer_address buyer_address
+     *
+     * @return $this
+     */
+    public function setBuyerAddress($buyer_address)
+    {
+        $this->container['buyer_address'] = $buyer_address;
+
+        return $this;
+    }
+
+    /**
+     * Gets chain
+     *
+     * @return \Bleumi\Pay\Model\Chain
+     */
+    public function getChain()
+    {
+        return $this->container['chain'];
+    }
+
+    /**
+     * Sets chain
+     *
+     * @param \Bleumi\Pay\Model\Chain $chain chain
+     *
+     * @return $this
+     */
+    public function setChain($chain)
+    {
+        $this->container['chain'] = $chain;
 
         return $this;
     }

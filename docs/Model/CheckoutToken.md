@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **transfer_address** | **string** | The destination address when payments are received in this token | 
 **name** | **string** | Name of the token | 
 **symbol** | **string** | Symbol of the token | 
-**decimals** | **string** | The decimal places supported | 
+**decimals** | **int** | Token decimal places | 
 
 
 ## Example

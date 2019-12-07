@@ -1,6 +1,6 @@
 <?php
 /**
- * WalletBalance
+ * PayoutItem
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \Bleumi\Pay\ObjectSerializer;
 use JsonSerializable;
 
 /**
- * WalletBalance Class Doc Comment
+ * PayoutItem Class Doc Comment
  *
  * @category Class
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
+class PayoutItem implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
       *
       * @var string
       */
-    protected static $swaggerModelName = 'WalletBalance';
+    protected static $swaggerModelName = 'PayoutItem';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,12 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'balance' => 'string',
-'token_balance' => 'string',
-'token_decimals' => 'int',
-'block_num' => 'string'    ];
+        'txid' => 'string',
+'status' => 'bool',
+'hash' => 'string',
+'created_at' => 'int',
+'updated_at' => 'int',
+'inputs' => '\Bleumi\Pay\Model\PayoutItemInputs'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -68,10 +70,12 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'balance' => null,
-'token_balance' => null,
-'token_decimals' => 'int64',
-'block_num' => null    ];
+        'txid' => null,
+'status' => null,
+'hash' => null,
+'created_at' => 'int64',
+'updated_at' => 'int64',
+'inputs' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -100,10 +104,12 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'balance' => 'balance',
-'token_balance' => 'token_balance',
-'token_decimals' => 'token_decimals',
-'block_num' => 'blockNum'    ];
+        'txid' => 'txid',
+'status' => 'status',
+'hash' => 'hash',
+'created_at' => 'createdAt',
+'updated_at' => 'updatedAt',
+'inputs' => 'inputs'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -111,10 +117,12 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'balance' => 'setBalance',
-'token_balance' => 'setTokenBalance',
-'token_decimals' => 'setTokenDecimals',
-'block_num' => 'setBlockNum'    ];
+        'txid' => 'setTxid',
+'status' => 'setStatus',
+'hash' => 'setHash',
+'created_at' => 'setCreatedAt',
+'updated_at' => 'setUpdatedAt',
+'inputs' => 'setInputs'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -122,10 +130,12 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'balance' => 'getBalance',
-'token_balance' => 'getTokenBalance',
-'token_decimals' => 'getTokenDecimals',
-'block_num' => 'getBlockNum'    ];
+        'txid' => 'getTxid',
+'status' => 'getStatus',
+'hash' => 'getHash',
+'created_at' => 'getCreatedAt',
+'updated_at' => 'getUpdatedAt',
+'inputs' => 'getInputs'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -185,10 +195,12 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['balance'] = isset($data['balance']) ? $data['balance'] : null;
-        $this->container['token_balance'] = isset($data['token_balance']) ? $data['token_balance'] : null;
-        $this->container['token_decimals'] = isset($data['token_decimals']) ? $data['token_decimals'] : null;
-        $this->container['block_num'] = isset($data['block_num']) ? $data['block_num'] : null;
+        $this->container['txid'] = isset($data['txid']) ? $data['txid'] : null;
+        $this->container['status'] = isset($data['status']) ? $data['status'] : null;
+        $this->container['hash'] = isset($data['hash']) ? $data['hash'] : null;
+        $this->container['created_at'] = isset($data['created_at']) ? $data['created_at'] : null;
+        $this->container['updated_at'] = isset($data['updated_at']) ? $data['updated_at'] : null;
+        $this->container['inputs'] = isset($data['inputs']) ? $data['inputs'] : null;
     }
 
     /**
@@ -200,17 +212,23 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['balance'] === null) {
-            $invalidProperties[] = "'balance' can't be null";
+        if ($this->container['txid'] === null) {
+            $invalidProperties[] = "'txid' can't be null";
         }
-        if ($this->container['token_balance'] === null) {
-            $invalidProperties[] = "'token_balance' can't be null";
+        if ($this->container['status'] === null) {
+            $invalidProperties[] = "'status' can't be null";
         }
-        if ($this->container['token_decimals'] === null) {
-            $invalidProperties[] = "'token_decimals' can't be null";
+        if ($this->container['hash'] === null) {
+            $invalidProperties[] = "'hash' can't be null";
         }
-        if ($this->container['block_num'] === null) {
-            $invalidProperties[] = "'block_num' can't be null";
+        if ($this->container['created_at'] === null) {
+            $invalidProperties[] = "'created_at' can't be null";
+        }
+        if ($this->container['updated_at'] === null) {
+            $invalidProperties[] = "'updated_at' can't be null";
+        }
+        if ($this->container['inputs'] === null) {
+            $invalidProperties[] = "'inputs' can't be null";
         }
         return $invalidProperties;
     }
@@ -228,97 +246,145 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
 
 
     /**
-     * Gets balance
+     * Gets txid
      *
      * @return string
      */
-    public function getBalance()
+    public function getTxid()
     {
-        return $this->container['balance'];
+        return $this->container['txid'];
     }
 
     /**
-     * Sets balance
+     * Sets txid
      *
-     * @param string $balance Token balance for the wallet
+     * @param string $txid Unique identifier for this payout
      *
      * @return $this
      */
-    public function setBalance($balance)
+    public function setTxid($txid)
     {
-        $this->container['balance'] = $balance;
+        $this->container['txid'] = $txid;
 
         return $this;
     }
 
     /**
-     * Gets token_balance
+     * Gets status
      *
-     * @return string
+     * @return bool
      */
-    public function getTokenBalance()
+    public function getStatus()
     {
-        return $this->container['token_balance'];
+        return $this->container['status'];
     }
 
     /**
-     * Sets token_balance
+     * Sets status
      *
-     * @param string $token_balance Token balance for the wallet in Ethereum format
+     * @param bool $status null- Operation in progress ; true - Operation confirmed by network; false - Operation rejected by network;
      *
      * @return $this
      */
-    public function setTokenBalance($token_balance)
+    public function setStatus($status)
     {
-        $this->container['token_balance'] = $token_balance;
+        $this->container['status'] = $status;
 
         return $this;
     }
 
     /**
-     * Gets token_decimals
+     * Gets hash
+     *
+     * @return string
+     */
+    public function getHash()
+    {
+        return $this->container['hash'];
+    }
+
+    /**
+     * Sets hash
+     *
+     * @param string $hash Transaction hash of the operation submitted to the network. This field is blank when the operation is in progress.
+     *
+     * @return $this
+     */
+    public function setHash($hash)
+    {
+        $this->container['hash'] = $hash;
+
+        return $this;
+    }
+
+    /**
+     * Gets created_at
      *
      * @return int
      */
-    public function getTokenDecimals()
+    public function getCreatedAt()
     {
-        return $this->container['token_decimals'];
+        return $this->container['created_at'];
     }
 
     /**
-     * Sets token_decimals
+     * Sets created_at
      *
-     * @param int $token_decimals Token decimal places
+     * @param int $created_at UNIX timestamp when the payout was created
      *
      * @return $this
      */
-    public function setTokenDecimals($token_decimals)
+    public function setCreatedAt($created_at)
     {
-        $this->container['token_decimals'] = $token_decimals;
+        $this->container['created_at'] = $created_at;
 
         return $this;
     }
 
     /**
-     * Gets block_num
+     * Gets updated_at
      *
-     * @return string
+     * @return int
      */
-    public function getBlockNum()
+    public function getUpdatedAt()
     {
-        return $this->container['block_num'];
+        return $this->container['updated_at'];
     }
 
     /**
-     * Sets block_num
+     * Sets updated_at
      *
-     * @param string $block_num Block in which the balance was last updated
+     * @param int $updated_at UNIX timestamp when the lastest operation was performed
      *
      * @return $this
      */
-    public function setBlockNum($block_num)
+    public function setUpdatedAt($updated_at)
     {
-        $this->container['block_num'] = $block_num;
+        $this->container['updated_at'] = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets inputs
+     *
+     * @return \Bleumi\Pay\Model\PayoutItemInputs
+     */
+    public function getInputs()
+    {
+        return $this->container['inputs'];
+    }
+
+    /**
+     * Sets inputs
+     *
+     * @param \Bleumi\Pay\Model\PayoutItemInputs $inputs inputs
+     *
+     * @return $this
+     */
+    public function setInputs($inputs)
+    {
+        $this->container['inputs'] = $inputs;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * WalletBalance
+ * ValidateCheckoutRequest
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \Bleumi\Pay\ObjectSerializer;
 use JsonSerializable;
 
 /**
- * WalletBalance Class Doc Comment
+ * ValidateCheckoutRequest Class Doc Comment
  *
  * @category Class
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
+class ValidateCheckoutRequest implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
       *
       * @var string
       */
-    protected static $swaggerModelName = 'WalletBalance';
+    protected static $swaggerModelName = 'ValidateCheckoutRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,10 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'balance' => 'string',
-'token_balance' => 'string',
-'token_decimals' => 'int',
-'block_num' => 'string'    ];
+        'hmac_input' => 'string',
+'hmac_key_id' => 'string',
+'hmac_alg' => 'string',
+'hmac_value' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -68,10 +68,10 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'balance' => null,
-'token_balance' => null,
-'token_decimals' => 'int64',
-'block_num' => null    ];
+        'hmac_input' => null,
+'hmac_key_id' => null,
+'hmac_alg' => null,
+'hmac_value' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -100,10 +100,10 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'balance' => 'balance',
-'token_balance' => 'token_balance',
-'token_decimals' => 'token_decimals',
-'block_num' => 'blockNum'    ];
+        'hmac_input' => 'hmac_input',
+'hmac_key_id' => 'hmac_keyId',
+'hmac_alg' => 'hmac_alg',
+'hmac_value' => 'hmac_value'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -111,10 +111,10 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'balance' => 'setBalance',
-'token_balance' => 'setTokenBalance',
-'token_decimals' => 'setTokenDecimals',
-'block_num' => 'setBlockNum'    ];
+        'hmac_input' => 'setHmacInput',
+'hmac_key_id' => 'setHmacKeyId',
+'hmac_alg' => 'setHmacAlg',
+'hmac_value' => 'setHmacValue'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -122,10 +122,10 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'balance' => 'getBalance',
-'token_balance' => 'getTokenBalance',
-'token_decimals' => 'getTokenDecimals',
-'block_num' => 'getBlockNum'    ];
+        'hmac_input' => 'getHmacInput',
+'hmac_key_id' => 'getHmacKeyId',
+'hmac_alg' => 'getHmacAlg',
+'hmac_value' => 'getHmacValue'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -185,10 +185,10 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['balance'] = isset($data['balance']) ? $data['balance'] : null;
-        $this->container['token_balance'] = isset($data['token_balance']) ? $data['token_balance'] : null;
-        $this->container['token_decimals'] = isset($data['token_decimals']) ? $data['token_decimals'] : null;
-        $this->container['block_num'] = isset($data['block_num']) ? $data['block_num'] : null;
+        $this->container['hmac_input'] = isset($data['hmac_input']) ? $data['hmac_input'] : null;
+        $this->container['hmac_key_id'] = isset($data['hmac_key_id']) ? $data['hmac_key_id'] : null;
+        $this->container['hmac_alg'] = isset($data['hmac_alg']) ? $data['hmac_alg'] : null;
+        $this->container['hmac_value'] = isset($data['hmac_value']) ? $data['hmac_value'] : null;
     }
 
     /**
@@ -200,17 +200,17 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['balance'] === null) {
-            $invalidProperties[] = "'balance' can't be null";
+        if ($this->container['hmac_input'] === null) {
+            $invalidProperties[] = "'hmac_input' can't be null";
         }
-        if ($this->container['token_balance'] === null) {
-            $invalidProperties[] = "'token_balance' can't be null";
+        if ($this->container['hmac_key_id'] === null) {
+            $invalidProperties[] = "'hmac_key_id' can't be null";
         }
-        if ($this->container['token_decimals'] === null) {
-            $invalidProperties[] = "'token_decimals' can't be null";
+        if ($this->container['hmac_alg'] === null) {
+            $invalidProperties[] = "'hmac_alg' can't be null";
         }
-        if ($this->container['block_num'] === null) {
-            $invalidProperties[] = "'block_num' can't be null";
+        if ($this->container['hmac_value'] === null) {
+            $invalidProperties[] = "'hmac_value' can't be null";
         }
         return $invalidProperties;
     }
@@ -228,97 +228,97 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
 
 
     /**
-     * Gets balance
+     * Gets hmac_input
      *
      * @return string
      */
-    public function getBalance()
+    public function getHmacInput()
     {
-        return $this->container['balance'];
+        return $this->container['hmac_input'];
     }
 
     /**
-     * Sets balance
+     * Sets hmac_input
      *
-     * @param string $balance Token balance for the wallet
+     * @param string $hmac_input Payment Details. Passed as GET parameter in successUrl.
      *
      * @return $this
      */
-    public function setBalance($balance)
+    public function setHmacInput($hmac_input)
     {
-        $this->container['balance'] = $balance;
+        $this->container['hmac_input'] = $hmac_input;
 
         return $this;
     }
 
     /**
-     * Gets token_balance
+     * Gets hmac_key_id
      *
      * @return string
      */
-    public function getTokenBalance()
+    public function getHmacKeyId()
     {
-        return $this->container['token_balance'];
+        return $this->container['hmac_key_id'];
     }
 
     /**
-     * Sets token_balance
+     * Sets hmac_key_id
      *
-     * @param string $token_balance Token balance for the wallet in Ethereum format
+     * @param string $hmac_key_id KeyId used to generate the HMAC. Passed as GET parameter in successUrl.
      *
      * @return $this
      */
-    public function setTokenBalance($token_balance)
+    public function setHmacKeyId($hmac_key_id)
     {
-        $this->container['token_balance'] = $token_balance;
+        $this->container['hmac_key_id'] = $hmac_key_id;
 
         return $this;
     }
 
     /**
-     * Gets token_decimals
+     * Gets hmac_alg
      *
-     * @return int
+     * @return string
      */
-    public function getTokenDecimals()
+    public function getHmacAlg()
     {
-        return $this->container['token_decimals'];
+        return $this->container['hmac_alg'];
     }
 
     /**
-     * Sets token_decimals
+     * Sets hmac_alg
      *
-     * @param int $token_decimals Token decimal places
+     * @param string $hmac_alg Algorithm used to generate the HMAC. Passed as GET parameter in successUrl.
      *
      * @return $this
      */
-    public function setTokenDecimals($token_decimals)
+    public function setHmacAlg($hmac_alg)
     {
-        $this->container['token_decimals'] = $token_decimals;
+        $this->container['hmac_alg'] = $hmac_alg;
 
         return $this;
     }
 
     /**
-     * Gets block_num
+     * Gets hmac_value
      *
      * @return string
      */
-    public function getBlockNum()
+    public function getHmacValue()
     {
-        return $this->container['block_num'];
+        return $this->container['hmac_value'];
     }
 
     /**
-     * Sets block_num
+     * Sets hmac_value
      *
-     * @param string $block_num Block in which the balance was last updated
+     * @param string $hmac_value HMAC passed as GET parameter in successUrl.
      *
      * @return $this
      */
-    public function setBlockNum($block_num)
+    public function setHmacValue($hmac_value)
     {
-        $this->container['block_num'] = $block_num;
+        $this->container['hmac_value'] = $hmac_value;
 
         return $this;
     }

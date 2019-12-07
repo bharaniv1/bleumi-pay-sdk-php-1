@@ -13,7 +13,7 @@
 /**
  * Bleumi Pay API
  *
- * A simple and powerful REST API to integrate ERC20 payments into your business or application
+ * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai payments and/or payouts into your business or application
  *
  * OpenAPI spec version: 1.0.0
  * Contact: info@bleumi.com

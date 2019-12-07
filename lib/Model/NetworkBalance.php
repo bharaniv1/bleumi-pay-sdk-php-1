@@ -1,6 +1,6 @@
 <?php
 /**
- * WalletBalance
+ * NetworkBalance
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \Bleumi\Pay\ObjectSerializer;
 use JsonSerializable;
 
 /**
- * WalletBalance Class Doc Comment
+ * NetworkBalance Class Doc Comment
  *
  * @category Class
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
+class NetworkBalance implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
       *
       * @var string
       */
-    protected static $swaggerModelName = 'WalletBalance';
+    protected static $swaggerModelName = 'NetworkBalance';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,13 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'balance' => 'string',
-'token_balance' => 'string',
-'token_decimals' => 'int',
-'block_num' => 'string'    ];
+        'mainnet' => 'map[string,\Bleumi\Pay\Model\WalletBalance]',
+'xdai' => 'map[string,\Bleumi\Pay\Model\WalletBalance]',
+'goerli' => 'map[string,\Bleumi\Pay\Model\WalletBalance]',
+'kovan' => 'map[string,\Bleumi\Pay\Model\WalletBalance]',
+'rinkeby' => 'map[string,\Bleumi\Pay\Model\WalletBalance]',
+'ropsten' => 'map[string,\Bleumi\Pay\Model\WalletBalance]',
+'xdai_testnet' => 'map[string,\Bleumi\Pay\Model\WalletBalance]'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -68,10 +71,13 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'balance' => null,
-'token_balance' => null,
-'token_decimals' => 'int64',
-'block_num' => null    ];
+        'mainnet' => null,
+'xdai' => null,
+'goerli' => null,
+'kovan' => null,
+'rinkeby' => null,
+'ropsten' => null,
+'xdai_testnet' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -100,10 +106,13 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'balance' => 'balance',
-'token_balance' => 'token_balance',
-'token_decimals' => 'token_decimals',
-'block_num' => 'blockNum'    ];
+        'mainnet' => 'mainnet',
+'xdai' => 'xdai',
+'goerli' => 'goerli',
+'kovan' => 'kovan',
+'rinkeby' => 'rinkeby',
+'ropsten' => 'ropsten',
+'xdai_testnet' => 'xdai_testnet'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -111,10 +120,13 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'balance' => 'setBalance',
-'token_balance' => 'setTokenBalance',
-'token_decimals' => 'setTokenDecimals',
-'block_num' => 'setBlockNum'    ];
+        'mainnet' => 'setMainnet',
+'xdai' => 'setXdai',
+'goerli' => 'setGoerli',
+'kovan' => 'setKovan',
+'rinkeby' => 'setRinkeby',
+'ropsten' => 'setRopsten',
+'xdai_testnet' => 'setXdaiTestnet'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -122,10 +134,13 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'balance' => 'getBalance',
-'token_balance' => 'getTokenBalance',
-'token_decimals' => 'getTokenDecimals',
-'block_num' => 'getBlockNum'    ];
+        'mainnet' => 'getMainnet',
+'xdai' => 'getXdai',
+'goerli' => 'getGoerli',
+'kovan' => 'getKovan',
+'rinkeby' => 'getRinkeby',
+'ropsten' => 'getRopsten',
+'xdai_testnet' => 'getXdaiTestnet'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -185,10 +200,13 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['balance'] = isset($data['balance']) ? $data['balance'] : null;
-        $this->container['token_balance'] = isset($data['token_balance']) ? $data['token_balance'] : null;
-        $this->container['token_decimals'] = isset($data['token_decimals']) ? $data['token_decimals'] : null;
-        $this->container['block_num'] = isset($data['block_num']) ? $data['block_num'] : null;
+        $this->container['mainnet'] = isset($data['mainnet']) ? $data['mainnet'] : null;
+        $this->container['xdai'] = isset($data['xdai']) ? $data['xdai'] : null;
+        $this->container['goerli'] = isset($data['goerli']) ? $data['goerli'] : null;
+        $this->container['kovan'] = isset($data['kovan']) ? $data['kovan'] : null;
+        $this->container['rinkeby'] = isset($data['rinkeby']) ? $data['rinkeby'] : null;
+        $this->container['ropsten'] = isset($data['ropsten']) ? $data['ropsten'] : null;
+        $this->container['xdai_testnet'] = isset($data['xdai_testnet']) ? $data['xdai_testnet'] : null;
     }
 
     /**
@@ -200,18 +218,6 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['balance'] === null) {
-            $invalidProperties[] = "'balance' can't be null";
-        }
-        if ($this->container['token_balance'] === null) {
-            $invalidProperties[] = "'token_balance' can't be null";
-        }
-        if ($this->container['token_decimals'] === null) {
-            $invalidProperties[] = "'token_decimals' can't be null";
-        }
-        if ($this->container['block_num'] === null) {
-            $invalidProperties[] = "'block_num' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -228,97 +234,169 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
 
 
     /**
-     * Gets balance
+     * Gets mainnet
      *
-     * @return string
+     * @return map[string,\Bleumi\Pay\Model\WalletBalance]
      */
-    public function getBalance()
+    public function getMainnet()
     {
-        return $this->container['balance'];
+        return $this->container['mainnet'];
     }
 
     /**
-     * Sets balance
+     * Sets mainnet
      *
-     * @param string $balance Token balance for the wallet
+     * @param map[string,\Bleumi\Pay\Model\WalletBalance] $mainnet mainnet
      *
      * @return $this
      */
-    public function setBalance($balance)
+    public function setMainnet($mainnet)
     {
-        $this->container['balance'] = $balance;
+        $this->container['mainnet'] = $mainnet;
 
         return $this;
     }
 
     /**
-     * Gets token_balance
+     * Gets xdai
      *
-     * @return string
+     * @return map[string,\Bleumi\Pay\Model\WalletBalance]
      */
-    public function getTokenBalance()
+    public function getXdai()
     {
-        return $this->container['token_balance'];
+        return $this->container['xdai'];
     }
 
     /**
-     * Sets token_balance
+     * Sets xdai
      *
-     * @param string $token_balance Token balance for the wallet in Ethereum format
+     * @param map[string,\Bleumi\Pay\Model\WalletBalance] $xdai xdai
      *
      * @return $this
      */
-    public function setTokenBalance($token_balance)
+    public function setXdai($xdai)
     {
-        $this->container['token_balance'] = $token_balance;
+        $this->container['xdai'] = $xdai;
 
         return $this;
     }
 
     /**
-     * Gets token_decimals
+     * Gets goerli
      *
-     * @return int
+     * @return map[string,\Bleumi\Pay\Model\WalletBalance]
      */
-    public function getTokenDecimals()
+    public function getGoerli()
     {
-        return $this->container['token_decimals'];
+        return $this->container['goerli'];
     }
 
     /**
-     * Sets token_decimals
+     * Sets goerli
      *
-     * @param int $token_decimals Token decimal places
+     * @param map[string,\Bleumi\Pay\Model\WalletBalance] $goerli goerli
      *
      * @return $this
      */
-    public function setTokenDecimals($token_decimals)
+    public function setGoerli($goerli)
     {
-        $this->container['token_decimals'] = $token_decimals;
+        $this->container['goerli'] = $goerli;
 
         return $this;
     }
 
     /**
-     * Gets block_num
+     * Gets kovan
      *
-     * @return string
+     * @return map[string,\Bleumi\Pay\Model\WalletBalance]
      */
-    public function getBlockNum()
+    public function getKovan()
     {
-        return $this->container['block_num'];
+        return $this->container['kovan'];
     }
 
     /**
-     * Sets block_num
+     * Sets kovan
      *
-     * @param string $block_num Block in which the balance was last updated
+     * @param map[string,\Bleumi\Pay\Model\WalletBalance] $kovan kovan
      *
      * @return $this
      */
-    public function setBlockNum($block_num)
+    public function setKovan($kovan)
     {
-        $this->container['block_num'] = $block_num;
+        $this->container['kovan'] = $kovan;
+
+        return $this;
+    }
+
+    /**
+     * Gets rinkeby
+     *
+     * @return map[string,\Bleumi\Pay\Model\WalletBalance]
+     */
+    public function getRinkeby()
+    {
+        return $this->container['rinkeby'];
+    }
+
+    /**
+     * Sets rinkeby
+     *
+     * @param map[string,\Bleumi\Pay\Model\WalletBalance] $rinkeby rinkeby
+     *
+     * @return $this
+     */
+    public function setRinkeby($rinkeby)
+    {
+        $this->container['rinkeby'] = $rinkeby;
+
+        return $this;
+    }
+
+    /**
+     * Gets ropsten
+     *
+     * @return map[string,\Bleumi\Pay\Model\WalletBalance]
+     */
+    public function getRopsten()
+    {
+        return $this->container['ropsten'];
+    }
+
+    /**
+     * Sets ropsten
+     *
+     * @param map[string,\Bleumi\Pay\Model\WalletBalance] $ropsten ropsten
+     *
+     * @return $this
+     */
+    public function setRopsten($ropsten)
+    {
+        $this->container['ropsten'] = $ropsten;
+
+        return $this;
+    }
+
+    /**
+     * Gets xdai_testnet
+     *
+     * @return map[string,\Bleumi\Pay\Model\WalletBalance]
+     */
+    public function getXdaiTestnet()
+    {
+        return $this->container['xdai_testnet'];
+    }
+
+    /**
+     * Sets xdai_testnet
+     *
+     * @param map[string,\Bleumi\Pay\Model\WalletBalance] $xdai_testnet xdai_testnet
+     *
+     * @return $this
+     */
+    public function setXdaiTestnet($xdai_testnet)
+    {
+        $this->container['xdai_testnet'] = $xdai_testnet;
 
         return $this;
     }
@@ -391,7 +469,6 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
-
     /**
      * Customize the way json_encode() renders the object.
      */

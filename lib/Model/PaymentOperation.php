@@ -1,6 +1,6 @@
 <?php
 /**
- * WalletBalance
+ * PaymentOperation
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \Bleumi\Pay\ObjectSerializer;
 use JsonSerializable;
 
 /**
- * WalletBalance Class Doc Comment
+ * PaymentOperation Class Doc Comment
  *
  * @category Class
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
+class PaymentOperation implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
       *
       * @var string
       */
-    protected static $swaggerModelName = 'WalletBalance';
+    protected static $swaggerModelName = 'PaymentOperation';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,12 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'balance' => 'string',
-'token_balance' => 'string',
-'token_decimals' => 'int',
-'block_num' => 'string'    ];
+        'txid' => 'string',
+'chain' => 'string',
+'func_name' => 'string',
+'status' => 'bool',
+'inputs' => '\Bleumi\Pay\Model\PaymentOperationInputs',
+'hash' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -68,10 +70,12 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'balance' => null,
-'token_balance' => null,
-'token_decimals' => 'int64',
-'block_num' => null    ];
+        'txid' => null,
+'chain' => null,
+'func_name' => null,
+'status' => null,
+'inputs' => null,
+'hash' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -100,10 +104,12 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'balance' => 'balance',
-'token_balance' => 'token_balance',
-'token_decimals' => 'token_decimals',
-'block_num' => 'blockNum'    ];
+        'txid' => 'txid',
+'chain' => 'chain',
+'func_name' => 'funcName',
+'status' => 'status',
+'inputs' => 'inputs',
+'hash' => 'hash'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -111,10 +117,12 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'balance' => 'setBalance',
-'token_balance' => 'setTokenBalance',
-'token_decimals' => 'setTokenDecimals',
-'block_num' => 'setBlockNum'    ];
+        'txid' => 'setTxid',
+'chain' => 'setChain',
+'func_name' => 'setFuncName',
+'status' => 'setStatus',
+'inputs' => 'setInputs',
+'hash' => 'setHash'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -122,10 +130,12 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'balance' => 'getBalance',
-'token_balance' => 'getTokenBalance',
-'token_decimals' => 'getTokenDecimals',
-'block_num' => 'getBlockNum'    ];
+        'txid' => 'getTxid',
+'chain' => 'getChain',
+'func_name' => 'getFuncName',
+'status' => 'getStatus',
+'inputs' => 'getInputs',
+'hash' => 'getHash'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -185,10 +195,12 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['balance'] = isset($data['balance']) ? $data['balance'] : null;
-        $this->container['token_balance'] = isset($data['token_balance']) ? $data['token_balance'] : null;
-        $this->container['token_decimals'] = isset($data['token_decimals']) ? $data['token_decimals'] : null;
-        $this->container['block_num'] = isset($data['block_num']) ? $data['block_num'] : null;
+        $this->container['txid'] = isset($data['txid']) ? $data['txid'] : null;
+        $this->container['chain'] = isset($data['chain']) ? $data['chain'] : null;
+        $this->container['func_name'] = isset($data['func_name']) ? $data['func_name'] : null;
+        $this->container['status'] = isset($data['status']) ? $data['status'] : null;
+        $this->container['inputs'] = isset($data['inputs']) ? $data['inputs'] : null;
+        $this->container['hash'] = isset($data['hash']) ? $data['hash'] : null;
     }
 
     /**
@@ -200,17 +212,20 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['balance'] === null) {
-            $invalidProperties[] = "'balance' can't be null";
+        if ($this->container['chain'] === null) {
+            $invalidProperties[] = "'chain' can't be null";
         }
-        if ($this->container['token_balance'] === null) {
-            $invalidProperties[] = "'token_balance' can't be null";
+        if ($this->container['func_name'] === null) {
+            $invalidProperties[] = "'func_name' can't be null";
         }
-        if ($this->container['token_decimals'] === null) {
-            $invalidProperties[] = "'token_decimals' can't be null";
+        if ($this->container['status'] === null) {
+            $invalidProperties[] = "'status' can't be null";
         }
-        if ($this->container['block_num'] === null) {
-            $invalidProperties[] = "'block_num' can't be null";
+        if ($this->container['inputs'] === null) {
+            $invalidProperties[] = "'inputs' can't be null";
+        }
+        if ($this->container['hash'] === null) {
+            $invalidProperties[] = "'hash' can't be null";
         }
         return $invalidProperties;
     }
@@ -228,97 +243,145 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
 
 
     /**
-     * Gets balance
+     * Gets txid
      *
      * @return string
      */
-    public function getBalance()
+    public function getTxid()
     {
-        return $this->container['balance'];
+        return $this->container['txid'];
     }
 
     /**
-     * Sets balance
+     * Sets txid
      *
-     * @param string $balance Token balance for the wallet
+     * @param string $txid Transaction ID of the operation
      *
      * @return $this
      */
-    public function setBalance($balance)
+    public function setTxid($txid)
     {
-        $this->container['balance'] = $balance;
+        $this->container['txid'] = $txid;
 
         return $this;
     }
 
     /**
-     * Gets token_balance
+     * Gets chain
      *
      * @return string
      */
-    public function getTokenBalance()
+    public function getChain()
     {
-        return $this->container['token_balance'];
+        return $this->container['chain'];
     }
 
     /**
-     * Sets token_balance
+     * Sets chain
      *
-     * @param string $token_balance Token balance for the wallet in Ethereum format
+     * @param string $chain Network in which the operation was carried out
      *
      * @return $this
      */
-    public function setTokenBalance($token_balance)
+    public function setChain($chain)
     {
-        $this->container['token_balance'] = $token_balance;
+        $this->container['chain'] = $chain;
 
         return $this;
     }
 
     /**
-     * Gets token_decimals
+     * Gets func_name
      *
-     * @return int
+     * @return string
      */
-    public function getTokenDecimals()
+    public function getFuncName()
     {
-        return $this->container['token_decimals'];
+        return $this->container['func_name'];
     }
 
     /**
-     * Sets token_decimals
+     * Sets func_name
      *
-     * @param int $token_decimals Token decimal places
+     * @param string $func_name The name of the function invoked on the [payment processor](https://pay.bleumi.com/docs/#payment-processor)
      *
      * @return $this
      */
-    public function setTokenDecimals($token_decimals)
+    public function setFuncName($func_name)
     {
-        $this->container['token_decimals'] = $token_decimals;
+        $this->container['func_name'] = $func_name;
 
         return $this;
     }
 
     /**
-     * Gets block_num
+     * Gets status
      *
-     * @return string
+     * @return bool
      */
-    public function getBlockNum()
+    public function getStatus()
     {
-        return $this->container['block_num'];
+        return $this->container['status'];
     }
 
     /**
-     * Sets block_num
+     * Sets status
      *
-     * @param string $block_num Block in which the balance was last updated
+     * @param bool $status null - Operation in progress ; true - Operation completed successfuly ; false - Operation failed to process
      *
      * @return $this
      */
-    public function setBlockNum($block_num)
+    public function setStatus($status)
     {
-        $this->container['block_num'] = $block_num;
+        $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets inputs
+     *
+     * @return \Bleumi\Pay\Model\PaymentOperationInputs
+     */
+    public function getInputs()
+    {
+        return $this->container['inputs'];
+    }
+
+    /**
+     * Sets inputs
+     *
+     * @param \Bleumi\Pay\Model\PaymentOperationInputs $inputs inputs
+     *
+     * @return $this
+     */
+    public function setInputs($inputs)
+    {
+        $this->container['inputs'] = $inputs;
+
+        return $this;
+    }
+
+    /**
+     * Gets hash
+     *
+     * @return string
+     */
+    public function getHash()
+    {
+        return $this->container['hash'];
+    }
+
+    /**
+     * Sets hash
+     *
+     * @param string $hash Transaction hash of operation submitted to the network. This field is blank when operation is in progress.
+     *
+     * @return $this
+     */
+    public function setHash($hash)
+    {
+        $this->container['hash'] = $hash;
 
         return $this;
     }

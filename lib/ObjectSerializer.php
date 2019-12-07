@@ -13,7 +13,7 @@
 /**
  * Bleumi Pay API
  *
- * A simple and powerful REST API to integrate ERC20 payments into your business or application
+ * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai payments and/or payouts into your business or application
  *
  * OpenAPI spec version: 1.0.0
  * Contact: info@bleumi.com
@@ -75,15 +75,17 @@ class ObjectSerializer
                     $values[$data::attributeMap()[$property]] = self::sanitizeForSerialization($value, $swaggerType, $formats[$property]);
                 }
                 //Bleumi-custom-start
-                if ($swaggerType == '\Bleumi\Pay\Model\EthAddress') {
+                if (($swaggerType == '\Bleumi\Pay\Model\EthAddress')||($swaggerType == '\Bleumi\Pay\Model\Token')) {
                     //echo  nl2br ("get - $swaggerType  -  $property - $value \n ");
-                    if (is_object($value)) {
-                        $values[$data::attributeMap()[$property]] = $value['addr'];
-                    } else {
-                        $values[$data::attributeMap()[$property]] = $value; 
+                    if ($value !== null) {
+                        if (is_object($value)) {
+                            $values[$data::attributeMap()[$property]] = $value['addr'];
+                        } else {
+                            $values[$data::attributeMap()[$property]] = $value; 
+                        }
                     }
                 }
-                //Bleumi-custom-end
+                //Bleumi-custom-end                
             }
             return (object)$values;
         } else {
@@ -310,7 +312,7 @@ class ObjectSerializer
             $instance = new $class();
             foreach ($instance::swaggerTypes() as $property => $type) {
                 //Bleumi-custom-start
-                if ($class == '\Bleumi\Pay\Model\EthAddress') {
+                if (($class == '\Bleumi\Pay\Model\EthAddress')||($class == '\Bleumi\Pay\Model\Token')) {
                     //echo  nl2br ("$data \n ");
                     return $data;
                 } 

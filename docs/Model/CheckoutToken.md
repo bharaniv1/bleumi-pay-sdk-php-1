@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **chain** | **string** | The chain in which the token is defined | 
-**transfer_address** | **string** | The destination address when payments are received in this token | 
+**addr** | **string** | The address of the token | 
 **name** | **string** | Name of the token | 
 **symbol** | **string** | Symbol of the token | 
 **decimals** | **int** | Token decimal places | 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ```json
 {
       "chain": "ropsten",
-      "transferAddress": "0xd15bdd17175825742a5904b21008dd3a019a060e",
+      "addr": "0x84df8548086ec9025e9c93297058bed706e90ddd",
       "name": "USD p18",
       "symbol": "USD18",
       "decimals": 18

@@ -57,7 +57,7 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static $swaggerTypes = [
         'chain' => 'string',
-'transfer_address' => 'string',
+'addr' => 'string',
 'name' => 'string',
 'symbol' => 'string',
 'decimals' => 'int'    ];
@@ -69,7 +69,7 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static $swaggerFormats = [
         'chain' => null,
-'transfer_address' => null,
+'addr' => null,
 'name' => null,
 'symbol' => null,
 'decimals' => 'int64'    ];
@@ -102,7 +102,7 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static $attributeMap = [
         'chain' => 'chain',
-'transfer_address' => 'transferAddress',
+'addr' => 'addr',
 'name' => 'name',
 'symbol' => 'symbol',
 'decimals' => 'decimals'    ];
@@ -114,7 +114,7 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static $setters = [
         'chain' => 'setChain',
-'transfer_address' => 'setTransferAddress',
+'addr' => 'setAddr',
 'name' => 'setName',
 'symbol' => 'setSymbol',
 'decimals' => 'setDecimals'    ];
@@ -126,7 +126,7 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static $getters = [
         'chain' => 'getChain',
-'transfer_address' => 'getTransferAddress',
+'addr' => 'getAddr',
 'name' => 'getName',
 'symbol' => 'getSymbol',
 'decimals' => 'getDecimals'    ];
@@ -190,7 +190,7 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
     public function __construct(array $data = null)
     {
         $this->container['chain'] = isset($data['chain']) ? $data['chain'] : null;
-        $this->container['transfer_address'] = isset($data['transfer_address']) ? $data['transfer_address'] : null;
+        $this->container['addr'] = isset($data['addr']) ? $data['addr'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['symbol'] = isset($data['symbol']) ? $data['symbol'] : null;
         $this->container['decimals'] = isset($data['decimals']) ? $data['decimals'] : null;
@@ -208,8 +208,8 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
         if ($this->container['chain'] === null) {
             $invalidProperties[] = "'chain' can't be null";
         }
-        if ($this->container['transfer_address'] === null) {
-            $invalidProperties[] = "'transfer_address' can't be null";
+        if ($this->container['addr'] === null) {
+            $invalidProperties[] = "'addr' can't be null";
         }
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
@@ -260,25 +260,25 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
     }
 
     /**
-     * Gets transfer_address
+     * Gets addr
      *
      * @return string
      */
-    public function getTransferAddress()
+    public function getAddr()
     {
-        return $this->container['transfer_address'];
+        return $this->container['addr'];
     }
 
     /**
-     * Sets transfer_address
+     * Sets addr
      *
-     * @param string $transfer_address The destination address when payments are received in this token
+     * @param string $addr The destination address when payments are received in this token
      *
      * @return $this
      */
-    public function setTransferAddress($transfer_address)
+    public function setAddr($addr)
     {
-        $this->container['transfer_address'] = $transfer_address;
+        $this->container['addr'] = $addr;
 
         return $this;
     }

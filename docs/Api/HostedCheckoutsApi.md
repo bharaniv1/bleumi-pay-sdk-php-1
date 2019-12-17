@@ -122,7 +122,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\Bleumi\Pay\Model\CheckoutTokens**](../Model/CheckoutTokens.md)
+[**\Bleumi\Pay\Model\CheckoutToken**](../Model/CheckoutToken.md)
 
 ### 400 Errors
 

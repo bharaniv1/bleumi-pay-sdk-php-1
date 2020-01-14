@@ -32,7 +32,7 @@ To install the bindings via [Composer](http://getcomposer.org/), add the followi
 ```
 {
   "require": {
-        "bleumi/bleumi-pay-sdk-php":"1.0.16"
+        "bleumi/bleumi-pay-sdk-php":"1.0.17"
     }
 }
 ```
@@ -147,6 +147,6 @@ PayoutsApi | [**listPayouts**](docs/Api/PayoutsApi.md#listpayouts) | **GET** /v1
 
 ## License
 
-Copyright 2019 Bleumi, Inc.
+Copyright 2020 Bleumi, Inc.
 
 Code licensed under the [MIT License](LICENSE).

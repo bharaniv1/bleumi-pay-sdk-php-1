@@ -57,6 +57,7 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static $swaggerTypes = [
         'chain' => 'string',
+        'network' => 'string',
 'addr' => 'string',
 'name' => 'string',
 'symbol' => 'string',
@@ -69,6 +70,7 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static $swaggerFormats = [
         'chain' => null,
+        'network' => null,
 'addr' => null,
 'name' => null,
 'symbol' => null,
@@ -102,6 +104,7 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static $attributeMap = [
         'chain' => 'chain',
+        'network' => 'network',
 'addr' => 'addr',
 'name' => 'name',
 'symbol' => 'symbol',
@@ -114,6 +117,7 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static $setters = [
         'chain' => 'setChain',
+        'network' => 'setNetwork',
 'addr' => 'setAddr',
 'name' => 'setName',
 'symbol' => 'setSymbol',
@@ -126,6 +130,7 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static $getters = [
         'chain' => 'getChain',
+        'network' => 'getNetwork',
 'addr' => 'getAddr',
 'name' => 'getName',
 'symbol' => 'getSymbol',
@@ -190,6 +195,7 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
     public function __construct(array $data = null)
     {
         $this->container['chain'] = isset($data['chain']) ? $data['chain'] : null;
+        $this->container['network'] = isset($data['network']) ? $data['network'] : null;
         $this->container['addr'] = isset($data['addr']) ? $data['addr'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['symbol'] = isset($data['symbol']) ? $data['symbol'] : null;
@@ -207,6 +213,9 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
 
         if ($this->container['chain'] === null) {
             $invalidProperties[] = "'chain' can't be null";
+        }
+        if ($this->container['network'] === null) {
+            $invalidProperties[] = "'network' can't be null";
         }
         if ($this->container['addr'] === null) {
             $invalidProperties[] = "'addr' can't be null";
@@ -255,6 +264,30 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
     public function setChain($chain)
     {
         $this->container['chain'] = $chain;
+
+        return $this;
+    }
+
+    /**
+     * Gets network
+     *
+     * @return string
+     */
+    public function getNetwork()
+    {
+        return $this->container['network'];
+    }
+
+    /**
+     * Sets network
+     *
+     * @param string $network The network in which the token is defined
+     *
+     * @return $this
+     */
+    public function setNetwork($network)
+    {
+        $this->container['network'] = $network;
 
         return $this;
     }

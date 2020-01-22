@@ -57,8 +57,8 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'mainnet' => 'map[string,\Bleumi\Pay\Model\WalletBalance]',
-'testnet' => 'map[string,\Bleumi\Pay\Model\WalletBalance]'    ];
+        'alg_mainnet' => 'map[string,\Bleumi\Pay\Model\WalletBalance]',
+'alg_testnet' => 'map[string,\Bleumi\Pay\Model\WalletBalance]'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -66,8 +66,8 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'mainnet' => null,
-'testnet' => null    ];
+        'alg_mainnet' => null,
+'alg_testnet' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -96,8 +96,8 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'mainnet' => 'mainnet',
-'testnet' => 'testnet'    ];
+        'alg_mainnet' => 'alg_mainnet',
+'alg_testnet' => 'alg_testnet'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -105,8 +105,8 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'mainnet' => 'setMainnet',
-'testnet' => 'setTestnet'    ];
+        'alg_mainnet' => 'setMainnet',
+'alg_testnet' => 'setTestnet'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -114,8 +114,8 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'mainnet' => 'getMainnet',
-'testnet' => 'getTestnet'    ];
+        'alg_mainnet' => 'getMainnet',
+'alg_testnet' => 'getTestnet'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -175,8 +175,8 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['mainnet'] = isset($data['mainnet']) ? $data['mainnet'] : null;
-        $this->container['testnet'] = isset($data['testnet']) ? $data['testnet'] : null;
+        $this->container['alg_mainnet'] = isset($data['alg_mainnet']) ? $data['alg_mainnet'] : null;
+        $this->container['alg_testnet'] = isset($data['alg_testnet']) ? $data['alg_testnet'] : null;
     }
 
     /**
@@ -210,7 +210,7 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function getMainnet()
     {
-        return $this->container['mainnet'];
+        return $this->container['alg_mainnet'];
     }
 
     /**
@@ -222,7 +222,7 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function setMainnet($mainnet)
     {
-        $this->container['mainnet'] = $mainnet;
+        $this->container['alg_mainnet'] = $mainnet;
 
         return $this;
     }
@@ -234,7 +234,7 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function getTestnet()
     {
-        return $this->container['testnet'];
+        return $this->container['alg_testnet'];
     }
 
     /**
@@ -246,7 +246,7 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function setTestnet($testnet)
     {
-        $this->container['testnet'] = $testnet;
+        $this->container['alg_testnet'] = $testnet;
 
         return $this;
     }

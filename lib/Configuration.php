@@ -87,7 +87,7 @@ class Configuration
      *
      * @var string
      */
-    protected $userAgent = 'Swagger-Codegen/1.0.15/php';
+    protected $userAgent = 'BleumiPay/1.0.18/php';
 
     /**
      * Debug switch (default set to false)

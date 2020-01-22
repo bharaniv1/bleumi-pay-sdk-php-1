@@ -11,9 +11,9 @@
  */
 
 /**
- * Bleumi Pay API
+ * Bleumi Pay REST API
  *
- * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai payments and/or payouts into your business or application
+ * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai, Algorand payments and/or payouts into your business or application
  *
  * OpenAPI spec version: 1.0.0
  * Contact: info@bleumi.com
@@ -57,7 +57,7 @@ class PaymentRefundRequest implements ModelInterface, ArrayAccess, JsonSerializa
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'token' => '\Bleumi\Pay\Model\Token'    ];
+        'token' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -203,7 +203,7 @@ class PaymentRefundRequest implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Gets token
      *
-     * @return \Bleumi\Pay\Model\Token
+     * @return string
      */
     public function getToken()
     {
@@ -213,7 +213,7 @@ class PaymentRefundRequest implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Sets token
      *
-     * @param \Bleumi\Pay\Model\Token $token token
+     * @param string $token token
      *
      * @return $this
      */

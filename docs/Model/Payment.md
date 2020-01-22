@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** | Unique ID identifying the payment; specified when it was created by your system | 
-**addresses** | [**\Bleumi\Pay\Model\PaymentAddresses**](PaymentAddresses.md) |  A dictionary which gives the address of the wallet generated for each network | 
+**addresses** | [**\Bleumi\Pay\Model\PaymentAddresses**](PaymentAddresses.md) | A dictionary which gives the address of the wallet generated for each network | 
 **balances** | [**\Bleumi\Pay\Model\PaymentBalances**](PaymentBalances.md) | A dictionary which gives the token balances in each network | 
 **created_at** | **int** | UNIX timestamp when the payment was created | 
 **updated_at** | **int** | UNIX timestamp when the lastest operation was performed | 

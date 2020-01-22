@@ -10,9 +10,9 @@
  */
 
 /**
- * Bleumi Pay API
+ * Bleumi Pay REST API
  *
- * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai payments and/or payouts into your business or application
+ * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai, Algorand payments and/or payouts into your business or application
  *
  * OpenAPI spec version: 1.0.0
  * Contact: info@bleumi.com
@@ -37,6 +37,7 @@ use Bleumi\Pay\ApiException;
 use Bleumi\Pay\Configuration;
 use Bleumi\Pay\HeaderSelector;
 use Bleumi\Pay\ObjectSerializer;
+use Bleumi\Pay\Utilities;
 
 /**
  * PaymentsApi Class Doc Comment
@@ -92,7 +93,7 @@ class PaymentsApi
      * Generate a unique wallet address in the specified network to accept payment
      *
      * @param  \Bleumi\Pay\Model\CreatePaymentRequest $body body (required)
-     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be created. Please refer documentation for Supported Networks (optional)
+     * @param  \Bleumi\Pay\Model\Chain $chain Network in which payment is to be created. Please refer documentation for Supported Networks (optional)
      *
      * @throws \Bleumi\Pay\ApiException on non-2xx response
      * @throws \InvalidArgumentException
@@ -110,7 +111,7 @@ class PaymentsApi
      * Generate a unique wallet address in the specified network to accept payment
      *
      * @param  \Bleumi\Pay\Model\CreatePaymentRequest $body (required)
-     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be created. Please refer documentation for Supported Networks (optional)
+     * @param  \Bleumi\Pay\Model\Chain $chain Network in which payment is to be created. Please refer documentation for Supported Networks (optional)
      *
      * @throws \Bleumi\Pay\ApiException on non-2xx response
      * @throws \InvalidArgumentException
@@ -194,7 +195,7 @@ class PaymentsApi
      * Generate a unique wallet address in the specified network to accept payment
      *
      * @param  \Bleumi\Pay\Model\CreatePaymentRequest $body (required)
-     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be created. Please refer documentation for Supported Networks (optional)
+     * @param  \Bleumi\Pay\Model\Chain $chain Network in which payment is to be created. Please refer documentation for Supported Networks (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -215,7 +216,7 @@ class PaymentsApi
      * Generate a unique wallet address in the specified network to accept payment
      *
      * @param  \Bleumi\Pay\Model\CreatePaymentRequest $body (required)
-     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be created. Please refer documentation for Supported Networks (optional)
+     * @param  \Bleumi\Pay\Model\Chain $chain Network in which payment is to be created. Please refer documentation for Supported Networks (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -266,7 +267,7 @@ class PaymentsApi
      * Create request for operation 'createPayment'
      *
      * @param  \Bleumi\Pay\Model\CreatePaymentRequest $body (required)
-     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be created. Please refer documentation for Supported Networks (optional)
+     * @param  \Bleumi\Pay\Model\Chain $chain Network in which payment is to be created. Please refer documentation for Supported Networks (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -292,6 +293,76 @@ class PaymentsApi
             $queryParams['chain'] = ObjectSerializer::toQueryValue($chain);
         }
 
+        //Bleumi Pay - Customization - Start : Adding more validations
+        $id = $body['id'];
+        if ($id === null) {
+            throw new \InvalidArgumentException(
+                "Missing the required parameter 'id' when calling createPayment"
+            );
+        }
+        
+        $buyer_address = $body['buyer_address'];
+        if ($buyer_address === null) {
+            throw new \InvalidArgumentException(
+                "Missing the required parameter 'buyerAddress' when calling createPayment"
+            );
+        }
+
+        $transfer_address = $body['transfer_address'];
+        if ($transfer_address === null) {
+            throw new \InvalidArgumentException(
+                "Missing the required parameter 'transferAddress' when calling createPayment"
+            );
+        }
+
+        $is_algo_net = Utilities::isAlgoNet($chain);
+
+        if ($is_algo_net == true) {
+            $token = $body['token'];
+            if (isset($token)) {
+                $valid_value = Utilities::isAlgoAddress($token);
+                if ($valid_value === false) {
+                    throw new \InvalidArgumentException(
+                        "Invalid parameter Algorand Standard Asset 'token' when calling createPayment"
+                    );
+                }
+            }
+            if (isset($buyer_address)) {
+                $valid_value = Utilities::isAlgoAddress($buyer_address);
+                if ($valid_value === false) {
+                    throw new \InvalidArgumentException(
+                        "Invalid parameter Algorand address provided for 'buyerAddress' when calling createPayment"
+                    );
+                }
+            }
+            if (isset($transfer_address)) {
+                $valid_value = Utilities::isAlgoAddress($transfer_address);
+                if ($valid_value === false) {
+                    throw new \InvalidArgumentException(
+                        "Invalid parameter Algorand address provided for 'transferAddress' when calling createPayment"
+                    );
+                }
+            }
+        } else {
+            if (isset($buyer_address)) {
+                $valid_value = Utilities::isEthAddress($buyer_address);
+                if ($valid_value === false) {
+                    throw new \InvalidArgumentException(
+                        "Invalid parameter Ethereum address provided for 'buyerAddress' when calling createPayment"
+                    );
+                }
+            }
+            if (isset($transfer_address)) {
+                $valid_value = Utilities::isEthAddress($transfer_address);
+                if ($valid_value === false) {
+                    throw new \InvalidArgumentException(
+                        "Invalid parameter Ethereum address provided for 'transferAddress' when calling createPayment"
+                    );
+                }
+            }
+        }
+
+        //Bleumi Pay - Customization - End : Adding more validations
 
         // body params
         $_tempBody = null;
@@ -370,7 +441,7 @@ class PaymentsApi
      *
      * Retrieve the wallet addresses & token balances for a given payment
      *
-     * @param  string $id Unique identifier of the payment (specified during [Create a Payment](#createPayment)) to retrieve (required)
+     * @param  string $id Unique identifier of the payment (specified during createPayment) to retrieve (required)
      *
      * @throws \Bleumi\Pay\ApiException on non-2xx response
      * @throws \InvalidArgumentException
@@ -387,7 +458,7 @@ class PaymentsApi
      *
      * Retrieve the wallet addresses & token balances for a given payment
      *
-     * @param  string $id Unique identifier of the payment (specified during [Create a Payment](#createPayment)) to retrieve (required)
+     * @param  string $id Unique identifier of the payment (specified during createPayment) to retrieve (required)
      *
      * @throws \Bleumi\Pay\ApiException on non-2xx response
      * @throws \InvalidArgumentException
@@ -470,7 +541,7 @@ class PaymentsApi
      *
      * Retrieve the wallet addresses & token balances for a given payment
      *
-     * @param  string $id Unique identifier of the payment (specified during [Create a Payment](#createPayment)) to retrieve (required)
+     * @param  string $id Unique identifier of the payment (specified during createPayment) to retrieve (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -490,7 +561,7 @@ class PaymentsApi
      *
      * Retrieve the wallet addresses & token balances for a given payment
      *
-     * @param  string $id Unique identifier of the payment (specified during [Create a Payment](#createPayment)) to retrieve (required)
+     * @param  string $id Unique identifier of the payment (specified during createPayment) to retrieve (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -540,7 +611,7 @@ class PaymentsApi
     /**
      * Create request for operation 'getPayment'
      *
-     * @param  string $id Unique identifier of the payment (specified during [Create a Payment](#createPayment)) to retrieve (required)
+     * @param  string $id Unique identifier of the payment (specified during createPayment) to retrieve (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -1225,6 +1296,7 @@ class PaymentsApi
      *
      * @param  string $next_token Cursor to start results from (optional)
      * @param  string $sort_by Sort payments by (optional)
+     * @param  string $sort_order Sort Order (optional)
      * @param  string $start_at Get payments from this timestamp (unix) (optional)
      * @param  string $end_at Get payments till this timestamp (unix) (optional)
      *
@@ -1232,9 +1304,9 @@ class PaymentsApi
      * @throws \InvalidArgumentException
      * @return \Bleumi\Pay\Model\PaginatedPayments
      */
-    public function listPayments($next_token = null, $sort_by = null, $start_at = null, $end_at = null)
+    public function listPayments($next_token = null, $sort_by = null, $sort_order = null, $start_at = null, $end_at = null)
     {
-        list($response) = $this->listPaymentsWithHttpInfo($next_token, $sort_by, $start_at, $end_at);
+        list($response) = $this->listPaymentsWithHttpInfo($next_token, $sort_by, $sort_order, $start_at, $end_at);
         return $response;
     }
 
@@ -1245,6 +1317,7 @@ class PaymentsApi
      *
      * @param  string $next_token Cursor to start results from (optional)
      * @param  string $sort_by Sort payments by (optional)
+     * @param  string $sort_order Sort Order (optional)
      * @param  string $start_at Get payments from this timestamp (unix) (optional)
      * @param  string $end_at Get payments till this timestamp (unix) (optional)
      *
@@ -1252,10 +1325,10 @@ class PaymentsApi
      * @throws \InvalidArgumentException
      * @return array of \Bleumi\Pay\Model\PaginatedPayments, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listPaymentsWithHttpInfo($next_token = null, $sort_by = null, $start_at = null, $end_at = null)
+    public function listPaymentsWithHttpInfo($next_token = null, $sort_by = null, $sort_order = null, $start_at = null, $end_at = null)
     {
         $returnType = '\Bleumi\Pay\Model\PaginatedPayments';
-        $request = $this->listPaymentsRequest($next_token, $sort_by, $start_at, $end_at);
+        $request = $this->listPaymentsRequest($next_token, $sort_by, $sort_order, $start_at, $end_at);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1331,15 +1404,16 @@ class PaymentsApi
      *
      * @param  string $next_token Cursor to start results from (optional)
      * @param  string $sort_by Sort payments by (optional)
+     * @param  string $sort_order Sort Order (optional)
      * @param  string $start_at Get payments from this timestamp (unix) (optional)
      * @param  string $end_at Get payments till this timestamp (unix) (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listPaymentsAsync($next_token = null, $sort_by = null, $start_at = null, $end_at = null)
+    public function listPaymentsAsync($next_token = null, $sort_by = null, $sort_order = null, $start_at = null, $end_at = null)
     {
-        return $this->listPaymentsAsyncWithHttpInfo($next_token, $sort_by, $start_at, $end_at)
+        return $this->listPaymentsAsyncWithHttpInfo($next_token, $sort_by, $sort_order, $start_at, $end_at)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1354,16 +1428,17 @@ class PaymentsApi
      *
      * @param  string $next_token Cursor to start results from (optional)
      * @param  string $sort_by Sort payments by (optional)
+     * @param  string $sort_order Sort Order (optional)
      * @param  string $start_at Get payments from this timestamp (unix) (optional)
      * @param  string $end_at Get payments till this timestamp (unix) (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listPaymentsAsyncWithHttpInfo($next_token = null, $sort_by = null, $start_at = null, $end_at = null)
+    public function listPaymentsAsyncWithHttpInfo($next_token = null, $sort_by = null, $sort_order = null, $start_at = null, $end_at = null)
     {
         $returnType = '\Bleumi\Pay\Model\PaginatedPayments';
-        $request = $this->listPaymentsRequest($next_token, $sort_by, $start_at, $end_at);
+        $request = $this->listPaymentsRequest($next_token, $sort_by, $sort_order, $start_at, $end_at);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1407,13 +1482,14 @@ class PaymentsApi
      *
      * @param  string $next_token Cursor to start results from (optional)
      * @param  string $sort_by Sort payments by (optional)
+     * @param  string $sort_order Sort Order (optional)
      * @param  string $start_at Get payments from this timestamp (unix) (optional)
      * @param  string $end_at Get payments till this timestamp (unix) (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function listPaymentsRequest($next_token = null, $sort_by = null, $start_at = null, $end_at = null)
+    protected function listPaymentsRequest($next_token = null, $sort_by = null, $sort_order = null, $start_at = null, $end_at = null)
     {
 
         $resourcePath = '/v1/payment';
@@ -1430,6 +1506,10 @@ class PaymentsApi
         // query params
         if ($sort_by !== null) {
             $queryParams['sortBy'] = ObjectSerializer::toQueryValue($sort_by);
+        }
+        // query params
+        if ($sort_order !== null) {
+            $queryParams['sortOrder'] = ObjectSerializer::toQueryValue($sort_order);
         }
         // query params
         if ($start_at !== null) {
@@ -1516,8 +1596,8 @@ class PaymentsApi
      * Refund the balance of a token for a given payment to the buyerAddress
      *
      * @param  \Bleumi\Pay\Model\PaymentRefundRequest $body Request body - used to specify the token to refund. (required)
-     * @param  string $id Unique identifier of the payment (specified during [Create a Payment](#createPayment)) (required)
-     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be created. (optional)
+     * @param  string $id Unique identifier of the payment (specified during createPayment) (required)
+     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be refunded. (optional)
      *
      * @throws \Bleumi\Pay\ApiException on non-2xx response
      * @throws \InvalidArgumentException
@@ -1535,8 +1615,8 @@ class PaymentsApi
      * Refund the balance of a token for a given payment to the buyerAddress
      *
      * @param  \Bleumi\Pay\Model\PaymentRefundRequest $body Request body - used to specify the token to refund. (required)
-     * @param  string $id Unique identifier of the payment (specified during [Create a Payment](#createPayment)) (required)
-     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be created. (optional)
+     * @param  string $id Unique identifier of the payment (specified during createPayment) (required)
+     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be refunded. (optional)
      *
      * @throws \Bleumi\Pay\ApiException on non-2xx response
      * @throws \InvalidArgumentException
@@ -1620,8 +1700,8 @@ class PaymentsApi
      * Refund the balance of a token for a given payment to the buyerAddress
      *
      * @param  \Bleumi\Pay\Model\PaymentRefundRequest $body Request body - used to specify the token to refund. (required)
-     * @param  string $id Unique identifier of the payment (specified during [Create a Payment](#createPayment)) (required)
-     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be created. (optional)
+     * @param  string $id Unique identifier of the payment (specified during createPayment) (required)
+     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be refunded. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -1642,8 +1722,8 @@ class PaymentsApi
      * Refund the balance of a token for a given payment to the buyerAddress
      *
      * @param  \Bleumi\Pay\Model\PaymentRefundRequest $body Request body - used to specify the token to refund. (required)
-     * @param  string $id Unique identifier of the payment (specified during [Create a Payment](#createPayment)) (required)
-     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be created. (optional)
+     * @param  string $id Unique identifier of the payment (specified during createPayment) (required)
+     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be refunded. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -1694,8 +1774,8 @@ class PaymentsApi
      * Create request for operation 'refundPayment'
      *
      * @param  \Bleumi\Pay\Model\PaymentRefundRequest $body Request body - used to specify the token to refund. (required)
-     * @param  string $id Unique identifier of the payment (specified during [Create a Payment](#createPayment)) (required)
-     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be created. (optional)
+     * @param  string $id Unique identifier of the payment (specified during createPayment) (required)
+     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be refunded. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -1726,6 +1806,33 @@ class PaymentsApi
         if ($chain !== null) {
             $queryParams['chain'] = ObjectSerializer::toQueryValue($chain);
         }
+
+        //Bleumi Pay - Customization - Start : Adding more validations
+        $is_algo_net = Utilities::isAlgoNet($chain);
+        $token = $body['token'];
+        if ($token === null) {
+            throw new \InvalidArgumentException(
+                "Missing the required parameter 'token' when calling refundPayment"
+            );
+        }
+        if (isset($token)) {
+            if ($is_algo_net == true) {
+                $valid_value = Utilities::isAlgoAddress($token);
+                if ($valid_value === false) {
+                    throw new \InvalidArgumentException(
+                        "Invalid parameter Algorand 'token' when calling refundPayment"
+                    );
+                }
+            } else {
+                $valid_value = Utilities::isEthAddress($token);
+                if ($valid_value === false) {
+                    throw new \InvalidArgumentException(
+                        "Invalid parameter Ethereum 'token' when calling refundPayment"
+                    );
+                }
+            }
+        }
+        //Bleumi Pay - Customization - End : Adding more validations
 
         // path params
         if ($id !== null) {
@@ -1814,8 +1921,8 @@ class PaymentsApi
      * Settle a specific amount of a token for a given payment to the transferAddress and remaining balance (if any) will be refunded to the buyerAddress
      *
      * @param  \Bleumi\Pay\Model\PaymentSettleRequest $body Request body - used to specify the amount to settle. (required)
-     * @param  string $id Unique identifier of the payment (specified during [Create a Payment](#createPayment)) (required)
-     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be created. (optional)
+     * @param  string $id Unique identifier of the payment (specified during createPayment) (required)
+     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be settled. (optional)
      *
      * @throws \Bleumi\Pay\ApiException on non-2xx response
      * @throws \InvalidArgumentException
@@ -1833,8 +1940,8 @@ class PaymentsApi
      * Settle a specific amount of a token for a given payment to the transferAddress and remaining balance (if any) will be refunded to the buyerAddress
      *
      * @param  \Bleumi\Pay\Model\PaymentSettleRequest $body Request body - used to specify the amount to settle. (required)
-     * @param  string $id Unique identifier of the payment (specified during [Create a Payment](#createPayment)) (required)
-     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be created. (optional)
+     * @param  string $id Unique identifier of the payment (specified during createPayment) (required)
+     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be settled. (optional)
      *
      * @throws \Bleumi\Pay\ApiException on non-2xx response
      * @throws \InvalidArgumentException
@@ -1918,8 +2025,8 @@ class PaymentsApi
      * Settle a specific amount of a token for a given payment to the transferAddress and remaining balance (if any) will be refunded to the buyerAddress
      *
      * @param  \Bleumi\Pay\Model\PaymentSettleRequest $body Request body - used to specify the amount to settle. (required)
-     * @param  string $id Unique identifier of the payment (specified during [Create a Payment](#createPayment)) (required)
-     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be created. (optional)
+     * @param  string $id Unique identifier of the payment (specified during createPayment) (required)
+     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be settled. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -1940,8 +2047,8 @@ class PaymentsApi
      * Settle a specific amount of a token for a given payment to the transferAddress and remaining balance (if any) will be refunded to the buyerAddress
      *
      * @param  \Bleumi\Pay\Model\PaymentSettleRequest $body Request body - used to specify the amount to settle. (required)
-     * @param  string $id Unique identifier of the payment (specified during [Create a Payment](#createPayment)) (required)
-     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be created. (optional)
+     * @param  string $id Unique identifier of the payment (specified during createPayment) (required)
+     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be settled. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -1992,8 +2099,8 @@ class PaymentsApi
      * Create request for operation 'settlePayment'
      *
      * @param  \Bleumi\Pay\Model\PaymentSettleRequest $body Request body - used to specify the amount to settle. (required)
-     * @param  string $id Unique identifier of the payment (specified during [Create a Payment](#createPayment)) (required)
-     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be created. (optional)
+     * @param  string $id Unique identifier of the payment (specified during createPayment) (required)
+     * @param  \Bleumi\Pay\Model\Chain $chain Ethereum network in which payment is to be settled. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -2024,6 +2131,39 @@ class PaymentsApi
         if ($chain !== null) {
             $queryParams['chain'] = ObjectSerializer::toQueryValue($chain);
         }
+
+        //Bleumi Pay - Customization - Start : Adding more validations
+        $amount = $body['amount'];
+        if ($amount === null) {
+            throw new \InvalidArgumentException(
+                "Missing the required parameter 'amount' when calling settlePayment"
+            );
+        }        
+        $is_algo_net = Utilities::isAlgoNet($chain);
+        $token = $body['token'];
+        if ($token === null) {
+            throw new \InvalidArgumentException(
+                "Missing the required parameter 'token' when calling settlePayment"
+            );
+        }
+        if (isset($token)) {
+            if ($is_algo_net == true) {
+                $valid_value = Utilities::isAlgoAddress($token);
+                if ($valid_value === false) {
+                    throw new \InvalidArgumentException(
+                        "Invalid parameter Algorand 'token' when calling settlePayment"
+                    );
+                }
+            } else {
+                $valid_value = Utilities::isEthAddress($token);
+                if ($valid_value === false) {
+                    throw new \InvalidArgumentException(
+                        "Invalid parameter Ethereum 'token' when calling settlePayment"
+                    );
+                }
+            }
+        }
+        //Bleumi Pay - Customization - End : Adding more validations        
 
         // path params
         if ($id !== null) {

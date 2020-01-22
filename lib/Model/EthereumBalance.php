@@ -1,6 +1,6 @@
 <?php
 /**
- * Token
+ * EthereumBalance
  *
  * PHP version 5
  *
@@ -11,9 +11,9 @@
  */
 
 /**
- * Bleumi Pay API
+ * Bleumi Pay REST API
  *
- * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai payments and/or payouts into your business or application
+ * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai, Algorand payments and/or payouts into your business or application
  *
  * OpenAPI spec version: 1.0.0
  * Contact: info@bleumi.com
@@ -33,14 +33,14 @@ use \Bleumi\Pay\ObjectSerializer;
 use JsonSerializable;
 
 /**
- * Token Class Doc Comment
+ * EthereumBalance Class Doc Comment
  *
  * @category Class
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class Token implements ModelInterface, ArrayAccess, JsonSerializable
+class EthereumBalance implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class Token implements ModelInterface, ArrayAccess, JsonSerializable
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Token';
+    protected static $swaggerModelName = 'EthereumBalance';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,10 @@ class Token implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'addr' => 'string'    ];
+        'mainnet' => 'map[string,\Bleumi\Pay\Model\WalletBalance]',
+'goerli' => 'map[string,\Bleumi\Pay\Model\WalletBalance]',
+'xdai' => 'map[string,\Bleumi\Pay\Model\WalletBalance]',
+'xdai_testnet' => 'map[string,\Bleumi\Pay\Model\WalletBalance]'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -65,7 +68,10 @@ class Token implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'addr' => null    ];
+        'mainnet' => null,
+'goerli' => null,
+'xdai' => null,
+'xdai_testnet' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -94,7 +100,10 @@ class Token implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'addr' => 'addr'    ];
+        'mainnet' => 'mainnet',
+'goerli' => 'goerli',
+'xdai' => 'xdai',
+'xdai_testnet' => 'xdai_testnet'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -102,7 +111,10 @@ class Token implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'addr' => 'setAddr'    ];
+        'mainnet' => 'setMainnet',
+'goerli' => 'setGoerli',
+'xdai' => 'setXdai',
+'xdai_testnet' => 'setXdaiTestnet'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -110,7 +122,10 @@ class Token implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'addr' => 'getAddr'    ];
+        'mainnet' => 'getMainnet',
+'goerli' => 'getGoerli',
+'xdai' => 'getXdai',
+'xdai_testnet' => 'getXdaiTestnet'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -168,15 +183,12 @@ class Token implements ModelInterface, ArrayAccess, JsonSerializable
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct($addr = null)
+    public function __construct(array $data = null)
     {
-        if (isset($addr)) {
-            if (preg_match("/^0x[a-fA-F0-9]{40}$/", $addr)||($addr==='ETH')||($addr==='XDAI')||($addr==='XDAIT')) {
-                $this->container['addr'] = $addr ;
-            } else {
-                 throw new \Exception("$addr not a valid Token. Expected any one of 'ETH' or 'XDAI' or 'XDAIT' or ECR-20 Contract Address.");
-            }
-        }
+        $this->container['mainnet'] = isset($data['mainnet']) ? $data['mainnet'] : null;
+        $this->container['goerli'] = isset($data['goerli']) ? $data['goerli'] : null;
+        $this->container['xdai'] = isset($data['xdai']) ? $data['xdai'] : null;
+        $this->container['xdai_testnet'] = isset($data['xdai_testnet']) ? $data['xdai_testnet'] : null;
     }
 
     /**
@@ -188,9 +200,6 @@ class Token implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['addr'] === null) {
-            $invalidProperties[] = "'addr' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -207,25 +216,97 @@ class Token implements ModelInterface, ArrayAccess, JsonSerializable
 
 
     /**
-     * Gets addr
+     * Gets mainnet
      *
-     * @return string
+     * @return map[string,\Bleumi\Pay\Model\WalletBalance]
      */
-    public function getAddr()
+    public function getMainnet()
     {
-        return $this->container['addr'];
+        return $this->container['mainnet'];
     }
 
     /**
-     * Sets addr
+     * Sets mainnet
      *
-     * @param string $addr ETH - for Ethereum ; XDAI - for xDai ; XDAIT - for xDai Testnet ; <contract address of ERC-20 token> - for ERC-20 Tokens;
+     * @param map[string,\Bleumi\Pay\Model\WalletBalance] $mainnet mainnet
      *
      * @return $this
      */
-    public function setAddr($addr)
+    public function setMainnet($mainnet)
     {
-        $this->container['addr'] = $addr;
+        $this->container['mainnet'] = $mainnet;
+
+        return $this;
+    }
+
+    /**
+     * Gets goerli
+     *
+     * @return map[string,\Bleumi\Pay\Model\WalletBalance]
+     */
+    public function getGoerli()
+    {
+        return $this->container['goerli'];
+    }
+
+    /**
+     * Sets goerli
+     *
+     * @param map[string,\Bleumi\Pay\Model\WalletBalance] $goerli goerli
+     *
+     * @return $this
+     */
+    public function setGoerli($goerli)
+    {
+        $this->container['goerli'] = $goerli;
+
+        return $this;
+    }
+
+    /**
+     * Gets xdai
+     *
+     * @return map[string,\Bleumi\Pay\Model\WalletBalance]
+     */
+    public function getXdai()
+    {
+        return $this->container['xdai'];
+    }
+
+    /**
+     * Sets xdai
+     *
+     * @param map[string,\Bleumi\Pay\Model\WalletBalance] $xdai xdai
+     *
+     * @return $this
+     */
+    public function setXdai($xdai)
+    {
+        $this->container['xdai'] = $xdai;
+
+        return $this;
+    }
+
+    /**
+     * Gets xdai_testnet
+     *
+     * @return map[string,\Bleumi\Pay\Model\WalletBalance]
+     */
+    public function getXdaiTestnet()
+    {
+        return $this->container['xdai_testnet'];
+    }
+
+    /**
+     * Sets xdai_testnet
+     *
+     * @param map[string,\Bleumi\Pay\Model\WalletBalance] $xdai_testnet xdai_testnet
+     *
+     * @return $this
+     */
+    public function setXdaiTestnet($xdai_testnet)
+    {
+        $this->container['xdai_testnet'] = $xdai_testnet;
 
         return $this;
     }
@@ -305,5 +386,5 @@ class Token implements ModelInterface, ArrayAccess, JsonSerializable
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);
-    }
+    }    
 }

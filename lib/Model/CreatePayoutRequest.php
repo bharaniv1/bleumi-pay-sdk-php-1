@@ -11,9 +11,9 @@
  */
 
 /**
- * Bleumi Pay API
+ * Bleumi Pay REST API
  *
- * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai payments and/or payouts into your business or application
+ * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai, Algorand payments and/or payouts into your business or application
  *
  * OpenAPI spec version: 1.0.0
  * Contact: info@bleumi.com
@@ -58,7 +58,7 @@ class CreatePayoutRequest implements ModelInterface, ArrayAccess, JsonSerializab
       */
     protected static $swaggerTypes = [
         'txid' => 'string',
-'token' => '\Bleumi\Pay\Model\Token',
+'token' => 'string',
 'payouts' => '\Bleumi\Pay\Model\Payout[]'    ];
 
     /**
@@ -245,7 +245,7 @@ class CreatePayoutRequest implements ModelInterface, ArrayAccess, JsonSerializab
     /**
      * Gets token
      *
-     * @return \Bleumi\Pay\Model\Token
+     * @return string
      */
     public function getToken()
     {
@@ -255,7 +255,7 @@ class CreatePayoutRequest implements ModelInterface, ArrayAccess, JsonSerializab
     /**
      * Sets token
      *
-     * @param \Bleumi\Pay\Model\Token $token token
+     * @param string $token ETH - for Ethereum ; XDAI - for xDai ; XDAIT - for xDai Testnet ; ALGO - Algo; <asset id> - for Algorand Standard Asset; <contract address of ERC-20 token> - for ERC-20 Tokens;
      *
      * @return $this
      */

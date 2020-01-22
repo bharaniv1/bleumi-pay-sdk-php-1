@@ -11,9 +11,9 @@
  */
 
 /**
- * Bleumi Pay API
+ * Bleumi Pay REST API
  *
- * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai payments and/or payouts into your business or application
+ * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai, Algorand payments and/or payouts into your business or application
  *
  * OpenAPI spec version: 1.0.0
  * Contact: info@bleumi.com
@@ -62,9 +62,10 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
 'amount' => 'string',
 'cancel_url' => 'string',
 'success_url' => 'string',
-'buyer_address' => '\Bleumi\Pay\Model\EthAddress',
+'buyer_address' => 'string',
 'chain' => '\Bleumi\Pay\Model\Chain',
-'token' => '\Bleumi\Pay\Model\Token'    ];
+'token' => 'string',
+'base64_transform' => 'bool'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -79,7 +80,8 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
 'success_url' => null,
 'buyer_address' => null,
 'chain' => null,
-'token' => null    ];
+'token' => null,
+'base64_transform' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -115,7 +117,8 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
 'success_url' => 'successUrl',
 'buyer_address' => 'buyerAddress',
 'chain' => 'chain',
-'token' => 'token'    ];
+'token' => 'token',
+'base64_transform' => 'base64Transform'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -130,7 +133,8 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
 'success_url' => 'setSuccessUrl',
 'buyer_address' => 'setBuyerAddress',
 'chain' => 'setChain',
-'token' => 'setToken'    ];
+'token' => 'setToken',
+'base64_transform' => 'setBase64Transform'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -145,7 +149,8 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
 'success_url' => 'getSuccessUrl',
 'buyer_address' => 'getBuyerAddress',
 'chain' => 'getChain',
-'token' => 'getToken'    ];
+'token' => 'getToken',
+'base64_transform' => 'getBase64Transform'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -213,6 +218,7 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
         $this->container['buyer_address'] = isset($data['buyer_address']) ? $data['buyer_address'] : null;
         $this->container['chain'] = isset($data['chain']) ? $data['chain'] : null;
         $this->container['token'] = isset($data['token']) ? $data['token'] : null;
+        $this->container['base64_transform'] = isset($data['base64_transform']) ? $data['base64_transform'] : null;
     }
 
     /**
@@ -377,7 +383,7 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
     /**
      * Gets buyer_address
      *
-     * @return \Bleumi\Pay\Model\EthAddress
+     * @return string
      */
     public function getBuyerAddress()
     {
@@ -387,7 +393,7 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
     /**
      * Sets buyer_address
      *
-     * @param \Bleumi\Pay\Model\EthAddress $buyer_address buyer_address
+     * @param string $buyer_address Address of buyer. Refund operations on this payment will use this address. You can set this to your address to manually handle refunds (outside of Bleumi Pay) to your buyer. This address must be able to receive payments from smart contracts.
      *
      * @return $this
      */
@@ -425,7 +431,7 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
     /**
      * Gets token
      *
-     * @return \Bleumi\Pay\Model\Token
+     * @return string
      */
     public function getToken()
     {
@@ -435,13 +441,37 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
     /**
      * Sets token
      *
-     * @param \Bleumi\Pay\Model\Token $token token
+     * @param string $token ETH - for Ethereum ; XDAI - for xDai ; XDAIT - for xDai Testnet ; ALGO - Algo; <asset id> - for Algorand Standard Asset; <contract address of ERC-20 token> - for ERC-20 Tokens;
      *
      * @return $this
      */
     public function setToken($token)
     {
         $this->container['token'] = $token;
+
+        return $this;
+    }
+
+    /**
+     * Gets base64_transform
+     *
+     * @return bool
+     */
+    public function getBase64Transform()
+    {
+        return $this->container['base64_transform'];
+    }
+
+    /**
+     * Sets base64_transform
+     *
+     * @param bool $base64_transform Base64 encode hmac_input GET parameter passed to the successUrl
+     *
+     * @return $this
+     */
+    public function setBase64Transform($base64_transform)
+    {
+        $this->container['base64_transform'] = $base64_transform;
 
         return $this;
     }

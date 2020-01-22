@@ -11,9 +11,9 @@
  */
 
 /**
- * Bleumi Pay API
+ * Bleumi Pay REST API
  *
- * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai payments and/or payouts into your business or application
+ * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai, Algorand payments and/or payouts into your business or application
  *
  * OpenAPI spec version: 1.0.0
  * Contact: info@bleumi.com
@@ -58,7 +58,8 @@ class PaymentAddresses implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'ethereum' => 'map[string,\Bleumi\Pay\Model\WalletAddress]'    ];
+        'ethereum' => 'map[string,\Bleumi\Pay\Model\WalletAddress]',
+'algorand' => 'map[string,\Bleumi\Pay\Model\WalletAddress]'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -66,7 +67,8 @@ class PaymentAddresses implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'ethereum' => null    ];
+        'ethereum' => null,
+'algorand' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -95,7 +97,8 @@ class PaymentAddresses implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'ethereum' => 'ethereum'    ];
+        'ethereum' => 'ethereum',
+'algorand' => 'algorand'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -103,7 +106,8 @@ class PaymentAddresses implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'ethereum' => 'setEthereum'    ];
+        'ethereum' => 'setEthereum',
+'algorand' => 'setAlgorand'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -111,7 +115,8 @@ class PaymentAddresses implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'ethereum' => 'getEthereum'    ];
+        'ethereum' => 'getEthereum',
+'algorand' => 'getAlgorand'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -172,6 +177,7 @@ class PaymentAddresses implements ModelInterface, ArrayAccess, JsonSerializable
     public function __construct(array $data = null)
     {
         $this->container['ethereum'] = isset($data['ethereum']) ? $data['ethereum'] : null;
+        $this->container['algorand'] = isset($data['algorand']) ? $data['algorand'] : null;
     }
 
     /**
@@ -218,6 +224,30 @@ class PaymentAddresses implements ModelInterface, ArrayAccess, JsonSerializable
     public function setEthereum($ethereum)
     {
         $this->container['ethereum'] = $ethereum;
+
+        return $this;
+    }
+
+    /**
+     * Gets algorand
+     *
+     * @return map[string,\Bleumi\Pay\Model\WalletAddress]
+     */
+    public function getAlgorand()
+    {
+        return $this->container['algorand'];
+    }
+
+    /**
+     * Sets algorand
+     *
+     * @param map[string,\Bleumi\Pay\Model\WalletAddress] $algorand algorand
+     *
+     * @return $this
+     */
+    public function setAlgorand($algorand)
+    {
+        $this->container['algorand'] = $algorand;
 
         return $this;
     }

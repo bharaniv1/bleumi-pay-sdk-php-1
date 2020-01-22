@@ -11,9 +11,9 @@
  */
 
 /**
- * Bleumi Pay API
+ * Bleumi Pay REST API
  *
- * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai payments and/or payouts into your business or application
+ * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai, Algorand payments and/or payouts into your business or application
  *
  * OpenAPI spec version: 1.0.0
  * Contact: info@bleumi.com
@@ -33,6 +33,7 @@ use \Bleumi\Pay\ObjectSerializer;
  * Chain Class Doc Comment
  *
  * @category Class
+ * @description Network enumeration. Please refer to the Supported Networks.
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
@@ -43,12 +44,11 @@ class Chain
      * Possible values of this enum
      */
     const MAINNET = 'mainnet';
-const ROPSTEN = 'ropsten';
 const GOERLI = 'goerli';
-const KOVAN = 'kovan';
-const RINKEBY = 'rinkeby';
 const XDAI = 'xdai';
 const XDAI_TESTNET = 'xdai_testnet';
+const ALG_MAINNET = 'alg_mainnet';
+const ALG_TESTNET = 'alg_testnet';
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -57,11 +57,10 @@ const XDAI_TESTNET = 'xdai_testnet';
     {
         return [
             self::MAINNET,
-self::ROPSTEN,
 self::GOERLI,
-self::KOVAN,
-self::RINKEBY,
 self::XDAI,
-self::XDAI_TESTNET,        ];
+self::XDAI_TESTNET,
+self::ALG_MAINNET,
+self::ALG_TESTNET,        ];
     }
 }

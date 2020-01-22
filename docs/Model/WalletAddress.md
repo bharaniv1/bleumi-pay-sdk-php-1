@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **addr** | **string** | Wallet address for the payment in the network | 
+
 ## Example
 
 ```json

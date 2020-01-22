@@ -3,7 +3,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ethereum** | [**\Bleumi\Pay\Model\NetworkBalance**](NetworkBalance.md) | A dictionary which gives the token balances in each network |  
+**ethereum** | [**\Bleumi\Pay\Model\EthereumBalance**](EthereumBalance.md) | A dictionary which gives the wallet balances in Ethereum Network | [optional]
+**algorand** | [**\Bleumi\Pay\Model\AlgorandBalance**](AlgorandBalance.md) | A dictionary which gives the wallet balances in Algorand Network | [optional]
+
 
 
 ## Example

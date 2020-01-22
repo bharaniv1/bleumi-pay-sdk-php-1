@@ -11,9 +11,9 @@
  */
 
 /**
- * Bleumi Pay API
+ * Bleumi Pay REST API
  *
- * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai payments and/or payouts into your business or application
+ * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai, Algorand payments and/or payouts into your business or application
  *
  * OpenAPI spec version: 1.0.0
  * Contact: info@bleumi.com
@@ -220,7 +220,7 @@ class BadRequest implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets error_code
      *
-     * @param string $error_code Code for error class. Complete list of error codes is available [here](https://pay.bleumi.com/docs/#errors)
+     * @param string $error_code Code for error class. Complete list of error codes is available here.
      *
      * @return $this
      */

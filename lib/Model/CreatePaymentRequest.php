@@ -11,9 +11,9 @@
  */
 
 /**
- * Bleumi Pay API
+ * Bleumi Pay REST API
  *
- * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai payments and/or payouts into your business or application
+ * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai, Algorand payments and/or payouts into your business or application
  *
  * OpenAPI spec version: 1.0.0
  * Contact: info@bleumi.com
@@ -58,8 +58,9 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, JsonSerializa
       */
     protected static $swaggerTypes = [
         'id' => 'string',
-'buyer_address' => '\Bleumi\Pay\Model\EthAddress',
-'transfer_address' => '\Bleumi\Pay\Model\EthAddress'    ];
+'token' => 'string',
+'buyer_address' => 'string',
+'transfer_address' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -68,6 +69,7 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, JsonSerializa
       */
     protected static $swaggerFormats = [
         'id' => null,
+'token' => null,
 'buyer_address' => null,
 'transfer_address' => null    ];
 
@@ -99,6 +101,7 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, JsonSerializa
      */
     protected static $attributeMap = [
         'id' => 'id',
+'token' => 'token',
 'buyer_address' => 'buyerAddress',
 'transfer_address' => 'transferAddress'    ];
 
@@ -109,6 +112,7 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, JsonSerializa
      */
     protected static $setters = [
         'id' => 'setId',
+'token' => 'setToken',
 'buyer_address' => 'setBuyerAddress',
 'transfer_address' => 'setTransferAddress'    ];
 
@@ -119,6 +123,7 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, JsonSerializa
      */
     protected static $getters = [
         'id' => 'getId',
+'token' => 'getToken',
 'buyer_address' => 'getBuyerAddress',
 'transfer_address' => 'getTransferAddress'    ];
 
@@ -181,6 +186,7 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, JsonSerializa
     public function __construct(array $data = null)
     {
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['token'] = isset($data['token']) ? $data['token'] : null;
         $this->container['buyer_address'] = isset($data['buyer_address']) ? $data['buyer_address'] : null;
         $this->container['transfer_address'] = isset($data['transfer_address']) ? $data['transfer_address'] : null;
     }
@@ -243,9 +249,33 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, JsonSerializa
     }
 
     /**
+     * Gets token
+     *
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->container['token'];
+    }
+
+    /**
+     * Sets token
+     *
+     * @param string $token (Only for Algorand Standard Asset) Asset id which will be used for payment.
+     *
+     * @return $this
+     */
+    public function setToken($token)
+    {
+        $this->container['token'] = $token;
+
+        return $this;
+    }
+
+    /**
      * Gets buyer_address
      *
-     * @return \Bleumi\Pay\Model\EthAddress
+     * @return string
      */
     public function getBuyerAddress()
     {
@@ -255,7 +285,7 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Sets buyer_address
      *
-     * @param \Bleumi\Pay\Model\EthAddress $buyer_address buyer_address
+     * @param string $buyer_address Address of buyer. Refund operations on this payment will use this address. You can set this to your address to manually handle refunds (outside of Bleumi Pay) to your buyer. This address must be able to receive payments from smart contracts.
      *
      * @return $this
      */
@@ -269,7 +299,7 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Gets transfer_address
      *
-     * @return \Bleumi\Pay\Model\EthAddress
+     * @return string
      */
     public function getTransferAddress()
     {
@@ -279,7 +309,7 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Sets transfer_address
      *
-     * @param \Bleumi\Pay\Model\EthAddress $transfer_address transfer_address
+     * @param string $transfer_address Your deposit address. Settle operations on this payment will use this address. This address must be able to receive payments from smart contracts.
      *
      * @return $this
      */

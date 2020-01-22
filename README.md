@@ -4,7 +4,7 @@
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/bleumi/bleumi-pay-sdk-php/master/LICENSE)
 
-The Bleumi Pay SDK is a one-stop shop to help you integrate ERC-20, Ethereum, xDai payments and/or payouts into your business or application. The SDK bundles [Bleumi Pay API](https://pay.bleumi.com/docs/#introduction) into one SDK to ease implementation and support.
+The Bleumi Pay SDK is a one-stop shop to help you integrate Algorand, Ethereum, ERC-20 and xDai payments and/or payouts into your business or application. The SDK bundles [Bleumi Pay API](https://pay.bleumi.com/docs/#introduction) into one SDK to ease implementation and support.
 
 **bleumi-pay-sdk-php** is a PHP library that provides an interface between your PHP application and [Bleumi Pay API](https://pay.bleumi.com/docs/#introduction). This tutorial covers the basics, including examples, needed to use the SDK.
 
@@ -18,7 +18,7 @@ PHP 5.5 and later
 
 #### Obtain An API Key
 
-Bleumi Pay SDK uses API keys to authenticate requests. You can obtain an API key through the [Bleumi Pay developer portal](https://pay.bleumi.com/app/).
+Bleumi Pay SDK uses API keys to authenticate requests. You can obtain an API key through the [Bleumi Pay Dashboard](https://pay.bleumi.com/app/).
 
 
 ### Install Package
@@ -32,7 +32,7 @@ To install the bindings via [Composer](http://getcomposer.org/), add the followi
 ```
 {
   "require": {
-        "bleumi/bleumi-pay-sdk-php":"1.0.17"
+        "bleumi/bleumi-pay-sdk-php":"1.0.18"
     }
 }
 ```
@@ -65,20 +65,13 @@ $apiInstance = new Bleumi\Pay\Api\PaymentsApi(
 );
 
 try {
-    $createReq = new \Bleumi\Pay\Model\CreatePaymentRequest();  // \Bleumi\Pay\Model\CreatePaymentRequest | 
-    $chain = new \Bleumi\Pay\Model\Chain(); // \Bleumi\Pay\Model\Chain | Ethereum network in which payment is to be created. Please refer documentation for Supported Networks
-
-    $buyer = "<BUYER_ADDR>"; // Replace <BUYER_ADDR> with the Buyer Address
-    $merchant = "<MERCHANT_ADDR>"; // Replace <MERCHANT_ADDR> with the Merchant's Enthereum Network Address
-
-    $buyerAddress = new \Bleumi\Pay\Model\EthAddress($buyer);
-    $merchantAddress = new \Bleumi\Pay\Model\EthAddress($merchant);
-
+    $createReq = new \Bleumi\Pay\Model\CreatePaymentRequest();  
+    $chain = new \Bleumi\Pay\Model\Chain(); // \Bleumi\Pay\Model\Chain | Network in which payment is to be created. Please refer documentation for Supported Networks
     $createReq->setId($id);
-    $createReq->setBuyerAddress($buyerAddress);
-    $createReq->setTransferAddress($merchantAddress);
+    $createReq->setBuyerAddress("<BUYER_ADDR>"); // Replace <BUYER_ADDR> with the Buyer Address
+    $createReq->setTransferAddress("<MERCHANT_ADDR>"); // Replace <MERCHANT_ADDR> with the Merchant's Enthereum Network Address
 
-    $result = $apiInstance->createPayment($createReq, $chain::ROPSTEN);
+    $result = $apiInstance->createPayment($createReq, $chain::GOERLI);
     $data = json_encode($result, JSON_PRETTY_PRINT);
     echo  $data;
 } catch (Exception $e) {
@@ -109,6 +102,7 @@ PayoutsApi | [**listPayouts**](docs/Api/PayoutsApi.md#listpayouts) | **GET** /v1
 
 ## Documentation For Models
 
+ - [AlgorandBalance](docs/Model/AlgorandBalance.md)
  - [BadRequest](docs/Model/BadRequest.md)
  - [Chain](docs/Model/Chain.md)
  - [CheckoutToken](docs/Model/CheckoutToken.md)
@@ -118,8 +112,7 @@ PayoutsApi | [**listPayouts**](docs/Api/PayoutsApi.md#listpayouts) | **GET** /v1
  - [CreatePaymentResponse](docs/Model/CreatePaymentResponse.md)
  - [CreatePayoutRequest](docs/Model/CreatePayoutRequest.md)
  - [CreatePayoutResponse](docs/Model/CreatePayoutResponse.md)
- - [EthAddress](docs/Model/EthAddress.md)
- - [NetworkBalance](docs/Model/NetworkBalance.md)
+ - [EthereumBalance](docs/Model/EthereumBalance.md)
  - [PaginatedPaymentOperations](docs/Model/PaginatedPaymentOperations.md)
  - [PaginatedPayments](docs/Model/PaginatedPayments.md)
  - [PaginatedPayoutItems](docs/Model/PaginatedPayoutItems.md)
@@ -134,7 +127,6 @@ PayoutsApi | [**listPayouts**](docs/Api/PayoutsApi.md#listpayouts) | **GET** /v1
  - [Payout](docs/Model/Payout.md)
  - [PayoutItem](docs/Model/PayoutItem.md)
  - [PayoutItemInputs](docs/Model/PayoutItemInputs.md)
- - [Token](docs/Model/Token.md)
  - [ValidateCheckoutRequest](docs/Model/ValidateCheckoutRequest.md)
  - [ValidateCheckoutResponse](docs/Model/ValidateCheckoutResponse.md)
  - [WalletAddress](docs/Model/WalletAddress.md)

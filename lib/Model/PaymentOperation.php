@@ -11,9 +11,9 @@
  */
 
 /**
- * Bleumi Pay API
+ * Bleumi Pay REST API
  *
- * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai payments and/or payouts into your business or application
+ * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai, Algorand payments and/or payouts into your business or application
  *
  * OpenAPI spec version: 1.0.0
  * Contact: info@bleumi.com
@@ -36,6 +36,7 @@ use JsonSerializable;
  * PaymentOperation Class Doc Comment
  *
  * @category Class
+ * @description Payment Operation details
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
@@ -303,7 +304,7 @@ class PaymentOperation implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets func_name
      *
-     * @param string $func_name The name of the function invoked on the [payment processor](https://pay.bleumi.com/docs/#payment-processor)
+     * @param string $func_name The name of the function invoked on the payment processor
      *
      * @return $this
      */

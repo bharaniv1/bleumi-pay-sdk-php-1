@@ -11,9 +11,9 @@
  */
 
 /**
- * Bleumi Pay API
+ * Bleumi Pay REST API
  *
- * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai payments and/or payouts into your business or application
+ * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai, Algorand payments and/or payouts into your business or application
  *
  * OpenAPI spec version: 1.0.0
  * Contact: info@bleumi.com
@@ -56,8 +56,8 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'chain' => 'string',
         'network' => 'string',
+'chain' => 'string',
 'addr' => 'string',
 'name' => 'string',
 'symbol' => 'string',
@@ -69,8 +69,8 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'chain' => null,
         'network' => null,
+'chain' => null,
 'addr' => null,
 'name' => null,
 'symbol' => null,
@@ -103,8 +103,8 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'chain' => 'chain',
         'network' => 'network',
+'chain' => 'chain',
 'addr' => 'addr',
 'name' => 'name',
 'symbol' => 'symbol',
@@ -116,8 +116,8 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'chain' => 'setChain',
         'network' => 'setNetwork',
+'chain' => 'setChain',
 'addr' => 'setAddr',
 'name' => 'setName',
 'symbol' => 'setSymbol',
@@ -129,8 +129,8 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'chain' => 'getChain',
         'network' => 'getNetwork',
+'chain' => 'getChain',
 'addr' => 'getAddr',
 'name' => 'getName',
 'symbol' => 'getSymbol',
@@ -194,8 +194,8 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['chain'] = isset($data['chain']) ? $data['chain'] : null;
         $this->container['network'] = isset($data['network']) ? $data['network'] : null;
+        $this->container['chain'] = isset($data['chain']) ? $data['chain'] : null;
         $this->container['addr'] = isset($data['addr']) ? $data['addr'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['symbol'] = isset($data['symbol']) ? $data['symbol'] : null;
@@ -213,12 +213,6 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
 
         if ($this->container['chain'] === null) {
             $invalidProperties[] = "'chain' can't be null";
-        }
-        if ($this->container['network'] === null) {
-            $invalidProperties[] = "'network' can't be null";
-        }
-        if ($this->container['addr'] === null) {
-            $invalidProperties[] = "'addr' can't be null";
         }
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
@@ -245,30 +239,6 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
 
 
     /**
-     * Gets chain
-     *
-     * @return string
-     */
-    public function getChain()
-    {
-        return $this->container['chain'];
-    }
-
-    /**
-     * Sets chain
-     *
-     * @param string $chain The chain in which the token is defined
-     *
-     * @return $this
-     */
-    public function setChain($chain)
-    {
-        $this->container['chain'] = $chain;
-
-        return $this;
-    }
-
-    /**
      * Gets network
      *
      * @return string
@@ -293,6 +263,30 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
     }
 
     /**
+     * Gets chain
+     *
+     * @return string
+     */
+    public function getChain()
+    {
+        return $this->container['chain'];
+    }
+
+    /**
+     * Sets chain
+     *
+     * @param string $chain The chain in which the token is defined
+     *
+     * @return $this
+     */
+    public function setChain($chain)
+    {
+        $this->container['chain'] = $chain;
+
+        return $this;
+    }
+
+    /**
      * Gets addr
      *
      * @return string
@@ -305,7 +299,7 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets addr
      *
-     * @param string $addr The destination address when payments are received in this token
+     * @param string $addr The address of the token
      *
      * @return $this
      */

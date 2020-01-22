@@ -20,18 +20,15 @@ $apiInstance = new Bleumi\Pay\Api\HostedCheckoutsApi(
 );
 
 try {
-    $token = new \Bleumi\Pay\Model\Token("<TOKEN>");  // string |  Replace <TOKEN>  by anyone of the following values: 'ETH' or 'XDAI' or ECR-20 Contract Address or 'XDAIT'.
-    $buyerAddress = new \Bleumi\Pay\Model\EthAddress("<BUYER_ADDR>");  // string |  Replace <BUYER_ADDR>  by Ethereum Address of the Buyer.
-
-    $createReq = new \Bleumi\Pay\Model\CreateCheckoutUrlRequest();  // Specify checkout URL creation parameters. 
+    $createReq = new \Bleumi\Pay\Model\CreateCheckoutUrlRequest();  // Checkout URL creation parameters. 
     $createReq->setId("<ID>"); // string |  Eg. '1'
     $createReq->setCurrency("<CURRENCY>"); // string |  Eg. 'USD'
     $createReq->setAmount("<AMOUNT>"); // string | Eg. '10'
     $createReq->setSuccessUrl("<SUCCESS_URL>"); // string | Eg. https://demo.store/api/completeOrder
     $createReq->setCancelUrl("<CANCEL_ORDER_URL>"); // string | Eg. https://demo.store/api/cancelOrder
-    $createReq->setToken($token); //Optional
-    $createReq->setChain($chain::ROPSTEN); //Optional; Replace ROPSTEN with the Chain as required
-    $createReq->setBuyerAddress($buyerAddress); //Optional
+    $createReq->setToken("<TOKEN>"); // string |  Replace <TOKEN>  by anyone of the following values: 'ETH' or 'XDAI' or ECR-20 Contract Address or 'XDAIT'. | Optional
+    $createReq->setChain($chain::GOERLI); //Optional; Replace GOERLI with the Chain as required
+    $createReq->setBuyerAddress("<BUYER_ADDR>"); // string |  Replace <BUYER_ADDR>  by Ethereum Address of the Buyer. | Optional
     $result = $apiInstance->createCheckoutUrl($createReq);
     $reponse = json_encode($result, JSON_PRETTY_PRINT);
     echo  $reponse;

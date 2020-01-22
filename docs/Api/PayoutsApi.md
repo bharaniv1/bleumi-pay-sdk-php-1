@@ -24,8 +24,6 @@ $apiInstance = new Bleumi\Pay\Api\PayoutsApi(
 
 try {
     $id = "<ID>"; // string | Replace <ID> with the unique identifier for this payout
-    $tokenAddress = "<TOKEN>"; // string |  Replace <TOKEN>  by anyone of the following values: 'ETH'/'XDAI'/'XDAIT'/ECR-20 Contract Address
-    $token = new \Bleumi\Pay\Model\Token($tokenAddress);
 
     $payout1 = new \Bleumi\Pay\Model\Payout();
     $payout1->setAmount('<PAYOUT_AMT_1>'); // string | Replace <PAYOUT_AMT_1>  with the 1st payout's amount
@@ -39,7 +37,7 @@ try {
 
     $createReq = new \Bleumi\Pay\Model\CreatePayoutRequest();   // \Bleumi\Pay\Model\CreatePayoutRequest | Request body - used to specify payout creation parameters.
     $createReq->setTxId($id);
-    $createReq->setToken($token);
+    $createReq->setToken("<TOKEN>"); // string |  Replace <TOKEN>  by anyone of the following values: 'ETH'/'XDAI'/'XDAIT'/ECR-20 Contract Address/ Algorand Standard Asset Address
     $createReq->setPayouts($payouts);
 
     $chain = new \Bleumi\Pay\Model\Chain(); // \Bleumi\Pay\Model\Chain | Ethereum network in which payment is to be created. Please refer documentation for Supported Networks

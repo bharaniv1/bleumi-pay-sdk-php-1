@@ -11,9 +11,9 @@
  */
 
 /**
- * Bleumi Pay API
+ * Bleumi Pay REST API
  *
- * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai payments and/or payouts into your business or application
+ * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai, Algorand payments and/or payouts into your business or application
  *
  * OpenAPI spec version: 1.0.0
  * Contact: info@bleumi.com
@@ -58,7 +58,8 @@ class Payout implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static $swaggerTypes = [
         'transfer_address' => 'string',
-'amount' => 'string'    ];
+'amount' => 'string',
+'authorization' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -67,7 +68,8 @@ class Payout implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static $swaggerFormats = [
         'transfer_address' => null,
-'amount' => null    ];
+'amount' => null,
+'authorization' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -97,7 +99,8 @@ class Payout implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static $attributeMap = [
         'transfer_address' => 'transferAddress',
-'amount' => 'amount'    ];
+'amount' => 'amount',
+'authorization' => 'authorization'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -106,7 +109,8 @@ class Payout implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static $setters = [
         'transfer_address' => 'setTransferAddress',
-'amount' => 'setAmount'    ];
+'amount' => 'setAmount',
+'authorization' => 'setAuthorization'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -115,7 +119,8 @@ class Payout implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static $getters = [
         'transfer_address' => 'getTransferAddress',
-'amount' => 'getAmount'    ];
+'amount' => 'getAmount',
+'authorization' => 'getAuthorization'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -177,6 +182,7 @@ class Payout implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $this->container['transfer_address'] = isset($data['transfer_address']) ? $data['transfer_address'] : null;
         $this->container['amount'] = isset($data['amount']) ? $data['amount'] : null;
+        $this->container['authorization'] = isset($data['authorization']) ? $data['authorization'] : null;
     }
 
     /**
@@ -253,6 +259,30 @@ class Payout implements ModelInterface, ArrayAccess, JsonSerializable
     public function setAmount($amount)
     {
         $this->container['amount'] = $amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets authorization
+     *
+     * @return string
+     */
+    public function getAuthorization()
+    {
+        return $this->container['authorization'];
+    }
+
+    /**
+     * Sets authorization
+     *
+     * @param string $authorization (Only for Algorand) Base64 serialization of an encoded LogicSig signed by the source of the payout
+     *
+     * @return $this
+     */
+    public function setAuthorization($authorization)
+    {
+        $this->container['authorization'] = $authorization;
 
         return $this;
     }

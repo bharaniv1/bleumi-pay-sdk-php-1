@@ -3,7 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ethereum** | [**map[string,\Bleumi\Pay\Model\WalletAddress]**](WalletAddress.md) |  A dictionary which gives the address of the wallet generated for each network  |  [optional]
+**ethereum** | [**map[string,\Bleumi\Pay\Model\WalletAddress]**](WalletAddress.md) | A dictionary which gives the wallet addresses in Ethereum Network | [optional]
+**algorand** | [**map[string,\Bleumi\Pay\Model\WalletAddress]**](WalletAddress.md) | A dictionary which gives the wallet addresses in Algorand Network | [optional]
 
 ## Example
 

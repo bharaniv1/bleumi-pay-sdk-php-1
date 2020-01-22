@@ -21,20 +21,13 @@ $apiInstance = new Bleumi\Pay\Api\PaymentsApi(
 );
 
 try {
-    $createReq = new \Bleumi\Pay\Model\CreatePaymentRequest();  // \Bleumi\Pay\Model\CreatePaymentRequest | 
+    $createReq = new \Bleumi\Pay\Model\CreatePaymentRequest();  
     $chain = new \Bleumi\Pay\Model\Chain(); // \Bleumi\Pay\Model\Chain | Ethereum network in which payment is to be created. Please refer documentation for Supported Networks
+    $createReq->setId('<ID>'); // string | Replace <ID> with the unique identifier of the payment
+    $createReq->setBuyerAddress("<BUYER_ADDR>"); // Replace <BUYER_ADDR> with the Buyer Address
+    $createReq->setTransferAddress("<MERCHANT_ADDR>"); // Replace <MERCHANT_ADDR> with the Merchant's Enthereum Network Address
 
-    $buyer = "<BUYER_ADDR>"; // Replace <BUYER_ADDR> with the Buyer Address
-    $merchant = "<MERCHANT_ADDR>"; // Replace <MERCHANT_ADDR> with the Merchant's Enthereum Network Address
-
-    $buyerAddress = new \Bleumi\Pay\Model\EthAddress($buyer);
-    $merchantAddress = new \Bleumi\Pay\Model\EthAddress($merchant);
-
-    $createReq->setId($id);
-    $createReq->setBuyerAddress($buyerAddress);
-    $createReq->setTransferAddress($merchantAddress);
-
-    $result = $apiInstance->createPayment($createReq, $chain::ROPSTEN);
+    $result = $apiInstance->createPayment($createReq, $chain::GOERLI);
     $data = json_encode($result, JSON_PRETTY_PRINT);
     echo  $data;
 } catch (Exception $e) {
@@ -154,13 +147,14 @@ $apiInstance = new Bleumi\Pay\Api\PaymentsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$next_token = ""; // string | Cursor to start results from
+$next_token = null; // string | Cursor to start results from
 $sort_by = "createdAt"; // string | Sort payments by
+$sort_order = "ascending"; // string | Sort Order for payments
 $start_at = "1563271832"; // string | Get payments from this timestamp
-$end_at = ""; // string | Get payments till this timestamp
+$end_at = null; // string | Get payments till this timestamp
 
 try {
-    $result = $apiInstance->listPayments($next_token, $sort_by, $start_at, $end_at);
+    $result = $apiInstance->listPayments($next_token, $sort_by, $sort_order, $start_at, $end_at);
     $payments = $result->getResults();
     $nextToken = $result->getNextToken();
     echo json_encode($payments);
@@ -180,6 +174,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **next_token** | **string**| Cursor to start results from | [optional]
  **sort_by** | **string**| Sort payments by | [optional]
+ **sort_order** | **string**| Sort Order | [optional]
  **start_at** | **string**| Get payments from this timestamp (unix) | [optional]
  **end_at** | **string**| Get payments till this timestamp (unix) | [optional]
 
@@ -225,12 +220,9 @@ $apiInstance = new Bleumi\Pay\Api\PaymentsApi(
 try {
     $chain = new \Bleumi\Pay\Model\Chain(); // \Bleumi\Pay\Model\Chain | The network in which payment is to be created.
     $id = '<ID>';   // string | Replace <ID> with the unique identifier of the payment (specified during Create Payment)
-    $tokenAddress = '<TOKEN>'; // string |  Replace <TOKEN>  by anyone of the following values: 'ETH'/'XDAI'/'XDAIT'/ECR-20 Contract Address
-    $token = new \Bleumi\Pay\Model\Token($tokenAddress);
-
     $settleReq = new \Bleumi\Pay\Model\PaymentSettleRequest();
     $settleReq->setAmount('<AMOUNT>'); // string | Amount to settle
-    $settleReq->setToken($token);
+    $settleReq->setToken('<TOKEN>'); // string |  Replace <TOKEN>  by anyone of the following values: 'ETH'/'XDAI'/'XDAIT'/ECR-20 Contract Address
 
     $result = $apiInstance->settlePayment($settleReq, $id, $chain::ROPSTEN);
     $data = json_encode($result, JSON_PRETTY_PRINT);
@@ -292,10 +284,8 @@ $apiInstance = new Bleumi\Pay\Api\PaymentsApi(
 try {
     $chain = new \Bleumi\Pay\Model\Chain(); // \Bleumi\Pay\Model\Chain | Ethereum network in which payment is to be created.
     $id = '<ID>'; // string | Replace <ID> with the unique identifier of the payment (specified during Create Payment)
-    $tokenAddress = '<TOKEN>'; // string |  Replace <TOKEN>  by anyone of the following values: 'ETH'/'XDAI'/'XDAIT'/ECR-20 Contract Address
-    $token = new \Bleumi\Pay\Model\Token($tokenAddress);
     $refundReq = new \Bleumi\Pay\Model\PaymentRefundRequest(); // \Bleumi\Pay\Model\PaymentRefundRequest | Request body - used to specify the token to refund.
-    $refundReq->setToken($token);
+    $refundReq->setToken('<TOKEN>'); // string |  Replace <TOKEN>  by anyone of the following values: 'ETH'/'XDAI'/'XDAIT'/ECR-20 Contract Address
     $result = $apiInstance->refundPayment($refundReq, $id, $chain::ROPSTEN);
     $data = json_encode($result, JSON_PRETTY_PRINT);
     echo  $data;

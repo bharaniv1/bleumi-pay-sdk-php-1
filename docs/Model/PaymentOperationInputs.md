@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **addr** | **string** | Address of the wallet | 
 **amount** | **string** | Amount (Only for settle operation) | 
-**token** | **string** | <b>ETH</b> - for Ethereum  <br/> <b>XDAI</b> - for xDai <br/> <b>XDAIT</b> - for xDai Testnet <br/> <b> &lt;contract address of ERC-20 token&gt;</b> - for ERC-20 Tokens  | 
+**token** | **string** | <b>ETH</b> - for Ethereum ; <b>XDAI</b> - for xDai ; <b>XDAIT</b> - for xDai Testnet ; ALGO - Algo; <b>&lt;asset id&gt;</b> - for Algorand Standard Asset; <b>&lt;contract address of ERC-20 token&gt;</b> - for ERC-20 Tokens; | 
 **token_amount** | **string** | Token amount to be settled in network format (Only for settle operation) | 
 **token_decimals** | **int** | Token decimal places (Only for settle operation) | 
 

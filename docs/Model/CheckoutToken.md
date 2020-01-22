@@ -3,9 +3,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**network** | **string** | The network in which the token is defined | 
+**network** | **string** | The network in which the token is defined | [optional] 
 **chain** | **string** | The chain in which the token is defined | 
-**addr** | **string** | The address of the token | 
+**addr** | **string** | The address of the token | [optional] 
 **name** | **string** | Name of the token | 
 **symbol** | **string** | Symbol of the token | 
 **decimals** | **int** | Token decimal places | 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ```json
 {
       "network": "ethereum",
-      "chain": "ropsten",
+      "chain": "goerli",
       "addr": "0x84df8548086ec9025e9c93297058bed706e90ddd",
       "name": "USD p18",
       "symbol": "USD18",

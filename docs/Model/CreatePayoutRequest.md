@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **txid** | **string** | Unique identifier for this payout | 
-**token** | [**\Bleumi\Pay\Model\Token**](Token.md) | <b>ETH</b> - for Ethereum  <br/> <b>XDAI</b> - for xDai <br/> <b>XDAIT</b> - for xDai Testnet <br/> <b> &lt;contract address of ERC-20 token&gt;</b> - for ERC-20 Tokens  | 
+**token** | **string** | <b>ETH</b> - for Ethereum ; <b>XDAI</b> - for xDai ; <b>XDAIT</b> - for xDai Testnet ; <b>ALGO</b> - Algo; <b>&lt;asset id&gt;</b> - for Algorand Standard Asset; <b>&lt;contract address of ERC-20 token&gt;</b> - for ERC-20 Tokens; | 
 **payouts** | [**\Bleumi\Pay\Model\Payout[]**](Payout.md) | Array of payments to be made in this payout. This is an atomic transaction (i.e. either all payments are processed or all of them are rejected). | 
 
 

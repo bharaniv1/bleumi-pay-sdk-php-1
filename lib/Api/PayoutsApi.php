@@ -10,9 +10,9 @@
  */
 
 /**
- * Bleumi Pay API
+ * Bleumi Pay REST API
  *
- * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai payments and/or payouts into your business or application
+ * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai, Algorand payments and/or payouts into your business or application
  *
  * OpenAPI spec version: 1.0.0
  * Contact: info@bleumi.com
@@ -37,6 +37,7 @@ use Bleumi\Pay\ApiException;
 use Bleumi\Pay\Configuration;
 use Bleumi\Pay\HeaderSelector;
 use Bleumi\Pay\ObjectSerializer;
+use Bleumi\Pay\Utilities;
 
 /**
  * PayoutsApi Class Doc Comment
@@ -279,6 +280,39 @@ class PayoutsApi
                 'Missing the required parameter $body when calling createPayout'
             );
         }
+
+        //Bleumi Pay - Customization - Start : Adding more validations
+        $txId = $body['txid'];
+        if ($txId === null) {
+            throw new \InvalidArgumentException(
+                "Missing the required parameter 'txid' when calling createPayout"
+            );
+        }
+
+        $token = $body['token'];
+        if ($token === null) {
+            throw new \InvalidArgumentException(
+                "Missing the required parameter 'token' when calling createPayout"
+            );
+        }
+
+        $is_algo_net = Utilities::isAlgoNet($chain);
+        if ($is_algo_net == true) {
+            $valid_value = Utilities::isAlgoAddress($token);
+            if ($valid_value === false) {
+                throw new \InvalidArgumentException(
+                    "Invalid parameter Algorand 'token' when calling createPayout"
+                );
+            }
+        } else {
+            $valid_value = Utilities::isEthAddress($token);
+            if ($valid_value === false) {
+                throw new \InvalidArgumentException(
+                    "Invalid parameter Ethereum 'token' when calling createPayout"
+                );
+            }
+        }
+        //Bleumi Pay - Customization - End : Adding more validations
 
         $resourcePath = '/v1/payout';
         $formParams = [];

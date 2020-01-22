@@ -61,7 +61,7 @@ The hmac.input GET parameter passed to successUrl contains payment parameters as
 <ul style="font-weight: 500">
     <li><b>Chain</b> - Please refer documentation for <a href="https://pay.bleumi.com/docs/#supported-networks" target="_blank">Supported Networks</a> </li>
     <li><b>Wallet Address</b></li>
-    <li><b>Token</b><br> <i>ETH</i> - for Ethereum<br> <i>XDAI</i> - for xDai<br> <i>XDAIT</i> - for xDai Testnet<br> <i>&lt;contract address of ERC-20 token&gt;</i> - for ERC-20; Please refer to [ERC-20 Tokens](/docs/#erc-20) for contract address;</li>
+    <li><b>Token</b><br> <i>ETH</i> - for Ethereum<br> <i>XDAI</i> - for xDai<br> <i>XDAIT</i> - for xDai Testnet <br> <i>ALGO</i> - Algo <br> <i>&lt;asset id&gt;</i> - for Algorand Standard Asset;<br> <i>&lt;contract address of ERC-20 token&gt;</i> - for ERC-20; <br>Please refer to [ERC-20 Tokens](https://pay.bleumi.com/docs/#erc-20) for contract address;</li>
     <li><b>Amount</b> - Token amount for the payment</li>
     <li><b>Number of block confirmations</b><br> <i>12</i> - for ETH<br> <i>0</i> - for XDAI<br> <i>0</i> - for XDAIT<br> <i>12</i> - for ERC-20</li></li>
 </ul>

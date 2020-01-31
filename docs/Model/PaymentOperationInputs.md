@@ -3,11 +3,11 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**addr** | **string** | Address of the wallet | 
-**amount** | **string** | Amount (Only for settle operation) | 
+**addr** | **string** | Address of the wallet |
 **token** | **string** | <b>ETH</b> - for Ethereum  <br/> <b>XDAI</b> - for xDai <br/> <b>XDAIT</b> - for xDai Testnet <br/> <b>ALGO</b> - for Algo <br/> <b> &lt;asset id&gt;</b> - for Algorand Standard Asset <br/> <b> &lt;contract address of ERC-20 token&gt;</b> - for ERC-20 Tokens. Please refer to [ERC-20 Tokens](https://pay.bleumi.com/docs/#erc-20) for contract address; | 
-**token_amount** | **string** | Token amount to be settled in network format (Only for settle operation) | 
-**token_decimals** | **int** | Token decimal places (Only for settle operation) | 
+**amount** <br>(Optional)| **string** | Amount (Only for settle operation) | 
+**token_amount** <br>(Optional)| **string** | Token amount to be settled in network format (Only for settle operation) | 
+**token_decimals** <br>(Optional)| **int** | Token decimal places (Only for settle operation) | 
 
 
 ## Settle Operation Example

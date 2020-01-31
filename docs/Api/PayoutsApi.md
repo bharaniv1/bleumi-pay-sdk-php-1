@@ -1,6 +1,6 @@
 # Bleumi\Pay\PayoutsApi
 
-Payouts are available only for the Ethereum network today and require you to set up a Private Payment Processor and link it to your account. Please contact support@bleumi.com if you want to enable payouts for your account.
+Payouts are available only for the Ethereum and xDAI networks today and require you to set up a Private Payment Processor and link it to your account. Please contact support@bleumi.com if you want to enable payouts for your account.
 
 
 # **createPayout**
@@ -40,9 +40,9 @@ try {
     $createReq->setToken("<TOKEN>"); // string |  Replace <TOKEN>  by anyone of the following values: 'ETH'/'XDAI'/'XDAIT'/ECR-20 Contract Address/ Algorand Standard Asset Address
     $createReq->setPayouts($payouts);
 
-    $chain = new \Bleumi\Pay\Model\Chain(); // \Bleumi\Pay\Model\Chain | Ethereum network in which payment is to be created. Please refer documentation for Supported Networks
+    $chain = new \Bleumi\Pay\Model\Chain(); // \Bleumi\Pay\Model\Chain | Network in which payment is to be created. Please refer documentation for Supported Networks
 
-    $result = $apiInstance->createPayout($createReq, $chain::ROPSTEN);
+    $result = $apiInstance->createPayout($createReq, $chain::GOERLI);
     $data = json_encode($result, JSON_PRETTY_PRINT);
     echo  $data;
 } catch (Exception $e) {
@@ -56,7 +56,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**\Bleumi\Pay\Model\CreatePayoutRequest**](../Model/CreatePayoutRequest.md)| Request body - used to specify payout creation parameters. |
- **chain** | [**\Bleumi\Pay\Model\Chain**](../Model/.md)| Ethereum network in which payment is to be created. Please refer documentation for Supported Networks | [optional]
+ **chain** | [**\Bleumi\Pay\Model\Chain**](../Model/.md)| Network in which payment is to be created. Please refer documentation for Supported Networks | [optional]
 
 ### Return type
 
@@ -131,7 +131,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **next_token** | **string**| Cursor to start results from | [optional]
- **sort_by** | **string**| Sort payments by | [optional]
+ **sort_by** | **string**| Sort payouts by | [optional]
  **start_at** | **string**| Get payouts from this timestamp (unix) | [optional]
  **end_at** | **string**| Get payouts till this timestamp (unix) | [optional]
 

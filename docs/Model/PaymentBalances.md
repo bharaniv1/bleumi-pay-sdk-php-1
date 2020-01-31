@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ethereum** | [**\Bleumi\Pay\Model\EthereumBalance**](EthereumBalance.md) | A dictionary which gives the wallet balances in Ethereum Network | [optional]
-**algorand** | [**\Bleumi\Pay\Model\AlgorandBalance**](AlgorandBalance.md) | A dictionary which gives the wallet balances in Algorand Network | [optional]
+**ethereum** <br>(Optional) | [**\Bleumi\Pay\Model\EthereumBalance**](EthereumBalance.md) | A dictionary which gives the wallet balances in Ethereum Network |
+**algorand** <br> (Optional)| [**\Bleumi\Pay\Model\AlgorandBalance**](AlgorandBalance.md) | A dictionary which gives the wallet balances in Algorand Network |
 
 
 

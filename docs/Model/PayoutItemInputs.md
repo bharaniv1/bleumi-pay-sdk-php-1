@@ -1,11 +1,12 @@
 # PayoutItemInputs
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**salt** | **string** | Unique identifier generated for the txid of the payout (specified during Create a Payout). | 
-**token** | **string** | Token used for the payout | 
-**payouts** | [**\Bleumi\Pay\Model\Payout[]**](Payout.md) | Array of payments to be made in this payout. This is an atomic transaction (i.e. either all payments are processed or all of them are rejected). | 
+**salt** | **string** | Unique identifier generated for the txid of the payout (specified during Create a Payout). |
+**token** | **string** | Token used for the payout |
+**payouts** | [**\Bleumi\Pay\Model\Payout[]**](Payout.md) | Array of payments to be made in this payout. This is an atomic transaction (i.e. either all payments are processed or all of them are rejected). |
 
 ## Example
 

@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ```json
 {
       "txid": "1574828863297",
-      "chain": "ropsten",
+      "chain": "goerli",
       "funcName": "createAndSettleWallet",
       "inputs": {
         "addr": "0xbec374e0acb4b7b6fde45b11287e61beb108e868",

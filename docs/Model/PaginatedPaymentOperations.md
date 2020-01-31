@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **results** | [**\Bleumi\Pay\Model\PaymentOperation[]**](PaymentOperation.md) | List of operations of the payment in the current page | 
-**next_token** | **string** | Cursor to fetch next page of results, empty if no more results | [optional] 
+**next_token** <br>(Optional) | **string** | Cursor to fetch next page of results, empty if no more results | 
 
 
 ## Example

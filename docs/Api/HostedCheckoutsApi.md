@@ -28,7 +28,7 @@ try {
     $createReq->setCancelUrl("<CANCEL_ORDER_URL>"); // string | Eg. https://demo.store/api/cancelOrder
     $createReq->setToken("<TOKEN>"); // string |  Replace <TOKEN>  by anyone of the following values: 'ETH' or 'XDAI' or ECR-20 Contract Address or 'XDAIT'. | Optional
     $createReq->setChain($chain::GOERLI); //Optional; Replace GOERLI with the Chain as required
-    $createReq->setBuyerAddress("<BUYER_ADDR>"); // string |  Replace <BUYER_ADDR>  by Ethereum Address of the Buyer. | Optional
+    $createReq->setBuyerAddress("<BUYER_ADDR>"); // string |  Replace <BUYER_ADDR>  by Network Address of the Buyer. | Optional
     $result = $apiInstance->createCheckoutUrl($createReq);
     $reponse = json_encode($result, JSON_PRETTY_PRINT);
     echo  $reponse;
@@ -84,7 +84,7 @@ ValidationError <br> <i>invalid_token</i> | The token provided is not valid for 
 
 
 # **listTokens**
-> \Bleumi\Pay\Model\CheckoutTokens listTokens()
+> \Bleumi\Pay\Model\CheckoutToken[] listTokens()
 
 Retrieve all tokens configured for the Hosted Checkout in your account in the [Bleumi Pay Dashboard](https://pay.bleumi.com/app/).
 
@@ -119,7 +119,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\Bleumi\Pay\Model\CheckoutToken**](../Model/CheckoutToken.md)
+[**\Bleumi\Pay\Model\CheckoutToken[]**](../Model/CheckoutToken.md)
 
 ### 400 Errors
 
@@ -152,7 +152,7 @@ $apiInstance = new Bleumi\Pay\Api\HostedCheckoutsApi(
 try {
     $validateReq = new \Bleumi\Pay\Model\ValidateCheckoutRequest();  // \Bleumi\Pay\Model\ValidateCheckoutRequest | Specify validation of checkout parameters.
     $validateReq->setHmacAlg('<ALG>'); // Eg. HMAC-SHA256-HEX
-    $validateReq->setHmacInput('<INPUT>'); // Eg. ropsten|0xbe33cde200e113f4847c66e9498f2c30e81635ad|0x115615dbd0f835344725146fa6343219315f15e5|10|12
+    $validateReq->setHmacInput('<INPUT>'); // Eg. goerli|0xbe33cde200e113f4847c66e9498f2c30e81635ad|0x115615dbd0f835344725146fa6343219315f15e5|10|12
     $validateReq->setHmacKeyId('<VER>'); // Eg. v1
     $validateReq->setHmacValue('<HMAC_VALUE>'); // Eg. 0d910e8dfd087dd0d0b7c3f6504f7f4316b507afc81c09e844cfeee0f3dbaef6
     $result = $apiInstance->validateCheckoutPayment($validateReq);

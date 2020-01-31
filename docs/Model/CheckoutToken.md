@@ -3,12 +3,12 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**network** | **string** | The network in which the token is defined | [optional] 
-**chain** | **string** | The chain in which the token is defined | 
-**addr** | **string** | The address of the token | [optional] 
-**name** | **string** | Name of the token | 
-**symbol** | **string** | Symbol of the token | 
-**decimals** | **int** | Token decimal places | 
+**network** | **string** | The network in which the token is defined |
+**chain** | **string** | The chain in which the token is defined |
+**addr** | **string** | The address of the token |
+**name** | **string** | Name of the token |
+**symbol** | **string** | Symbol of the token |
+**decimals** | **int** | Token decimal places |
 
 
 ## Example

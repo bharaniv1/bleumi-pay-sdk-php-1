@@ -22,7 +22,7 @@ $apiInstance = new Bleumi\Pay\Api\PaymentsApi(
 
 try {
     $createReq = new \Bleumi\Pay\Model\CreatePaymentRequest();  
-    $chain = new \Bleumi\Pay\Model\Chain(); // \Bleumi\Pay\Model\Chain | Ethereum network in which payment is to be created. Please refer documentation for Supported Networks
+    $chain = new \Bleumi\Pay\Model\Chain(); // \Bleumi\Pay\Model\Chain | Network in which payment is to be created. Please refer documentation for Supported Networks
     $createReq->setId('<ID>'); // string | Replace <ID> with the unique identifier of the payment
     $createReq->setBuyerAddress("<BUYER_ADDR>"); // Replace <BUYER_ADDR> with the Buyer Address
     $createReq->setTransferAddress("<MERCHANT_ADDR>"); // Replace <MERCHANT_ADDR> with the Merchant's Enthereum Network Address
@@ -43,7 +43,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**\Bleumi\Pay\Model\CreatePaymentRequest**](../Model/CreatePaymentRequest.md)|  |
- **chain** | [**\Bleumi\Pay\Model\Chain**](../Model/.md)| Ethereum network in which payment is to be created. Please refer documentation for Supported Networks | [optional]
+ **chain** | [**\Bleumi\Pay\Model\Chain**](../Model/.md)| Network in which payment is to be created. Please refer documentation for Supported Networks | [optional]
 
 ### Return type
 
@@ -224,7 +224,7 @@ try {
     $settleReq->setAmount('<AMOUNT>'); // string | Amount to settle
     $settleReq->setToken('<TOKEN>'); // string |  Replace <TOKEN>  by anyone of the following values: 'ETH'/'XDAI'/'XDAIT'/ECR-20 Contract Address
 
-    $result = $apiInstance->settlePayment($settleReq, $id, $chain::ROPSTEN);
+    $result = $apiInstance->settlePayment($settleReq, $id, $chain::GOERLI);
     $data = json_encode($result, JSON_PRETTY_PRINT);
     echo  $data;
 } catch (Exception $e) {
@@ -241,7 +241,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**\Bleumi\Pay\Model\PaymentSettleRequest**](../Model/PaymentSettleRequest.md)| Request body - used to specify the amount to settle. |
  **id** | **string**| Unique identifier of the payment (specified during [Create a Payment](#createPayment)) |
- **chain** | [**\Bleumi\Pay\Model\Chain**](../Model/Chain.md)| Ethereum network in which payment is to be created. | [optional]
+ **chain** | [**\Bleumi\Pay\Model\Chain**](../Model/Chain.md)| Network in which payment is to be created. | [optional]
 
 ### Return type
 
@@ -282,11 +282,11 @@ $apiInstance = new Bleumi\Pay\Api\PaymentsApi(
 );
 
 try {
-    $chain = new \Bleumi\Pay\Model\Chain(); // \Bleumi\Pay\Model\Chain | Ethereum network in which payment is to be created.
+    $chain = new \Bleumi\Pay\Model\Chain(); // \Bleumi\Pay\Model\Chain | Network in which payment is to be created.
     $id = '<ID>'; // string | Replace <ID> with the unique identifier of the payment (specified during Create Payment)
     $refundReq = new \Bleumi\Pay\Model\PaymentRefundRequest(); // \Bleumi\Pay\Model\PaymentRefundRequest | Request body - used to specify the token to refund.
     $refundReq->setToken('<TOKEN>'); // string |  Replace <TOKEN>  by anyone of the following values: 'ETH'/'XDAI'/'XDAIT'/ECR-20 Contract Address
-    $result = $apiInstance->refundPayment($refundReq, $id, $chain::ROPSTEN);
+    $result = $apiInstance->refundPayment($refundReq, $id, $chain::GOERLI);
     $data = json_encode($result, JSON_PRETTY_PRINT);
     echo  $data;
 } catch (Exception $e) {
@@ -303,7 +303,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**\Bleumi\Pay\Model\PaymentRefundRequest**](../Model/PaymentRefundRequest.md)| Request body - used to specify the token to refund. |
  **id** | **string**| Unique identifier of the payment (specified during [Create a Payment](#createPayment)) |
- **chain** | [**\Bleumi\Pay\Model\Chain**](../Model/Chain.md)| Ethereum network in which payment is to be created. | [optional]
+ **chain** | [**\Bleumi\Pay\Model\Chain**](../Model/Chain.md)| Network in which payment is to be created. | [optional]
 
 ### Return type
 

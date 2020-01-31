@@ -1,5 +1,7 @@
 # Chain
 
+Network enumeration. Please refer to the [Supported Networks](https://pay.bleumi.com/docs/#supported-networks).
+
 ## Enum
 
 * `MAINNET` (value: `"mainnet"`)

@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **results** | [**\Bleumi\Pay\Model\Payment[]**](Payment.md) | List of payments in the current page | 
-**next_token** | **string** | Cursor to fetch next page of results, empty if no more results | [optional] 
+**next_token** <br>(Optional)| **string** | Cursor to fetch next page of results, empty if no more results |
 
 ## Example
 
@@ -15,14 +15,14 @@ Name | Type | Description | Notes
       "id": "2",
       "addresses": {
         "ethereum": {
-          "ropsten": {
+          "goerli": {
             "addr": "0xbe02daaf993b29302c2e983b63eca1465c227245"
           }
         }
       },
       "balances": {
         "ethereum": {
-          "ropsten": {
+          "goerli": {
             "0x84df8548086ec9025e9c93297058bed706e90ddd": {
               "blockNum": "6831652",
               "token_balance": "0",

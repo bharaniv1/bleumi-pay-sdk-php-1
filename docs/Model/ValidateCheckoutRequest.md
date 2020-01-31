@@ -6,7 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **hmac_input** | **string** | Payment Details. Passed as GET parameter in successUrl. | 
 **hmac_key_id** | **string** | KeyId used to generate the HMAC. Passed as GET parameter in successUrl. | 
-**hmac_alg** | **string** | Algorithm used to generate the HMAC. Passed as GET parameter in successUrl. |**hmac_value** | **string** | HMAC passed as GET parameter in successUrl. | 
+**hmac_alg** | **string** | Algorithm used to generate the HMAC. Passed as GET parameter in successUrl. |
+**hmac_value** | **string** | HMAC passed as GET parameter in successUrl. | 
 
 ## Example
 

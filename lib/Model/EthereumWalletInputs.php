@@ -1,6 +1,6 @@
 <?php
 /**
- * AlgorandBalance
+ * EthereumWalletInputs
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \Bleumi\Pay\ObjectSerializer;
 use JsonSerializable;
 
 /**
- * AlgorandBalance Class Doc Comment
+ * EthereumWalletInputs Class Doc Comment
  *
  * @category Class
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
+class EthereumWalletInputs implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
       *
       * @var string
       */
-    protected static $swaggerModelName = 'AlgorandBalance';
+    protected static $swaggerModelName = 'EthereumWalletInputs';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,11 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'alg_mainnet' => 'map[string,\Bleumi\Pay\Model\WalletBalance]',
-'alg_testnet' => 'map[string,\Bleumi\Pay\Model\WalletBalance]'    ];
+        'buyer' => 'string',
+'merchant' => 'string',
+'salt' => 'string',
+'wallet_library' => 'string',
+'wallet_proxy' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -66,8 +69,11 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'alg_mainnet' => null,
-'alg_testnet' => null    ];
+        'buyer' => null,
+'merchant' => null,
+'salt' => null,
+'wallet_library' => null,
+'wallet_proxy' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -96,8 +102,11 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'alg_mainnet' => 'alg_mainnet',
-'alg_testnet' => 'alg_testnet'    ];
+        'buyer' => 'buyer',
+'merchant' => 'merchant',
+'salt' => 'salt',
+'wallet_library' => 'walletLibrary',
+'wallet_proxy' => 'walletProxy'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -105,8 +114,11 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'alg_mainnet' => 'setAlgMainnet',
-'alg_testnet' => 'setAlgTestnet'    ];
+        'buyer' => 'setBuyer',
+'merchant' => 'setMerchant',
+'salt' => 'setSalt',
+'wallet_library' => 'setWalletLibrary',
+'wallet_proxy' => 'setWalletProxy'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -114,8 +126,11 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'alg_mainnet' => 'getAlgMainnet',
-'alg_testnet' => 'getAlgTestnet'    ];
+        'buyer' => 'getBuyer',
+'merchant' => 'getMerchant',
+'salt' => 'getSalt',
+'wallet_library' => 'getWalletLibrary',
+'wallet_proxy' => 'getWalletProxy'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -175,8 +190,11 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['alg_mainnet'] = isset($data['alg_mainnet']) ? $data['alg_mainnet'] : null;
-        $this->container['alg_testnet'] = isset($data['alg_testnet']) ? $data['alg_testnet'] : null;
+        $this->container['buyer'] = isset($data['buyer']) ? $data['buyer'] : null;
+        $this->container['merchant'] = isset($data['merchant']) ? $data['merchant'] : null;
+        $this->container['salt'] = isset($data['salt']) ? $data['salt'] : null;
+        $this->container['wallet_library'] = isset($data['wallet_library']) ? $data['wallet_library'] : null;
+        $this->container['wallet_proxy'] = isset($data['wallet_proxy']) ? $data['wallet_proxy'] : null;
     }
 
     /**
@@ -204,49 +222,121 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
 
 
     /**
-     * Gets alg_mainnet
+     * Gets buyer
      *
-     * @return map[string,\Bleumi\Pay\Model\WalletBalance]
+     * @return string
      */
-    public function getAlgMainnet()
+    public function getBuyer()
     {
-        return $this->container['alg_mainnet'];
+        return $this->container['buyer'];
     }
 
     /**
-     * Sets alg_mainnet
+     * Sets buyer
      *
-     * @param map[string,\Bleumi\Pay\Model\WalletBalance] $alg_mainnet alg_mainnet
+     * @param string $buyer Buyer Address
      *
      * @return $this
      */
-    public function setAlgMainnet($alg_mainnet)
+    public function setBuyer($buyer)
     {
-        $this->container['alg_mainnet'] = $alg_mainnet;
+        $this->container['buyer'] = $buyer;
 
         return $this;
     }
 
     /**
-     * Gets alg_testnet
+     * Gets merchant
      *
-     * @return map[string,\Bleumi\Pay\Model\WalletBalance]
+     * @return string
      */
-    public function getAlgTestnet()
+    public function getMerchant()
     {
-        return $this->container['alg_testnet'];
+        return $this->container['merchant'];
     }
 
     /**
-     * Sets alg_testnet
+     * Sets merchant
      *
-     * @param map[string,\Bleumi\Pay\Model\WalletBalance] $alg_testnet alg_testnet
+     * @param string $merchant Merchant Address
      *
      * @return $this
      */
-    public function setAlgTestnet($alg_testnet)
+    public function setMerchant($merchant)
     {
-        $this->container['alg_testnet'] = $alg_testnet;
+        $this->container['merchant'] = $merchant;
+
+        return $this;
+    }
+
+    /**
+     * Gets salt
+     *
+     * @return string
+     */
+    public function getSalt()
+    {
+        return $this->container['salt'];
+    }
+
+    /**
+     * Sets salt
+     *
+     * @param string $salt Salt
+     *
+     * @return $this
+     */
+    public function setSalt($salt)
+    {
+        $this->container['salt'] = $salt;
+
+        return $this;
+    }
+
+    /**
+     * Gets wallet_library
+     *
+     * @return string
+     */
+    public function getWalletLibrary()
+    {
+        return $this->container['wallet_library'];
+    }
+
+    /**
+     * Sets wallet_library
+     *
+     * @param string $wallet_library Wallet Library
+     *
+     * @return $this
+     */
+    public function setWalletLibrary($wallet_library)
+    {
+        $this->container['wallet_library'] = $wallet_library;
+
+        return $this;
+    }
+
+    /**
+     * Gets wallet_proxy
+     *
+     * @return string
+     */
+    public function getWalletProxy()
+    {
+        return $this->container['wallet_proxy'];
+    }
+
+    /**
+     * Sets wallet_proxy
+     *
+     * @param string $wallet_proxy Wallet Proxy
+     *
+     * @return $this
+     */
+    public function setWalletProxy($wallet_proxy)
+    {
+        $this->container['wallet_proxy'] = $wallet_proxy;
 
         return $this;
     }
@@ -319,7 +409,7 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
-
+    
     /**
      * Customize the way json_encode() renders the object.
      */

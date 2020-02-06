@@ -1,6 +1,6 @@
 <?php
 /**
- * WalletAddress
+ * AlgorandWalletInputs
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \Bleumi\Pay\ObjectSerializer;
 use JsonSerializable;
 
 /**
- * WalletAddress Class Doc Comment
+ * AlgorandWalletInputs Class Doc Comment
  *
  * @category Class
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class WalletAddress implements ModelInterface, ArrayAccess, JsonSerializable
+class AlgorandWalletInputs implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class WalletAddress implements ModelInterface, ArrayAccess, JsonSerializable
       *
       * @var string
       */
-    protected static $swaggerModelName = 'WalletAddress';
+    protected static $swaggerModelName = 'AlgorandWalletInputs';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,11 @@ class WalletAddress implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'addr' => 'string'    ];
+        'buyer' => 'string',
+'merchant' => 'string',
+'salt' => 'string',
+'gas' => 'string',
+'program_bytes' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -65,7 +69,11 @@ class WalletAddress implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'addr' => null    ];
+        'buyer' => null,
+'merchant' => null,
+'salt' => null,
+'gas' => null,
+'program_bytes' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -94,7 +102,11 @@ class WalletAddress implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'addr' => 'addr'    ];
+        'buyer' => 'buyer',
+'merchant' => 'merchant',
+'salt' => 'salt',
+'gas' => 'gas',
+'program_bytes' => 'programBytes'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -102,7 +114,11 @@ class WalletAddress implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'addr' => 'setAddr'    ];
+        'buyer' => 'setBuyer',
+'merchant' => 'setMerchant',
+'salt' => 'setSalt',
+'gas' => 'setGas',
+'program_bytes' => 'setProgramBytes'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -110,7 +126,11 @@ class WalletAddress implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'addr' => 'getAddr'    ];
+        'buyer' => 'getBuyer',
+'merchant' => 'getMerchant',
+'salt' => 'getSalt',
+'gas' => 'getGas',
+'program_bytes' => 'getProgramBytes'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -170,7 +190,11 @@ class WalletAddress implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['addr'] = isset($data['addr']) ? $data['addr'] : null;
+        $this->container['buyer'] = isset($data['buyer']) ? $data['buyer'] : null;
+        $this->container['merchant'] = isset($data['merchant']) ? $data['merchant'] : null;
+        $this->container['salt'] = isset($data['salt']) ? $data['salt'] : null;
+        $this->container['gas'] = isset($data['gas']) ? $data['gas'] : null;
+        $this->container['program_bytes'] = isset($data['program_bytes']) ? $data['program_bytes'] : null;
     }
 
     /**
@@ -182,9 +206,6 @@ class WalletAddress implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['addr'] === null) {
-            $invalidProperties[] = "'addr' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -201,25 +222,121 @@ class WalletAddress implements ModelInterface, ArrayAccess, JsonSerializable
 
 
     /**
-     * Gets addr
+     * Gets buyer
      *
      * @return string
      */
-    public function getAddr()
+    public function getBuyer()
     {
-        return $this->container['addr'];
+        return $this->container['buyer'];
     }
 
     /**
-     * Sets addr
+     * Sets buyer
      *
-     * @param string $addr Wallet address for the payment in the network
+     * @param string $buyer Buyer Address
      *
      * @return $this
      */
-    public function setAddr($addr)
+    public function setBuyer($buyer)
     {
-        $this->container['addr'] = $addr;
+        $this->container['buyer'] = $buyer;
+
+        return $this;
+    }
+
+    /**
+     * Gets merchant
+     *
+     * @return string
+     */
+    public function getMerchant()
+    {
+        return $this->container['merchant'];
+    }
+
+    /**
+     * Sets merchant
+     *
+     * @param string $merchant Merchant Address
+     *
+     * @return $this
+     */
+    public function setMerchant($merchant)
+    {
+        $this->container['merchant'] = $merchant;
+
+        return $this;
+    }
+
+    /**
+     * Gets salt
+     *
+     * @return string
+     */
+    public function getSalt()
+    {
+        return $this->container['salt'];
+    }
+
+    /**
+     * Sets salt
+     *
+     * @param string $salt Salt
+     *
+     * @return $this
+     */
+    public function setSalt($salt)
+    {
+        $this->container['salt'] = $salt;
+
+        return $this;
+    }
+
+    /**
+     * Gets gas
+     *
+     * @return string
+     */
+    public function getGas()
+    {
+        return $this->container['gas'];
+    }
+
+    /**
+     * Sets gas
+     *
+     * @param string $gas Gas account Address
+     *
+     * @return $this
+     */
+    public function setGas($gas)
+    {
+        $this->container['gas'] = $gas;
+
+        return $this;
+    }
+
+    /**
+     * Gets program_bytes
+     *
+     * @return string
+     */
+    public function getProgramBytes()
+    {
+        return $this->container['program_bytes'];
+    }
+
+    /**
+     * Sets program_bytes
+     *
+     * @param string $program_bytes Program Bytes
+     *
+     * @return $this
+     */
+    public function setProgramBytes($program_bytes)
+    {
+        $this->container['program_bytes'] = $program_bytes;
 
         return $this;
     }
@@ -292,12 +409,12 @@ class WalletAddress implements ModelInterface, ArrayAccess, JsonSerializable
 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
-
+    
     /**
      * Customize the way json_encode() renders the object.
      */
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);
-    }
+    }    
 }

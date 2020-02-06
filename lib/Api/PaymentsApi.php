@@ -37,7 +37,7 @@ use Bleumi\Pay\ApiException;
 use Bleumi\Pay\Configuration;
 use Bleumi\Pay\HeaderSelector;
 use Bleumi\Pay\ObjectSerializer;
-use Bleumi\Pay\Utilities;
+use Bleumi\Pay\RequestValidator;
 
 /**
  * PaymentsApi Class Doc Comment
@@ -293,76 +293,14 @@ class PaymentsApi
             $queryParams['chain'] = ObjectSerializer::toQueryValue($chain);
         }
 
-        //Bleumi Pay - Customization - Start : Adding more validations
-        $id = $body['id'];
-        if ($id === null) {
+        //Bleumi Pay - Customization : Adding validation for request parameters
+        $msg = RequestValidator::validateCreatePaymentRequest($body, $chain);
+        if ($msg !== null ) {
             throw new \InvalidArgumentException(
-                "Missing the required parameter 'id' when calling createPayment"
+                $msg . ' when calling createPayment'
             );
         }
-        
-        $buyer_address = $body['buyer_address'];
-        if ($buyer_address === null) {
-            throw new \InvalidArgumentException(
-                "Missing the required parameter 'buyerAddress' when calling createPayment"
-            );
-        }
-
-        $transfer_address = $body['transfer_address'];
-        if ($transfer_address === null) {
-            throw new \InvalidArgumentException(
-                "Missing the required parameter 'transferAddress' when calling createPayment"
-            );
-        }
-
-        $is_algo_net = Utilities::isAlgoNet($chain);
-
-        if ($is_algo_net == true) {
-            $token = $body['token'];
-            if (isset($token)) {
-                $valid_value = Utilities::isAlgoAddress($token);
-                if ($valid_value === false) {
-                    throw new \InvalidArgumentException(
-                        "Invalid parameter Algorand Standard Asset 'token' when calling createPayment"
-                    );
-                }
-            }
-            if (isset($buyer_address)) {
-                $valid_value = Utilities::isAlgoAddress($buyer_address);
-                if ($valid_value === false) {
-                    throw new \InvalidArgumentException(
-                        "Invalid parameter Algorand address provided for 'buyerAddress' when calling createPayment"
-                    );
-                }
-            }
-            if (isset($transfer_address)) {
-                $valid_value = Utilities::isAlgoAddress($transfer_address);
-                if ($valid_value === false) {
-                    throw new \InvalidArgumentException(
-                        "Invalid parameter Algorand address provided for 'transferAddress' when calling createPayment"
-                    );
-                }
-            }
-        } else {
-            if (isset($buyer_address)) {
-                $valid_value = Utilities::isEthAddress($buyer_address);
-                if ($valid_value === false) {
-                    throw new \InvalidArgumentException(
-                        "Invalid parameter Ethereum address provided for 'buyerAddress' when calling createPayment"
-                    );
-                }
-            }
-            if (isset($transfer_address)) {
-                $valid_value = Utilities::isEthAddress($transfer_address);
-                if ($valid_value === false) {
-                    throw new \InvalidArgumentException(
-                        "Invalid parameter Ethereum address provided for 'transferAddress' when calling createPayment"
-                    );
-                }
-            }
-        }
-
-        //Bleumi Pay - Customization - End : Adding more validations
+        //Bleumi Pay - Customization : Ends
 
         // body params
         $_tempBody = null;
@@ -1807,32 +1745,14 @@ class PaymentsApi
             $queryParams['chain'] = ObjectSerializer::toQueryValue($chain);
         }
 
-        //Bleumi Pay - Customization - Start : Adding more validations
-        $is_algo_net = Utilities::isAlgoNet($chain);
-        $token = $body['token'];
-        if ($token === null) {
+        //Bleumi Pay - Customization : Adding validation for request parameters
+        $msg = RequestValidator::validateRefundPaymentRequest($body, $chain);
+        if ($msg !== null ) {
             throw new \InvalidArgumentException(
-                "Missing the required parameter 'token' when calling refundPayment"
+                $msg . ' when calling refundPayment'
             );
         }
-        if (isset($token)) {
-            if ($is_algo_net == true) {
-                $valid_value = Utilities::isAlgoAddress($token);
-                if ($valid_value === false) {
-                    throw new \InvalidArgumentException(
-                        "Invalid parameter Algorand 'token' when calling refundPayment"
-                    );
-                }
-            } else {
-                $valid_value = Utilities::isEthAddress($token);
-                if ($valid_value === false) {
-                    throw new \InvalidArgumentException(
-                        "Invalid parameter Ethereum 'token' when calling refundPayment"
-                    );
-                }
-            }
-        }
-        //Bleumi Pay - Customization - End : Adding more validations
+        //Bleumi Pay - Customization : Ends
 
         // path params
         if ($id !== null) {
@@ -2132,39 +2052,15 @@ class PaymentsApi
             $queryParams['chain'] = ObjectSerializer::toQueryValue($chain);
         }
 
-        //Bleumi Pay - Customization - Start : Adding more validations
-        $amount = $body['amount'];
-        if ($amount === null) {
+        //Bleumi Pay - Customization : Adding validation for request parameters
+        $msg = RequestValidator::validateSettlePaymentRequest($body, $chain);
+        if ($msg !== null ) {
             throw new \InvalidArgumentException(
-                "Missing the required parameter 'amount' when calling settlePayment"
-            );
-        }        
-        $is_algo_net = Utilities::isAlgoNet($chain);
-        $token = $body['token'];
-        if ($token === null) {
-            throw new \InvalidArgumentException(
-                "Missing the required parameter 'token' when calling settlePayment"
+                $msg . ' when calling settlePayment'
             );
         }
-        if (isset($token)) {
-            if ($is_algo_net == true) {
-                $valid_value = Utilities::isAlgoAddress($token);
-                if ($valid_value === false) {
-                    throw new \InvalidArgumentException(
-                        "Invalid parameter Algorand 'token' when calling settlePayment"
-                    );
-                }
-            } else {
-                $valid_value = Utilities::isEthAddress($token);
-                if ($valid_value === false) {
-                    throw new \InvalidArgumentException(
-                        "Invalid parameter Ethereum 'token' when calling settlePayment"
-                    );
-                }
-            }
-        }
-        //Bleumi Pay - Customization - End : Adding more validations        
-
+        //Bleumi Pay - Customization : Ends
+        
         // path params
         if ($id !== null) {
             $resourcePath = str_replace(

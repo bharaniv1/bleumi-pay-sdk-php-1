@@ -37,7 +37,7 @@ use Bleumi\Pay\ApiException;
 use Bleumi\Pay\Configuration;
 use Bleumi\Pay\HeaderSelector;
 use Bleumi\Pay\ObjectSerializer;
-use Bleumi\Pay\Utilities;
+use Bleumi\Pay\RequestValidator;
 
 /**
  * PayoutsApi Class Doc Comment
@@ -281,38 +281,14 @@ class PayoutsApi
             );
         }
 
-        //Bleumi Pay - Customization - Start : Adding more validations
-        $txId = $body['txid'];
-        if ($txId === null) {
+        //Bleumi Pay - Customization : Adding validation for request parameters
+        $msg = RequestValidator::validateCreatePayoutRequest($body, $chain);
+        if ($msg !== null ) {
             throw new \InvalidArgumentException(
-                "Missing the required parameter 'txid' when calling createPayout"
+                $msg . ' when calling createPayout'
             );
         }
-
-        $token = $body['token'];
-        if ($token === null) {
-            throw new \InvalidArgumentException(
-                "Missing the required parameter 'token' when calling createPayout"
-            );
-        }
-
-        $is_algo_net = Utilities::isAlgoNet($chain);
-        if ($is_algo_net == true) {
-            $valid_value = Utilities::isAlgoAddress($token);
-            if ($valid_value === false) {
-                throw new \InvalidArgumentException(
-                    "Invalid parameter Algorand 'token' when calling createPayout"
-                );
-            }
-        } else {
-            $valid_value = Utilities::isEthAddress($token);
-            if ($valid_value === false) {
-                throw new \InvalidArgumentException(
-                    "Invalid parameter Ethereum 'token' when calling createPayout"
-                );
-            }
-        }
-        //Bleumi Pay - Customization - End : Adding more validations
+        //Bleumi Pay - Customization : Ends
 
         $resourcePath = '/v1/payout';
         $formParams = [];

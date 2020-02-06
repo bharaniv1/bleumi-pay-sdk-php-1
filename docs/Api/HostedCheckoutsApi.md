@@ -18,6 +18,7 @@ $apiInstance = new Bleumi\Pay\Api\HostedCheckoutsApi(
     new GuzzleHttp\Client(),
     $config
 );
+$chain = new \Bleumi\Pay\Model\Chain(); 
 
 try {
     $createReq = new \Bleumi\Pay\Model\CreateCheckoutUrlRequest();  // Checkout URL creation parameters. 
@@ -27,8 +28,7 @@ try {
     $createReq->setSuccessUrl("<SUCCESS_URL>"); // string | Eg. https://demo.store/api/completeOrder
     $createReq->setCancelUrl("<CANCEL_ORDER_URL>"); // string | Eg. https://demo.store/api/cancelOrder
     $createReq->setToken("<TOKEN>"); // string |  Replace <TOKEN>  by anyone of the following values: 'ETH' or 'XDAI' or ECR-20 Contract Address or 'XDAIT'. | Optional
-    $createReq->setChain($chain::GOERLI); //Optional; Replace GOERLI with the Chain as required
-    $createReq->setBuyerAddress("<BUYER_ADDR>"); // string |  Replace <BUYER_ADDR>  by Network Address of the Buyer. | Optional
+    $createReq->setChain($chain::GOERLI); //Optional, but required if '<Token>' is specified; Replace GOERLI with the Chain as required
     $result = $apiInstance->createCheckoutUrl($createReq);
     $reponse = json_encode($result, JSON_PRETTY_PRINT);
     echo  $reponse;

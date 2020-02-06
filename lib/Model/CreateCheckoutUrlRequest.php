@@ -63,7 +63,7 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
 'cancel_url' => 'string',
 'success_url' => 'string',
 'buyer_address' => 'string',
-'chain' => '\Bleumi\Pay\Model\Chain',
+'chain' => 'string',
 'token' => 'string',
 'base64_transform' => 'bool'    ];
 
@@ -407,7 +407,7 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
     /**
      * Gets chain
      *
-     * @return \Bleumi\Pay\Model\Chain
+     * @return string
      */
     public function getChain()
     {
@@ -417,7 +417,7 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
     /**
      * Sets chain
      *
-     * @param \Bleumi\Pay\Model\Chain $chain chain
+     * @param string $chain (Required if specifying 'token') Network in which the hosted checkout is to be created. Please refer to the Supported Networks.
      *
      * @return $this
      */

@@ -58,8 +58,8 @@ class PaymentAddresses implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'ethereum' => 'map[string,\Bleumi\Pay\Model\WalletAddress]',
-'algorand' => 'map[string,\Bleumi\Pay\Model\WalletAddress]'    ];
+        'ethereum' => 'map[string,\Bleumi\Pay\Model\EthereumWalletAddress]',
+'algorand' => 'map[string,\Bleumi\Pay\Model\AlgorandWalletAddress]'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -207,7 +207,7 @@ class PaymentAddresses implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets ethereum
      *
-     * @return map[string,\Bleumi\Pay\Model\WalletAddress]
+     * @return map[string,\Bleumi\Pay\Model\EthereumWalletAddress]
      */
     public function getEthereum()
     {
@@ -217,7 +217,7 @@ class PaymentAddresses implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets ethereum
      *
-     * @param map[string,\Bleumi\Pay\Model\WalletAddress] $ethereum ethereum
+     * @param map[string,\Bleumi\Pay\Model\EthereumWalletAddress] $ethereum ethereum
      *
      * @return $this
      */
@@ -231,7 +231,7 @@ class PaymentAddresses implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets algorand
      *
-     * @return map[string,\Bleumi\Pay\Model\WalletAddress]
+     * @return map[string,\Bleumi\Pay\Model\AlgorandWalletAddress]
      */
     public function getAlgorand()
     {
@@ -241,7 +241,7 @@ class PaymentAddresses implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets algorand
      *
-     * @param map[string,\Bleumi\Pay\Model\WalletAddress] $algorand algorand
+     * @param map[string,\Bleumi\Pay\Model\AlgorandWalletAddress] $algorand algorand
      *
      * @return $this
      */

@@ -37,7 +37,7 @@ use Bleumi\Pay\ApiException;
 use Bleumi\Pay\Configuration;
 use Bleumi\Pay\HeaderSelector;
 use Bleumi\Pay\ObjectSerializer;
-use Bleumi\Pay\Utilities;
+use Bleumi\Pay\RequestValidator;
 
 /**
  * HostedCheckoutsApi Class Doc Comment
@@ -276,88 +276,15 @@ class HostedCheckoutsApi
             );
         }
 
-        //Bleumi Pay - Customization - Start : Adding more validations
-        $id = $body['id'];
-        if ($id === null) {
+        //Bleumi Pay - Customization : Adding validation for request parameters
+        $msg = RequestValidator::validateCreateCheckoutUrlRequest($body);
+        if ($msg !== null ) {
             throw new \InvalidArgumentException(
-                "Missing the required parameter 'id' when calling createCheckoutUrl"
+                $msg . ' when calling createCheckoutUrl'
             );
         }
-
-        $currency = $body['currency'];
-        if ($currency === null) {
-            throw new \InvalidArgumentException(
-                "Missing the required parameter 'currency' when calling createCheckoutUrl"
-            );
-        }
-
-        $amount = $body['amount'];
-        if ($amount === null) {
-            throw new \InvalidArgumentException(
-                "Missing the required parameter 'amount' when calling createCheckoutUrl"
-            );
-        }
-
-        $cancelUrl = $body['cancel_url'];
-        if ($cancelUrl === null) {
-            throw new \InvalidArgumentException(
-                "Missing the required parameter 'cancelURL' when calling createCheckoutUrl"
-            );
-        }
-
-        $successUrl = $body['success_url'];
-        if ($successUrl === null) {
-            throw new \InvalidArgumentException(
-                "Missing the required parameter 'successURL' when calling createCheckoutUrl"
-            );
-        }
-
-        $token = $body['token'];
-        if ($token !== null) {
-            $chain = $body['chain'];
-            $buyerAddress = $body['buyer_address'];
-            if ($chain === null) {
-                throw new \InvalidArgumentException(
-                    "Missing the required parameter 'chain' when calling createCheckoutUrl"
-                );
-            }
-            if (isset($token)) {
-                $is_algo_net = Utilities::isAlgoNet($chain);
-                if ($is_algo_net == true) {
-                    $valid_value = Utilities::isAlgoAddress($token);
-                    if ($valid_value === false) {
-                        throw new \InvalidArgumentException(
-                            "Invalid parameter Algorand 'token' when calling createCheckoutUrl"
-                        );
-                    }
-                    if (isset($buyerAddress)) {
-                        $valid_value = Utilities::isAlgoAddress($buyerAddress);
-                        if ($valid_value === false) {
-                            throw new \InvalidArgumentException(
-                                "Invalid parameter Algorand address for buyer when calling createCheckoutUrl"
-                            );
-                        }
-                    }
-                } else {
-                    $valid_value = Utilities::isEthAddress($token);
-                    if ($valid_value === false) {
-                        throw new \InvalidArgumentException(
-                            "Invalid parameter Ethereum 'token' when calling createCheckoutUrl"
-                        );
-                    }
-                    if (isset($buyerAddress)) {
-                        $valid_value = Utilities::isEthAddress($buyerAddress);
-                        if ($valid_value === false) {
-                            throw new \InvalidArgumentException(
-                                "Invalid parameter Ethereum address for buyer when calling createCheckoutUrl"
-                            );
-                        }
-                    }
-                }
-            }
-        }
-        //Bleumi Pay - Customization - End : Adding more validations
-
+        //Bleumi Pay - Customization : Ends
+        
         $resourcePath = '/v1/payment/hc';
         $formParams = [];
         $queryParams = [];
@@ -891,33 +818,15 @@ class HostedCheckoutsApi
         $httpBody = '';
         $multipart = false;
 
-        //Bleumi Pay - Customization - Start : Adding more validations
-        $hmacAlg = $body['hmac_alg'];
-        if ($hmacAlg === null) {
+        //Bleumi Pay - Customization : Adding validation for request parameters
+        $msg = RequestValidator::validateCheckoutPaymentParams($body);
+        if ($msg !== null ) {
             throw new \InvalidArgumentException(
-                "Missing the required parameter 'hmac_alg' when calling validateCheckoutPayment"
+                $msg . ' when calling validateCheckoutPayment'
             );
         }
-        $hmacKeyId = $body['hmac_key_id'];
-        if ($hmacKeyId === null) {
-            throw new \InvalidArgumentException(
-                "Missing the required parameter 'hmac_key_id' when calling validateCheckoutPayment"
-            );
-        }
-        $hmacInput = $body['hmac_input'];
-        if ($hmacInput === null) {
-            throw new \InvalidArgumentException(
-                "Missing the required parameter 'hmac_input' when calling validateCheckoutPayment"
-            );
-        }
-        $hmacValue = $body['hmac_value'];
-        if ($hmacValue === null) {
-            throw new \InvalidArgumentException(
-                "Missing the required parameter 'hmac_value' when calling validateCheckoutPayment"
-            );
-        }
-        //Bleumi Pay - Customization - End : Adding more validations
-
+        //Bleumi Pay - Customization : Ends
+        
         // body params
         $_tempBody = null;
         if (isset($body)) {

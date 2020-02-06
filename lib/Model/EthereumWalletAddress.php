@@ -1,6 +1,6 @@
 <?php
 /**
- * AlgorandBalance
+ * EthereumWalletAddress
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \Bleumi\Pay\ObjectSerializer;
 use JsonSerializable;
 
 /**
- * AlgorandBalance Class Doc Comment
+ * EthereumWalletAddress Class Doc Comment
  *
  * @category Class
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
+class EthereumWalletAddress implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
       *
       * @var string
       */
-    protected static $swaggerModelName = 'AlgorandBalance';
+    protected static $swaggerModelName = 'EthereumWalletAddress';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,8 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'alg_mainnet' => 'map[string,\Bleumi\Pay\Model\WalletBalance]',
-'alg_testnet' => 'map[string,\Bleumi\Pay\Model\WalletBalance]'    ];
+        'addr' => 'string',
+'inputs' => '\Bleumi\Pay\Model\EthereumWalletInputs'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -66,8 +66,8 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'alg_mainnet' => null,
-'alg_testnet' => null    ];
+        'addr' => null,
+'inputs' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -96,8 +96,8 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'alg_mainnet' => 'alg_mainnet',
-'alg_testnet' => 'alg_testnet'    ];
+        'addr' => 'addr',
+'inputs' => 'inputs'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -105,8 +105,8 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'alg_mainnet' => 'setAlgMainnet',
-'alg_testnet' => 'setAlgTestnet'    ];
+        'addr' => 'setAddr',
+'inputs' => 'setInputs'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -114,8 +114,8 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'alg_mainnet' => 'getAlgMainnet',
-'alg_testnet' => 'getAlgTestnet'    ];
+        'addr' => 'getAddr',
+'inputs' => 'getInputs'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -175,8 +175,8 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['alg_mainnet'] = isset($data['alg_mainnet']) ? $data['alg_mainnet'] : null;
-        $this->container['alg_testnet'] = isset($data['alg_testnet']) ? $data['alg_testnet'] : null;
+        $this->container['addr'] = isset($data['addr']) ? $data['addr'] : null;
+        $this->container['inputs'] = isset($data['inputs']) ? $data['inputs'] : null;
     }
 
     /**
@@ -188,6 +188,9 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['addr'] === null) {
+            $invalidProperties[] = "'addr' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -204,49 +207,49 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
 
 
     /**
-     * Gets alg_mainnet
+     * Gets addr
      *
-     * @return map[string,\Bleumi\Pay\Model\WalletBalance]
+     * @return string
      */
-    public function getAlgMainnet()
+    public function getAddr()
     {
-        return $this->container['alg_mainnet'];
+        return $this->container['addr'];
     }
 
     /**
-     * Sets alg_mainnet
+     * Sets addr
      *
-     * @param map[string,\Bleumi\Pay\Model\WalletBalance] $alg_mainnet alg_mainnet
+     * @param string $addr Wallet address for the payment in the network
      *
      * @return $this
      */
-    public function setAlgMainnet($alg_mainnet)
+    public function setAddr($addr)
     {
-        $this->container['alg_mainnet'] = $alg_mainnet;
+        $this->container['addr'] = $addr;
 
         return $this;
     }
 
     /**
-     * Gets alg_testnet
+     * Gets inputs
      *
-     * @return map[string,\Bleumi\Pay\Model\WalletBalance]
+     * @return \Bleumi\Pay\Model\EthereumWalletInputs
      */
-    public function getAlgTestnet()
+    public function getInputs()
     {
-        return $this->container['alg_testnet'];
+        return $this->container['inputs'];
     }
 
     /**
-     * Sets alg_testnet
+     * Sets inputs
      *
-     * @param map[string,\Bleumi\Pay\Model\WalletBalance] $alg_testnet alg_testnet
+     * @param \Bleumi\Pay\Model\EthereumWalletInputs $inputs inputs
      *
      * @return $this
      */
-    public function setAlgTestnet($alg_testnet)
+    public function setInputs($inputs)
     {
-        $this->container['alg_testnet'] = $alg_testnet;
+        $this->container['inputs'] = $inputs;
 
         return $this;
     }
@@ -319,7 +322,7 @@ class AlgorandBalance implements ModelInterface, ArrayAccess, JsonSerializable
 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
-
+    
     /**
      * Customize the way json_encode() renders the object.
      */

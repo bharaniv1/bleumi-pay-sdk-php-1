@@ -32,7 +32,7 @@ To install the bindings via [Composer](http://getcomposer.org/), add the followi
 ```
 {
   "require": {
-        "bleumi/bleumi-pay-sdk-php":"1.0.18"
+        "bleumi/bleumi-pay-sdk-php":"1.0.19"
     }
 }
 ```
@@ -103,6 +103,8 @@ PayoutsApi | [**listPayouts**](docs/Api/PayoutsApi.md#listpayouts) | **GET** /v1
 ## Documentation For Models
 
  - [AlgorandBalance](docs/Model/AlgorandBalance.md)
+ - [AlgorandWalletAddress](docs/Model/AlgorandWalletAddress.md)
+ - [AlgorandWalletInputs](docs/Model/AlgorandWalletInputs.md)
  - [BadRequest](docs/Model/BadRequest.md)
  - [Chain](docs/Model/Chain.md)
  - [CheckoutToken](docs/Model/CheckoutToken.md)
@@ -113,6 +115,8 @@ PayoutsApi | [**listPayouts**](docs/Api/PayoutsApi.md#listpayouts) | **GET** /v1
  - [CreatePayoutRequest](docs/Model/CreatePayoutRequest.md)
  - [CreatePayoutResponse](docs/Model/CreatePayoutResponse.md)
  - [EthereumBalance](docs/Model/EthereumBalance.md)
+ - [EthereumWalletAddress](docs/Model/EthereumWalletAddress.md)
+ - [EthereumWalletInputs](docs/Model/EthereumWalletInputs.md)
  - [PaginatedPaymentOperations](docs/Model/PaginatedPaymentOperations.md)
  - [PaginatedPayments](docs/Model/PaginatedPayments.md)
  - [PaginatedPayoutItems](docs/Model/PaginatedPayoutItems.md)
@@ -129,7 +133,6 @@ PayoutsApi | [**listPayouts**](docs/Api/PayoutsApi.md#listpayouts) | **GET** /v1
  - [PayoutItemInputs](docs/Model/PayoutItemInputs.md)
  - [ValidateCheckoutRequest](docs/Model/ValidateCheckoutRequest.md)
  - [ValidateCheckoutResponse](docs/Model/ValidateCheckoutResponse.md)
- - [WalletAddress](docs/Model/WalletAddress.md)
  - [WalletBalance](docs/Model/WalletBalance.md)
 
 ## Limitations

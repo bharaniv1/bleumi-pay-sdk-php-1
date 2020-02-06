@@ -211,8 +211,14 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['network'] === null) {
+            $invalidProperties[] = "'network' can't be null";
+        }
         if ($this->container['chain'] === null) {
             $invalidProperties[] = "'chain' can't be null";
+        }
+        if ($this->container['addr'] === null) {
+            $invalidProperties[] = "'addr' can't be null";
         }
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";

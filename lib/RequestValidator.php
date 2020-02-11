@@ -35,7 +35,17 @@ class RequestValidator
     public static function isAlgoAddress($addr = null)
     {
         if (isset($addr)) {
-            if (preg_match("/^[A-Z2-7+=*]{58}$/", $addr) || ($addr === "ALGO") ) {
+            if ( preg_match("/^[A-Z2-7+=*]{58}$/", $addr) ) {
+                return true;
+            } 
+        }
+        return false;
+    }
+
+    public static function isAlgoToken($addr = null)
+    {
+        if (isset($addr)) {
+            if ( ( preg_match("/^[0-9]*$/", $addr) ) || ($addr === "ALGO") ) {
                 return true;
             } 
         }
@@ -52,10 +62,16 @@ class RequestValidator
         return false;
     }
 
-    public static function checkAlgoAddress ($name, $input) {
+    public static function checkAlgoAddress ($name, $input, $isToken=false) {
         $msg = null;
-        if (!self::isAlgoAddress($input)) {
-            $msg = "'$name' is not a valid Algorand address";
+        if ($isToken === true) {
+            if ( !self::isAlgoToken($input) ) {
+                $msg = "'$name' is not a valid Algorand token";
+            } 
+        } else {
+            if (!self::isAlgoAddress($input)) {
+                $msg = "'$name' is not a valid Algorand address";
+            }
         }
         return $msg;
     }
@@ -75,7 +91,7 @@ class RequestValidator
         return null;
     }
 
-    public static function checkNetworkAddress ($name, $input, $chain=null, $mandatory=false) {
+    public static function checkNetworkAddress ($name, $input, $chain=null, $mandatory=false, $isToken=false) {
         $msg = null;
 
         if ($mandatory === true) {
@@ -92,7 +108,7 @@ class RequestValidator
 
         if (isset($input)) {
             if (self::isAlgoNet($chain)) {
-                $msg = self::checkAlgoAddress($name, $input);
+                $msg = self::checkAlgoAddress($name, $input, $isToken);
             } else {
                 $msg = self::checkEthAddress($name, $input);
             }
@@ -117,13 +133,13 @@ class RequestValidator
         }
 
         //Checking if 'BuyerAddress' is provided & is a valid network address
-        $msg = self::checkNetworkAddress('BuyerAddress', $body['buyer_address'], $chain, true);
+        $msg = self::checkNetworkAddress('BuyerAddress', $body['buyer_address'], $chain, true, false);
         if ($msg !== null) {
             return $msg;
         }
 
         //Checking if 'TransferAddress' is provided & is a valid network address
-        $msg = self::checkNetworkAddress('TransferAddress', $body['transfer_address'], $chain, true);
+        $msg = self::checkNetworkAddress('TransferAddress', $body['transfer_address'], $chain, true, false);
         if ($msg !== null) {
             return $msg;
         }
@@ -131,7 +147,7 @@ class RequestValidator
         //If 'Token' is provided, it has to be a valid network address.
         $token = $body['token'];
         if (isset($token)) {
-            $msg = self::checkNetworkAddress('Algorand Standard Asset Token', $token, $chain, false);
+            $msg = self::checkNetworkAddress('Algorand Standard Asset Token', $token, $chain, false, true);
             if ($msg !== null) {
                 return $msg;
             }
@@ -148,7 +164,7 @@ class RequestValidator
         }
 
         //Checking if 'Token' is provided while refunding payment    
-        $msg = self::checkNetworkAddress('Token', $body['token'], $chain, true);
+        $msg = self::checkNetworkAddress('Token', $body['token'], $chain, true, true);
         if ($msg !== null) {
             return $msg;
         }
@@ -171,7 +187,7 @@ class RequestValidator
         }
 
         //Checking if 'Token' is provided while settling payment    
-        $msg = self::checkNetworkAddress('Token', $body['token'], $chain, true);
+        $msg = self::checkNetworkAddress('Token', $body['token'], $chain, true, true);
         if ($msg !== null) {
             return $msg;
         }
@@ -224,7 +240,7 @@ class RequestValidator
             }
 
             //Checking if 'Token' is a valid network address
-            $msg = self::checkNetworkAddress('Token', $token, $chain, false);
+            $msg = self::checkNetworkAddress('Token', $token, $chain, false, true);
             if ($msg !== null) {
                 return $msg;
             }
@@ -273,7 +289,7 @@ class RequestValidator
         //Check if 'Token' is valid network address.
         $token = $body['token'];
         if (isset($token)) {
-            $msg = self::checkNetworkAddress('Token', $token, $chain, true);
+            $msg = self::checkNetworkAddress('Token', $token, $chain, true, true);
             if ($msg !== null) {
                 return $msg;
             }
@@ -290,7 +306,7 @@ class RequestValidator
             foreach ($payouts as $payout) {
             
                 //Check if for given payout, 'TransferAddress' is provided 
-                $msg = self::checkNetworkAddress('TransferAddress', $payout['transfer_address'], $chain, true);
+                $msg = self::checkNetworkAddress('TransferAddress', $payout['transfer_address'], $chain, true, false);
                 if ($msg !== null) {
                     return $msg;
                 }

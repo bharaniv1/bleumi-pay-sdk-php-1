@@ -1,6 +1,6 @@
 {
     "name": "bleumi/bleumi-pay-sdk-php",
-    "version": "1.0.19",
+    "version": "1.0.20",
     "description": "PHP SDK for Bleumi Pay REST API",
     "keywords": [
         "payment-gateway",

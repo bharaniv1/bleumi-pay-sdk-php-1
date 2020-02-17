@@ -52,6 +52,10 @@ Name | Type | Description  | Notes
 Field | Type | Description
 ----- | ----- | -----
 addr | string | Wallet address
+inputs | map | Object containing the network specific details used to create the wallet
+
+Bleumi recommends each merchant to keep a copy of the `inputs` map to ensure access to wallet funds at all times.
+
 
 ### 400 Errors
 

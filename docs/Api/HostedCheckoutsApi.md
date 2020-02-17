@@ -55,7 +55,7 @@ Field | Type | Description
 id | string | Unique identifier generated for this checkout URL
 url | string | URL for buyer to complete payment
 
-### Format - hmac_input GET parameter passed in successUrl
+Format - hmac_input GET parameter passed in successUrl
 
 The hmac_input GET parameter passed to successUrl contains payment parameters as a pipe ('|') separated string in the following order,
 <ul style="font-weight: 500">
@@ -80,10 +80,7 @@ The hmac_input GET parameter passed to successUrl contains payment parameters as
     </li>
 </ul>
 
-<aside class="notice">
-Call [Validate a Checkout Payment](#validateCheckoutPayment) endpoint to validate the GET parameters passed in successUrl and then cross-check the payment parameters of hmac.input GET parameter with your database.
-</aside>
-
+Call [Validate a Checkout Payment ](#validateCheckoutPayment) endpoint to validate the GET parameters passed in successUrl and then cross-check the payment parameters of hmac.input GET parameter with your database.
 
 ### 400 Errors
 

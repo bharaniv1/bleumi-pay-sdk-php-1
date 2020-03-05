@@ -61,6 +61,7 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
 'addr' => 'string',
 'name' => 'string',
 'symbol' => 'string',
+'currency' => 'string',
 'decimals' => 'int'    ];
 
     /**
@@ -74,6 +75,7 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
 'addr' => null,
 'name' => null,
 'symbol' => null,
+'currency' => null,
 'decimals' => 'int64'    ];
 
     /**
@@ -108,6 +110,7 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
 'addr' => 'addr',
 'name' => 'name',
 'symbol' => 'symbol',
+'currency' => 'currency',
 'decimals' => 'decimals'    ];
 
     /**
@@ -121,6 +124,7 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
 'addr' => 'setAddr',
 'name' => 'setName',
 'symbol' => 'setSymbol',
+'currency' => 'setCurrency',
 'decimals' => 'setDecimals'    ];
 
     /**
@@ -134,6 +138,7 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
 'addr' => 'getAddr',
 'name' => 'getName',
 'symbol' => 'getSymbol',
+'currency' => 'getCurrency',
 'decimals' => 'getDecimals'    ];
 
     /**
@@ -199,6 +204,7 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
         $this->container['addr'] = isset($data['addr']) ? $data['addr'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['symbol'] = isset($data['symbol']) ? $data['symbol'] : null;
+        $this->container['currency'] = isset($data['currency']) ? $data['currency'] : null;
         $this->container['decimals'] = isset($data['decimals']) ? $data['decimals'] : null;
     }
 
@@ -225,6 +231,9 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
         }
         if ($this->container['symbol'] === null) {
             $invalidProperties[] = "'symbol' can't be null";
+        }
+        if ($this->container['currency'] === null) {
+            $invalidProperties[] = "'currency' can't be null";
         }
         if ($this->container['decimals'] === null) {
             $invalidProperties[] = "'decimals' can't be null";
@@ -363,6 +372,30 @@ class CheckoutToken implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
+    /**
+     * Gets currency
+     *
+     * @return string
+     */
+    public function getCurrency()
+    {
+        return $this->container['currency'];
+    }
+
+    /**
+     * Sets currency
+     *
+     * @param string $currency Currency of the token
+     *
+     * @return $this
+     */
+    public function setCurrency($currency)
+    {
+        $this->container['currency'] = $currency;
+
+        return $this;
+    }    
 
     /**
      * Gets decimals

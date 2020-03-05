@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **addr** | **string** | The address of the token |
 **name** | **string** | Name of the token |
 **symbol** | **string** | Symbol of the token |
+**currency** | **string** | Currency of the token |
 **decimals** | **int** | Token decimal places |
 
 
@@ -20,6 +21,7 @@ Name | Type | Description | Notes
       "addr": "0x84df8548086ec9025e9c93297058bed706e90ddd",
       "name": "USD p18",
       "symbol": "USD18",
+      "currency": "USD",
       "decimals": 18
 }
 ```

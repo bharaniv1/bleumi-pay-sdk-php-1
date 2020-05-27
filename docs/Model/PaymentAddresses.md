@@ -5,6 +5,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ethereum** <br> (Optional) | [**map[string,\Bleumi\Pay\Model\EthereumWalletAddress]**](EthereumWalletAddress.md) | A dictionary which gives the wallet addresses in Ethereum Network | 
 **algorand** <br> (Optional) | [**map[string,\Bleumi\Pay\Model\AlgorandWalletAddress]**](AlgorandWalletAddress.md) | A dictionary which gives the wallet addresses in Algorand Network | 
+**rsk** | [**map[string,\Bleumi\Pay\Model\EthereumWalletAddress]**](EthereumWalletAddress.md) | A dictionary which gives the wallet addresses in Rsk Network | 
+
 
 ## Example
 

@@ -59,7 +59,8 @@ class PaymentBalances implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static $swaggerTypes = [
         'ethereum' => '\Bleumi\Pay\Model\EthereumBalance',
-'algorand' => '\Bleumi\Pay\Model\AlgorandBalance'    ];
+'algorand' => '\Bleumi\Pay\Model\AlgorandBalance',
+'rsk' => '\Bleumi\Pay\Model\RskBalance'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -68,7 +69,8 @@ class PaymentBalances implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static $swaggerFormats = [
         'ethereum' => null,
-'algorand' => null    ];
+'algorand' => null,
+'rsk' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -98,7 +100,8 @@ class PaymentBalances implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static $attributeMap = [
         'ethereum' => 'ethereum',
-'algorand' => 'algorand'    ];
+'algorand' => 'algorand',
+'rsk' => 'rsk'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -107,7 +110,8 @@ class PaymentBalances implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static $setters = [
         'ethereum' => 'setEthereum',
-'algorand' => 'setAlgorand'    ];
+'algorand' => 'setAlgorand',
+'rsk' => 'setRsk'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -116,7 +120,8 @@ class PaymentBalances implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static $getters = [
         'ethereum' => 'getEthereum',
-'algorand' => 'getAlgorand'    ];
+'algorand' => 'getAlgorand',
+'rsk' => 'getRsk'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -178,6 +183,7 @@ class PaymentBalances implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $this->container['ethereum'] = isset($data['ethereum']) ? $data['ethereum'] : null;
         $this->container['algorand'] = isset($data['algorand']) ? $data['algorand'] : null;
+        $this->container['rsk'] = isset($data['rsk']) ? $data['rsk'] : null;
     }
 
     /**
@@ -248,6 +254,30 @@ class PaymentBalances implements ModelInterface, ArrayAccess, JsonSerializable
     public function setAlgorand($algorand)
     {
         $this->container['algorand'] = $algorand;
+
+        return $this;
+    }
+
+    /**
+     * Gets rsk
+     *
+     * @return \Bleumi\Pay\Model\RskBalance
+     */
+    public function getRsk()
+    {
+        return $this->container['rsk'];
+    }
+
+    /**
+     * Sets rsk
+     *
+     * @param \Bleumi\Pay\Model\RskBalance $rsk rsk
+     *
+     * @return $this
+     */
+    public function setRsk($rsk)
+    {
+        $this->container['rsk'] = $rsk;
 
         return $this;
     }

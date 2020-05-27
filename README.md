@@ -1,4 +1,4 @@
-<img src="https://pay.bleumi.com/wp-content/uploads/2019/04/logo_dark_bleumi_invoice_6797x1122.png" height="30">
+<img src="./assets/images/BleumiPay.png" height="30">
 
 # Bleumi Pay SDK for PHP
 
@@ -32,7 +32,7 @@ To install the bindings via [Composer](http://getcomposer.org/), add the followi
 ```
 {
   "require": {
-        "bleumi/bleumi-pay-sdk-php":"1.0.21"
+        "bleumi/bleumi-pay-sdk-php":"1.0.22"
     }
 }
 ```
@@ -131,6 +131,7 @@ PayoutsApi | [**listPayouts**](docs/Api/PayoutsApi.md#listpayouts) | **GET** /v1
  - [Payout](docs/Model/Payout.md)
  - [PayoutItem](docs/Model/PayoutItem.md)
  - [PayoutItemInputs](docs/Model/PayoutItemInputs.md)
+ - [RskBalance](docs/Model/RskBalance.md)
  - [ValidateCheckoutRequest](docs/Model/ValidateCheckoutRequest.md)
  - [ValidateCheckoutResponse](docs/Model/ValidateCheckoutResponse.md)
  - [WalletBalance](docs/Model/WalletBalance.md)

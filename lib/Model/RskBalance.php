@@ -1,6 +1,6 @@
 <?php
 /**
- * WalletBalance
+ * RskBalance
  *
  * PHP version 5
  *
@@ -13,7 +13,7 @@
 /**
  * Bleumi Pay REST API
  *
- * A simple and powerful REST API to integrate ERC-20, Ethereum, xDai, Algorand payments and/or payouts into your business or application
+ * A simple and powerful REST API to integrate Algorand, Ethereum, ERC-20 and xDai payments and/or payouts into your business
  *
  * OpenAPI spec version: 1.0.0
  * Contact: info@bleumi.com
@@ -30,17 +30,16 @@ namespace Bleumi\Pay\Model;
 
 use \ArrayAccess;
 use \Bleumi\Pay\ObjectSerializer;
-use JsonSerializable;
 
 /**
- * WalletBalance Class Doc Comment
+ * RskBalance Class Doc Comment
  *
  * @category Class
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
+class RskBalance implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +48,7 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
       *
       * @var string
       */
-    protected static $swaggerModelName = 'WalletBalance';
+    protected static $swaggerModelName = 'RskBalance';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,11 +56,8 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'balance' => 'string',
-'token_balance' => 'string',
-'token_decimals' => 'int',
-'block_num' => 'string',
-'safety' => 'string'    ];
+        'rsk' => 'map[string,\Bleumi\Pay\Model\WalletBalance]',
+'rsk_testnet' => 'map[string,\Bleumi\Pay\Model\WalletBalance]'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -69,11 +65,8 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'balance' => null,
-'token_balance' => null,
-'token_decimals' => 'int64',
-'block_num' => null,
-'safety' => null    ];
+        'rsk' => null,
+'rsk_testnet' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -102,11 +95,8 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'balance' => 'balance',
-'token_balance' => 'token_balance',
-'token_decimals' => 'token_decimals',
-'block_num' => 'blockNum',
-'safety' => 'safety'    ];
+        'rsk' => 'rsk',
+'rsk_testnet' => 'rsk_testnet'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -114,11 +104,8 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'balance' => 'setBalance',
-'token_balance' => 'setTokenBalance',
-'token_decimals' => 'setTokenDecimals',
-'block_num' => 'setBlockNum',
-'safety' => 'setSafety'    ];
+        'rsk' => 'setRsk',
+'rsk_testnet' => 'setRskTestnet'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -126,11 +113,8 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'balance' => 'getBalance',
-'token_balance' => 'getTokenBalance',
-'token_decimals' => 'getTokenDecimals',
-'block_num' => 'getBlockNum',
-'safety' => 'getSafety'    ];
+        'rsk' => 'getRsk',
+'rsk_testnet' => 'getRskTestnet'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -190,11 +174,8 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['balance'] = isset($data['balance']) ? $data['balance'] : null;
-        $this->container['token_balance'] = isset($data['token_balance']) ? $data['token_balance'] : null;
-        $this->container['token_decimals'] = isset($data['token_decimals']) ? $data['token_decimals'] : null;
-        $this->container['block_num'] = isset($data['block_num']) ? $data['block_num'] : null;
-        $this->container['safety'] = isset($data['safety']) ? $data['safety'] : null;
+        $this->container['rsk'] = isset($data['rsk']) ? $data['rsk'] : null;
+        $this->container['rsk_testnet'] = isset($data['rsk_testnet']) ? $data['rsk_testnet'] : null;
     }
 
     /**
@@ -206,21 +187,6 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['balance'] === null) {
-            $invalidProperties[] = "'balance' can't be null";
-        }
-        if ($this->container['token_balance'] === null) {
-            $invalidProperties[] = "'token_balance' can't be null";
-        }
-        if ($this->container['token_decimals'] === null) {
-            $invalidProperties[] = "'token_decimals' can't be null";
-        }
-        if ($this->container['block_num'] === null) {
-            $invalidProperties[] = "'block_num' can't be null";
-        }
-        if ($this->container['safety'] === null) {
-            $invalidProperties[] = "'safety' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -237,121 +203,49 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
 
 
     /**
-     * Gets balance
+     * Gets rsk
      *
-     * @return string
+     * @return map[string,\Bleumi\Pay\Model\WalletBalance]
      */
-    public function getBalance()
+    public function getRsk()
     {
-        return $this->container['balance'];
+        return $this->container['rsk'];
     }
 
     /**
-     * Sets balance
+     * Sets rsk
      *
-     * @param string $balance Token balance for the wallet
+     * @param map[string,\Bleumi\Pay\Model\WalletBalance] $rsk rsk
      *
      * @return $this
      */
-    public function setBalance($balance)
+    public function setRsk($rsk)
     {
-        $this->container['balance'] = $balance;
+        $this->container['rsk'] = $rsk;
 
         return $this;
     }
 
     /**
-     * Gets token_balance
+     * Gets rsk_testnet
      *
-     * @return string
+     * @return map[string,\Bleumi\Pay\Model\WalletBalance]
      */
-    public function getTokenBalance()
+    public function getRskTestnet()
     {
-        return $this->container['token_balance'];
+        return $this->container['rsk_testnet'];
     }
 
     /**
-     * Sets token_balance
+     * Sets rsk_testnet
      *
-     * @param string $token_balance Token balance for the wallet in Ethereum format
+     * @param map[string,\Bleumi\Pay\Model\WalletBalance] $rsk_testnet rsk_testnet
      *
      * @return $this
      */
-    public function setTokenBalance($token_balance)
+    public function setRskTestnet($rsk_testnet)
     {
-        $this->container['token_balance'] = $token_balance;
-
-        return $this;
-    }
-
-    /**
-     * Gets token_decimals
-     *
-     * @return int
-     */
-    public function getTokenDecimals()
-    {
-        return $this->container['token_decimals'];
-    }
-
-    /**
-     * Sets token_decimals
-     *
-     * @param int $token_decimals Token decimal places
-     *
-     * @return $this
-     */
-    public function setTokenDecimals($token_decimals)
-    {
-        $this->container['token_decimals'] = $token_decimals;
-
-        return $this;
-    }
-
-    /**
-     * Gets block_num
-     *
-     * @return string
-     */
-    public function getBlockNum()
-    {
-        return $this->container['block_num'];
-    }
-
-    /**
-     * Sets block_num
-     *
-     * @param string $block_num Block in which the balance was last updated
-     *
-     * @return $this
-     */
-    public function setBlockNum($block_num)
-    {
-        $this->container['block_num'] = $block_num;
-
-        return $this;
-    }
-
-    /**
-     * Gets safety
-     *
-     * @return string
-     */
-    public function getSafety()
-    {
-        return $this->container['safety'];
-    }
-
-    /**
-     * Sets safety
-     *
-     * @param string $safety Safety level indicator
-     *
-     * @return $this
-     */
-    public function setSafety($safety)
-    {
-        $this->container['safety'] = $safety;
+        $this->container['rsk_testnet'] = $rsk_testnet;
 
         return $this;
     }
@@ -423,13 +317,5 @@ class WalletBalance implements ModelInterface, ArrayAccess, JsonSerializable
         }
 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
-    }
-
-    /**
-     * Customize the way json_encode() renders the object.
-     */
-    public function jsonSerialize()
-    {
-        return ObjectSerializer::sanitizeForSerialization($this);
     }
 }

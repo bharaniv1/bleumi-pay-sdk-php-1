@@ -87,7 +87,7 @@ class Configuration
      *
      * @var string
      */
-    protected $userAgent = 'BleumiPay/1.0.21/php';
+    protected $userAgent = 'BleumiPay/1.0.22/php';
 
     /**
      * Debug switch (default set to false)

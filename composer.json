@@ -1,10 +1,10 @@
 {
     "name": "bleumi/bleumi-pay-sdk-php",
-    "version": "1.0.21",
+    "version": "1.0.22",
     "description": "PHP SDK for Bleumi Pay REST API",
     "keywords": [
         "payment-gateway",
-        "cryptopayments",
+        "digital-currency-payments",
         "paymentprocessing",
         "stablecoins",
         "ethereum",
@@ -12,6 +12,7 @@
         "algorand",
         "xDAI",
         "bitcoin",
+        "rsk",
         "Bleumi Pay API"
     ],
     "homepage": "http://pay.bleumi.com",

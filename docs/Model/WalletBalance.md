@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **token_balance** | **string** | Token balance for the wallet in Ethereum format | 
 **token_decimals** | **int** | Token decimal places | 
 **block_num** | **string** | Block in which the balance was last updated | 
+**safety** | **string** | Safety level indicator | 
 
 ## Example
 
@@ -15,6 +16,7 @@ Name | Type | Description | Notes
     "balance": "1",
     "token_decimals": 15,
     "blockNum": "1698324",
-    "token_balance": "1000000000000000"
+    "token_balance": "1000000000000000",
+    "safety": "high"
 }
 ```

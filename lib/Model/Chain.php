@@ -49,6 +49,8 @@ const XDAI = 'xdai';
 const XDAI_TESTNET = 'xdai_testnet';
 const ALG_MAINNET = 'alg_mainnet';
 const ALG_TESTNET = 'alg_testnet';
+const RSK = 'rsk';
+const RSK_TESTNET = 'rsk_testnet';
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -61,6 +63,8 @@ self::GOERLI,
 self::XDAI,
 self::XDAI_TESTNET,
 self::ALG_MAINNET,
-self::ALG_TESTNET,        ];
+self::ALG_TESTNET,
+self::RSK,
+self::RSK_TESTNET,        ];
     }
 }

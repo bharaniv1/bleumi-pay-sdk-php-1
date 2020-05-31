@@ -4,7 +4,7 @@
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/bleumi/bleumi-pay-sdk-php/master/LICENSE)
 
-The Bleumi Pay SDK is a one-stop shop to help you integrate Algorand, Ethereum, ERC-20 and xDai payments and/or payouts into your business or application. The SDK bundles [Bleumi Pay API](https://pay.bleumi.com/docs/#introduction) into one SDK to ease implementation and support.
+The Bleumi Pay SDK is a one-stop shop to help you integrate ERC-20, Ethereum, xDai, Algo, Algorand Standard Asset, RSK ERC-20 & RSK payments and/or payouts into your business or application. The SDK bundles [Bleumi Pay API](https://pay.bleumi.com/docs/#introduction) into one SDK to ease implementation and support.
 
 **bleumi-pay-sdk-php** is a PHP library that provides an interface between your PHP application and [Bleumi Pay API](https://pay.bleumi.com/docs/#introduction). This tutorial covers the basics, including examples, needed to use the SDK.
 
@@ -49,7 +49,7 @@ Download the files and include `autoload.php`:
 
 ### Run Sample Code
 
-The following code generates a payment request to accept payment from the buyer for a specific seller.
+The following code generates an unique checkout URL to accept payment from the buyer.
 
 ```php
 <?php
@@ -57,28 +57,33 @@ require_once(__DIR__ . '/vendor/autoload.php');
 // Configure API key authorization: ApiKeyAuth
 $config = Bleumi\Pay\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', '<Your API Key>');
 
-$apiInstance = new Bleumi\Pay\Api\PaymentsApi(
+$apiInstance = new Bleumi\Pay\Api\HostedCheckoutsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
+$chain = new \Bleumi\Pay\Model\Chain(); 
 
 try {
-    $createReq = new \Bleumi\Pay\Model\CreatePaymentRequest();  
-    $chain = new \Bleumi\Pay\Model\Chain(); // \Bleumi\Pay\Model\Chain | Network in which payment is to be created. Please refer documentation for Supported Networks
-    $createReq->setId($id);
-    $createReq->setBuyerAddress("<BUYER_ADDR>"); // Replace <BUYER_ADDR> with the Buyer Address
-    $createReq->setTransferAddress("<MERCHANT_ADDR>"); // Replace <MERCHANT_ADDR> with the Merchant's Enthereum Network Address
-
-    $result = $apiInstance->createPayment($createReq, $chain::GOERLI);
-    $data = json_encode($result, JSON_PRETTY_PRINT);
-    echo  $data;
+    $createReq = new \Bleumi\Pay\Model\CreateCheckoutUrlRequest();  // Checkout URL creation parameters. 
+    $createReq->setId("<ID>"); // string |  Eg. '1'
+    $createReq->setCurrency("<CURRENCY>"); // string |  Eg. 'USD'
+    $createReq->setAmount("<AMOUNT>"); // string | Eg. '10'
+    $createReq->setSuccessUrl("<SUCCESS_URL>"); // string | Eg. https://demo.store/api/completeOrder
+    $createReq->setCancelUrl("<CANCEL_ORDER_URL>"); // string | Eg. https://demo.store/api/cancelOrder
+    $createReq->setToken("<TOKEN>"); // string |  Replace <TOKEN>  by anyone of the following values: 'ETH' or 'XDAI' or 'XDAIT' or ECR-20 Contract Address or 'RBTC' or RSK ECR-20 Contract Address or 'Asset ID' of Algorand Standard Asset. | Optional
+    $createReq->setChain($chain::GOERLI); //Optional, but required if '<Token>' is specified; Replace GOERLI with the Chain as required
+    $result = $apiInstance->createCheckoutUrl($createReq);
+    echo  json_encode($result, JSON_PRETTY_PRINT);
 } catch (Exception $e) {
-    echo 'Exception when calling PaymentsApi->createPayment: ', $e->getMessage(), nl2br (" \n ");
+    echo 'Exception when calling HostedCheckoutsApi->createCheckoutUrl: ', $e->getMessage(), nl2br (" \n ");
     echo 'Code: ', $e->getCode(), nl2br (" \n ");
-    echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
+    if (method_exists($e, 'getResponseBody')) {
+        echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
+    }
 }
+?>
 ```
 
 More examples can be found under each method in [SDK Classes](#sdk-classes) section.
@@ -87,16 +92,15 @@ More examples can be found under each method in [SDK Classes](#sdk-classes) sect
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-PaymentsApi | [**createPayment**](docs/Api/PaymentsApi.md#createpayment) | **POST** /v1/payment | Generate a unique wallet address in the specified network to accept payment
+HostedCheckoutsApi | [**createCheckoutUrl**](docs/Api/HostedCheckoutsApi.md#createcheckouturl) | **POST** /v1/payment/hc | Generate a unique checkout URL to accept payment.
+HostedCheckoutsApi | [**listTokens**](docs/Api/HostedCheckoutsApi.md#listtokens) | **GET** /v1/payment/hc/tokens | Retrieve all tokens configured for the Hosted Checkout in your account in the [Bleumi Pay Dashboard](https://pay.bleumi.com/app/).
+HostedCheckoutsApi | [**validateCheckoutPayment**](docs/Api/HostedCheckoutsApi.md#validatecheckoutpayment) | **POST** /v1/payment/hc/validate | Validate the GET parameters passed by Hosted Checkout in successUrl upon successfully completing payment.
 PaymentsApi | [**getPayment**](docs/Api/PaymentsApi.md#getpayment) | **GET** /v1/payment/{id} | Retrieve the wallet addresses &amp; token balances for a given payment
 PaymentsApi | [**listPayments**](docs/Api/PaymentsApi.md#listpayments) | **GET** /v1/payment | Retrieve all payments created.
 PaymentsApi | [**settlePayment**](docs/Api/PaymentsApi.md#settlepayment) | **POST** /v1/payment/{id}/settle | Settle a specific amount of a token for a given payment to the transferAddress and remaining balance (if any) will be refunded to the buyerAddress
 PaymentsApi | [**refundPayment**](docs/Api/PaymentsApi.md#refundpayment) | **POST** /v1/payment/{id}/refund | Refund the balance of a token for a given payment to the buyerAddress
 PaymentsApi | [**getPaymentOperation**](docs/Api/PaymentsApi.md#getpaymentoperation) | **GET** /v1/payment/{id}/operation/{txid} | Retrieve a payment operation for a specific payment.
 PaymentsApi | [**listPaymentOperations**](docs/Api/PaymentsApi.md#listpaymentoperations) | **GET** /v1/payment/{id}/operation | Retrieve all payment operations for a specific payment.
-HostedCheckoutsApi | [**createCheckoutUrl**](docs/Api/HostedCheckoutsApi.md#createcheckouturl) | **POST** /v1/payment/hc | Generate a unique checkout URL to accept payment.
-HostedCheckoutsApi | [**listTokens**](docs/Api/HostedCheckoutsApi.md#listtokens) | **GET** /v1/payment/hc/tokens | Retrieve all tokens configured for the Hosted Checkout in your account in the [Bleumi Pay Dashboard](https://pay.bleumi.com/app/).
-HostedCheckoutsApi | [**validateCheckoutPayment**](docs/Api/HostedCheckoutsApi.md#validatecheckoutpayment) | **POST** /v1/payment/hc/validate | Validate the GET parameters passed by Hosted Checkout in successUrl upon successfully completing payment.
 PayoutsApi | [**createPayout**](docs/Api/PayoutsApi.md#createpayout) | **POST** /v1/payout | Create a payout.
 PayoutsApi | [**listPayouts**](docs/Api/PayoutsApi.md#listpayouts) | **GET** /v1/payout | Returns a list of payouts
 

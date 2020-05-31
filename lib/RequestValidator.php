@@ -32,6 +32,16 @@ class RequestValidator
         return false;
     }
 
+    public static function isRskAddress($addr = null)
+    {
+        if (isset($addr)) {
+            if (preg_match("/^0x[a-fA-F0-9]{40}$/", $addr) || ($addr === "RBTC") ) {
+                return true;
+            } 
+        }
+        return false;
+    }
+
     public static function isAlgoAddress($addr = null)
     {
         if (isset($addr)) {
@@ -62,6 +72,16 @@ class RequestValidator
         return false;
     }
 
+    public static function isRskNet($chain = null)
+    {
+        if (isset($chain)) {
+            if ( ($chain === "rsk") || ($chain === "rsk_testnet")) {
+                return true;
+            } 
+        }
+        return false;
+    }
+
     public static function checkAlgoAddress ($name, $input, $isToken=false) {
         $msg = null;
         if ($isToken === true) {
@@ -72,6 +92,14 @@ class RequestValidator
             if (!self::isAlgoAddress($input)) {
                 $msg = "'$name' is not a valid Algorand address";
             }
+        }
+        return $msg;
+    }
+
+    public static function checkRskAddress ($name, $input) {
+        $msg = null;
+        if (!self::isRskAddress($input)) {
+            $msg = "'$name' is not a valid RSK address";
         }
         return $msg;
     }
@@ -109,6 +137,8 @@ class RequestValidator
         if (isset($input)) {
             if (self::isAlgoNet($chain)) {
                 $msg = self::checkAlgoAddress($name, $input, $isToken);
+            } else if (self::isRskNet($chain)) {
+                $msg = self::checkRskAddress($name, $input, $isToken);
             } else {
                 $msg = self::checkEthAddress($name, $input);
             }
@@ -147,7 +177,7 @@ class RequestValidator
         //If 'Token' is provided, it has to be a valid network address.
         $token = $body['token'];
         if (isset($token)) {
-            $msg = self::checkNetworkAddress('Algorand Standard Asset Token', $token, $chain, false, true);
+            $msg = self::checkNetworkAddress('Token', $token, $chain, false, true);
             if ($msg !== null) {
                 return $msg;
             }

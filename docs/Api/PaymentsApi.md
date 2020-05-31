@@ -1,72 +1,5 @@
 # Bleumi\Pay\PaymentsApi
 
-
-# **createPayment**
-> \Bleumi\Pay\Model\CreatePaymentResponse createPayment($body, $chain)
-
-This method generates a unique wallet address in the specified network to accept payment.
-
-### Example
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-// Configure API key authorization: ApiKeyAuth
-$config = Bleumi\Pay\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', '<Your API Key>');
-
-$apiInstance = new Bleumi\Pay\Api\PaymentsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-
-try {
-    $createReq = new \Bleumi\Pay\Model\CreatePaymentRequest();  
-    $chain = new \Bleumi\Pay\Model\Chain(); // \Bleumi\Pay\Model\Chain | Network in which payment is to be created. Please refer documentation for Supported Networks
-    $createReq->setId('<ID>'); // string | Replace <ID> with the unique identifier of the payment
-    $createReq->setBuyerAddress("<BUYER_ADDR>"); // Replace <BUYER_ADDR> with the Buyer Address
-    $createReq->setTransferAddress("<MERCHANT_ADDR>"); // Replace <MERCHANT_ADDR> with the Merchant's Enthereum Network Address
-
-    $result = $apiInstance->createPayment($createReq, $chain::GOERLI);
-    $data = json_encode($result, JSON_PRETTY_PRINT);
-    echo  $data;
-} catch (Exception $e) {
-    echo 'Exception when calling PaymentsApi->createPayment: ', $e->getMessage(), nl2br (" \n ");
-    echo 'Code: ', $e->getCode(), nl2br (" \n ");
-    echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
-}
-?>
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**\Bleumi\Pay\Model\CreatePaymentRequest**](../Model/CreatePaymentRequest.md)|  |
- **chain** | [**\Bleumi\Pay\Model\Chain**](../Model/.md)| Network in which payment is to be created. Please refer documentation for Supported Networks | [optional]
-
-### Return type
-
-[**\Bleumi\Pay\Model\CreatePaymentResponse**](../Model/CreatePaymentResponse.md)
-
-Field | Type | Description
------ | ----- | -----
-addr | string | Wallet address
-inputs | map | Object containing the network specific details used to create the wallet
-
-Bleumi recommends each merchant to keep a copy of the `inputs` map to ensure access to wallet funds at all times.
-
-
-### 400 Errors
-
-The following table is a list of possible error codes that can be returned, along with additional information about how to resolve them for a response with 400 status code.
-
-errorCode <br> <i>errorMessage</i> | Description
----- | ---- 
-ValidationError <br> <i>&lt;details&gt;</i> | Details on input which does not conform to the above schema
-ValidationError <br> <i>wallet_already_exists&#124;&lt;addr&gt;</i> | A wallet with address &lt;addr&gt; has already been created with the specified payment 'id' for the given network
-
-
 # **getPayment**
 > \Bleumi\Pay\Model\Payment getPayment($id)
 
@@ -89,12 +22,13 @@ $id = "<ID>"; // string | Replace <ID> with the unique identifier of the payment
 
 try {
     $result = $apiInstance->getPayment($id);
-    $data = json_encode($result, JSON_PRETTY_PRINT);
-    echo  $data;
+    echo json_encode($result, JSON_PRETTY_PRINT);
 } catch (Exception $e) {
     echo 'Exception when calling PaymentsApi->getPayment: ', $e->getMessage(), nl2br (" \n ");
     echo 'Code: ', $e->getCode(), nl2br (" \n ");
-    echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
+    if (method_exists($e, 'getResponseBody')) {
+        echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
+    }
 }
 ?>
 ```
@@ -161,13 +95,15 @@ try {
     $result = $apiInstance->listPayments($next_token, $sort_by, $sort_order, $start_at, $end_at);
     $payments = $result->getResults();
     $nextToken = $result->getNextToken();
-    echo json_encode($payments);
+    echo  json_encode($payments, JSON_PRETTY_PRINT);
     echo nl2br (" \n ");
     echo 'nextToken:', $nextToken , nl2br (" \n ");
 } catch (Exception $e) {
     echo 'Exception when calling PaymentsApi->listPayments: ', $e->getMessage(), nl2br (" \n ");
     echo 'Code: ', $e->getCode(), nl2br (" \n ");
-    echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");    
+    if (method_exists($e, 'getResponseBody')) {
+        echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
+    }
 }
 ?>
 ```
@@ -226,15 +162,16 @@ try {
     $id = '<ID>';   // string | Replace <ID> with the unique identifier of the payment (specified during Create Payment)
     $settleReq = new \Bleumi\Pay\Model\PaymentSettleRequest();
     $settleReq->setAmount('<AMOUNT>'); // string | Amount to settle
-    $settleReq->setToken('<TOKEN>'); // string |  Replace <TOKEN>  by anyone of the following values: 'ETH'/'XDAI'/'XDAIT'/ECR-20 Contract Address
+    $settleReq->setToken('<TOKEN>'); // string |  Replace <TOKEN>  by anyone of the following values: 'ETH' or 'XDAI' or 'XDAIT' or ECR-20 Contract Address or 'RBTC' or RSK ECR-20 Contract Address or 'Asset ID' of Algorand Standard Asset. | Optional
 
     $result = $apiInstance->settlePayment($settleReq, $id, $chain::GOERLI);
-    $data = json_encode($result, JSON_PRETTY_PRINT);
-    echo  $data;
+    echo  json_encode($result, JSON_PRETTY_PRINT);
 } catch (Exception $e) {
     echo 'Exception when calling PaymentsApi->settlePayment: ', $e->getMessage(), nl2br (" \n ");
     echo 'Code: ', $e->getCode(), nl2br (" \n ");
-    echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
+    if (method_exists($e, 'getResponseBody')) {
+        echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
+    }
 }
 ?>
 ```
@@ -289,14 +226,15 @@ try {
     $chain = new \Bleumi\Pay\Model\Chain(); // \Bleumi\Pay\Model\Chain | Network in which payment is to be created.
     $id = '<ID>'; // string | Replace <ID> with the unique identifier of the payment (specified during Create Payment)
     $refundReq = new \Bleumi\Pay\Model\PaymentRefundRequest(); // \Bleumi\Pay\Model\PaymentRefundRequest | Request body - used to specify the token to refund.
-    $refundReq->setToken('<TOKEN>'); // string |  Replace <TOKEN>  by anyone of the following values: 'ETH'/'XDAI'/'XDAIT'/ECR-20 Contract Address
+    $refundReq->setToken('<TOKEN>'); // string |  Replace <TOKEN>  by anyone of the following values: 'ETH' or 'XDAI' or 'XDAIT' or ECR-20 Contract Address or 'RBTC' or RSK ECR-20 Contract Address or 'Asset ID' of Algorand Standard Asset. | Optional
     $result = $apiInstance->refundPayment($refundReq, $id, $chain::GOERLI);
-    $data = json_encode($result, JSON_PRETTY_PRINT);
-    echo  $data;
+    echo  json_encode($result, JSON_PRETTY_PRINT);
 } catch (Exception $e) {
     echo 'Exception when calling PaymentsApi->refundPayment: ', $e->getMessage(), nl2br (" \n ");
     echo 'Code: ', $e->getCode(), nl2br (" \n ");
-    echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
+    if (method_exists($e, 'getResponseBody')) {
+        echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
+    }
 }
 ?>
 ```
@@ -352,12 +290,13 @@ $txid = '<TXID>'; // string | Replace <TXID> with transaction ID of a specific o
 
 try {
     $result = $apiInstance->getPaymentOperation($id, $txid);
-    $data = json_encode($result, JSON_PRETTY_PRINT);
-    echo  $data;
+    echo  json_encode($result, JSON_PRETTY_PRINT);
 } catch (Exception $e) {
     echo 'Exception when calling PaymentsApi->getPaymentOperation: ', $e->getMessage(), nl2br (" \n ");
     echo 'Code: ', $e->getCode(), nl2br (" \n ");
-    echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
+    if (method_exists($e, 'getResponseBody')) {
+        echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
+    }
 }
 ?>
 ```
@@ -406,11 +345,13 @@ $next_token = '<NEXT_TOKEN>'; // string | Replace <NEXT_TOKEN> with cursor to st
 try {
     $result = $apiInstance->listPaymentOperations($id, $next_token);
     $paymentOperations = $result->getResults();
-    echo json_encode($paymentOperations);
+    echo json_encode($paymentOperations, JSON_PRETTY_PRINT);
 } catch (Exception $e) {
     echo 'Exception when calling PaymentsApi->listPaymentOperations: ', $e->getMessage(), nl2br (" \n ");
     echo 'Code: ', $e->getCode(), nl2br (" \n ");
-    echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
+    if (method_exists($e, 'getResponseBody')) {
+        echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
+    }
 }
 ?>
 ```

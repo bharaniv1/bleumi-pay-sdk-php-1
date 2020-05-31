@@ -1,6 +1,6 @@
 # Bleumi\Pay\PayoutsApi
 
-Payouts are available only for the Ethereum and xDAI networks today and require you to set up a Private Payment Processor and link it to your account. Please contact support@bleumi.com if you want to enable payouts for your account.
+Payouts are available only for the Ethereum, xDAI and RSK networks today and require you to set up a Private Payment Processor and link it to your account. Please contact support@bleumi.com if you want to enable payouts for your account.
 
 
 # **createPayout**
@@ -37,14 +37,13 @@ try {
 
     $createReq = new \Bleumi\Pay\Model\CreatePayoutRequest();   // \Bleumi\Pay\Model\CreatePayoutRequest | Request body - used to specify payout creation parameters.
     $createReq->setTxId($id);
-    $createReq->setToken("<TOKEN>"); // string |  Replace <TOKEN>  by anyone of the following values: 'ETH'/'XDAI'/'XDAIT'/ECR-20 Contract Address/ Algorand Standard Asset Address
+    $createReq->setToken("<TOKEN>"); // string |  Replace <TOKEN>  by anyone of the following values: 'ETH' or 'XDAI' or 'XDAIT' or ECR-20 Contract Address or 'RBTC' or RSK ECR-20 Contract Address or 'Asset ID' of Algorand Standard Asset.
     $createReq->setPayouts($payouts);
 
     $chain = new \Bleumi\Pay\Model\Chain(); // \Bleumi\Pay\Model\Chain | Network in which payment is to be created. Please refer documentation for Supported Networks
 
     $result = $apiInstance->createPayout($createReq, $chain::GOERLI);
-    $data = json_encode($result, JSON_PRETTY_PRINT);
-    echo  $data;
+    echo  json_encode($result, JSON_PRETTY_PRINT);
 } catch (Exception $e) {
     echo 'Exception when calling PayoutsApi->createPayout: ', $e->getMessage(), PHP_EOL;
 }
@@ -115,7 +114,7 @@ try {
     $result = $apiInstance->listPayouts($next_token, $sort_by, $start_at, $end_at);
     $payouts = $result->getResults();
     $nextToken = $result->getNextToken();
-    echo json_encode($payouts);
+    echo json_encode($result, JSON_PRETTY_PRINT);
     echo nl2br (" \n ");
     echo 'nextToken:', $nextToken , nl2br (" \n ");
 } catch (Exception $e) {

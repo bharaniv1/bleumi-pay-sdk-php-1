@@ -3,7 +3,7 @@
 # **createCheckoutUrl**
 > \Bleumi\Pay\Model\CreateCheckoutUrlResponse createCheckoutUrl($body)
 
-This method generates a unique checkout URL to accept payment.
+This method generates an unique checkout URL to accept payment.
 
 ### Example
 ```php
@@ -27,15 +27,16 @@ try {
     $createReq->setAmount("<AMOUNT>"); // string | Eg. '10'
     $createReq->setSuccessUrl("<SUCCESS_URL>"); // string | Eg. https://demo.store/api/completeOrder
     $createReq->setCancelUrl("<CANCEL_ORDER_URL>"); // string | Eg. https://demo.store/api/cancelOrder
-    $createReq->setToken("<TOKEN>"); // string |  Replace <TOKEN>  by anyone of the following values: 'ETH' or 'XDAI' or ECR-20 Contract Address or 'XDAIT'. | Optional
+    $createReq->setToken("<TOKEN>"); // string |  Replace <TOKEN>  by anyone of the following values: 'ETH' or 'XDAI' or 'XDAIT' or ECR-20 Contract Address or 'RBTC' or RSK ECR-20 Contract Address or 'Asset ID' of Algorand Standard Asset. | Optional
     $createReq->setChain($chain::GOERLI); //Optional, but required if '<Token>' is specified; Replace GOERLI with the Chain as required
     $result = $apiInstance->createCheckoutUrl($createReq);
-    $reponse = json_encode($result, JSON_PRETTY_PRINT);
-    echo  $reponse;
+    echo  json_encode($result, JSON_PRETTY_PRINT);
 } catch (Exception $e) {
     echo 'Exception when calling HostedCheckoutsApi->createCheckoutUrl: ', $e->getMessage(), nl2br (" \n ");
     echo 'Code: ', $e->getCode(), nl2br (" \n ");
-    echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
+    if (method_exists($e, 'getResponseBody')) {
+        echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
+    }
 }
 ?>
 ```
@@ -66,16 +67,13 @@ The hmac_input GET parameter passed to successUrl contains payment parameters as
             <i>XDAI</i> - for xDai<br> 
             <i>XDAIT</i> - for xDai Testnet<br> 
             <i>ALGO</i> - for Algo <br> 
+            <i>RBTC</i> - for R-BTC <br> 
             <i>&lt;asset id&gt;</i> - for Algorand Standard Asset <br> 
-            <i>&lt;contract address of ERC-20 token&gt;</i> - for ERC-20; Please refer to <a href="https://pay.bleumi.com/docs/#erc-20" target="_blank">ERC-20 Tokens</a> for contract address; </li>
+            <i>&lt;contract address of ERC-20 token&gt;</i> - for ERC-20; Please refer to <a href="https://pay.bleumi.com/docs/#erc-20" target="_blank">ERC-20 Tokens</a> for contract address;<br> 
+            <i>&lt;contract address of RSK ERC-20 token&gt;</i> - for RSK ERC-20; Please refer to <a href="https://pay.bugnet.work/docs/#rsk-tokens-erc-20" target="_blank">RSK ERC-20 Tokens</a> for contract address;<br> 
+        </li>
         <li><b>Amount</b> - Token amount for the payment</li>
         <li><b>Number of block confirmations</b><br> 
-            <i>12</i> - for ETH<br> 
-            <i>0</i> - for XDAI<br> 
-            <i>0</i> - for XDAIT<br> 
-            <i>0</i> - for ALGO<br> 
-            <i>0</i> - for Algorand Standard Asset<br> 
-            <i>12</i> - for ERC-20<br>
         </li>
     </li>
 </ul>
@@ -115,12 +113,13 @@ $apiInstance = new Bleumi\Pay\Api\HostedCheckoutsApi(
 
 try {
     $result = $apiInstance->listTokens();
-    echo json_encode($result);
-    echo nl2br (" \n ");
+    echo  json_encode($result, JSON_PRETTY_PRINT);
 } catch (Exception $e) {
     echo 'Exception when calling HostedCheckoutsApi->listTokens: ', $e->getMessage(), nl2br (" \n ");
     echo 'Code: ', $e->getCode(), nl2br (" \n ");
-    echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
+    if (method_exists($e, 'getResponseBody')) {
+        echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
+    }
 }
 ?>
 ```
@@ -167,12 +166,13 @@ try {
     $validateReq->setHmacKeyId('<VER>'); // Eg. v1
     $validateReq->setHmacValue('<HMAC_VALUE>'); // Eg. 0d910e8dfd087dd0d0b7c3f6504f7f4316b507afc81c09e844cfeee0f3dbaef6
     $result = $apiInstance->validateCheckoutPayment($validateReq);
-    $reponse = json_encode($result, JSON_PRETTY_PRINT);
-    echo  $reponse;
+    echo  json_encode($result, JSON_PRETTY_PRINT);
 } catch (Exception $e) {
     echo 'Exception when calling HostedCheckoutsApi->validateCheckoutPayment: ', $e->getMessage(), nl2br (" \n ");
     echo 'Code: ', $e->getCode(), nl2br (" \n ");
-    echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
+    if (method_exists($e, 'getResponseBody')) {
+        echo 'Response Body: ', $e->getResponseBody(), nl2br (" \n ");
+    }
 }
 ?>
 ```

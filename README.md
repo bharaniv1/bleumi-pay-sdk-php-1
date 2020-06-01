@@ -4,7 +4,7 @@
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/bleumi/bleumi-pay-sdk-php/master/LICENSE)
 
-The Bleumi Pay SDK is a one-stop shop to help you integrate ERC-20, Ethereum, xDai, Algo, Algorand Standard Asset, RSK ERC-20 & RSK payments and/or payouts into your business or application. The SDK bundles [Bleumi Pay API](https://pay.bleumi.com/docs/#introduction) into one SDK to ease implementation and support.
+The Bleumi Pay SDK helps you integrate Algo, Algorand Standard Asset, Ethereum, ERC-20, RSK, RSK ERC-20 & xDai payments and payouts into your business or application. The SDK bundles [Bleumi Pay API](https://pay.bleumi.com/docs/#introduction) into one SDK to ease implementation and support.
 
 **bleumi-pay-sdk-php** is a PHP library that provides an interface between your PHP application and [Bleumi Pay API](https://pay.bleumi.com/docs/#introduction). This tutorial covers the basics, including examples, needed to use the SDK.
 
@@ -114,8 +114,6 @@ PayoutsApi | [**listPayouts**](docs/Api/PayoutsApi.md#listpayouts) | **GET** /v1
  - [CheckoutToken](docs/Model/CheckoutToken.md)
  - [CreateCheckoutUrlRequest](docs/Model/CreateCheckoutUrlRequest.md)
  - [CreateCheckoutUrlResponse](docs/Model/CreateCheckoutUrlResponse.md)
- - [CreatePaymentRequest](docs/Model/CreatePaymentRequest.md)
- - [CreatePaymentResponse](docs/Model/CreatePaymentResponse.md)
  - [CreatePayoutRequest](docs/Model/CreatePayoutRequest.md)
  - [CreatePayoutResponse](docs/Model/CreatePayoutResponse.md)
  - [EthereumBalance](docs/Model/EthereumBalance.md)

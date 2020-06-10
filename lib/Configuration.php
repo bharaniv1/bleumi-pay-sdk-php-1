@@ -87,7 +87,7 @@ class Configuration
      *
      * @var string
      */
-    protected $userAgent = 'BleumiPay/1.0.22/php';
+    protected $userAgent = 'BleumiPay/1.0.23/php';
 
     /**
      * Debug switch (default set to false)
@@ -396,7 +396,7 @@ class Configuration
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . PHP_VERSION . PHP_EOL;
         $report .= '    OpenAPI Spec Version: 1.0.0' . PHP_EOL;
-        $report .= '    SDK Package Version: 1.0.15' . PHP_EOL;
+        $report .= '    SDK Package Version: 1.0.23' . PHP_EOL;
         $report .= '    Temp Folder Path: ' . self::getDefaultConfiguration()->getTempFolderPath() . PHP_EOL;
 
         return $report;

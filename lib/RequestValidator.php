@@ -147,43 +147,6 @@ class RequestValidator
         return $msg;
     }
 
-    // validateCreatePaymentRequest - checks if createPayment request parameters are valid
-    public static function validateCreatePaymentRequest($body, $chain = null)
-    {
-        //Checking if 'id' is provided for payment creation
-        $msg = self::checkRequiredParam('Id', $body['id']);
-        if ($msg !== null) {
-            return $msg;
-        }
-
-        //Checking if 'Chain' is provided
-        $msg = self::checkRequiredParam('Chain', $chain);
-        if ($msg !== null) {
-            return $msg;
-        }
-
-        //Checking if 'BuyerAddress' is provided & is a valid network address
-        $msg = self::checkNetworkAddress('BuyerAddress', $body['buyer_address'], $chain, true, false);
-        if ($msg !== null) {
-            return $msg;
-        }
-
-        //Checking if 'TransferAddress' is provided & is a valid network address
-        $msg = self::checkNetworkAddress('TransferAddress', $body['transfer_address'], $chain, true, false);
-        if ($msg !== null) {
-            return $msg;
-        }
-
-        //If 'Token' is provided, it has to be a valid network address.
-        $token = $body['token'];
-        if (isset($token)) {
-            $msg = self::checkNetworkAddress('Token', $token, $chain, false, true);
-            if ($msg !== null) {
-                return $msg;
-            }
-        }
-    }
-
     // validateRefundPaymentRequest - checks if refundPayment parameters are valid
     public static function validateRefundPaymentRequest($body, $chain = null) {
         
@@ -271,6 +234,12 @@ class RequestValidator
 
             //Checking if 'Token' is a valid network address
             $msg = self::checkNetworkAddress('Token', $token, $chain, false, true);
+            if ($msg !== null) {
+                return $msg;
+            }
+
+            //Checking if 'TransferAddress' is provided & is a valid network address
+            $msg = self::checkNetworkAddress('TransferAddress', $body['transfer_address'], $chain, false, false);
             if ($msg !== null) {
                 return $msg;
             }

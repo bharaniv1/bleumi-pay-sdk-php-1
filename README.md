@@ -32,7 +32,7 @@ To install the bindings via [Composer](http://getcomposer.org/), add the followi
 ```
 {
   "require": {
-        "bleumi/bleumi-pay-sdk-php":"1.0.22"
+        "bleumi/bleumi-pay-sdk-php":"1.0.23"
     }
 }
 ```
@@ -106,6 +106,7 @@ PayoutsApi | [**listPayouts**](docs/Api/PayoutsApi.md#listpayouts) | **GET** /v1
 
 ## Documentation For Models
 
+ - [AlgorandAddress](docs/Model/AlgorandAddress.md)
  - [AlgorandBalance](docs/Model/AlgorandBalance.md)
  - [AlgorandWalletAddress](docs/Model/AlgorandWalletAddress.md)
  - [AlgorandWalletInputs](docs/Model/AlgorandWalletInputs.md)
@@ -116,6 +117,7 @@ PayoutsApi | [**listPayouts**](docs/Api/PayoutsApi.md#listpayouts) | **GET** /v1
  - [CreateCheckoutUrlResponse](docs/Model/CreateCheckoutUrlResponse.md)
  - [CreatePayoutRequest](docs/Model/CreatePayoutRequest.md)
  - [CreatePayoutResponse](docs/Model/CreatePayoutResponse.md)
+ - [EthereumAddress](docs/Model/EthereumAddress.md)
  - [EthereumBalance](docs/Model/EthereumBalance.md)
  - [EthereumWalletAddress](docs/Model/EthereumWalletAddress.md)
  - [EthereumWalletInputs](docs/Model/EthereumWalletInputs.md)
@@ -133,6 +135,7 @@ PayoutsApi | [**listPayouts**](docs/Api/PayoutsApi.md#listpayouts) | **GET** /v1
  - [Payout](docs/Model/Payout.md)
  - [PayoutItem](docs/Model/PayoutItem.md)
  - [PayoutItemInputs](docs/Model/PayoutItemInputs.md)
+ - [RskAddress](docs/Model/RskAddress.md)
  - [RskBalance](docs/Model/RskBalance.md)
  - [ValidateCheckoutRequest](docs/Model/ValidateCheckoutRequest.md)
  - [ValidateCheckoutResponse](docs/Model/ValidateCheckoutResponse.md)

@@ -3,38 +3,41 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ethereum** <br> (Optional) | [**map[string,\Bleumi\Pay\Model\EthereumWalletAddress]**](EthereumWalletAddress.md) | A dictionary which gives the wallet addresses in Ethereum Network | 
-**algorand** <br> (Optional) | [**map[string,\Bleumi\Pay\Model\AlgorandWalletAddress]**](AlgorandWalletAddress.md) | A dictionary which gives the wallet addresses in Algorand Network | 
-**rsk** | [**map[string,\Bleumi\Pay\Model\EthereumWalletAddress]**](EthereumWalletAddress.md) | A dictionary which gives the wallet addresses in Rsk Network | 
-
+**ethereum** <br> (Optional) | [**map[string,\Bleumi\Pay\Model\EthereumAddress]**](EthereumAddress.md) | A dictionary which gives the wallet addresses in Ethereum Network |
+**algorand** <br> (Optional) | [**map[string,\Bleumi\Pay\Model\AlgorandAddress]**](AlgorandAddress.md) | A dictionary which gives the wallet addresses in Algorand Network |
+**rsk** <br> (Optional) | [**map[string,\Bleumi\Pay\Model\RskAddress]**](RskAddress.md) | A dictionary which gives the wallet addresses in Rsk Network |
 
 ## Example
 
 ```json
 {
     "ethereum": {
-      "goerli": {
-        "addr": "0xbe7b6dd3a81b9ae6b27b9a4690af39690095c791",
-        "inputs": {
-          "buyer": "0x713883bf69b786f0a7ab6e2248a70c50577f6b34",
-          "walletLibrary": "0xb33893fdf59b634653fcbed27b5d38d86710fc40",
-          "merchant": "0x5db2d6542d55b2aec1f10d0c0df3b0169bf41e41",
-          "salt": "0x5fca1a8d4c6e8786f915a57a9bdde2be9d643b93f366ffa713384fe75762e4aa",
-          "walletProxy": "0xfaac6b338f79cfd8a53dfec95263f12ef046a049"
+      "xdai_testnet": {
+        "0x13e4acefe6a6700604929946e70e6443e4e73447|0x13e4acefe6a6700604929946e70e6443e4e73447":{
+          "addr": "0xbe1fa332f24ba568108ba55a25eccf93d882f54e",
+          "inputs": {
+            "buyer": "0x13e4acefe6a6700604929946e70e6443e4e73447",
+            "walletLibrary": "0xb33893fdf59b634653fcbed27b5d38d86710fc40",
+            "merchant": "0x13e4acefe6a6700604929946e70e6443e4e73447",
+            "salt": "0x4d5afc486391108fd9af8e33cec2caa8038899c7974fae22a3c3bb0d127ab8a7",
+            "walletProxy": "0xfaac6b338f79cfd8a53dfec95263f12ef046a049"
+          }
         }
       }
     },
     "algorand": {
       "alg_testnet": {
-          "addr": "BEGKKXKFVAIU2PJK274A6GJDQK7J323RLEPMRRFKSDARTX2LFYR6S6VNLM",
-        "inputs": {
-          "merchant": "CQRMTAHZJA3SIEOTEMZXCAIZKUWE2CCLBCFYQI4NINU43IOTEWT4LOT4IY",
-          "salt": "dbc9d66dca9185c04c8fb6dc201db8f572ICevWSmBwaIL+TZExKWDigc4PDAQwy125SrvxoMHoWHNbS79Dp+w==",
-          "gas": "CQRMTAHZJA3SIEOTEMZXCAIZKUWE2CCLBCFYQI4NINU43IOTEWT4LOT4IY",
-          "programBytes": "ASYGIBQiyYD5SDckEdMjM3EBGVUsTQhLCIuII41Dac2h0yWnILdvTiLCnUM8XlhBk4uR9z6d2XovOsvEq11pH4nuIBD5IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA3BheQVheGZlciBdtOnkjuxx1Dec/b84B7gMkevLMHGQmt2Q5eDcnAU/KzEHKBIxBykSETEJKhIxCSgSMQkpEhExCSgSEREQMQ8rEhAxFCgSMRQpEhExFSoSMRUoEjEVKRIRERAxDycEEhARMQUBJwUSEDEUMQASEQ==",
-          "buyer": "W5XU4IWCTVBTYXSYIGJYXEPXH2O5S6RPHLF4JK25NEPYT3RACD4Z3EBS4A"
+        "IZYYKSQO3GRZQ4SMAUVV5SVK6N7WUIDBZJCVZEVCHJ2XO22ARMQ3IEEGAQ|QTYQRYMFCS5FT63RUZXBR3MKEEQLHKMHMGMYS4UAPM5CKK27KELGP62QUY": {
+          "addr": "BE2CX2DSRWNNQH6YEAEIDCXKESHJMJTL7BA7U74RUXBEOPLYV4JQA26XXI",
+          "inputs": {
+            "merchant": "IZYYKSQO3GRZQ4SMAUVV5SVK6N7WUIDBZJCVZEVCHJ2XO22ARMQ3IEEGAQ",
+            "salt": "b73cb93c774b6c5fa4fcf2e02acff50fK9gTTRyoF64g1YANSZcydHjzXbRyfCPQNxpDIBegczRdb6Oosfr18g==",
+            "gas": "ARHKCC34GGEDB7ZZE73QMAUKWNXAK3SZWDRECYRVN6AXTPQ7JTFSRDEYCI",
+            "programBytes": "ASYHIEZxhUoO2aOYckwFK17KqvN/aiBhykVckqI6dXdrQIshIITxCOGFFLpZ+3GmbhjtiiEgs6mHYZmJcoB7OiUrX1EWIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAROoQt8MYgw/zkn9wYCirNuBW5ZsOJBYjVvgXm+H0zLA3BheQVheGZlciDb1gr1RfLUa+ziM7438kcaEMopE3DXemdxEpiWWKhvkzEHKBIxBykSETEJKhIxCSgSMQkpEhExCSsSEREQMQ8nBBIQMRQoEjEUKRIRMRUqEjEVKBIxFSkSEREQMQ8nBRIQETEFAScGEhAxFDEAEhE=",
+            "buyer": "QTYQRYMFCS5FT63RUZXBR3MKEEQLHKMHMGMYS4UAPM5CKK27KELGP62QUY"
+          }
         }
       }
     }
-  }
+}
 ```

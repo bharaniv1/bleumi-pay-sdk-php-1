@@ -1,6 +1,6 @@
 <?php
 /**
- * CreatePaymentResponse
+ * AlgorandAddress
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \Bleumi\Pay\ObjectSerializer;
 use JsonSerializable;
 
 /**
- * CreatePaymentResponse Class Doc Comment
+ * AlgorandAddress Class Doc Comment
  *
  * @category Class
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class CreatePaymentResponse implements ModelInterface, ArrayAccess, JsonSerializable
+class AlgorandAddress implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class CreatePaymentResponse implements ModelInterface, ArrayAccess, JsonSerializ
       *
       * @var string
       */
-    protected static $swaggerModelName = 'CreatePaymentResponse';
+    protected static $swaggerModelName = 'AlgorandAddress';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,8 @@ class CreatePaymentResponse implements ModelInterface, ArrayAccess, JsonSerializ
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'addr' => 'string'    ];
+        'alg_mainnet' => 'map[string,\Bleumi\Pay\Model\AlgorandWalletAddress]',
+'alg_testnet' => 'map[string,\Bleumi\Pay\Model\AlgorandWalletAddress]'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -65,7 +66,8 @@ class CreatePaymentResponse implements ModelInterface, ArrayAccess, JsonSerializ
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'addr' => null    ];
+        'alg_mainnet' => null,
+'alg_testnet' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -94,7 +96,8 @@ class CreatePaymentResponse implements ModelInterface, ArrayAccess, JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'addr' => 'addr'    ];
+        'alg_mainnet' => 'alg_mainnet',
+'alg_testnet' => 'alg_testnet'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -102,7 +105,8 @@ class CreatePaymentResponse implements ModelInterface, ArrayAccess, JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'addr' => 'setAddr'    ];
+        'alg_mainnet' => 'setAlgMainnet',
+'alg_testnet' => 'setAlgTestnet'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -110,7 +114,8 @@ class CreatePaymentResponse implements ModelInterface, ArrayAccess, JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'addr' => 'getAddr'    ];
+        'alg_mainnet' => 'getAlgMainnet',
+'alg_testnet' => 'getAlgTestnet'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -170,7 +175,8 @@ class CreatePaymentResponse implements ModelInterface, ArrayAccess, JsonSerializ
      */
     public function __construct(array $data = null)
     {
-        $this->container['addr'] = isset($data['addr']) ? $data['addr'] : null;
+        $this->container['alg_mainnet'] = isset($data['alg_mainnet']) ? $data['alg_mainnet'] : null;
+        $this->container['alg_testnet'] = isset($data['alg_testnet']) ? $data['alg_testnet'] : null;
     }
 
     /**
@@ -182,9 +188,6 @@ class CreatePaymentResponse implements ModelInterface, ArrayAccess, JsonSerializ
     {
         $invalidProperties = [];
 
-        if ($this->container['addr'] === null) {
-            $invalidProperties[] = "'addr' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -201,25 +204,49 @@ class CreatePaymentResponse implements ModelInterface, ArrayAccess, JsonSerializ
 
 
     /**
-     * Gets addr
+     * Gets alg_mainnet
      *
-     * @return string
+     * @return map[string,\Bleumi\Pay\Model\AlgorandWalletAddress]
      */
-    public function getAddr()
+    public function getAlgMainnet()
     {
-        return $this->container['addr'];
+        return $this->container['alg_mainnet'];
     }
 
     /**
-     * Sets addr
+     * Sets alg_mainnet
      *
-     * @param string $addr Address of the newly created payment
+     * @param map[string,\Bleumi\Pay\Model\AlgorandWalletAddress] $alg_mainnet alg_mainnet
      *
      * @return $this
      */
-    public function setAddr($addr)
+    public function setAlgMainnet($alg_mainnet)
     {
-        $this->container['addr'] = $addr;
+        $this->container['alg_mainnet'] = $alg_mainnet;
+
+        return $this;
+    }
+
+    /**
+     * Gets alg_testnet
+     *
+     * @return map[string,\Bleumi\Pay\Model\AlgorandWalletAddress]
+     */
+    public function getAlgTestnet()
+    {
+        return $this->container['alg_testnet'];
+    }
+
+    /**
+     * Sets alg_testnet
+     *
+     * @param map[string,\Bleumi\Pay\Model\AlgorandWalletAddress] $alg_testnet alg_testnet
+     *
+     * @return $this
+     */
+    public function setAlgTestnet($alg_testnet)
+    {
+        $this->container['alg_testnet'] = $alg_testnet;
 
         return $this;
     }
@@ -292,12 +319,12 @@ class CreatePaymentResponse implements ModelInterface, ArrayAccess, JsonSerializ
 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
-
+    
     /**
      * Customize the way json_encode() renders the object.
      */
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);
-    }
+    }     
 }

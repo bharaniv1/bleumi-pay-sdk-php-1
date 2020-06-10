@@ -1,15 +1,15 @@
 # EthereumBalance
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**mainnet** <br> (Optional)| [**map[string,\Bleumi\Pay\Model\WalletBalance]**](WalletBalance.md) | A dictionary which gives the token balances in Ethereum MainNet | 
-**goerli** <br> (Optional)| [**map[string,\Bleumi\Pay\Model\WalletBalance]**](WalletBalance.md) | A dictionary which gives the token balances in Ethereum Goerli TestNet | 
+**mainnet** <br> (Optional)| [**map[string,\Bleumi\Pay\Model\WalletBalance]**](WalletBalance.md) | A dictionary which gives the token balances in Ethereum MainNet |
+**goerli** <br> (Optional)| [**map[string,\Bleumi\Pay\Model\WalletBalance]**](WalletBalance.md) | A dictionary which gives the token balances in Ethereum Goerli TestNet |
 **xdai** <br> (Optional)| [**map[string,\Bleumi\Pay\Model\WalletBalance]**](WalletBalance.md) | A dictionary which gives the token balances in xDAI |
-**xdai_testnet** <br> (Optional)| [**map[string,\Bleumi\Pay\Model\WalletBalance]**](WalletBalance.md) | A dictionary which gives the token balances in xDAI TestNet | 
+**xdai_testnet** <br> (Optional)| [**map[string,\Bleumi\Pay\Model\WalletBalance]**](WalletBalance.md) | A dictionary which gives the token balances in xDAI TestNet |
 
-
-## Example - Goerli - TestNet
+## Example
 
 ```json
 {

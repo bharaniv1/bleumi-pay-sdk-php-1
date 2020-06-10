@@ -62,7 +62,7 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
 'amount' => 'string',
 'cancel_url' => 'string',
 'success_url' => 'string',
-'buyer_address' => 'string',
+'transfer_address' => 'string',
 'chain' => 'string',
 'token' => 'string',
 'base64_transform' => 'bool'    ];
@@ -78,7 +78,7 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
 'amount' => null,
 'cancel_url' => null,
 'success_url' => null,
-'buyer_address' => null,
+'transfer_address' => null,
 'chain' => null,
 'token' => null,
 'base64_transform' => null    ];
@@ -115,7 +115,7 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
 'amount' => 'amount',
 'cancel_url' => 'cancelUrl',
 'success_url' => 'successUrl',
-'buyer_address' => 'buyerAddress',
+'transfer_address' => 'transferAddress',
 'chain' => 'chain',
 'token' => 'token',
 'base64_transform' => 'base64Transform'    ];
@@ -131,7 +131,7 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
 'amount' => 'setAmount',
 'cancel_url' => 'setCancelUrl',
 'success_url' => 'setSuccessUrl',
-'buyer_address' => 'setBuyerAddress',
+'transfer_address' => 'setTransferAddress',
 'chain' => 'setChain',
 'token' => 'setToken',
 'base64_transform' => 'setBase64Transform'    ];
@@ -147,7 +147,7 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
 'amount' => 'getAmount',
 'cancel_url' => 'getCancelUrl',
 'success_url' => 'getSuccessUrl',
-'buyer_address' => 'getBuyerAddress',
+'transfer_address' => 'getTransferAddress',
 'chain' => 'getChain',
 'token' => 'getToken',
 'base64_transform' => 'getBase64Transform'    ];
@@ -215,7 +215,7 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
         $this->container['amount'] = isset($data['amount']) ? $data['amount'] : null;
         $this->container['cancel_url'] = isset($data['cancel_url']) ? $data['cancel_url'] : null;
         $this->container['success_url'] = isset($data['success_url']) ? $data['success_url'] : null;
-        $this->container['buyer_address'] = isset($data['buyer_address']) ? $data['buyer_address'] : null;
+        $this->container['transfer_address'] = isset($data['transfer_address']) ? $data['transfer_address'] : null;
         $this->container['chain'] = isset($data['chain']) ? $data['chain'] : null;
         $this->container['token'] = isset($data['token']) ? $data['token'] : null;
         $this->container['base64_transform'] = isset($data['base64_transform']) ? $data['base64_transform'] : null;
@@ -381,25 +381,25 @@ class CreateCheckoutUrlRequest implements ModelInterface, ArrayAccess, JsonSeria
     }
 
     /**
-     * Gets buyer_address
+     * Gets transfer_address
      *
      * @return string
      */
-    public function getBuyerAddress()
+    public function getTransferAddress()
     {
-        return $this->container['buyer_address'];
+        return $this->container['transfer_address'];
     }
 
     /**
-     * Sets buyer_address
+     * Sets transfer_address
      *
-     * @param string $buyer_address Address of buyer. Refund operations on this payment will use this address. You can set this to your address to manually handle refunds (outside of Bleumi Pay) to your buyer. This address must be able to receive payments from smart contracts.
+     * @param string $transfer_address Payment transfer address (only used in case of Marketplace payments). Use this field to override the token's settlement address specified in the Bleumi Pay Dashboard for the payment.
      *
      * @return $this
      */
-    public function setBuyerAddress($buyer_address)
+    public function setTransferAddress($transfer_address)
     {
-        $this->container['buyer_address'] = $buyer_address;
+        $this->container['transfer_address'] = $transfer_address;
 
         return $this;
     }

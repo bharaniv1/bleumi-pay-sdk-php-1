@@ -1,6 +1,6 @@
 <?php
 /**
- * CreatePaymentRequest
+ * EthereumAddress
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \Bleumi\Pay\ObjectSerializer;
 use JsonSerializable;
 
 /**
- * CreatePaymentRequest Class Doc Comment
+ * EthereumAddress Class Doc Comment
  *
  * @category Class
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class CreatePaymentRequest implements ModelInterface, ArrayAccess, JsonSerializable
+class EthereumAddress implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, JsonSerializa
       *
       * @var string
       */
-    protected static $swaggerModelName = 'CreatePaymentRequest';
+    protected static $swaggerModelName = 'EthereumAddress';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,10 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, JsonSerializa
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'id' => 'string',
-'token' => 'string',
-'buyer_address' => 'string',
-'transfer_address' => 'string'    ];
+        'mainnet' => 'map[string,\Bleumi\Pay\Model\EthereumWalletAddress]',
+'goerli' => 'map[string,\Bleumi\Pay\Model\EthereumWalletAddress]',
+'xdai' => 'map[string,\Bleumi\Pay\Model\EthereumWalletAddress]',
+'xdai_testnet' => 'map[string,\Bleumi\Pay\Model\EthereumWalletAddress]'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -68,10 +68,10 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, JsonSerializa
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'id' => null,
-'token' => null,
-'buyer_address' => null,
-'transfer_address' => null    ];
+        'mainnet' => null,
+'goerli' => null,
+'xdai' => null,
+'xdai_testnet' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -100,10 +100,10 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-'token' => 'token',
-'buyer_address' => 'buyerAddress',
-'transfer_address' => 'transferAddress'    ];
+        'mainnet' => 'mainnet',
+'goerli' => 'goerli',
+'xdai' => 'xdai',
+'xdai_testnet' => 'xdai_testnet'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -111,10 +111,10 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-'token' => 'setToken',
-'buyer_address' => 'setBuyerAddress',
-'transfer_address' => 'setTransferAddress'    ];
+        'mainnet' => 'setMainnet',
+'goerli' => 'setGoerli',
+'xdai' => 'setXdai',
+'xdai_testnet' => 'setXdaiTestnet'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -122,10 +122,10 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-'token' => 'getToken',
-'buyer_address' => 'getBuyerAddress',
-'transfer_address' => 'getTransferAddress'    ];
+        'mainnet' => 'getMainnet',
+'goerli' => 'getGoerli',
+'xdai' => 'getXdai',
+'xdai_testnet' => 'getXdaiTestnet'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -185,10 +185,10 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, JsonSerializa
      */
     public function __construct(array $data = null)
     {
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['token'] = isset($data['token']) ? $data['token'] : null;
-        $this->container['buyer_address'] = isset($data['buyer_address']) ? $data['buyer_address'] : null;
-        $this->container['transfer_address'] = isset($data['transfer_address']) ? $data['transfer_address'] : null;
+        $this->container['mainnet'] = isset($data['mainnet']) ? $data['mainnet'] : null;
+        $this->container['goerli'] = isset($data['goerli']) ? $data['goerli'] : null;
+        $this->container['xdai'] = isset($data['xdai']) ? $data['xdai'] : null;
+        $this->container['xdai_testnet'] = isset($data['xdai_testnet']) ? $data['xdai_testnet'] : null;
     }
 
     /**
@@ -200,15 +200,6 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, JsonSerializa
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
-        }
-        if ($this->container['buyer_address'] === null) {
-            $invalidProperties[] = "'buyer_address' can't be null";
-        }
-        if ($this->container['transfer_address'] === null) {
-            $invalidProperties[] = "'transfer_address' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -225,97 +216,97 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, JsonSerializa
 
 
     /**
-     * Gets id
+     * Gets mainnet
      *
-     * @return string
+     * @return map[string,\Bleumi\Pay\Model\EthereumWalletAddress]
      */
-    public function getId()
+    public function getMainnet()
     {
-        return $this->container['id'];
+        return $this->container['mainnet'];
     }
 
     /**
-     * Sets id
+     * Sets mainnet
      *
-     * @param string $id Unique ID identifying the payment
+     * @param map[string,\Bleumi\Pay\Model\EthereumWalletAddress] $mainnet mainnet
      *
      * @return $this
      */
-    public function setId($id)
+    public function setMainnet($mainnet)
     {
-        $this->container['id'] = $id;
+        $this->container['mainnet'] = $mainnet;
 
         return $this;
     }
 
     /**
-     * Gets token
+     * Gets goerli
      *
-     * @return string
+     * @return map[string,\Bleumi\Pay\Model\EthereumWalletAddress]
      */
-    public function getToken()
+    public function getGoerli()
     {
-        return $this->container['token'];
+        return $this->container['goerli'];
     }
 
     /**
-     * Sets token
+     * Sets goerli
      *
-     * @param string $token (Only for Algorand Standard Asset) Asset id which will be used for payment.
+     * @param map[string,\Bleumi\Pay\Model\EthereumWalletAddress] $goerli goerli
      *
      * @return $this
      */
-    public function setToken($token)
+    public function setGoerli($goerli)
     {
-        $this->container['token'] = $token;
+        $this->container['goerli'] = $goerli;
 
         return $this;
     }
 
     /**
-     * Gets buyer_address
+     * Gets xdai
      *
-     * @return string
+     * @return map[string,\Bleumi\Pay\Model\EthereumWalletAddress]
      */
-    public function getBuyerAddress()
+    public function getXdai()
     {
-        return $this->container['buyer_address'];
+        return $this->container['xdai'];
     }
 
     /**
-     * Sets buyer_address
+     * Sets xdai
      *
-     * @param string $buyer_address Address of buyer. Refund operations on this payment will use this address. You can set this to your address to manually handle refunds (outside of Bleumi Pay) to your buyer. This address must be able to receive payments from smart contracts.
+     * @param map[string,\Bleumi\Pay\Model\EthereumWalletAddress] $xdai xdai
      *
      * @return $this
      */
-    public function setBuyerAddress($buyer_address)
+    public function setXdai($xdai)
     {
-        $this->container['buyer_address'] = $buyer_address;
+        $this->container['xdai'] = $xdai;
 
         return $this;
     }
 
     /**
-     * Gets transfer_address
+     * Gets xdai_testnet
      *
-     * @return string
+     * @return map[string,\Bleumi\Pay\Model\EthereumWalletAddress]
      */
-    public function getTransferAddress()
+    public function getXdaiTestnet()
     {
-        return $this->container['transfer_address'];
+        return $this->container['xdai_testnet'];
     }
 
     /**
-     * Sets transfer_address
+     * Sets xdai_testnet
      *
-     * @param string $transfer_address Your deposit address. Settle operations on this payment will use this address. This address must be able to receive payments from smart contracts.
+     * @param map[string,\Bleumi\Pay\Model\EthereumWalletAddress] $xdai_testnet xdai_testnet
      *
      * @return $this
      */
-    public function setTransferAddress($transfer_address)
+    public function setXdaiTestnet($xdai_testnet)
     {
-        $this->container['transfer_address'] = $transfer_address;
+        $this->container['xdai_testnet'] = $xdai_testnet;
 
         return $this;
     }
@@ -388,12 +379,12 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, JsonSerializa
 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
-    
+
     /**
      * Customize the way json_encode() renders the object.
      */
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);
-    }
+    }     
 }

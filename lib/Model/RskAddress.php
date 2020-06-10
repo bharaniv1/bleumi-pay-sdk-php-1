@@ -1,6 +1,6 @@
 <?php
 /**
- * PaymentAddresses
+ * RskAddress
  *
  * PHP version 5
  *
@@ -33,15 +33,14 @@ use \Bleumi\Pay\ObjectSerializer;
 use JsonSerializable;
 
 /**
- * PaymentAddresses Class Doc Comment
+ * RskAddress Class Doc Comment
  *
  * @category Class
- * @description Payment addresses
  * @package  Bleumi\Pay
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class PaymentAddresses implements ModelInterface, ArrayAccess, JsonSerializable
+class RskAddress implements ModelInterface, ArrayAccess, JsonSerializable
 {
     const DISCRIMINATOR = null;
 
@@ -50,7 +49,7 @@ class PaymentAddresses implements ModelInterface, ArrayAccess, JsonSerializable
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Payment_addresses';
+    protected static $swaggerModelName = 'RskAddress';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,9 +57,8 @@ class PaymentAddresses implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'ethereum' => '\Bleumi\Pay\Model\EthereumAddress',
-'algorand' => '\Bleumi\Pay\Model\AlgorandAddress',
-'rsk' => '\Bleumi\Pay\Model\RskAddress'    ];
+        'rsk' => 'map[string,\Bleumi\Pay\Model\EthereumWalletAddress]',
+'rsk_testnet' => 'map[string,\Bleumi\Pay\Model\EthereumWalletAddress]'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -68,9 +66,8 @@ class PaymentAddresses implements ModelInterface, ArrayAccess, JsonSerializable
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'ethereum' => null,
-'algorand' => null,
-'rsk' => null    ];
+        'rsk' => null,
+'rsk_testnet' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -99,9 +96,8 @@ class PaymentAddresses implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'ethereum' => 'ethereum',
-'algorand' => 'algorand',
-'rsk' => 'rsk'    ];
+        'rsk' => 'rsk',
+'rsk_testnet' => 'rsk_testnet'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -109,9 +105,8 @@ class PaymentAddresses implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'ethereum' => 'setEthereum',
-'algorand' => 'setAlgorand',
-'rsk' => 'setRsk'    ];
+        'rsk' => 'setRsk',
+'rsk_testnet' => 'setRskTestnet'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -119,9 +114,8 @@ class PaymentAddresses implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'ethereum' => 'getEthereum',
-'algorand' => 'getAlgorand',
-'rsk' => 'getRsk'    ];
+        'rsk' => 'getRsk',
+'rsk_testnet' => 'getRskTestnet'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -181,9 +175,8 @@ class PaymentAddresses implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['ethereum'] = isset($data['ethereum']) ? $data['ethereum'] : null;
-        $this->container['algorand'] = isset($data['algorand']) ? $data['algorand'] : null;
         $this->container['rsk'] = isset($data['rsk']) ? $data['rsk'] : null;
+        $this->container['rsk_testnet'] = isset($data['rsk_testnet']) ? $data['rsk_testnet'] : null;
     }
 
     /**
@@ -211,57 +204,9 @@ class PaymentAddresses implements ModelInterface, ArrayAccess, JsonSerializable
 
 
     /**
-     * Gets ethereum
-     *
-     * @return \Bleumi\Pay\Model\EthereumAddress
-     */
-    public function getEthereum()
-    {
-        return $this->container['ethereum'];
-    }
-
-    /**
-     * Sets ethereum
-     *
-     * @param \Bleumi\Pay\Model\EthereumAddress $ethereum ethereum
-     *
-     * @return $this
-     */
-    public function setEthereum($ethereum)
-    {
-        $this->container['ethereum'] = $ethereum;
-
-        return $this;
-    }
-
-    /**
-     * Gets algorand
-     *
-     * @return \Bleumi\Pay\Model\AlgorandAddress
-     */
-    public function getAlgorand()
-    {
-        return $this->container['algorand'];
-    }
-
-    /**
-     * Sets algorand
-     *
-     * @param \Bleumi\Pay\Model\AlgorandAddress $algorand algorand
-     *
-     * @return $this
-     */
-    public function setAlgorand($algorand)
-    {
-        $this->container['algorand'] = $algorand;
-
-        return $this;
-    }
-
-    /**
      * Gets rsk
      *
-     * @return \Bleumi\Pay\Model\RskAddress
+     * @return map[string,\Bleumi\Pay\Model\EthereumWalletAddress]
      */
     public function getRsk()
     {
@@ -271,13 +216,37 @@ class PaymentAddresses implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets rsk
      *
-     * @param \Bleumi\Pay\Model\RskAddress $rsk rsk
+     * @param map[string,\Bleumi\Pay\Model\EthereumWalletAddress] $rsk rsk
      *
      * @return $this
      */
     public function setRsk($rsk)
     {
         $this->container['rsk'] = $rsk;
+
+        return $this;
+    }
+
+    /**
+     * Gets rsk_testnet
+     *
+     * @return map[string,\Bleumi\Pay\Model\EthereumWalletAddress]
+     */
+    public function getRskTestnet()
+    {
+        return $this->container['rsk_testnet'];
+    }
+
+    /**
+     * Sets rsk_testnet
+     *
+     * @param map[string,\Bleumi\Pay\Model\EthereumWalletAddress] $rsk_testnet rsk_testnet
+     *
+     * @return $this
+     */
+    public function setRskTestnet($rsk_testnet)
+    {
+        $this->container['rsk_testnet'] = $rsk_testnet;
 
         return $this;
     }
@@ -357,5 +326,5 @@ class PaymentAddresses implements ModelInterface, ArrayAccess, JsonSerializable
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);
-    }
+    }     
 }

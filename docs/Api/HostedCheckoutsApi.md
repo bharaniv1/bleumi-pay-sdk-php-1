@@ -74,6 +74,7 @@ The hmac_input GET parameter passed to successUrl contains payment parameters as
         </li>
         <li><b>Amount</b> - Token amount for the payment</li>
         <li><b>Number of block confirmations</b><br> 
+        <li><b>Transaction Hash</b><br> 
         </li>
     </li>
 </ul>
@@ -162,9 +163,9 @@ $apiInstance = new Bleumi\Pay\Api\HostedCheckoutsApi(
 try {
     $validateReq = new \Bleumi\Pay\Model\ValidateCheckoutRequest();  // \Bleumi\Pay\Model\ValidateCheckoutRequest | Specify validation of checkout parameters.
     $validateReq->setHmacAlg('<ALG>'); // Eg. HMAC-SHA256-HEX
-    $validateReq->setHmacInput('<INPUT>'); // Eg. goerli|0xbe33cde200e113f4847c66e9498f2c30e81635ad|0x115615dbd0f835344725146fa6343219315f15e5|10|12
+    $validateReq->setHmacInput('<INPUT>'); // Eg. rsk_testnet|0xbed61c55cc290b55c1c4c327148bdede56a831f4|0xb9f624160bb2755aa25366cc307ed27e39a4f296|10|0|0x16e54beb3ea4b4206b62ca32b1d2cf4ad15d9af2234564c2166ff3ccc817d5c1
     $validateReq->setHmacKeyId('<VER>'); // Eg. v1
-    $validateReq->setHmacValue('<HMAC_VALUE>'); // Eg. 0d910e8dfd087dd0d0b7c3f6504f7f4316b507afc81c09e844cfeee0f3dbaef6
+    $validateReq->setHmacValue('<HMAC_VALUE>'); // Eg. c782cbad4394383599b7cf9f9d62990f289649b35edd82cd1c7d58dd65e9fc03
     $result = $apiInstance->validateCheckoutPayment($validateReq);
     echo  json_encode($result, JSON_PRETTY_PRINT);
 } catch (Exception $e) {
